@@ -23,7 +23,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cliniccontrol:build",
-        "dev": true
+        "dev": true,
+        "proxyConfig": "apps/cliniccontrol/proxy.conf.json"
       },
       "configurations": {
         "development": {

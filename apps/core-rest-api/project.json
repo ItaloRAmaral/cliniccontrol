@@ -1,0 +1,50 @@
+{
+  "name": "core-rest-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core-rest-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/core-rest-api",
+        "main": "apps/core-rest-api/src/main.ts",
+        "tsConfig": "apps/core-rest-api/tsconfig.app.json",
+        "assets": ["apps/core-rest-api/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/core-rest-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "core-rest-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "core-rest-api:build:development"
+        },
+        "production": {
+          "buildTarget": "core-rest-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/core-rest-api/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
