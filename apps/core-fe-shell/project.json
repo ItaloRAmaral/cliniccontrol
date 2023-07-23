@@ -1,7 +1,7 @@
 {
-  "name": "cliniccontrol",
+  "name": "core-fe-shell",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/cliniccontrol",
+  "sourceRoot": "apps/core-fe-shell",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,11 +9,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/cliniccontrol"
+        "outputPath": "dist/apps/core-fe-shell"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/cliniccontrol"
+          "outputPath": "apps/core-fe-shell"
         },
         "production": {}
       }
@@ -22,17 +22,17 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "cliniccontrol:build",
+        "buildTarget": "core-fe-shell:build",
         "dev": true,
-        "proxyConfig": "apps/cliniccontrol/proxy.conf.json"
+        "proxyConfig": "apps/core-fe-shell/proxy.conf.json"
       },
       "configurations": {
         "development": {
-          "buildTarget": "cliniccontrol:build:development",
+          "buildTarget": "core-fe-shell:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "cliniccontrol:build:production",
+          "buildTarget": "core-fe-shell:build:production",
           "dev": false
         }
       }
@@ -40,14 +40,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "cliniccontrol:build:production"
+        "buildTarget": "core-fe-shell:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/cliniccontrol/jest.config.ts",
+        "jestConfig": "apps/core-fe-shell/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -61,7 +61,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/cliniccontrol/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/core-fe-shell/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
