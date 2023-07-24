@@ -14,7 +14,16 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@core-rest-api/adapters": [
+        "libs/core-rest-api/adapters/src/index.ts"
+      ],
+      "@core-fe-shell/store": ["libs/core-fe-shell/store/src/index.ts"],
+      "@core-fe-shell/ui": ["libs/core-fe-shell/ui/src/index.ts"],
+      "@core-fe-shell/ui/server": ["libs/core-fe-shell/ui/src/server.ts"],
+      "@core-fe-shell/utils": ["libs/core-fe-shell/utils/src/index.ts"],
+      "@core-rest-api/core": ["libs/core-rest-api/core/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
