@@ -7,6 +7,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
@@ -18,11 +19,12 @@
       "@core-rest-api/adapters": [
         "libs/core-rest-api/adapters/src/index.ts"
       ],
-      "@core-fe-shell/store": ["libs/core-fe-shell/store/src/index.ts"],
-      "@core-fe-shell/ui": ["libs/core-fe-shell/ui/src/index.ts"],
-      "@core-fe-shell/ui/server": ["libs/core-fe-shell/ui/src/server.ts"],
-      "@core-fe-shell/utils": ["libs/core-fe-shell/utils/src/index.ts"],
-      "@core-rest-api/core": ["libs/core-rest-api/core/src/index.ts"]
+      "@clinicControl/core-fe-shell/store": ["libs/core-fe-shell/store/src/index.ts"],
+      "@clinicControl/core-fe-shell/ui": ["libs/core-fe-shell/ui/src/index.ts"],
+      "@clinicControl/core-fe-shell/ui/server": ["libs/core-fe-shell/ui/src/server.ts"],
+      "@clinicControl/core-fe-shell/utils": ["libs/core-fe-shell/utils/src/index.ts"],
+      "@clinicControl/core-rest-api/core": ["libs/core-rest-api/core/src/index.ts"],
+      "@clinicControl/root/*": ["./*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
