@@ -24,6 +24,9 @@ export class patientDto {
   @IsMobilePhone('pt-BR')
   phone!: number;
 
+  @IsString()
+  psychologistId!: string;
+
   @IsDate()
   createdAt!: Date;
 
