@@ -206,17 +206,17 @@ export class PsychologistEntity extends PsychologistDto {
   }
 }
 
-const psychologist = new PsychologistEntity({
-  name: '1',
-  email: '1',
-  password: '1',
-  role: '1',
-  price: 1,
-  plan: '1',
-  totalYearEarnings: 1,
-  totalMonthEarnings: 1,
-});
+// const psychologist = new PsychologistEntity({
+//   name: '1',
+//   email: '1',
+//   password: '1',
+//   role: '1',
+//   price: 1,
+//   plan: '1',
+//   totalYearEarnings: 1,
+//   totalMonthEarnings: 1,
+// });
 
-psychologist.setTotalMonthEarnings = 1;
+// psychologist.setTotalMonthEarnings = 1;
 
-console.log(psychologist);
+// console.log(psychologist);

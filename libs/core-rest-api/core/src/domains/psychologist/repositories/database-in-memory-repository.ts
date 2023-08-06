@@ -2,6 +2,7 @@ import { ConflictException, Injectable, Logger } from '@nestjs/common';
 import { PsychologistDatabaseRepository } from './database-repository';
 import { PsychologistEntity } from '../entities/psychologist/entity';
 import { CreatePsychologistDto } from '../use-cases/create-psychologist/create-psychologist-dto';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../constants/error-messages';
 
 const className = 'InMemoryPsychologistDatabaseRepository';
 
@@ -12,13 +13,10 @@ export class InMemoryPsychologistDatabaseRepository
   private psychologists: PsychologistEntity[] = [];
 
   async createPsychologist(psychologist: CreatePsychologistDto) {
-    const logger = new Logger(className);
+    const isPsychologistExists = await this.findUser(psychologist.email);
 
-    const psychologistAlreadyExists = await this.findUser(psychologist.email);
-
-    if (psychologistAlreadyExists) {
-      logger.error('Psychologist already exists');
-      throw new ConflictException('Psychologist already exists');
+    if (isPsychologistExists) {
+      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL']);
     }
 
     const newPsychologist = new PsychologistEntity(psychologist);

@@ -1,11 +1,12 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, Logger } from '@nestjs/common';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { PsychologistEntity } from '../../entities/psychologist/entity';
 import { plainToInstance } from 'class-transformer';
 import { CreatePsychologistDto } from './create-psychologist-dto';
 import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/shared/validators/validate-or-reject';
 import { Replace } from '@clinicControl/core-rest-api/core/shared/utils/replace';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../constants/error-messages';
 
 type IPsychologistProps = Replace<
   CreatePsychologistDto,
@@ -28,15 +29,18 @@ export class CreatePsychologistService {
     );
     await applicationValidateOrReject(createPsychologistDtoInstance);
 
-    // TODO: check if user already exists
+    const isPsychologistExists = await this.psychologistDatabaseRepository.findUser(createPsychologistDto.email);
+
+    if (isPsychologistExists) {
+      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL']
+      );
+    }
 
     // Create
     const psychologist =
       await this.psychologistDatabaseRepository.createPsychologist(
         createPsychologistDto
       );
-
-    console.log('Psychologist Created:', psychologist);
 
     return psychologist;
   }
