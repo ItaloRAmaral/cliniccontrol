@@ -1,7 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from "crypto";
 import { Replace } from "@clinicControl/core-rest-api/core/shared/utils";
-import { IPatientProps } from "../../interface/patient";
+import { IPatientProps } from "../../interfaces/patient";
 
 export class Patient {
   private props: IPatientProps;

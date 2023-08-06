@@ -1,7 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
 import { Replace } from '@clinicControl/core-rest-api/core/shared/utils';
-import { IAppointmentProps } from '../../interface/appointment';
+import { IAppointmentProps } from '../../interfaces/appointment';
 
 
 export class Appointment {

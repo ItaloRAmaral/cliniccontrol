@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 export interface IPsychologistProps {
   id: string;
   name: string;
@@ -5,7 +6,7 @@ export interface IPsychologistProps {
   password: string;
   role: string;
   price?: number | null;
-  plan?: string | null;
+  plan: string | null;
   totalYearEarnings?: number | null;
   totalMonthEarnings?: number | null;
   createdAt: Date;
