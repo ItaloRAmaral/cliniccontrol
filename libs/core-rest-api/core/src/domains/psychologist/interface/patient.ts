@@ -2,12 +2,13 @@ export interface IPatientProps {
   id: string
   name: string
   email: string
-  password: string
   CPF: string
   phone: number
+  paymentMethod: string
   psychologistId: string
-  createdAt?: Date
+  clinicId: string
+  createdAt: Date
   updatedAt?: Date
-  // adress: adressDto
+  // deletedAt?: Date
   // apointments: apoimentsDto[]
 }

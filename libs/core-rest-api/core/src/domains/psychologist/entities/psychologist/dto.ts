@@ -17,13 +17,19 @@ export class PsychologistDto {
   @IsString()
   role!: string;
 
+  @IsOptional()
   @IsNumber()
   price?: number | null;
 
+  @IsString()
+  plan!: string | null;
+
+  @IsOptional()
   @IsNumber()
   @Min(0)
   totalYearEarnings?: number;
 
+  @IsOptional()
   @IsNumber()
   @Min(0)
   totalMonthEarnings?: number;

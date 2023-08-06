@@ -1,7 +1,8 @@
 import {
   IsString,
   IsMobilePhone,
-  IsDate
+  IsDate,
+  IsOptional
 } from 'class-validator';
 // import { Type } from 'class-transformer';
 
@@ -16,26 +17,31 @@ export class patientDto {
   email!: string;
 
   @IsString()
-  password!: string;
-
-  @IsString()
   CPF!: string;
 
   @IsMobilePhone('pt-BR')
   phone!: number;
 
   @IsString()
+  paymentMethod!: string;
+
+  @IsString()
   psychologistId!: string;
 
-  @IsDate()
-  createdAt!: Date;
+  @IsString()
+  clinicId!: string;
 
+  @IsOptional()
   @IsDate()
-  updatedAt!: Date;
+  createdAt?: Date;
 
-  // @ValidateNested()
-  // @Type(() => adressDto)
-  // adress!: adressDto;
+  @IsOptional()
+  @IsDate()
+  updatedAt?: Date | null;
+
+  @IsOptional()
+  @IsDate()
+  deletedAt?: Date | null;
 
   // TODO: apointments
   // @ValidateNested()

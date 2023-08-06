@@ -58,7 +58,7 @@ export class Psychologist {
     this.props.role = role;
   }
 
-  public get getPrice() {
+  public get getPrice(): number | null | undefined {
     return this.props.price;
   }
 
@@ -66,7 +66,15 @@ export class Psychologist {
     this.props.price = price;
   }
 
-  public get getTotalYearEarnings() {
+  public get getPlan(): string | null | undefined {
+    return this.props.plan;
+  }
+
+  public set setPlan(plan: string) {
+    this.props.plan = plan;
+  }
+
+  public get getTotalYearEarnings(): number | null | undefined {
     return this.props.totalYearEarnings;
   }
 
@@ -74,7 +82,7 @@ export class Psychologist {
     this.props.totalYearEarnings = totalYearEarnings;
   }
 
-  public get getTotalMonthEarnings() {
+  public get getTotalMonthEarnings(): number | null | undefined {
     return this.props.totalMonthEarnings;
   }
 
@@ -82,7 +90,7 @@ export class Psychologist {
     this.props.totalMonthEarnings = totalMonthEarnings;
   }
 
-  public get getCreatedAt() {
+  public get getCreatedAt(): Date {
     return this.props.createdAt;
   }
 
@@ -90,7 +98,7 @@ export class Psychologist {
     this.props.createdAt = createdAt;
   }
 
-  public get getUpdatedAt() {
+  public get getUpdatedAt(): Date | null | undefined {
     return this.props.updatedAt;
   }
 
@@ -99,6 +107,14 @@ export class Psychologist {
   }
 }
 
-// const teste = new Psychologist({ name: 'teste', email: 'teste', password: 'teste', role: 'teste', price: 1  });
+const psychologist = new Psychologist({
+  name: 'teste',
+  email: 'teste',
+  password: 'teste',
+  role: 'teste',
+  price: 1,
+});
 
-// console.log(teste);
+psychologist.setTotalMonthEarnings = 1;
+
+console.log(psychologist);

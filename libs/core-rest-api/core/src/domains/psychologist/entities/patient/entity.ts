@@ -1,8 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from "crypto";
 import { Replace } from "@clinicControl/core-rest-api/core/shared/utils";
-
-import { IPatientProps } from "../interfaces/patient";
+import { IPatientProps } from "../../interface/patient";
 
 export class Patient {
   private props: IPatientProps;
@@ -37,14 +36,6 @@ export class Patient {
     this.props.email = email;
   }
 
-  public get getPassword(): string {
-    return this.props.password;
-  }
-
-  public set setPassword(password: string) {
-    this.props.password = password;
-  }
-
   public get getCPF(): string {
     return this.props.CPF;
   }
@@ -61,6 +52,22 @@ export class Patient {
     this.props.phone = phone;
   }
 
+  public get getPaymentMethod(): string {
+    return this.props.paymentMethod;
+  }
+
+  public set setPaymentMethod(paymentMethod: string) {
+    this.props.paymentMethod = paymentMethod;
+  }
+
+  public get getClinicId(): string {
+    return this.props.clinicId;
+  }
+
+  public set setClinicId(clinicId: string) {
+    this.props.clinicId = clinicId;
+  }
+
   public get getPsychologistId(): string {
     return this.props.psychologistId;
   }
@@ -69,7 +76,7 @@ export class Patient {
     this.props.psychologistId = psychologistId;
   }
 
-  public get getCreatedAt() {
+  public get getCreatedAt(): Date {
     return this.props.createdAt;
   }
 
@@ -77,7 +84,7 @@ export class Patient {
     this.props.createdAt = createdAt;
   }
 
-  public get getUpdatedAt() {
+  public get getUpdatedAt(): Date | null | undefined {
     return this.props.updatedAt;
   }
 
@@ -86,6 +93,17 @@ export class Patient {
   }
 }
 
+const patient = new Patient({
+  name: "teste",
+  email: "",
+  CPF: "",
+  phone: 0,
+  paymentMethod: "",
+  psychologistId: "",
+  clinicId: "",
+});
+
+console.log(patient);
+
 // const patient = new Patient({ name: "teste", email: "", password: "", CPF: "", phone: 0 });
 
-// console.log(patient);
