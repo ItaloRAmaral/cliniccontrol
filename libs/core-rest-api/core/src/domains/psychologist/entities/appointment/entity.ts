@@ -1,140 +1,146 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
 import { Replace } from '@clinicControl/core-rest-api/core/shared/utils';
-import { IAppointmentProps } from '../../interfaces/appointment';
+import { AppointmentDto } from './dto';
 
 
-export class Appointment {
-  private props: IAppointmentProps;
+type IAppointmentProps = Replace<AppointmentDto, { id?: string; createdAt?: Date }>;
 
-  constructor(
-    props: Replace<IAppointmentProps, { id?: string; createdAt?: Date }>
-  ) {
-    this.props = {
-      ...props,
-      id: props.id ?? randomUUID(),
-      createdAt: props.createdAt ?? new Date(),
-    };
+export class Appointment extends AppointmentDto {
+  constructor(props: IAppointmentProps) {
+    super();
+    Object.assign(this, props);
+    this.id = props.id ?? randomUUID();
+    this.createdAt = props.createdAt ?? new Date();
   }
 
   public get getId(): string {
-    return this.props.id;
+    return this.id;
   }
 
   public get getPsychologistId(): string {
-    return this.props.psychologistId;
+    return this.psychologistId;
   }
 
   public set setPsychologistId(psychologistId: string) {
-    this.props.psychologistId = psychologistId;
+    this.psychologistId = psychologistId;
   }
 
   public get getPatientId(): string {
-    return this.props.patientId;
+    return this.patientId;
   }
 
   public set setPatientId(patientId: string) {
-    this.props.patientId = patientId;
+    this.patientId = patientId;
   }
 
   public get getDate(): Date {
-    return this.props.date;
+    return this.date;
   }
 
   public set setDate(date: Date) {
-    this.props.date = date;
+    this.date = date;
   }
 
   public get getOnline(): boolean {
-    return this.props.online;
+    return this.online;
   }
 
   public set setOnline(online: boolean) {
-    this.props.online = online;
+    this.online = online;
+  }
+
+  public get getClinicId(): string {
+    return this.clinicId;
+  }
+
+  public set setClinicId(clinicId: string) {
+    this.clinicId = clinicId;
   }
 
   public get getConfirmed(): boolean {
-    return this.props.confirmed;
+    return this.confirmed;
   }
 
   public set setConfirmed(confirmed: boolean) {
-    this.props.confirmed = confirmed;
+    this.confirmed = confirmed;
   }
 
-  public get getConfirmationDate(): Date | null {
-    return this.props.confirmationDate;
+  public get getConfirmationDate(): Date | null | undefined {
+    return this.confirmationDate;
   }
 
   public set setConfirmationDate(confirmationDate: Date) {
-    this.props.confirmationDate = confirmationDate;
+    this.confirmationDate = confirmationDate;
   }
 
   public get getCancelled(): boolean {
-    return this.props.cancelled;
+    return this.cancelled;
   }
 
   public set setCancelled(cancelled: boolean) {
-    this.props.cancelled = cancelled;
+    this.cancelled = cancelled;
   }
 
   public get getCancellationDate(): Date | null {
-    return this.props.cancellationDate;
+    return this.cancellationDate;
   }
 
   public set setCancellationDate(cancellationDate: Date) {
-    this.props.cancellationDate = cancellationDate;
+    this.cancellationDate = cancellationDate;
   }
 
   public get getDone(): boolean | null {
-    return this.props.done;
+    return this.done;
   }
 
   public set setDone(done: boolean | null) {
-    this.props.done = done;
+    this.done = done;
   }
 
-  public get getMissed(): boolean | null {
-    return this.props.missed;
+  public get getMissed(): boolean | null | undefined {
+    return this.missed;
   }
 
   public set setMissed(missed: boolean) {
-    this.props.missed = missed;
+    this.missed = missed;
   }
 
   public get getPaid(): boolean {
-    return this.props.paid;
+    return this.paid;
   }
 
   public set setPaid(paid: boolean) {
-    this.props.paid = paid;
+    this.paid = paid;
   }
 
   public get getPaymentMethod(): string {
-    return this.props.paymentMethod;
+    return this.paymentMethod;
   }
 
   public set setPaymentMethod(paymentMethod: string) {
-    this.props.paymentMethod = paymentMethod;
+    this.paymentMethod = paymentMethod;
   }
 
   public get getCreatedAt(): Date {
-    return this.props.createdAt;
+    return this.createdAt;
   }
 
   public get getUpdatedAt(): Date | null | undefined {
-    return this.props.updatedAt;
+    return this.updatedAt;
   }
 
   public set setUpdatedAt(updatedAt: Date) {
-    this.props.updatedAt = updatedAt;
+    this.updatedAt = updatedAt;
   }
 }
 
 const appointment = new Appointment({
-  patientId: '1',
-  psychologistId: '1',
+  patientId: '112E-123f-1234-1234',
+  psychologistId: '222d-523d',
   date: new Date(),
   online: true,
+  clinicId: '555f-666d',
   confirmed: true,
   confirmationDate: new Date(),
   cancelled: true,
@@ -142,7 +148,7 @@ const appointment = new Appointment({
   done: true,
   missed: true,
   paid: true,
-  paymentMethod: 'teste',
+  paymentMethod: 'debit',
 });
 
 console.log(appointment);

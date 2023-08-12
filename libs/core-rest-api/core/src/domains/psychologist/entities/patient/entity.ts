@@ -1,109 +1,109 @@
 /* eslint-disable @nx/enforce-module-boundaries */
+import 'reflect-metadata';
 import { randomUUID } from "crypto";
 import { Replace } from "@clinicControl/core-rest-api/core/shared/utils";
-import { IPatientProps } from "../../interfaces/patient";
+import { PatientDto } from "./dto";
+import { AppointmentDto } from '../appointment/dto';
 
-export class Patient {
-  private props: IPatientProps;
+type IPatientProps = Replace<
+  PatientDto,
+  { id?: string; createdAt?: Date; }
+>;
 
-  constructor(
-    props: Replace<IPatientProps, { id?: string; createdAt?: Date }>
-  ) {
-    this.props = {
-      ...props,
-      id: props.id ?? randomUUID(),
-      createdAt: props.createdAt ?? new Date(),
-    };
+export class Patient extends PatientDto {
+  constructor(props: IPatientProps) {
+    super()
+    Object.assign(this, props);
+    this.id = props.id ?? randomUUID();
+    this.createdAt = props.createdAt ?? new Date();
   }
 
   public get getId(): string {
-    return this.props.id;
+    return this.id;
   }
 
   public get getName(): string {
-    return this.props.name;
+    return this.name;
   }
 
   public set setName(name: string) {
-    this.props.name = name;
+    this.name = name;
   }
 
   public get getEmail(): string {
-    return this.props.email;
+    return this.email;
   }
 
   public set setEmail(email: string) {
-    this.props.email = email;
+    this.email = email;
   }
 
   public get getCPF(): string {
-    return this.props.CPF;
+    return this.CPF;
   }
 
   public set setCPF(CPF: string) {
-    this.props.CPF = CPF;
+    this.CPF = CPF;
   }
 
   public get getPhone(): number {
-    return this.props.phone;
+    return this.phone;
   }
 
   public set setPhone(phone: number) {
-    this.props.phone = phone;
+    this.phone = phone;
   }
 
   public get getPaymentMethod(): string {
-    return this.props.paymentMethod;
+    return this.paymentMethod;
   }
 
   public set setPaymentMethod(paymentMethod: string) {
-    this.props.paymentMethod = paymentMethod;
+    this.paymentMethod = paymentMethod;
   }
 
   public get getClinicId(): string {
-    return this.props.clinicId;
+    return this.clinicId;
   }
 
   public set setClinicId(clinicId: string) {
-    this.props.clinicId = clinicId;
+    this.clinicId = clinicId;
   }
 
   public get getPsychologistId(): string {
-    return this.props.psychologistId;
+    return this.psychologistId;
   }
 
   public set setPsychologistId(psychologistId: string) {
-    this.props.psychologistId = psychologistId;
+    this.psychologistId = psychologistId;
   }
 
-  public get getCreatedAt(): Date {
-    return this.props.createdAt;
+  public get getCreatedAt(): Date | null | undefined {
+    return this.createdAt;
   }
 
   public set setCreatedAt(createdAt: Date) {
-    this.props.createdAt = createdAt;
+    this.createdAt = createdAt;
   }
 
   public get getUpdatedAt(): Date | null | undefined {
-    return this.props.updatedAt;
+    return this.updatedAt;
   }
 
   public set setUpdatedAt(updatedAt: Date) {
-    this.props.updatedAt = updatedAt;
+    this.updatedAt = updatedAt;
   }
 }
 
-const patient = new Patient({
-  name: "teste",
-  email: "",
-  CPF: "",
-  phone: 0,
-  paymentMethod: "",
-  psychologistId: "",
-  clinicId: "",
-});
+// const patient = new Patient({
+//   name: "teste",
+//   email: "",
+//   CPF: "",
+//   phone: 0,
+//   paymentMethod: "",
+//   psychologistId: "",
+//   clinicId: "",
+// });
 
-console.log(patient);
-
-// const patient = new Patient({ name: "teste", email: "", password: "", CPF: "", phone: 0 });
+// console.log(patient);
 

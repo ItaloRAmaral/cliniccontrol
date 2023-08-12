@@ -2,7 +2,6 @@
  * This is not a production server yet!
  * This is only a minimal backend to get started.
  */
-
 import { Logger, ValidationPipe, INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestFactory } from '@nestjs/core';

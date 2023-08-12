@@ -1,5 +1,4 @@
-import { IsString, IsNumber, IsDate, IsOptional } from 'class-validator';
-// import { Type } from 'class-transformer';
+import { IsString, IsDate, IsOptional } from 'class-validator';
 
 export class ClinicDto {
   @IsString()
@@ -12,7 +11,7 @@ export class ClinicDto {
   psychologistId!: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsString()
   adress?: string | null;
 
   @IsString()

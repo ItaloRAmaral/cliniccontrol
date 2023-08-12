@@ -2,11 +2,10 @@ import {
   IsString,
   IsMobilePhone,
   IsDate,
-  IsOptional
+  IsOptional,
 } from 'class-validator';
-// import { Type } from 'class-transformer';
 
-export class patientDto {
+export class PatientDto {
   @IsString()
   id!: string;
 
@@ -38,13 +37,4 @@ export class patientDto {
   @IsOptional()
   @IsDate()
   updatedAt?: Date | null;
-
-  @IsOptional()
-  @IsDate()
-  deletedAt?: Date | null;
-
-  // TODO: apointments
-  // @ValidateNested()
-  // @Type(() => apoimentsDto)
-  // apointments!: apoimentsDto[];
 }

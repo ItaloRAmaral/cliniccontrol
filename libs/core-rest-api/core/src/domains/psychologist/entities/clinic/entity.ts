@@ -1,86 +1,158 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
 import { Replace } from '@clinicControl/core-rest-api/core/shared/utils';
-import { IClinicProps } from '../../interfaces/clinic';
+import { ClinicDto } from './dto';
 
-export class Clinic {
-  private props: IClinicProps;
+// export class Clinic {
+//   private props: IClinicProps;
 
-  constructor(props: Replace<IClinicProps, { id?: string; createdAt?: Date }>) {
-    this.props = {
-      ...props,
-      id: props.id ?? randomUUID(),
-      createdAt: props.createdAt ?? new Date()
-    };
+//   constructor(props: Replace<IClinicProps, { id?: string; createdAt?: Date }>) {
+//     this.props = {
+//       ...props,
+//       id: props.id ?? randomUUID(),
+//       createdAt: props.createdAt ?? new Date()
+//     };
+//   }
+
+//   public get getId(): string {
+//     return this.props.id;
+//   }
+
+//   public get getName(): string {
+//     return this.props.name;
+//   }
+
+//   public set setName(name: string) {
+//     this.props.name = name;
+//   }
+
+//   public get getPsychologistId(): string {
+//     return this.props.psychologistId;
+//   }
+
+//   public set setPsychologistId(psychologistId: string) {
+//     this.props.psychologistId = psychologistId;
+//   }
+
+//   public get getAdress(): string | null {
+//     return this.props.adress;
+//   }
+
+//   public set setAdress(adress: string) {
+//     this.props.adress = adress;
+//   }
+
+//   public get getCity(): string {
+//     return this.props.city;
+//   }
+
+//   public set setCity(city: string) {
+//     this.props.city = city;
+//   }
+
+//   public get getState(): string {
+//     return this.props.state;
+//   }
+
+//   public set setState(state: string) {
+//     this.props.state = state;
+//   }
+
+//   public set setCreatedAt(createdAt: Date) {
+//     this.props.createdAt = createdAt;
+//   }
+
+//   public get getCreatedAt(): Date {
+//     return this.props.createdAt;
+//   }
+
+//   public get getUpdatedAt(): Date | null | undefined {
+//     return this.props.updatedAt;
+//   }
+
+//   public set setUpdatedAt(updatedAt: Date) {
+//     this.props.updatedAt = updatedAt;
+//   }
+// }
+
+type IClinicProps = Replace<ClinicDto, { id?: string; createdAt?: Date }>;
+
+export class Clinic extends ClinicDto {
+  constructor(props: IClinicProps) {
+    super();
+    Object.assign(this, props);
+    this.id = props.id ?? randomUUID();
+    this.createdAt = props.createdAt ?? new Date();
+    this.adress = props.adress ?? null;
   }
 
   public get getId(): string {
-    return this.props.id;
+    return this.id;
   }
 
   public get getName(): string {
-    return this.props.name;
+    return this.name;
   }
 
   public set setName(name: string) {
-    this.props.name = name;
+    this.name = name;
   }
 
   public get getPsychologistId(): string {
-    return this.props.psychologistId;
+    return this.psychologistId;
   }
 
   public set setPsychologistId(psychologistId: string) {
-    this.props.psychologistId = psychologistId;
+    this.psychologistId = psychologistId;
   }
 
-  public get getAdress(): string | null {
-    return this.props.adress;
+  public get getAdress(): string | null | undefined {
+    return this.adress;
   }
 
   public set setAdress(adress: string) {
-    this.props.adress = adress;
+    this.adress = adress;
   }
 
   public get getCity(): string {
-    return this.props.city;
+    return this.city;
   }
 
   public set setCity(city: string) {
-    this.props.city = city;
+    this.city = city;
   }
 
   public get getState(): string {
-    return this.props.state;
+    return this.state;
   }
 
   public set setState(state: string) {
-    this.props.state = state;
+    this.state = state;
   }
 
   public set setCreatedAt(createdAt: Date) {
-    this.props.createdAt = createdAt;
+    this.createdAt = createdAt;
   }
 
-  public get getCreatedAt(): Date {
-    return this.props.createdAt;
+  public get getCreatedAt(): Date | null | undefined {
+    return this.createdAt;
   }
 
   public get getUpdatedAt(): Date | null | undefined {
-    return this.props.updatedAt;
+    return this.updatedAt;
   }
 
   public set setUpdatedAt(updatedAt: Date) {
-    this.props.updatedAt = updatedAt;
+    this.updatedAt = updatedAt;
   }
 }
 
 const clinic = new Clinic({
-  name: 'teste',
-  psychologistId: 'teste',
-  adress: 'teste',
-  city: 'teste',
-  state: 'teste'
+  name: 'Clinica teste',
+  psychologistId: '12E-341a',
+  adress: 'Endereço teste',
+  city: 'Cidade teste',
+  state: 'Estado teste'
 });
 
 console.log(clinic);

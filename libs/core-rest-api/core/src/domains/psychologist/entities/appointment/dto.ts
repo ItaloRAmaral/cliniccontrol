@@ -1,5 +1,4 @@
 import { IsString, IsDate, IsOptional, IsBoolean } from 'class-validator';
-// import { Type } from 'class-transformer';
 
 export class AppointmentDto {
   @IsString()
@@ -17,11 +16,14 @@ export class AppointmentDto {
   @IsBoolean()
   online!: boolean;
 
+  @IsString()
+  clinicId!: string;
+
   @IsBoolean()
   confirmed!: boolean;
 
   @IsDate()
-  confirmationDate?: Date | null;
+  confirmationDate!: Date | null;
 
   @IsBoolean()
   cancelled!: boolean;
@@ -47,5 +49,5 @@ export class AppointmentDto {
 
   @IsOptional()
   @IsDate()
-  updatedAt?: Date;
+  updatedAt?: Date | null;
 }
