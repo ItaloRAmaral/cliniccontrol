@@ -77,7 +77,7 @@ import { ClinicDto } from './dto';
 
 type IClinicProps = Replace<ClinicDto, { id?: string; createdAt?: Date }>;
 
-export class Clinic extends ClinicDto {
+export class ClinicEntity extends ClinicDto {
   constructor(props: IClinicProps) {
     super();
     Object.assign(this, props);
@@ -147,12 +147,12 @@ export class Clinic extends ClinicDto {
   }
 }
 
-const clinic = new Clinic({
-  name: 'Clinica teste',
-  psychologistId: '12E-341a',
-  adress: 'Endereço teste',
-  city: 'Cidade teste',
-  state: 'Estado teste'
-});
+// const clinic = new ClinicEntity({
+//   name: 'Clinica teste',
+//   psychologistId: '12E-341a',
+//   adress: 'Endereço teste',
+//   city: 'Cidade teste',
+//   state: 'Estado teste',
+// });
 
-console.log(clinic);
+// console.log(clinic);
