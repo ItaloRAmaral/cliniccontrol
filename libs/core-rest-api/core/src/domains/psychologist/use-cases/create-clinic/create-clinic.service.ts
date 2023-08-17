@@ -5,7 +5,7 @@ import { CreateClinicDto } from './create-clinic-dto';
 import { plainToInstance } from 'class-transformer';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/shared/validators/validate-or-reject';
-import { CLINIC_ERROR_MESSAGES } from '../../constants/error-messages';
+import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { ClinicEntity } from '../../entities/clinic/entity';
 
 type IClinicProps = Replace<CreateClinicDto, { createdAt?: Date }>;

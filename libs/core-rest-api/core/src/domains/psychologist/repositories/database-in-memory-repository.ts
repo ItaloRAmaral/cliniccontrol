@@ -2,7 +2,7 @@ import { ConflictException, Injectable, Logger } from '@nestjs/common';
 import { PsychologistDatabaseRepository } from './database-repository';
 import { PsychologistEntity } from '../entities/psychologist/entity';
 import { CreatePsychologistDto } from '../use-cases/create-psychologist/create-psychologist-dto';
-import { CLINIC_ERROR_MESSAGES, PSYCHOLOGIST_ERROR_MESSAGES } from '../constants/error-messages';
+import { CLINIC_ERROR_MESSAGES, PSYCHOLOGIST_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { ClinicEntity } from '../entities/clinic/entity';
 import { CreateClinicDto } from '../use-cases/create-clinic/create-clinic-dto';
 

@@ -6,7 +6,7 @@ import { plainToInstance } from 'class-transformer';
 import { CreatePsychologistDto } from './create-psychologist-dto';
 import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/shared/validators/validate-or-reject';
 import { Replace } from '@clinicControl/core-rest-api/core/shared/utils/replace';
-import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../constants/error-messages';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 
 type IPsychologistProps = Replace<
   CreatePsychologistDto,
