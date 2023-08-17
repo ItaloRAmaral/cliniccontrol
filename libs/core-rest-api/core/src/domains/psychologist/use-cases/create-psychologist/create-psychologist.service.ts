@@ -1,5 +1,5 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import { ConflictException, Injectable, Logger } from '@nestjs/common';
+import { ConflictException, Injectable} from '@nestjs/common';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { PsychologistEntity } from '../../entities/psychologist/entity';
 import { plainToInstance } from 'class-transformer';

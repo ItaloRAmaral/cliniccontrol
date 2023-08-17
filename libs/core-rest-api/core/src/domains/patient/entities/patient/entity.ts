@@ -3,14 +3,13 @@ import 'reflect-metadata';
 import { randomUUID } from "crypto";
 import { Replace } from "@clinicControl/core-rest-api/core/shared/utils";
 import { PatientDto } from "./dto";
-import { AppointmentDto } from '../appointment/dto';
 
 type IPatientProps = Replace<
   PatientDto,
   { id?: string; createdAt?: Date; }
 >;
 
-export class Patient extends PatientDto {
+export class PatientEntity extends PatientDto {
   constructor(props: IPatientProps) {
     super()
     Object.assign(this, props);

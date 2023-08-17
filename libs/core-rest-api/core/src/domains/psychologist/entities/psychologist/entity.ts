@@ -101,12 +101,12 @@ export class PsychologistEntity extends PsychologistDto {
   }
 }
 
-const psychologist = new PsychologistEntity({
-  name: 'John Doe',
-  email: 'johndow@hotmail.com',
-  password: '123456',
-  role: 'admin',
-  plan: 'basic',
-});
+// const psychologist = new PsychologistEntity({
+//   name: 'John Doe',
+//   email: 'johndow@hotmail.com',
+//   password: '123456',
+//   role: 'admin',
+//   plan: 'basic',
+// });
 
-console.log(psychologist);
+// console.log(psychologist);

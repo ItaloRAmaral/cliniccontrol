@@ -6,10 +6,7 @@ import {
   IsNumber,
 } from 'class-validator';
 
-export class PatientDto {
-  @IsString()
-  id!: string;
-
+export class CreatePatientDto {
   @IsString()
   name!: string;
 
