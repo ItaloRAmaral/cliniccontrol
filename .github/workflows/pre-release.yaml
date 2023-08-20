@@ -9,6 +9,11 @@ permissions:
   pull-requests: write
   issues: write
   repository-projects: write
+  deployments: write
+  contents: write
+  statuses: write
+  actions: write
+  checks: read
 
 env:
   HUSKY: 0
