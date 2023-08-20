@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "packages": ["."],
+  "version": "independent",
+  "command": {
+    "version": {
+      "message": "chore(release): [skip-github-actions]"
+    }
+  }
+}
