@@ -1,0 +1,28 @@
+name: Run conventional-prerelease on merge to main
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  HUSKY: 0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run conventional-prerelease
+        run: pnpm run conventional-prerelease
