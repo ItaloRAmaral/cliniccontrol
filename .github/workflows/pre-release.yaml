@@ -34,5 +34,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACESS_TOKEN }}
         run: |
           git config --global user.email "italorockamaral@gmail.com"
-          git config --global user.name "ItaloRAmaral"pnpm run conventional-prerelease
+          git config --global user.name "italoRAmaral"
           pnpm run conventional-prerelease
