@@ -16,13 +16,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Configure Git
-        env:
-          GH_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACESS_TOKEN }}
-        run: |
-          git config --global user.email "italorockamaral@gmail.com"
-          git config --global user.name "ItaloRAmaral"
-
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -37,4 +30,9 @@ jobs:
         run: pnpm install
 
       - name: Run conventional-prerelease
-        run: pnpm run conventional-prerelease
+        env:
+          GH_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACESS_TOKEN }}
+        run: |
+          echo ${{ secrets.GH_ACTIONS_PERSONAL_ACESS_TOKEN }}
+          git config --global user.email "italorockamaral@gmail.com"
+          git config --global user.name "ItaloRAmaral"pnpm run conventional-prerelease
