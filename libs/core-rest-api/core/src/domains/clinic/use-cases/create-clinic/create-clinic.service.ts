@@ -1,22 +1,22 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { ConflictException, Injectable } from '@nestjs/common';
-import { Replace } from '@clinicControl/core-rest-api/core/shared/utils';
 import { CreateClinicDto } from './create-clinic-dto';
 import { plainToInstance } from 'class-transformer';
-import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
-import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/shared/validators/validate-or-reject';
+import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/src/shared/validators/validate-or-reject';
 import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { ClinicEntity } from '../../entities/clinic/entity';
-
-type IClinicProps = Replace<CreateClinicDto, { createdAt?: Date }>;
+import { ICreateClinicServiceProps } from '../../interfaces/clinic';
+import { ClinicDatabaseRepository } from '../../repositories/database-repository';
 
 @Injectable()
 export class CreateClinicService {
   constructor(
-    private psychologistDatabaseRepository: PsychologistDatabaseRepository
+    private clinicDatabaseRepository: ClinicDatabaseRepository
   ) {}
 
-  async execute(createClinicDto: IClinicProps): Promise<ClinicEntity> {
+  async execute(
+    createClinicDto: ICreateClinicServiceProps
+  ): Promise<ClinicEntity> {
     // Validate
     const createClinicDtoInstance = plainToInstance(
       CreateClinicDto,
@@ -25,17 +25,16 @@ export class CreateClinicService {
 
     await applicationValidateOrReject(createClinicDtoInstance);
 
-    const isClinicExistent =
-      await this.psychologistDatabaseRepository.findClinic(
-        createClinicDto.name
-      );
+    const isClinicExist = await this.clinicDatabaseRepository.findClinic(
+      createClinicDto.name
+    );
 
-    if (isClinicExistent) {
+    if (isClinicExist) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_NAME']);
     }
 
     // Create
-    const createClinic = await this.psychologistDatabaseRepository.createClinic(
+    const createClinic = await this.clinicDatabaseRepository.createClinic(
       createClinicDto
     );
 

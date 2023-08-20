@@ -1,12 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
-import { Replace } from '@clinicControl/core-rest-api/core/shared/utils';
 import { PsychologistDto } from './dto';
-
-type IPsychologistProps = Replace<
-  PsychologistDto,
-  { id?: string; createdAt?: Date }
->;
+import { IPsychologistProps } from '../../interfaces/psychologist';
 
 export class PsychologistEntity extends PsychologistDto {
   constructor(props: IPsychologistProps) {

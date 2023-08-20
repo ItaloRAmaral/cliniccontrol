@@ -5,7 +5,7 @@ export const applicationValidateOrReject = async (
   object: object,
   message?: string
 ) => {
-  console.log('object', object)
+  console.log('applicationValidateOrReject:', object)
   const errors = await validate(object);
   if (errors.length > 0) throw new ValidationException(errors, message);
 };

@@ -5,9 +5,9 @@ import { PatientDatabaseRepository } from '../../repositories/database-repositor
 import { PatientEntity } from '../../entities/patient/entity';
 import { plainToInstance } from 'class-transformer';
 import { CreatePatientDto } from './create-patient-dto';
-import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/shared/validators/validate-or-reject';
-import { Replace } from '@clinicControl/core-rest-api/core/shared/utils/replace';
-import { PATIENT_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/shared/errors/error-messages';
+import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/src/shared/validators/validate-or-reject';
+import { Replace } from '@clinicControl/core-rest-api/core/src/shared/utils/replace';
+import { PATIENT_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 
 type IPatientProps = Replace<CreatePatientDto, {id?:string, createdAt?: Date}>
 

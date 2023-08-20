@@ -1,0 +1,15 @@
+{
+  "name": "@cliniccontrol/core-rest-api",
+  "version": "0.0.0",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Italo Rockenbach Amaral",
+      "email": "italorockamaral@gmail.com"
+    },
+    {
+      "name": "Luana Vefago",
+      "email": ""
+    }
+  ]
+}

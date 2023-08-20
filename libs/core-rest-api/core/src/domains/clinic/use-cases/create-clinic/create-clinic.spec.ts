@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateClinicService } from './create-clinic.service'
-import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
+import { ClinicDatabaseRepository } from '../../repositories/database-repository';
 
 import { randomUUID } from 'crypto';
-import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
+import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
 
 describe('[clinic] Create Clinic Service', () => {
   const fakeClinic = {
@@ -15,22 +15,22 @@ describe('[clinic] Create Clinic Service', () => {
   };
 
   let service: CreateClinicService;
-  let databaseRepository: PsychologistDatabaseRepository;
+  let databaseRepository: ClinicDatabaseRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CreateClinicService,
         {
-          provide: PsychologistDatabaseRepository,
-          useClass: InMemoryPsychologistDatabaseRepository,
+          provide: ClinicDatabaseRepository,
+          useClass: InMemoryClinicDatabaseRepository,
         },
       ],
     }).compile();
 
     service = module.get<CreateClinicService>(CreateClinicService);
-    databaseRepository = module.get<PsychologistDatabaseRepository>(
-      PsychologistDatabaseRepository
+    databaseRepository = module.get<ClinicDatabaseRepository>(
+      ClinicDatabaseRepository
     );
   });
 

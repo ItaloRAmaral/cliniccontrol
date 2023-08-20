@@ -1,13 +1,8 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import 'reflect-metadata';
 import { randomUUID } from "crypto";
-import { Replace } from "@clinicControl/core-rest-api/core/shared/utils";
 import { PatientDto } from "./dto";
-
-type IPatientProps = Replace<
-  PatientDto,
-  { id?: string; createdAt?: Date; }
->;
+import { IPatientProps } from '../../interfaces/patient';
 
 export class PatientEntity extends PatientDto {
   constructor(props: IPatientProps) {

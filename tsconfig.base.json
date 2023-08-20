@@ -15,10 +15,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "useUnknownInCatchVariables": true,
     "paths": {
-      "@clinicControl/core-rest-api/core/*": ["libs/core-rest-api/core/src/*"],
       "@clinicControl/root/*": ["./*"],
-      "@core-rest-api/adapters": ["libs/core-rest-api/adapters/src/index.ts"]
+      "@clinicControl/core-rest-api/core/*": ["libs/core-rest-api/core/*"],
+      "@clinicControl/core-rest-api/adapters/*": ["libs/core-rest-api/adapters/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

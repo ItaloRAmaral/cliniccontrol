@@ -1,10 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
-import { Replace } from '@clinicControl/core-rest-api/core/shared/utils';
 import { AppointmentDto } from './dto';
-
-
-type IAppointmentProps = Replace<AppointmentDto, { id?: string; createdAt?: Date }>;
+import { IAppointmentProps } from '../../interfaces/appointment';
 
 export class Appointment extends AppointmentDto {
   constructor(props: IAppointmentProps) {
@@ -135,20 +132,20 @@ export class Appointment extends AppointmentDto {
   }
 }
 
-const appointment = new Appointment({
-  patientId: '112E-123f-1234-1234',
-  psychologistId: '222d-523d',
-  date: new Date(),
-  online: true,
-  clinicId: '555f-666d',
-  confirmed: true,
-  confirmationDate: new Date(),
-  cancelled: true,
-  cancellationDate: new Date(),
-  done: true,
-  missed: true,
-  paid: true,
-  paymentMethod: 'debit',
-});
+// const appointment = new Appointment({
+//   patientId: '112E-123f-1234-1234',
+//   psychologistId: '222d-523d',
+//   date: new Date(),
+//   online: true,
+//   clinicId: '555f-666d',
+//   confirmed: true,
+//   confirmationDate: new Date(),
+//   cancelled: true,
+//   cancellationDate: new Date(),
+//   done: true,
+//   missed: true,
+//   paid: true,
+//   paymentMethod: 'debit',
+// });
 
-console.log(appointment);
+// console.log(appointment);

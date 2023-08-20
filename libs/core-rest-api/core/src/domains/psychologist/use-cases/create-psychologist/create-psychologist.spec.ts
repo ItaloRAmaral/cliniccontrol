@@ -38,7 +38,8 @@ describe('[psychologist] Create Psychologist Service', () => {
   it('should create a new psychologist', async () => {
     const psychologist = await service.execute(fakePsychologist);
 
-    const psychologistDatabaseRepository = await databaseRepository.findUser(psychologist.email);
+    const psychologistDatabaseRepository =
+      await databaseRepository.findPsychologist(psychologist.email);
 
     expect(psychologistDatabaseRepository?.email).toEqual(psychologist.email);
     expect(psychologist.email).toEqual(fakePsychologist.email);

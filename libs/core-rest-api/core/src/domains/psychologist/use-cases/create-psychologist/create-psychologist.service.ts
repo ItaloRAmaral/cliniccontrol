@@ -4,8 +4,8 @@ import { PsychologistDatabaseRepository } from '../../repositories/database-repo
 import { PsychologistEntity } from '../../entities/psychologist/entity';
 import { plainToInstance } from 'class-transformer';
 import { CreatePsychologistDto } from './create-psychologist-dto';
-import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/shared/validators/validate-or-reject';
-import { Replace } from '@clinicControl/core-rest-api/core/shared/utils/replace';
+import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/src/shared/validators/validate-or-reject';
+import { Replace } from '@clinicControl/core-rest-api/core/src/shared/utils/replace';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 
 type IPsychologistProps = Replace<
@@ -29,7 +29,10 @@ export class CreatePsychologistService {
     );
     await applicationValidateOrReject(createPsychologistDtoInstance);
 
-    const isPsychologistExists = await this.psychologistDatabaseRepository.findUser(createPsychologistDto.email);
+    const isPsychologistExists =
+      await this.psychologistDatabaseRepository.findPsychologist(
+        createPsychologistDto.email
+      );
 
     if (isPsychologistExists) {
       throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL']

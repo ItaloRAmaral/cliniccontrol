@@ -1,14 +1,4 @@
-export interface IPatientProps {
-  id: string
-  name: string
-  email: string
-  CPF: string
-  phone: number
-  paymentMethod: string
-  psychologistId: string
-  clinicId: string
-  createdAt: Date
-  updatedAt?: Date
-  // deletedAt?: Date
-  // apointments: apoimentsDto[]
-}
+import { Replace } from "../../../shared/utils";
+import { PatientDto } from "../entities/patient/dto";
+
+export type IPatientProps = Replace<PatientDto, { id?: string; createdAt?: Date }>;
