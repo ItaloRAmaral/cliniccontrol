@@ -1,4 +1,4 @@
-import { IsString, IsDate, IsOptional, IsBoolean } from 'class-validator';
+import { IsBoolean, IsDate, IsOptional, IsString } from 'class-validator';
 
 export class AppointmentDto {
   @IsString()
@@ -28,8 +28,9 @@ export class AppointmentDto {
   @IsBoolean()
   cancelled!: boolean;
 
+  @IsOptional()
   @IsDate()
-  cancellationDate!: Date | null;
+  cancellationDate?: Date | null;
 
   @IsBoolean()
   done!: boolean | null;
@@ -38,8 +39,9 @@ export class AppointmentDto {
   @IsBoolean()
   missed?: boolean | null;
 
+  @IsOptional()
   @IsBoolean()
-  paid!: boolean;
+  paid?: boolean;
 
   @IsString()
   paymentMethod!: string;

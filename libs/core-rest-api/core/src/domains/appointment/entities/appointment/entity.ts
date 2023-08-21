@@ -1,14 +1,18 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
-import { AppointmentDto } from './dto';
 import { IAppointmentProps } from '../../interfaces/appointment';
+import { AppointmentDto } from './dto';
 
-export class Appointment extends AppointmentDto {
+export class AppointmentEntity extends AppointmentDto {
   constructor(props: IAppointmentProps) {
     super();
     Object.assign(this, props);
     this.id = props.id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
+    this.done = props.done ?? false;
+    this.missed = props.missed ?? null;
+    this.cancellationDate = props.cancellationDate ?? null;
+    this.paid = props.paid ?? false;
   }
 
   public get getId(): string {
@@ -79,7 +83,7 @@ export class Appointment extends AppointmentDto {
     this.cancelled = cancelled;
   }
 
-  public get getCancellationDate(): Date | null {
+  public get getCancellationDate(): Date | null | undefined {
     return this.cancellationDate;
   }
 
@@ -103,7 +107,7 @@ export class Appointment extends AppointmentDto {
     this.missed = missed;
   }
 
-  public get getPaid(): boolean {
+  public get getPaid(): boolean | null | undefined {
     return this.paid;
   }
 
@@ -132,20 +136,16 @@ export class Appointment extends AppointmentDto {
   }
 }
 
-// const appointment = new Appointment({
-//   patientId: '112E-123f-1234-1234',
-//   psychologistId: '222d-523d',
-//   date: new Date(),
-//   online: true,
-//   clinicId: '555f-666d',
-//   confirmed: true,
-//   confirmationDate: new Date(),
-//   cancelled: true,
-//   cancellationDate: new Date(),
-//   done: true,
-//   missed: true,
-//   paid: true,
-//   paymentMethod: 'debit',
-// });
+const appointment = new AppointmentEntity({
+  patientId: '112E-123f-1234-1234',
+  psychologistId: '222d-523d',
+  date: new Date(),
+  online: true,
+  clinicId: '555f-666d',
+  confirmed: true,
+  confirmationDate: new Date(),
+  cancelled: false,
+  paymentMethod: 'debit',
+});
 
-// console.log(appointment);
+console.log(appointment);
