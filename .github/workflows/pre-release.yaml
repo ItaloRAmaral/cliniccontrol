@@ -45,5 +45,4 @@ jobs:
         run: |
           git config --global user.email "italorockamaral@gmail.com"
           git config --global user.name "italoRAmaral"
-          git remote set-url origin https://italoRAmaral:${GH_TOKEN}@github.com/ItaloRAmaral/cliniccontrol.git
           pnpm run conventional-prerelease
