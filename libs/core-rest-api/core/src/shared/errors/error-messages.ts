@@ -10,3 +10,7 @@ export const CLINIC_ERROR_MESSAGES = {
 export const PATIENT_ERROR_MESSAGES = {
   CONFLICTING_CREDENTIALS: 'patient already exists',
 };
+
+export const APPOINTMENT_ERROR_MESSAGES = {
+  CONFLICTING_DATE_TIME: 'appointment already exists at this time',
+};
