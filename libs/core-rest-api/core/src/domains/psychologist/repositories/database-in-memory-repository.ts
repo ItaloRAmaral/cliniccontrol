@@ -34,4 +34,23 @@ export class InMemoryPsychologistDatabaseRepository
       null
     );
   }
+
+  async deletePsychologist(email: string): Promise<void> {
+    const isPsychologistExists = await this.findPsychologist(
+      email
+    )
+
+    if(!isPsychologistExists) {
+      throw new ConflictException(
+        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
+      );
+    }
+
+    this.psychologists = this.psychologists.filter((psychologists) => psychologists.email !== email)
+
+  }
+
+  async getPsychologists(): Promise<PsychologistEntity[]> {
+    return this.psychologists
+  }
 }
