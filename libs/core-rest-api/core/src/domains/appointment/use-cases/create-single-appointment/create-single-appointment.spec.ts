@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateSingleAppointmentService } from './create-appointment.service';
 
+import { ConflictException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
@@ -53,6 +54,14 @@ describe('[appointment] Create Single Appointment Service', () => {
     expect(createAppointment.patientId).toEqual(fakeAppointment.patientId);
     expect(createAppointment.psychologistId).toEqual(
       fakeAppointment.psychologistId
+    );
+  });
+
+  it('should not create a new appointment if the date is already taken', async () => {
+    await service.execute(fakeAppointment);
+
+    await expect(service.execute(fakeAppointment)).rejects.toThrowError(
+      ConflictException
     );
   });
 });

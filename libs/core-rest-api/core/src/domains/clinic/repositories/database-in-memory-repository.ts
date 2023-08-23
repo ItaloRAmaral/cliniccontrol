@@ -1,9 +1,8 @@
 import { ConflictException, Injectable } from '@nestjs/common';
-import { ClinicDatabaseRepository } from './database-repository';
 import { CLINIC_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { ClinicEntity } from '../../clinic/entities/clinic/entity';
 import { CreateClinicDto } from '../../clinic/use-cases/create-clinic/create-clinic-dto';
-
+import { ClinicDatabaseRepository } from './database-repository';
 
 @Injectable()
 export class InMemoryClinicDatabaseRepository
@@ -27,5 +26,19 @@ export class InMemoryClinicDatabaseRepository
 
   async findClinic(name: string): Promise<ClinicEntity | null> {
     return this.clinics.find((clinic) => clinic.name === name) || null;
+  }
+
+  async getClinics(): Promise<ClinicEntity[]> {
+    return this.clinics;
+  }
+
+  async deleteClinic(name: string): Promise<void> {
+    const isClinicExists = await this.findClinic(name);
+
+    if (!isClinicExists) {
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_DO_NOT_EXIST']);
+    }
+
+    this.clinics = this.clinics.filter((clinic) => clinic.name !== name);
   }
 }

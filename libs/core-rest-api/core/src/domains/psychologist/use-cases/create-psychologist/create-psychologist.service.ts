@@ -1,17 +1,11 @@
-/* eslint-disable @nx/enforce-module-boundaries */
-import { ConflictException, Injectable} from '@nestjs/common';
-import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
-import { PsychologistEntity } from '../../entities/psychologist/entity';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { CreatePsychologistDto } from './create-psychologist-dto';
-import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/src/shared/validators/validate-or-reject';
-import { Replace } from '@clinicControl/core-rest-api/core/src/shared/utils/replace';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
-
-type IPsychologistProps = Replace<
-  CreatePsychologistDto,
-  { id?: string; createdAt?: Date }
->;
+import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
+import { PsychologistEntity } from '../../entities/psychologist/entity';
+import { ICreatePsychologistServiceProps } from '../../interfaces/psychologist';
+import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
+import { CreatePsychologistDto } from './create-psychologist-dto';
 
 @Injectable()
 export class CreatePsychologistService {
@@ -20,7 +14,7 @@ export class CreatePsychologistService {
   ) {}
 
   async execute(
-    createPsychologistDto: IPsychologistProps
+    createPsychologistDto: ICreatePsychologistServiceProps
   ): Promise<PsychologistEntity> {
     // Validate
     const createPsychologistDtoInstance = plainToInstance(
@@ -35,7 +29,8 @@ export class CreatePsychologistService {
       );
 
     if (isPsychologistExists) {
-      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL']
+      throw new ConflictException(
+        PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL']
       );
     }
 
