@@ -1,12 +1,12 @@
 /* eslint-disable @nx/enforce-module-boundaries */
+import { randomUUID } from 'crypto';
 import 'reflect-metadata';
-import { randomUUID } from "crypto";
-import { PatientDto } from "./dto";
 import { IPatientProps } from '../../interfaces/patient';
+import { PatientDto } from './dto';
 
 export class PatientEntity extends PatientDto {
   constructor(props: IPatientProps) {
-    super()
+    super();
     Object.assign(this, props);
     this.id = props.id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -40,11 +40,11 @@ export class PatientEntity extends PatientDto {
     this.CPF = CPF;
   }
 
-  public get getPhone(): number {
+  public get getPhone(): string {
     return this.phone;
   }
 
-  public set setPhone(phone: number) {
+  public set setPhone(phone: string) {
     this.phone = phone;
   }
 
@@ -100,4 +100,3 @@ export class PatientEntity extends PatientDto {
 // });
 
 // console.log(patient);
-

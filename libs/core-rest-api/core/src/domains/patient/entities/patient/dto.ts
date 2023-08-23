@@ -1,10 +1,4 @@
-import {
-  IsString,
-  // IsMobilePhone,
-  IsDate,
-  IsOptional,
-  IsNumber,
-} from 'class-validator';
+import { IsDate, IsMobilePhone, IsOptional, IsString } from 'class-validator';
 
 export class PatientDto {
   @IsString()
@@ -19,11 +13,8 @@ export class PatientDto {
   @IsString()
   CPF!: string;
 
-  // @IsMobilePhone('pt-BR')
-  // phone!: number;
-
-  @IsNumber()
-  phone!: number;
+  @IsMobilePhone('pt-BR')
+  phone!: string;
 
   @IsString()
   paymentMethod!: string;

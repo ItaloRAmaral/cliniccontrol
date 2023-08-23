@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ClinicDatabaseRepository } from '../../repositories/database-repository';
-import { CreateClinicService } from './create-clinic.service';
+import { DeleteClinicService } from './delete-clinic.service';
 
 import { ConflictException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
 
-describe('[clinic] Create Clinic Service', () => {
+describe('[clinic] Delete Clinic Service', () => {
   const fakeClinic = {
     name: faker.company.name(),
     psychologistId: randomUUID(),
@@ -15,13 +15,13 @@ describe('[clinic] Create Clinic Service', () => {
     state: faker.location.state(),
   };
 
-  let service: CreateClinicService;
+  let service: DeleteClinicService;
   let databaseRepository: ClinicDatabaseRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        CreateClinicService,
+        DeleteClinicService,
         {
           provide: ClinicDatabaseRepository,
           useClass: InMemoryClinicDatabaseRepository,
@@ -29,26 +29,24 @@ describe('[clinic] Create Clinic Service', () => {
       ],
     }).compile();
 
-    service = module.get<CreateClinicService>(CreateClinicService);
+    service = module.get<DeleteClinicService>(DeleteClinicService);
     databaseRepository = module.get<ClinicDatabaseRepository>(
       ClinicDatabaseRepository
     );
   });
 
-  it('should create a new clinic', async () => {
-    const createClinic = await service.execute(fakeClinic);
+  it('should delete a new clinic', async () => {
+    const createClinic = await databaseRepository.createClinic(fakeClinic);
 
-    const clinic = await databaseRepository.findClinic(createClinic.name);
+    await service.execute(createClinic.name);
 
-    expect(clinic?.name).toEqual(createClinic.name);
-    expect(createClinic.name).toEqual(fakeClinic.name);
-    expect(createClinic.psychologistId).toEqual(fakeClinic.psychologistId);
+    const getClinics = await databaseRepository.getClinics();
+
+    expect(getClinics).not.toContain(createClinic);
   });
 
-  it('should not create a new clinic if the name is already taken', async () => {
-    await service.execute(fakeClinic);
-
-    await expect(service.execute(fakeClinic)).rejects.toThrow(
+  it('should throw conflict exception if clinic do not exists', async () => {
+    await expect(service.execute(fakeClinic.name)).rejects.toThrow(
       ConflictException
     );
   });
