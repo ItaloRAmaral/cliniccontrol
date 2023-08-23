@@ -10,6 +10,7 @@ export const CLINIC_ERROR_MESSAGES = {
 
 export const PATIENT_ERROR_MESSAGES = {
   CONFLICTING_CREDENTIALS: 'patient already exists',
+  PATIENT_NOT_FOUND: 'patient not found'
 };
 
 export const APPOINTMENT_ERROR_MESSAGES = {
