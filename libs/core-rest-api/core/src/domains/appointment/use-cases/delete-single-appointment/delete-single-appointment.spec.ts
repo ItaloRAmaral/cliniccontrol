@@ -1,12 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { Test, TestingModule } from '@nestjs/testing';
-import { CreateSingleAppointmentService } from './create-single-appointment.service';
-
 import { ConflictException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { CreateSingleAppointmentDto } from './create-single-appointment-dto';
+import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
+import { DeleteSingleAppointmentService } from './delete-single-appointment.service';
 
 describe('[appointment] Create Single Appointment Service', () => {
   const fakeAppointment: CreateSingleAppointmentDto = {
@@ -21,13 +20,13 @@ describe('[appointment] Create Single Appointment Service', () => {
     paymentMethod: 'debit',
   };
 
-  let service: CreateSingleAppointmentService;
+  let service: DeleteSingleAppointmentService;
   let databaseRepository: AppointmentDatabaseRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        CreateSingleAppointmentService,
+        DeleteSingleAppointmentService,
         {
           provide: AppointmentDatabaseRepository,
           useClass: InMemoryAppointmentDatabaseRepository,
@@ -35,33 +34,27 @@ describe('[appointment] Create Single Appointment Service', () => {
       ],
     }).compile();
 
-    service = module.get<CreateSingleAppointmentService>(
-      CreateSingleAppointmentService
+    service = module.get<DeleteSingleAppointmentService>(
+      DeleteSingleAppointmentService
     );
     databaseRepository = module.get<AppointmentDatabaseRepository>(
       AppointmentDatabaseRepository
     );
   });
 
-  it('should create a new appointment', async () => {
-    const createAppointment = await service.execute(fakeAppointment);
+  it('should delete a new appointment', async () => {
+    const createAppointment = await databaseRepository.createSingleAppointment(fakeAppointment);
+    await service.execute(createAppointment.id)
+    const getAppointments = await databaseRepository.getAppointments();
 
-    const appointment = await databaseRepository.findSingleAppointmentByDate(
-      createAppointment.date
-    );
 
-    expect(appointment?.id).toEqual(appointment?.id);
-    expect(createAppointment.patientId).toEqual(fakeAppointment.patientId);
-    expect(createAppointment.psychologistId).toEqual(
-      fakeAppointment.psychologistId
-    );
+    expect(getAppointments).not.toContain(createAppointment);
   });
 
-  it('should not create a new appointment if the date is already taken', async () => {
-    await service.execute(fakeAppointment);
+  it('should throw error if appointment does not exist', async () => {
+    const createAppointment = await databaseRepository.createSingleAppointment(fakeAppointment);
+    await service.execute(createAppointment.id)
+    await expect(service.execute(createAppointment.id)).rejects.toThrow(ConflictException)
+  })
 
-    await expect(service.execute(fakeAppointment)).rejects.toThrowError(
-      ConflictException
-    );
-  });
 });
