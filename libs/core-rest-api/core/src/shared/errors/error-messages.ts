@@ -1,6 +1,7 @@
 export const PSYCHOLOGIST_ERROR_MESSAGES = {
   CONFLICTING_EMAIL: 'email already exists',
   INVALID_EMAIL: 'email must be an email',
+  PSYCHOLOGIST_NOT_FOUND: 'psychologist not found'
 };
 
 export const CLINIC_ERROR_MESSAGES = {

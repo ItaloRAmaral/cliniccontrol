@@ -6,4 +6,6 @@ export abstract class PsychologistDatabaseRepository {
     psychologist: CreatePsychologistDto
   ): Promise<PsychologistEntity>;
   abstract findPsychologist(email: string): Promise<PsychologistEntity | null>;
+  abstract deletePsychologist(email: string): Promise<void>
+  abstract getPsychologists(): Promise<PsychologistEntity[]>
 }
