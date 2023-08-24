@@ -6,7 +6,7 @@ import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-mess
 import { AppointmentEntity } from '../../entities/appointment/entity';
 import { ICreateAppointmentServiceProps } from '../../interfaces/appointment';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { CreateSingleAppointmentDto } from './create-appointment-dto';
+import { CreateSingleAppointmentDto } from './create-single-appointment-dto';
 
 @Injectable()
 export class CreateSingleAppointmentService {
@@ -26,7 +26,7 @@ export class CreateSingleAppointmentService {
     await applicationValidateOrReject(createSingleAppointmentDtoInstance);
 
     const isAppointmentExist =
-      await this.appointmentDatabaseRepository.findSingleAppointment(
+      await this.appointmentDatabaseRepository.findSingleAppointmentByDate(
         createSingleAppointmentDto.date
       );
 

@@ -1,7 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { AppointmentEntity } from '../entities/appointment/entity';
-import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-appointment-dto';
+import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
 import { AppointmentDatabaseRepository } from './database-repository';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class InMemoryAppointmentDatabaseRepository
   async createSingleAppointment(
     appointment: CreateSingleAppointmentDto
   ): Promise<AppointmentEntity> {
-    const isAppointmentExist = await this.findSingleAppointment(
+    const isAppointmentExist = await this.findSingleAppointmentByDate(
       appointment.date
     );
 
@@ -30,13 +30,36 @@ export class InMemoryAppointmentDatabaseRepository
     return newAppointment;
   }
 
-  async findSingleAppointment(
+  async findSingleAppointmentByDate(
     appointmentDate: Date
   ): Promise<AppointmentEntity | null> {
     return (
       this.appointments.find(
         (appointment) => appointment.date === appointmentDate
-      ) || null
+      ) ?? null
     );
+  }
+
+  async findSingleAppointmentById(
+    appointmentId: string
+  ): Promise<AppointmentEntity | null> {
+    return (
+      this.appointments.find((appointment) => appointment.id === appointmentId) ?? null
+    )
+  }
+
+
+  async deleteSingleAppointment(appointmentId: string): Promise<void> {
+    const isAppointmentExist = await this.findSingleAppointmentById(appointmentId)
+
+    if(!isAppointmentExist) {
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND'])
+    }
+
+    this.appointments = this.appointments.filter((appointment) => appointment.id !== appointmentId)
+  }
+
+  async getAppointments(): Promise<AppointmentEntity[]> {
+    return this.appointments
   }
 }

@@ -16,4 +16,5 @@ export const PATIENT_ERROR_MESSAGES = {
 
 export const APPOINTMENT_ERROR_MESSAGES = {
   CONFLICTING_DATE_TIME: 'appointment already exists at this time',
+  APPOINTMENT_NOT_FOUND: 'appointment not found'
 };

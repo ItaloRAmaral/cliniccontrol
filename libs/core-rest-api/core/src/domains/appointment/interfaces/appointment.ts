@@ -1,6 +1,6 @@
 import { Replace } from '../../../shared/utils';
 import { AppointmentDto } from '../entities/appointment/dto';
-import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-appointment-dto';
+import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
 
 export type IAppointmentProps = Replace<
   AppointmentDto,
