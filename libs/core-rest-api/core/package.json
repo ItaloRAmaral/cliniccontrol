@@ -1,7 +1,7 @@
 {
-  "name": "@cliniccontrol/core-rest-api",
+  "name": "@cliniccontrol/core-rest-api-core",
   "version": "1.0.1-beta.1",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "authors": [
     {
       "name": "Italo Rockenbach Amaral",
