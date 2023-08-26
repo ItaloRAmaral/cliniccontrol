@@ -10,11 +10,13 @@
   ],
   "scripts": {
     "prepare": "husky install",
+    "git:discard:all": "git checkout -- .",
     "conventional-prerelease": "lerna version --conventional-prerelease --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "conventional-prerelease:no-push": "lerna version --conventional-prerelease --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
     "conventional-graduate": "lerna version --yes --conventional-graduate --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "conventional-graduate:no-push": "lerna version --yes --conventional-graduate --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
-    "test:unit": "nx run-many --target=test --all=true"
+    "test:unit": "nx run-many --target=test --all=true",
+    "env:setup": "cp .env.example .env"
   },
   "private": true,
   "dependencies": {
@@ -76,7 +78,7 @@
     "jest-environment-node": "^29.6.2",
     "lerna": "7.1.5",
     "nx": "16.6.0",
-    "nx-cloud": "16.2.0",
+    "nx-cloud": "16.3.0",
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.1",
     "ts-node": "10.9.1",
@@ -85,5 +87,11 @@
     "vite-plugin-dts": "~2.3.0",
     "vite-tsconfig-paths": "~4.2.0",
     "vitest": "~0.32.4"
+  },
+  "volta": {
+    "node": "18.16.0",
+    "npm": "8.19.4",
+    "yarn": "1.22.19",
+    "pnpm": "8.6.7"
   }
 }
