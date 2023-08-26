@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1-beta.11](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.0.1-beta.10...cliniccontrol@1.0.1-beta.11) (2023-08-26)
+
+### Bug Fixes
+
+- **CC-34:** fixed pre-release ([d3e38e4](https://github.com/ItaloRAmaral/cliniccontrol/commit/d3e38e4c2e27e24d19b4d7d44e784b172d1d6756))
+
 ## 1.0.1-beta.10 (2023-08-26)
 
 **Note:** Version bump only for package cliniccontrol
