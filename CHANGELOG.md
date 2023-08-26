@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1-beta.12](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.0.1-beta.11...cliniccontrol@1.0.1-beta.12) (2023-08-26)
+
+### Bug Fixes
+
+- **CC-34:** added check-commit-message in pre release workflow ([56229a4](https://github.com/ItaloRAmaral/cliniccontrol/commit/56229a411f3814c485ef6a768bfe85f6e33a9ca8))
+
 ## [1.0.1-beta.11](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.0.1-beta.10...cliniccontrol@1.0.1-beta.11) (2023-08-26)
 
 ### Bug Fixes
