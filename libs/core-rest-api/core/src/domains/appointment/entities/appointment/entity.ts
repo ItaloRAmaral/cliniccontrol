@@ -135,17 +135,3 @@ export class AppointmentEntity extends AppointmentDto {
     this.updatedAt = updatedAt;
   }
 }
-
-const appointment = new AppointmentEntity({
-  patientId: '112E-123f-1234-1234',
-  psychologistId: '222d-523d',
-  date: new Date(),
-  online: true,
-  clinicId: '555f-666d',
-  confirmed: true,
-  confirmationDate: new Date(),
-  cancelled: false,
-  paymentMethod: 'debit',
-});
-
-console.log(appointment);

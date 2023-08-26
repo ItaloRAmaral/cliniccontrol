@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsNumber,
-  Min,
-  IsDate,
-  IsOptional,
-} from 'class-validator';
+import { IsDate, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
 export class PsychologistDto {
   @IsString()
@@ -32,18 +26,18 @@ export class PsychologistDto {
   @IsOptional()
   @IsNumber()
   @Min(0)
-  totalYearEarnings?: number;
+  totalYearEarnings?: number | null;
 
   @IsOptional()
   @IsNumber()
   @Min(0)
-  totalMonthEarnings?: number;
+  totalMonthEarnings?: number | null;
 
   @IsOptional()
   @IsDate()
-  createdAt?: Date;
+  createdAt!: Date;
 
   @IsOptional()
   @IsDate()
-  updatedAt?: Date;
+  updatedAt?: Date | null;
 }

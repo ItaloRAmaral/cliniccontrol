@@ -24,13 +24,13 @@ export class CreatePsychologistService {
     await applicationValidateOrReject(createPsychologistDtoInstance);
 
     const isPsychologistExists =
-      await this.psychologistDatabaseRepository.findPsychologist(
+      await this.psychologistDatabaseRepository.findPsychologistByEmail(
         createPsychologistDto.email
       );
 
     if (isPsychologistExists) {
       throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL']
+        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_ALREADY_EXISTS']
       );
     }
 
