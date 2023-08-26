@@ -143,7 +143,6 @@ jobs:
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-          # NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
         run: |
           git status
           git diff
@@ -152,7 +151,7 @@ jobs:
           git diff
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
-          pnpm pre-release
+          pnpm conventional-prerelease
 
       - name: Override nx token back to fake value # Avoid leaking the token
         run: |
