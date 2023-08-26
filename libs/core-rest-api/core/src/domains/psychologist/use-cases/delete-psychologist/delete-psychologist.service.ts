@@ -1,6 +1,6 @@
-import { ConflictException, Injectable } from "@nestjs/common";
-import { PSYCHOLOGIST_ERROR_MESSAGES } from "../../../../shared/errors/error-messages";
-import { PsychologistDatabaseRepository } from "../../repositories/database-repository";
+import { ConflictException, Injectable } from '@nestjs/common';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 
 @Injectable()
 export class DeletePsychologistService {
@@ -10,7 +10,8 @@ export class DeletePsychologistService {
 
   async execute(email: string): Promise<void> {
     // Validate if Psychologist exists
-    const isPsychologistExists = await this.psychologistDatabaseRepository.findPsychologist(email)
+    const isPsychologistExists =
+      await this.psychologistDatabaseRepository.findPsychologistByEmail(email);
     if (!isPsychologistExists) {
       throw new ConflictException(
         PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
@@ -18,6 +19,6 @@ export class DeletePsychologistService {
     }
 
     // Delete psychologist
-    await this.psychologistDatabaseRepository.deletePsychologist(email)
-  }  
+    await this.psychologistDatabaseRepository.deletePsychologist(email);
+  }
 }
