@@ -45,7 +45,7 @@ describe('[psychologist] Update Psychologist Service', () => {
       id: createPsychologist.id,
       name: faker.person.fullName(),
       email: faker.internet.email(),
-      password: 'new_password',
+      password: faker.internet.password({ length: 5 }),
       plan: 'premium',
     };
 
@@ -73,12 +73,12 @@ describe('[psychologist] Update Psychologist Service', () => {
     expect(findPsychologist?.plan).toBe(newPsychologistInfos.plan);
   });
 
-  it('should not update a new psychologist if not exists', async () => {
+  it('should not update a new psychologist and throw an ConflicException if not exists', async () => {
     const newPsychologistInfos = {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
       email: faker.internet.email(),
-      password: 'new_password',
+      password: faker.internet.password({ length: 5 }),
       plan: 'premium',
     };
 
