@@ -25,10 +25,10 @@
 
 - [About the Project](#about-the-project)
 - [Built With](#built-with)
-<!-- - [Getting Started](#getting-started)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage) -->
+- [Usage](#usage)
 - [Roadmap](#roadmap)
 <!-- - [Contributing](#contributing)
 - [License](#license) -->
@@ -73,7 +73,7 @@ This project leverages a robust and modern tech stack to deliver a fast, secure,
 
 - <b>Hexagonal Architecture:</b> This architecture separates the core logic of the application from the services that it uses, making the system more maintainable, scalable, and testable.
 
-<!-- ## Getting Started
+## Getting Started
 
 _under development_
 
@@ -87,7 +87,7 @@ _under development_
 
 ## Usage
 
-_under development_ -->
+_under development_
 
 ## Roadmap
 
