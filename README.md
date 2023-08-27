@@ -42,12 +42,12 @@ In the fast-paced and demanding field of psychology, professionals need an effec
 
 ##### Features (_under developtment!_)
 
-- <b>Schedule Management:</b> Easily schedule appointments, set reminders, and automate cancellations to manage your time efficiently.
-- <b>Cost Tracking:</b> Accurately record and analyze costs such as rent, utilities, and supplies, to get a clear picture of your overhead expenses.
-- <b>Earnings Monitoring:</b> Keep track of payments, generate invoices, and visualize your income over various time frames to understand your financial health.
-- <b>Client Management:</b> Safely store client information, treatment plans, and session notes in one centralized, secure database.
-- <b>Data Visualization:</b> Use intuitive graphs and charts to understand your practice's performance metrics, like client retention, earnings, and more.
-- <b>User-Friendly Interface:</b> Designed with user experience in mind, making it easy for anyone to use, even with little to no technical expertise.
+- <b>⏳- Schedule Management:</b> Easily schedule appointments, set reminders, and automate cancellations to manage your time efficiently.
+- <b>⏳- Cost Tracking:</b> Accurately record and analyze costs such as rent, utilities, and supplies, to get a clear picture of your overhead expenses.
+- <b>⏳- Earnings Monitoring:</b> Keep track of payments, generate invoices, and visualize your income over various time frames to understand your financial health.
+- <b>⏳- Client Management:</b> Safely store client information, treatment plans, and session notes in one centralized, secure database.
+- <b>⏳- Data Visualization:</b> Use intuitive graphs and charts to understand your practice's performance metrics, like client retention, earnings, and more.
+- <b>⏳- User-Friendly Interface:</b> Designed with user experience in mind, making it easy for anyone to use, even with little to no technical expertise.
 
 ## Built With
 
