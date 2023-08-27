@@ -1,4 +1,5 @@
-import { IsDate, IsMobilePhone, IsOptional, IsString } from 'class-validator';
+import { IsMobilePhone, IsString } from 'class-validator';
+import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
 export class CreatePatientDto {
   @IsString()
@@ -14,19 +15,11 @@ export class CreatePatientDto {
   phone!: string;
 
   @IsString()
-  paymentMethod!: string;
+  paymentMethod!: PaymentMethod;
 
   @IsString()
   psychologistId!: string;
 
   @IsString()
   clinicId!: string;
-
-  @IsOptional()
-  @IsDate()
-  createdAt?: Date;
-
-  @IsOptional()
-  @IsDate()
-  updatedAt?: Date | null;
 }

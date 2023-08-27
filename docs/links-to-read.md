@@ -1,13 +1,12 @@
 https://dev.to/rubemfsv/clean-architecture-applying-with-react-40h6
 psicomanager -> referencia
 
-
--- 
+--
 Prisma -> performance baixa
 https://codedamn.com/news/product/dont-use-prisma
 https://www.youtube.com/watch?v=jqhHXe746Ns
 
--- Alternativas para avaliar para usar na possivel migração do psca -- 
+-- Alternativas para avaliar para usar na possivel migração do psca --
 https://orm.drizzle.team/
 https://kysely.dev/
 
@@ -23,3 +22,7 @@ we use the class-transformer function plainToInstance() to transform our plain J
 --
 
 type guard error handling: https://www.youtube.com/watch?v=xdQkEn3mx1k&t=114s
+
+--
+
+https://aykhanhuseyn.medium.com/typescript-naming-conventions-crafting-maintainable-code-7d872234fe17

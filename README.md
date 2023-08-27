@@ -10,11 +10,10 @@
     Effortlessly manage your schedule, track costs, and monitor earnings - initially made for psychologists
     <br/>
     <br/>
-    <a href="https://github.com/italoRAmaral/cliniccontrol/docs"><strong>Explore the docs »</strong></a>
-    <br/>
-    <br/>
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong>Explore the docs</strong></a>
+    -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>
-    .
+    -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Request Feature</a>
   </p>
 </p>
@@ -41,9 +40,7 @@
 
 In the fast-paced and demanding field of psychology, professionals need an effective way to manage their practices without getting bogged down by administrative tasks. Our project aims to simplify and streamline these processes so that psychologists can focus more on what really matters: their patients.
 
-##### Features
-
-###### (_under developtment!_)
+##### Features (_under developtment!_)
 
 - <b>Schedule Management:</b> Easily schedule appointments, set reminders, and automate cancellations to manage your time efficiently.
 - <b>Cost Tracking:</b> Accurately record and analyze costs such as rent, utilities, and supplies, to get a clear picture of your overhead expenses.
@@ -55,6 +52,10 @@ In the fast-paced and demanding field of psychology, professionals need an effec
 ## Built With
 
 This project leverages a robust and modern tech stack to deliver a fast, secure, and scalable solution. Below are some of the key technologies, frameworks, and architectures we've used:
+
+##### Architecture
+
+- <b>Hexagonal Architecture:</b> This architecture separates the core logic of the application from the services that it uses, making the system more maintainable, scalable, and testable.
 
 ##### Monorepo Management
 
@@ -68,10 +69,6 @@ This project leverages a robust and modern tech stack to deliver a fast, secure,
 ##### Backend
 
 - [NestJS:](https://nestjs.com) A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
-
-##### Architecture
-
-- <b>Hexagonal Architecture:</b> This architecture separates the core logic of the application from the services that it uses, making the system more maintainable, scalable, and testable.
 
 ## Getting Started
 
@@ -107,8 +104,8 @@ Distributed under the MIT License. See [LICENSE](https://github.com/italoRAmaral
 
 ## Authors
 
-- **Italo Amaral** - _FullStack Developer_ - [Italo Amaral](https://github.com/italoRAmaral) - _Owner_
-- **Luana Vefago** - _FullStack Developer_ - [Luana Vefago](https://github.com/luanavfg) - _Owner_
+- **[Italo Amaral](https://github.com/italoRAmaral)** - _FullStack Developer_ - _Owner_
+- **[Luana Vefago](https://github.com/luanavfg)** - _FullStack Developer_ - _Owner_
 
 ## Acknowledgements
 
