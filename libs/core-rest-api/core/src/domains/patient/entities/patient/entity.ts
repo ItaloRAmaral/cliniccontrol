@@ -1,6 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
 import 'reflect-metadata';
+import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { IPatientProps } from '../../interfaces/patient';
 import { PatientDto } from './dto';
 
@@ -52,7 +53,7 @@ export class PatientEntity extends PatientDto {
     return this.paymentMethod;
   }
 
-  public set setPaymentMethod(paymentMethod: string) {
+  public set setPaymentMethod(paymentMethod: PaymentMethod) {
     this.paymentMethod = paymentMethod;
   }
 
@@ -88,15 +89,3 @@ export class PatientEntity extends PatientDto {
     this.updatedAt = updatedAt;
   }
 }
-
-// const patient = new Patient({
-//   name: "teste",
-//   email: "",
-//   CPF: "",
-//   phone: 0,
-//   paymentMethod: "",
-//   psychologistId: "",
-//   clinicId: "",
-// });
-
-// console.log(patient);

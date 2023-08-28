@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
+import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryPatientDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
 import { CreatePatientDto } from './create-patient-dto';
@@ -12,9 +13,8 @@ describe('[patient] Create Patient Service', () => {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    // phone: '5548999999999',
     phone: faker.phone.number('+5548988240149'),
-    paymentMethod: 'debit',
+    paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),
   };
