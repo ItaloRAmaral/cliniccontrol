@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { AppointmentEntity } from '../entities/appointment/entity';
 import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
+import { UpdatedAppointmentInfoDto } from '../use-cases/update-appointment/update-appointment-dto';
 import { AppointmentDatabaseRepository } from './database-repository';
 
 @Injectable()
@@ -44,22 +45,54 @@ export class InMemoryAppointmentDatabaseRepository
     appointmentId: string
   ): Promise<AppointmentEntity | null> {
     return (
-      this.appointments.find((appointment) => appointment.id === appointmentId) ?? null
-    )
-  }
-
-
-  async deleteSingleAppointment(appointmentId: string): Promise<void> {
-    const isAppointmentExist = await this.findSingleAppointmentById(appointmentId)
-
-    if(!isAppointmentExist) {
-      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND'])
-    }
-
-    this.appointments = this.appointments.filter((appointment) => appointment.id !== appointmentId)
+      this.appointments.find(
+        (appointment) => appointment.id === appointmentId
+      ) ?? null
+    );
   }
 
   async getAppointments(): Promise<AppointmentEntity[]> {
-    return this.appointments
+    return this.appointments;
+  }
+
+  async updateAppointmentInfo(
+    newAppointmentInfo: UpdatedAppointmentInfoDto
+  ): Promise<void> {
+    const oldAppointmentInfo = await this.findSingleAppointmentById(
+      newAppointmentInfo.id
+    );
+
+    if (!oldAppointmentInfo) {
+      throw new ConflictException(
+        APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']
+      );
+    }
+
+    const appointmentIndex = this.appointments.findIndex((appointment) => {
+      return appointment.id === newAppointmentInfo.id;
+    });
+
+    const updatedAppointment = Object.assign(oldAppointmentInfo, {
+      ...newAppointmentInfo,
+      updatedAt: new Date(),
+    });
+
+    this.appointments[appointmentIndex] = updatedAppointment;
+  }
+
+  async deleteSingleAppointment(appointmentId: string): Promise<void> {
+    const isAppointmentExist = await this.findSingleAppointmentById(
+      appointmentId
+    );
+
+    if (!isAppointmentExist) {
+      throw new ConflictException(
+        APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']
+      );
+    }
+
+    this.appointments = this.appointments.filter(
+      (appointment) => appointment.id !== appointmentId
+    );
   }
 }
