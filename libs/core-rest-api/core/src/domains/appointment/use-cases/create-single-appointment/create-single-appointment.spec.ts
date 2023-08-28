@@ -4,6 +4,7 @@ import { CreateSingleAppointmentService } from './create-single-appointment.serv
 
 import { ConflictException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
 import { CreateSingleAppointmentDto } from './create-single-appointment-dto';
@@ -18,7 +19,7 @@ describe('[appointment] Create Single Appointment Service', () => {
     confirmed: true,
     confirmationDate: faker.date.recent({ days: 5 }),
     cancelled: false,
-    paymentMethod: 'debit',
+    paymentMethod: PaymentMethod.CREDIT_CARD,
   };
 
   let service: CreateSingleAppointmentService;

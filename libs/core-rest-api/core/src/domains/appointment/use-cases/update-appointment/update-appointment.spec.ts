@@ -2,13 +2,15 @@ import { faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
+import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
 import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
-import { DeleteSingleAppointmentService } from './delete-single-appointment.service';
+import { UpdatedAppointmentInfoDto } from './update-appointment-dto';
+import { UpdateAppointmentInfoService } from './update-appointment.service';
 
-describe('[appointment] Create Single Appointment Service', () => {
+describe('[appointment] Update Appointment Info Service', () => {
   const fakeAppointment: CreateSingleAppointmentDto = {
     psychologistId: randomUUID(),
     patientId: randomUUID(),
@@ -21,13 +23,13 @@ describe('[appointment] Create Single Appointment Service', () => {
     paymentMethod: PaymentMethod.CREDIT_CARD,
   };
 
-  let service: DeleteSingleAppointmentService;
+  let service: UpdateAppointmentInfoService;
   let databaseRepository: AppointmentDatabaseRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        DeleteSingleAppointmentService,
+        UpdateAppointmentInfoService,
         {
           provide: AppointmentDatabaseRepository,
           useClass: InMemoryAppointmentDatabaseRepository,
@@ -35,31 +37,54 @@ describe('[appointment] Create Single Appointment Service', () => {
       ],
     }).compile();
 
-    service = module.get<DeleteSingleAppointmentService>(
-      DeleteSingleAppointmentService
+    service = module.get<UpdateAppointmentInfoService>(
+      UpdateAppointmentInfoService
     );
     databaseRepository = module.get<AppointmentDatabaseRepository>(
       AppointmentDatabaseRepository
     );
   });
 
-  it('should delete a new appointment', async () => {
+  it('should update an appointment', async () => {
     const createAppointment = await databaseRepository.createSingleAppointment(
       fakeAppointment
     );
-    await service.execute(createAppointment.id);
-    const getAppointments = await databaseRepository.getAppointments();
 
-    expect(getAppointments).not.toContain(createAppointment);
+    const newAppointmentInfo: UpdatedAppointmentInfoDto = {
+      id: createAppointment.id,
+      paid: true,
+      paymentMethod: PaymentMethod.PIX,
+    };
+
+    await service.execute(newAppointmentInfo);
+    const findAppointment = await databaseRepository.findSingleAppointmentById(
+      newAppointmentInfo.id
+    );
+
+    expect(findAppointment).toEqual({
+      ...createAppointment,
+      ...newAppointmentInfo,
+    });
+
+    expect(findAppointment?.paid).toBe(newAppointmentInfo.paid);
+
+    expect(findAppointment?.paymentMethod).toBe(
+      newAppointmentInfo.paymentMethod
+    );
+    expect(findAppointment?.paymentMethod).not.toBe(
+      fakeAppointment.paymentMethod
+    );
   });
 
   it('should throw error if appointment does not exist', async () => {
-    const createAppointment = await databaseRepository.createSingleAppointment(
-      fakeAppointment
-    );
-    await service.execute(createAppointment.id);
-    await expect(service.execute(createAppointment.id)).rejects.toThrow(
-      ConflictException
+    const newAppointmentInfo: UpdatedAppointmentInfoDto = {
+      id: randomUUID(),
+      paid: true,
+      paymentMethod: PaymentMethod.PIX,
+    };
+
+    await expect(service.execute(newAppointmentInfo)).rejects.toThrow(
+      new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND'])
     );
   });
 });
