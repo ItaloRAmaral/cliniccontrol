@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.1.0-beta.0...@cliniccontrol/core-rest-api-core@1.1.0-beta.1) (2023-08-28)
+
+### Features
+
+- **CC-28:** added update appointment info use case ([a74be8e](https://github.com/ItaloRAmaral/cliniccontrol/commit/a74be8e762a9543fca09e4406f30c46b9f7444bf))
+
 ## [1.1.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.0.1-beta.4...@cliniccontrol/core-rest-api-core@1.1.0-beta.0) (2023-08-28)
 
 ### Features
