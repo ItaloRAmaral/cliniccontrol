@@ -27,11 +27,11 @@ export class InMemoryPatientDatabaseRepository
   }
 
   async findPatient(email: string): Promise<PatientEntity | null> {
-    return this.patients.find((patient) => patient.email === email) || null;
+    return this.patients.find((patient) => patient.email === email) ?? null;
   }
 
   async findPatientById(patientId: string): Promise<PatientEntity | null> {
-    return this.patients.find((patient) => patient.id === patientId) || null;
+    return this.patients.find((patient) => patient.id === patientId) ?? null;
   }
 
   async getPatients(): Promise<PatientEntity[]> {

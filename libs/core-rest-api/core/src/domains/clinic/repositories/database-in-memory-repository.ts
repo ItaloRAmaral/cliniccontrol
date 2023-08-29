@@ -25,7 +25,7 @@ export class InMemoryClinicDatabaseRepository
   }
 
   async findClinic(name: string): Promise<ClinicEntity | null> {
-    return this.clinics.find((clinic) => clinic.name === name) || null;
+    return this.clinics.find((clinic) => clinic.name === name) ?? null;
   }
 
   async getClinics(): Promise<ClinicEntity[]> {

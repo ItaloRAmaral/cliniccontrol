@@ -1,4 +1,3 @@
-/* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
 import { IAppointmentProps } from '../../interfaces/appointment';
 import { AppointmentDto } from './dto';

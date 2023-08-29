@@ -1,7 +1,6 @@
-/* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
-import { ClinicDto } from './dto';
 import { IClinicProps } from '../../interfaces/clinic';
+import { ClinicDto } from './dto';
 
 export class ClinicEntity extends ClinicDto {
   constructor(props: IClinicProps) {
@@ -72,13 +71,3 @@ export class ClinicEntity extends ClinicDto {
     this.updatedAt = updatedAt;
   }
 }
-
-// const clinic = new ClinicEntity({
-//   name: 'Clinica teste',
-//   psychologistId: '12E-341a',
-//   adress: 'Endereço teste',
-//   city: 'Cidade teste',
-//   state: 'Estado teste',
-// });
-
-// console.log(clinic);
