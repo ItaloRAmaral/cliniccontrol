@@ -1,4 +1,3 @@
-/* eslint-disable @nx/enforce-module-boundaries */
 import { randomUUID } from 'crypto';
 import { IPsychologistProps } from '../../interfaces/psychologist';
 import { PsychologistDto } from './dto';
@@ -98,13 +97,3 @@ export class PsychologistEntity extends PsychologistDto {
     this.updatedAt = updatedAt;
   }
 }
-
-// const psychologist = new PsychologistEntity({
-//   name: 'John Doe',
-//   email: 'johndow@hotmail.com',
-//   password: '123456',
-//   role: 'admin',
-//   plan: 'basic',
-// });
-
-// console.log(psychologist);
