@@ -2,7 +2,8 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { AppointmentEntity } from '../entities/appointment/entity';
 import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
-import { UpdatedAppointmentInfoDto } from '../use-cases/update-appointment/update-appointment-dto';
+import { UpdatedAppointmentDateDto } from '../use-cases/update-appointment-date/update-appointment-date-dto';
+import { UpdatedAppointmentInfoDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
 import { AppointmentDatabaseRepository } from './database-repository';
 
 @Injectable()
@@ -80,6 +81,24 @@ export class InMemoryAppointmentDatabaseRepository
     this.appointments[appointmentIndex] = updatedAppointment;
   }
 
+  async updateAppointmentDate(newAppointmentInfo: UpdatedAppointmentDateDto): Promise<void> {
+    const oldAppointmentInfo = await this.findSingleAppointmentById(newAppointmentInfo.id)
+
+    if (!oldAppointmentInfo) {
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND'])
+    }
+
+    const appointmentIndex = this.appointments.findIndex((appointment) => {
+      return appointment.id = newAppointmentInfo.id
+    })
+
+    const updateAppointmentDate = Object.assign(oldAppointmentInfo, {
+      ...newAppointmentInfo,
+      updatedAt: new Date()
+    });
+
+    this.appointments[appointmentIndex] = updateAppointmentDate;
+  }
   async deleteSingleAppointment(appointmentId: string): Promise<void> {
     const isAppointmentExist = await this.findSingleAppointmentById(
       appointmentId

@@ -7,8 +7,8 @@ import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
 import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
-import { UpdatedAppointmentInfoDto } from './update-appointment-dto';
-import { UpdateAppointmentInfoService } from './update-appointment.service';
+import { UpdatedAppointmentInfoDto } from './update-appointment-info-dto';
+import { UpdateAppointmentInfoService } from './update-appointment-info.service';
 
 describe('[appointment] Update Appointment Info Service', () => {
   const fakeAppointment: CreateSingleAppointmentDto = {

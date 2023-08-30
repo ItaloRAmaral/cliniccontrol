@@ -3,7 +3,7 @@ import { plainToInstance } from 'class-transformer';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { UpdatedAppointmentInfoDto } from './update-appointment-dto';
+import { UpdatedAppointmentInfoDto } from './update-appointment-info-dto';
 
 @Injectable()
 export class UpdateAppointmentInfoService {
@@ -13,12 +13,12 @@ export class UpdateAppointmentInfoService {
 
   async execute(newAppointmentInfo: UpdatedAppointmentInfoDto): Promise<void> {
     // Validate props types
-    const updatePatientDtoInstance = plainToInstance(
+    const updateAppointmentDtoInstance = plainToInstance(
       UpdatedAppointmentInfoDto,
       newAppointmentInfo
     );
 
-    await applicationValidateOrReject(updatePatientDtoInstance);
+    await applicationValidateOrReject(updateAppointmentDtoInstance);
 
     const oldAppointmentInfo =
       await this.appointmentDatabaseRepository.findSingleAppointmentById(
