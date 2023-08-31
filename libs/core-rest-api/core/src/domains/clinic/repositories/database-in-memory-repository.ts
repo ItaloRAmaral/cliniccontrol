@@ -12,7 +12,7 @@ export class InMemoryClinicDatabaseRepository
   private clinics: ClinicEntity[] = [];
 
   async createClinic(clinic: CreateClinicDto): Promise<ClinicEntity> {
-    const isClinicExists = await this.findClinic(clinic.name);
+    const isClinicExists = await this.findClinicByName(clinic.name);
 
     if (isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_NAME']);
@@ -25,7 +25,7 @@ export class InMemoryClinicDatabaseRepository
     return newClinic;
   }
 
-  async findClinic(name: string): Promise<ClinicEntity | null> {
+  async findClinicByName(name: string): Promise<ClinicEntity | null> {
     return this.clinics.find((clinic) => clinic.name === name) ?? null;
   }
 
@@ -56,10 +56,10 @@ export class InMemoryClinicDatabaseRepository
   }
 
   async deleteClinic(name: string): Promise<void> {
-    const isClinicExists = await this.findClinic(name);
+    const isClinicExists = await this.findClinicByName(name);
 
     if (!isClinicExists) {
-      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_DO_NOT_EXIST']);
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
     }
 
     this.clinics = this.clinics.filter((clinic) => clinic.name !== name);

@@ -22,7 +22,7 @@ export class CreateClinicService {
 
     await applicationValidateOrReject(createClinicDtoInstance);
 
-    const isClinicExist = await this.clinicDatabaseRepository.findClinic(
+    const isClinicExist = await this.clinicDatabaseRepository.findClinicByName(
       createClinicDto.name
     );
 

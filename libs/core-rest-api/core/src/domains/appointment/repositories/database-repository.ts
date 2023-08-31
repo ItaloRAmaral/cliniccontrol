@@ -10,10 +10,10 @@ export abstract class AppointmentDatabaseRepository {
   abstract findSingleAppointmentByDate(
     appointmentDate: Date
   ): Promise<AppointmentEntity | null>;
-  abstract getAppointments(): Promise<AppointmentEntity[]>;
   abstract findSingleAppointmentById(
     appointmentId: string
   ): Promise<AppointmentEntity | null>;
+  abstract getAppointments(): Promise<AppointmentEntity[]>;
   abstract updateAppointmentInfo(
     newAppointmentInfo: UpdatedAppointmentInfoDto
   ): Promise<void>;

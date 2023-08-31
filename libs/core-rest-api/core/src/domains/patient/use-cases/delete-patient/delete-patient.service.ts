@@ -11,7 +11,7 @@ export class DeletePatientService {
     email: string
   ): Promise<void> {
     // Validate if patient exists in db
-    const isPatientExists = await this.patientDatabaseRepository.findPatient(email);
+    const isPatientExists = await this.patientDatabaseRepository.findPatientByEmail(email);
 
     if (!isPatientExists) {
       throw new ConflictException(

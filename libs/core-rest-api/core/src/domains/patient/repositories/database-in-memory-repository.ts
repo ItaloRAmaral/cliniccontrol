@@ -12,7 +12,7 @@ export class InMemoryPatientDatabaseRepository
   private patients: PatientEntity[] = [];
 
   async createPatient(patient: CreatePatientDto): Promise<PatientEntity> {
-    const isPatientExists = await this.findPatient(patient.email);
+    const isPatientExists = await this.findPatientByEmail(patient.email);
 
     if (isPatientExists) {
       throw new ConflictException(
@@ -26,7 +26,7 @@ export class InMemoryPatientDatabaseRepository
     return newPatient;
   }
 
-  async findPatient(email: string): Promise<PatientEntity | null> {
+  async findPatientByEmail(email: string): Promise<PatientEntity | null> {
     return this.patients.find((patient) => patient.email === email) ?? null;
   }
 
@@ -58,7 +58,7 @@ export class InMemoryPatientDatabaseRepository
   }
 
   async deletePatient(email: string): Promise<void> {
-    const isPatientExists = await this.findPatient(email);
+    const isPatientExists = await this.findPatientByEmail(email);
 
     if (!isPatientExists) {
       throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);

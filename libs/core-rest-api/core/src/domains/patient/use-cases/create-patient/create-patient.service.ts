@@ -23,7 +23,7 @@ export class CreatePatientService {
 
     await applicationValidateOrReject(createPatientDtoInstance);
 
-    const isPatientExists = await this.patientDatabaseRepository.findPatient(
+    const isPatientExists = await this.patientDatabaseRepository.findPatientByEmail(
       createPatientDto.email
     );
 
