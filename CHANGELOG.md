@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0-beta.4](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0-beta.3...cliniccontrol@1.1.0-beta.4) (2023-08-31)
+
+### Features
+
+- **CC-29:** add update clinic use case ([1dcb968](https://github.com/ItaloRAmaral/cliniccontrol/commit/1dcb968890a4506fd7fac344d4ecc755ca4d0859))
+
 ## [1.1.0-beta.3](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0-beta.2...cliniccontrol@1.1.0-beta.3) (2023-08-30)
 
 ### Features
