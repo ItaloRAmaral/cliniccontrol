@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0-beta.5](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0-beta.4...cliniccontrol@1.1.0-beta.5) (2023-08-31)
+
+### Features
+
+- **CC-44:** add first docs structure ([1f2fce0](https://github.com/ItaloRAmaral/cliniccontrol/commit/1f2fce00f9006dc46595e971f96859a7d75b60ea))
+
 ## [1.1.0-beta.4](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0-beta.3...cliniccontrol@1.1.0-beta.4) (2023-08-31)
 
 ### Features
