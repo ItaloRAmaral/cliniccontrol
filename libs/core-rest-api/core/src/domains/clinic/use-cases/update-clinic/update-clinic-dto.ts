@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class UpdateClinicDto {
   @IsString()
@@ -23,12 +23,4 @@ export class UpdateClinicDto {
   @IsOptional()
   @IsString()
   state?: string;
-
-  @IsOptional()
-  @IsDate()
-  createdAt?: Date;
-
-  @IsOptional()
-  @IsDate()
-  updatedAt?: Date | null;
 }
