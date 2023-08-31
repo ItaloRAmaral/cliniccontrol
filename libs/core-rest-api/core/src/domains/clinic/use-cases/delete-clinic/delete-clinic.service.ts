@@ -8,10 +8,10 @@ export class DeleteClinicService {
 
   async execute(name: string): Promise<void> {
     // Validate if clinic exists in db
-    const isClinicExists = await this.clinicDatabaseRepository.findClinic(name);
+    const isClinicExists = await this.clinicDatabaseRepository.findClinicByName(name);
 
     if (!isClinicExists) {
-      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_DO_NOT_EXIST']);
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
     }
 
     // Delete clinic

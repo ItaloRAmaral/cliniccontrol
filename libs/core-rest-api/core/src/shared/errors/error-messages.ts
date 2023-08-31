@@ -7,7 +7,7 @@ export const PSYCHOLOGIST_ERROR_MESSAGES = {
 
 export const CLINIC_ERROR_MESSAGES = {
   CONFLICTING_NAME: 'clinic already exists',
-  CLINIC_DO_NOT_EXIST: 'clinic do not exist',
+  CLINIC_NOT_FOUND: 'clinic not found',
 };
 
 export const PATIENT_ERROR_MESSAGES = {

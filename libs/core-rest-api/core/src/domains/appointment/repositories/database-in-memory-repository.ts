@@ -99,6 +99,7 @@ export class InMemoryAppointmentDatabaseRepository
 
     this.appointments[appointmentIndex] = updateAppointmentDate;
   }
+  
   async deleteSingleAppointment(appointmentId: string): Promise<void> {
     const isAppointmentExist = await this.findSingleAppointmentById(
       appointmentId

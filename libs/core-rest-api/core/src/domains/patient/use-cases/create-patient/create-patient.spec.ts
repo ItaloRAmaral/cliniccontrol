@@ -42,7 +42,7 @@ describe('[patient] Create Patient Service', () => {
   it('should create a new patient', async () => {
     const patient = await service.execute(fakePatient);
 
-    const patientDatabaseRepository = await databaseRepository.findPatient(
+    const patientDatabaseRepository = await databaseRepository.findPatientByEmail(
       patient.email
     );
     expect(patientDatabaseRepository?.email).toEqual(patient.email);

@@ -3,7 +3,7 @@ import { CreateClinicDto } from '../../clinic/use-cases/create-clinic/create-cli
 
 export abstract class ClinicDatabaseRepository {
   abstract createClinic(clinic: CreateClinicDto): Promise<ClinicEntity>;
-  abstract findClinic(name: string): Promise<ClinicEntity | null>;
+  abstract findClinicByName(name: string): Promise<ClinicEntity | null>;
   abstract getClinics(): Promise<ClinicEntity[]>;
   abstract deleteClinic(name: string): Promise<void>;
 }
