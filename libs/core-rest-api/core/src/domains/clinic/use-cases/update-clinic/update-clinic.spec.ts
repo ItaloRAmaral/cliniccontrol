@@ -67,7 +67,7 @@ describe('[clinic] Update Clinic Service', () => {
     };
 
     await expect(service.execute(newClinicInfos)).rejects.toThrow(
-      new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_DO_NOT_EXIST'])
+      new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND'])
     );
   });
 });
