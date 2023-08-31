@@ -17,7 +17,7 @@ export class UpdateClinicService {
 
     const isClinicExists = await this.clinicDatabaseRepository.findClinicById(newClinicInfo.id)
     if(!isClinicExists) {
-      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_DO_NOT_EXIST'])
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND'])
     }
 
     await this.clinicDatabaseRepository.updateClinic(newClinicInfo)

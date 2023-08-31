@@ -41,12 +41,12 @@ export class InMemoryClinicDatabaseRepository
     const oldClinicInfo = await this.findClinicById(newClinicInfo.id)
 
     if(!oldClinicInfo) {
-      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_DO_NOT_EXIST'])
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND'])
     }
 
     const clinicIndex = this.clinics.findIndex((clinic) => {
       return clinic.id === newClinicInfo.id
-    }) 
+    })
     const updatedClinic = Object.assign(oldClinicInfo, {
       ...newClinicInfo,
       updatedAt: new Date(),
