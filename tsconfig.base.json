@@ -17,13 +17,13 @@
     "baseUrl": ".",
     "useUnknownInCatchVariables": true,
     "paths": {
-      "@clinicControl/root/*": ["./*"],
       "@clinicControl/core-rest-api/core/src/*": [
         "libs/core-rest-api/core/src/*"
       ],
       "@clinicControl/core-rest-api/adapters/src/*": [
         "libs/core-rest-api/adapters/src/*"
-      ]
+      ],
+      "@clinicControl/root/*": ["./*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
