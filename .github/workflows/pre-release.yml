@@ -1,4 +1,4 @@
-name: 1Run conventional-prerelease on merge to main
+name: Run conventional-prerelease on merge to main
 
 on:
   push:
