@@ -8,9 +8,9 @@
     <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
-    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Core Docs</a>
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/core">Core Docs</a>
     -
-    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Adapters Docs</a>
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/adapters">Adapters Docs</a>
   </p>
 </p>
 
