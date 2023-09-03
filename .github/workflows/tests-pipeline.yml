@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - 'main'
+env:
+  HUSKY: 0
 
 jobs:
   tests-pipeline:
@@ -95,26 +97,16 @@ jobs:
             ${{ runner.os }}-node-${{ env.node_version }}-
 
       - name: Install dependencies
-        run:
-          if [ -f ./pnpm-lock.yaml ]; then
-          echo "Running pnpm install --frozen-lockfile"
-          pnpm install --frozen-lockfile
+        run: |
+          if [ "${{ env.package_manager == 'yarn' }}" == "true" ]; then
+            echo "Running yarn install --frozen-lockfile"
+            yarn install --frozen-lockfile
+          elif [ "${{ env.package_manager == 'pnpm' }}" == "true" ]; then
+            echo "Running pnpm install --frozen-lockfile"
+            pnpm install --frozen-lockfile
           else
-          echo "Installing pnpm"
-          yarn add pnpm
-          echo "Running pnpm install --frozen-lockfile"
-          pnpm install --frozen-lockfile
+            echo "Running npm ci"
+            npm ci
           fi
-          # if [ "${{ env.package_manager == 'yarn' }}" == "true" ]; then
-          #   echo "Running yarn install --frozen-lockfile"
-          #   yarn install --frozen-lockfile
-          # elif [ "${{ env.package_manager == 'pnpm' }}" == "true" ]; then
-          #   echo "Running pnpm install --frozen-lockfile"
-          #   pnpm install --frozen-lockfile
-          # else
-          #   echo "Running npm ci"
-          #   npm ci
-          # fi
-
       - name: Run tests
         run: pnpm run test:unit
