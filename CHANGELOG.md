@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0-beta.9](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0-beta.8...cliniccontrol@1.1.0-beta.9) (2023-09-03)
+
+### Features
+
+- **CC-57:** add script to run automated test in PRs ([b6ef29f](https://github.com/ItaloRAmaral/cliniccontrol/commit/b6ef29f85f911312890a6e59b8bc13ee592abda5))
+
 ## [1.1.0-beta.8](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0-beta.7...cliniccontrol@1.1.0-beta.8) (2023-09-03)
 
 **Note:** Version bump only for package cliniccontrol
