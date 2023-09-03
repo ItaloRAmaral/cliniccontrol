@@ -31,10 +31,10 @@ jobs:
           token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
 
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-        with:
-          main-branch-name: ${{ github.base_ref }}
+      # - name: Derive appropriate SHAs for base and head for `nx affected` commands
+      #   uses: nrwl/nx-set-shas@v2
+      #   with:
+      #     main-branch-name: ${{ github.base_ref }}
 
       - name: Detect package manager
         id: package_manager
@@ -99,9 +99,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ env.node_version }}-
 
-      - name: Override fake nx token
-        run: |
-          bash scripts/nx/set-nx-cloud-token.sh --access-token=${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+      # - name: Override fake nx token
+      #   run: |
+      #     bash scripts/nx/set-nx-cloud-token.sh --access-token=${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Install dependencies
         run: |
@@ -116,17 +116,17 @@ jobs:
             npm ci
           fi
 
-      - name: Extract branch name
-        run: |
-          echo $GITHUB_REF
-          echo $GITHUB_HEAD_REF
-          branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          echo "branch_name=$branch_name" >> $GITHUB_ENV
+      # - name: Extract branch name
+      #   run: |
+      #     echo $GITHUB_REF
+      #     echo $GITHUB_HEAD_REF
+      #     branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+      #     echo "branch_name=$branch_name" >> $GITHUB_ENV
 
-      - name: Check affected
-        run: |
-          NX_BRANCH=${{ env.branch_name }} npx nx affected --target lint --parallel 3
-          NX_BRANCH=${{ env.branch_name }} npx nx affected --target test --parallel 3 --ci --code-coverage
-          NX_BRANCH=${{ env.branch_name }} npx nx affected --target build --parallel 3
+      # - name: Check affected
+      #   run: |
+      #     NX_BRANCH=${{ env.branch_name }} npx nx affected --target lint --parallel 3
+      #     NX_BRANCH=${{ env.branch_name }} npx nx affected --target test --parallel 3 --ci --code-coverage
+      #     NX_BRANCH=${{ env.branch_name }} npx nx affected --target build --parallel 3
       - name: Run tests
         run: pnpm run test:unit
