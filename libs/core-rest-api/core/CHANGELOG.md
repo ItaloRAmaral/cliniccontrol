@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.1.0-beta.6...@cliniccontrol/core-rest-api-core@1.1.0) (2023-09-04)
+
+**Note:** Version bump only for package @cliniccontrol/core-rest-api-core
+
 ## [1.1.0-beta.6](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.1.0-beta.5...@cliniccontrol/core-rest-api-core@1.1.0-beta.6) (2023-09-02)
 
 **Note:** Version bump only for package @cliniccontrol/core-rest-api-core
