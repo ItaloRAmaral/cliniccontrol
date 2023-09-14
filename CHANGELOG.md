@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0...cliniccontrol@1.2.0-beta.0) (2023-09-14)
+
+### Features
+
+- **CC-65:** add appointment and clinic entities docs ([41b1e06](https://github.com/ItaloRAmaral/cliniccontrol/commit/41b1e0698f24955b55db227a6342fc3cc7623b0a))
+
 ## [1.1.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0-beta.9...cliniccontrol@1.1.0) (2023-09-04)
 
 **Note:** Version bump only for package cliniccontrol
