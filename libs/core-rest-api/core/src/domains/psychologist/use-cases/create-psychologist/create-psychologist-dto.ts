@@ -14,5 +14,5 @@ export class CreatePsychologistDto {
   role!: string;
 
   @IsString()
-  plan!: string | null;
+  plan!: string;
 }

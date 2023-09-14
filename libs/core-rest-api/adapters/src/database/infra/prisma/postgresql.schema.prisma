@@ -1,0 +1,26 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/data-model#type-modifiers
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Psychologist {
+  id                 String   @id @default(uuid())
+  name               String
+  email              String   @unique
+  password           String
+  role               String   @default("psychologist")
+  price              Int?     @default(0)
+  plan               String   @default("free")
+  totalYearEarnings  Int?     @default(0)
+  totalMonthEarnings Int?     @default(0)
+  createdAt          DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime @default(now()) @db.Timestamptz(6)
+
+  @@map("psychologists")
+}

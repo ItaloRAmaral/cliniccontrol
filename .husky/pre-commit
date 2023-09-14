@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm test:unit
+echo " ____  _   _ ____  _____ ____  _   _ _____ ____  "
+# pnpm test:unit

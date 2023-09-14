@@ -2,19 +2,17 @@
  * This is not a production server yet!
  * This is only a minimal backend to get started.
  */
-import { Logger, ValidationPipe, INestApplication } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { version } from '@clinicControl/root/package.json';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { version } from "@clinicControl/root/package.json"
-
-
-import { AppModule } from './app/app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ApiModule } from '../../../libs/core-rest-api/adapters/src/controllers/api/api.module';
 
 const setupOpenApi = (app: INestApplication) => {
   // Setting up Swagger document
   const options = new DocumentBuilder()
-    .setTitle('Clinic Controll Restful API')
-    .setDescription('Clinic Controll Restful API')
+    .setTitle('Clinic Control Restful API')
+    .setDescription('Clinic Control Restful API')
     .setVersion(version)
     .build();
 
@@ -23,7 +21,7 @@ const setupOpenApi = (app: INestApplication) => {
 };
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(ApiModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 
@@ -39,7 +37,7 @@ async function bootstrap() {
   setupOpenApi(app);
 
   // Listen on specified port
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3333;
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`

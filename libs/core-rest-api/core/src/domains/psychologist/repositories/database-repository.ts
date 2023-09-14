@@ -1,6 +1,5 @@
 import { PsychologistEntity } from '../entities/psychologist/entity';
 import { CreatePsychologistDto } from '../use-cases/create-psychologist/create-psychologist-dto';
-import { UpdatePsychologistDto } from '../use-cases/update-psychologist/update-psychologist-dto';
 
 export abstract class PsychologistDatabaseRepository {
   abstract createPsychologist(
@@ -9,10 +8,10 @@ export abstract class PsychologistDatabaseRepository {
   abstract findPsychologistByEmail(
     email: string
   ): Promise<PsychologistEntity | null>;
-  abstract findPsychologistById(id: string): Promise<PsychologistEntity | null>;
-  abstract getPsychologists(): Promise<PsychologistEntity[]>;
-  abstract updatePsychologist(
-    newPsychologist: UpdatePsychologistDto
-  ): Promise<void>;
-  abstract deletePsychologist(email: string): Promise<void>;
+  // abstract findPsychologistById(id: string): Promise<PsychologistEntity | null>;
+  // abstract getPsychologists(): Promise<PsychologistEntity[]>;
+  // abstract updatePsychologist(
+  //   newPsychologist: UpdatePsychologistDto
+  // ): Promise<void>;
+  // abstract deletePsychologist(email: string): Promise<void>;
 }
