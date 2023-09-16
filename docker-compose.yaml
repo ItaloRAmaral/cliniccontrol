@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: core-rest-api-pg
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: cliniccontrol
+      POSTGRES_PASSWORD: cliniccontrolpassword
+      POSTGRES_DB: core-rest-api
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_SCHEMA: public
+
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/pg:/data/postgres
