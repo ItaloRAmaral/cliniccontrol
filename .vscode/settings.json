@@ -8,12 +8,15 @@
   "editor.formatOnSave": true,
   "cSpell.words": [
     "Amaral",
+    "cliniccontrol",
     "CODEOWNERS",
     "CQRS",
     "instanceof",
     "italo",
     "keyof",
     "Luana",
+    "postgresql",
+    "preid",
     "Vefago"
   ],
   "cSpell.language": "en,pt-BR"
