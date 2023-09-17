@@ -1,8 +1,14 @@
-import { version } from "@clinicControl/root/package.json";
-import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
+import { version } from '@clinicControl/root/package.json';
+import {
+  INestApplication,
+  Logger,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import { EnvService } from '@clinicControl/core-rest-api/adapters/src/env/env.service';
 import { ApiModule } from '../../../libs/core-rest-api/adapters/src/controllers/api/api.module';
 
 const setupOpenApi = (app: INestApplication) => {
@@ -30,11 +36,18 @@ async function bootstrap() {
     })
   );
 
+  // Enable versioning
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
+
   // Setting up Swagger document
   setupOpenApi(app);
 
   // Listen on specified port
-  const port = process.env.PORT || 3000;
+  const configService = app.get(EnvService);
+  const port = configService.get('PORT');
+
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`

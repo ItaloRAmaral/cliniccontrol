@@ -26,3 +26,17 @@ type guard error handling: https://www.youtube.com/watch?v=xdQkEn3mx1k&t=114s
 --
 
 https://aykhanhuseyn.medium.com/typescript-naming-conventions-crafting-maintainable-code-7d872234fe17
+
+--
+
+# generate private key
+
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+
+# generate public key
+
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+base64 -i private_key.pem -o private_key-base64.txt
+
+https://www.elvisduru.com/blog/nestjs-jwt-authentication-refresh-token

@@ -1,5 +1,5 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { Role } from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
+import { Role } from '@prisma/client';
 import { randomUUID } from 'crypto';
 import { IPsychologistProps } from '../../interfaces/psychologist';
 import { PsychologistDto } from './dto';

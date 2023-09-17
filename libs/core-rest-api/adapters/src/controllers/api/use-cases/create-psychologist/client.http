@@ -1,13 +1,38 @@
-@baseUrl = http://localhost:3333
+@baseUrl = http://localhost:3333/core
+@authToken = {{loginauthenticate.response.body.access_token}}
 
- # @name create_psychologist
- POST http://localhost:3333/api/core HTTP/1.1
- Content-Type: application/json
+# @name create_psychologist
+POST http://localhost:3333/core/psychologist/create HTTP/1.1
+Content-Type: application/json
+api-key: api-key
 
- {
-   "name": "Italo Amaral",
-   "email": "italo2312@email.com",
-   "password": "01212012",
-   "role": "psychologist",
-   "plan": "premium"
- }
+{
+  "name": "Novo Usuario",
+  "email": "novo_usuario@gmail.com",
+  "password": "01212012",
+  "role": "PSYCHOLOGIST",
+  "plan": "premium"
+}
+
+###
+
+# @name loginauthenticate
+POST http://localhost:3333/core/psychologist/login HTTP/1.1
+Content-Type: application/json
+api-key: api-key
+
+{
+  "name": "Novo Usuario",
+  "email": "novo_usuario@gmail.com",
+  "password": "01212012",
+  "role": "PSYCHOLOGIST",
+  "plan": "premium"
+}
+
+###
+
+# @name me
+GET http://localhost:3333/core/psychologist/me HTTP/1.1
+Content-Type: application/json
+api-key: api-key
+Authorization: Bearer {{authToken}}
