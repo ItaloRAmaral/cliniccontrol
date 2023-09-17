@@ -3,8 +3,7 @@ import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-
-import { AppModule } from './app/app.module';
+import { ApiModule } from '../../../libs/core-rest-api/adapters/src/controllers/api/api.module';
 
 const setupOpenApi = (app: INestApplication) => {
   // Setting up Swagger document
@@ -19,7 +18,7 @@ const setupOpenApi = (app: INestApplication) => {
 };
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(ApiModule);
   const globalPrefix = 'core';
   app.setGlobalPrefix(globalPrefix);
 

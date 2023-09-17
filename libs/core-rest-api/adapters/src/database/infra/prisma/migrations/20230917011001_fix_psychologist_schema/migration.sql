@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "psychologists" ALTER COLUMN "price" SET DEFAULT 0,
+ALTER COLUMN "totalYearEarnings" SET DEFAULT 0,
+ALTER COLUMN "totalMonthEarnings" SET DEFAULT 0,
+ALTER COLUMN "role" SET DEFAULT 'PSYCHOLOGIST';

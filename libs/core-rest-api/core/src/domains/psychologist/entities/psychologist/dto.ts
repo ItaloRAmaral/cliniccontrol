@@ -1,3 +1,5 @@
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { Role } from '@prisma/client';
 import { IsDate, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
 export class PsychologistDto {
@@ -14,14 +16,14 @@ export class PsychologistDto {
   password!: string;
 
   @IsString()
-  role!: string;
+  role!: Role;
 
   @IsOptional()
   @IsNumber()
   price?: number | null;
 
   @IsString()
-  plan!: string | null;
+  plan!: string;
 
   @IsOptional()
   @IsNumber()
