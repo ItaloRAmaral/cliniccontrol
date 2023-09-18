@@ -1,0 +1,128 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/data-model#type-modifiers
+// relations schema prisma doc -> https://www.prisma.io/docs/concepts/components/prisma-schema/relations
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  PSYCHOLOGIST
+  PATIENT
+}
+
+enum Plan {
+  FREE
+  BASIC
+  PREMIUM
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  DEBIT_CARD
+  PIX
+  MONEY
+  HEALTH_INSURANCE
+  OTHER
+}
+
+model Psychologist {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role Role @default(PSYCHOLOGIST)
+  price Int? @default(0)
+  plan  Plan @default(BASIC)
+  totalYearEarnings Int? @default(0) @map("total_year_earnings")
+  totalMonthEarnings Int? @default(0) @map("total_month_earnings")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+  clinic Clinic[]
+  patient Patient[]
+  appointment Appointment[]
+  patientAppointmentsRegistry PatientAppointmentsRegistry[]
+
+  @@map("psychologist")
+}
+
+model Clinic {
+  id String @id @default(uuid())
+  name String
+  address String?
+  city String
+  state String
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+  psychologistId String @map("psychologist_id")
+  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
+  patient Patient[]
+  appointment Appointment[]
+
+  @@map("clinic")
+}
+
+model Patient {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  cpf String @unique
+  telephone String
+  paymentMethod PaymentMethod @map("payment_method") @default(HEALTH_INSURANCE)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+  appointment Appointment[]
+  patientAppointmentsRegistry PatientAppointmentsRegistry[]
+
+  psychologistId String @map("psychologist_id")
+  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
+  clinicId String @map("clinic_id")
+  clinic Clinic @relation(fields: [clinicId], references: [id])
+
+  @@map("patient")
+}
+
+model Appointment {
+  id               String        @id @default(uuid())
+  date             DateTime      @db.Timestamptz(6)
+  online           Boolean       @default(false)
+  confirmed        Boolean       @default(false)
+  confirmationDate DateTime?     @map("confirmation_date") @db.Timestamptz(6)
+  cancelled        Boolean       @default(false)
+  cancellationDate DateTime?     @map("cancellation_date") @db.Timestamptz(6)
+  done             Boolean       @default(false)
+  missed           Boolean?
+  paid             Boolean?      @default(false)
+  paymentMethod    PaymentMethod @default(HEALTH_INSURANCE) @map("payment_method")
+  createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+    patientId      String       @map("patient_id")
+  patient        Patient      @relation(fields: [patientId], references: [id])
+  psychologistId String       @map("psychologist_id")
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+  clinicId       String       @map("clinic_id")
+  clinic         Clinic       @relation(fields: [clinicId], references: [id])
+
+
+  @@map("appointment")
+}
+
+model PatientAppointmentsRegistry {
+  id        String   @id @default(uuid())
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  registry  Json     @db.Json
+
+  patientId      String       @map("patient_id")
+  patient        Patient      @relation(fields: [patientId], references: [id])
+  psychologistId String       @map("psychologist_id")
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+
+  @@map("patient_appointments_registry")
+}

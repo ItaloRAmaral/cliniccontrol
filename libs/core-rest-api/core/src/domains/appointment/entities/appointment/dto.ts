@@ -22,6 +22,7 @@ export class AppointmentDto {
   @IsBoolean()
   confirmed!: boolean;
 
+  @IsOptional()
   @IsDate()
   confirmationDate!: Date | null;
 
