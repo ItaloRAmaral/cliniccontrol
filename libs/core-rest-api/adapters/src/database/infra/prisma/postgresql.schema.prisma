@@ -32,57 +32,58 @@ enum PaymentMethod {
 }
 
 model Psychologist {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
-  role Role @default(PSYCHOLOGIST)
-  price Int? @default(0)
-  plan  Plan @default(BASIC)
-  totalYearEarnings Int? @default(0) @map("total_year_earnings")
-  totalMonthEarnings Int? @default(0) @map("total_month_earnings")
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
-  clinic Clinic[]
-  patient Patient[]
-  appointment Appointment[]
+  id                          String                        @id @default(uuid())
+  name                        String
+  email                       String                        @unique
+  password                    String
+  role                        Role                          @default(PSYCHOLOGIST)
+  price                       Int?                          @default(0)
+  plan                        Plan                          @default(BASIC)
+  totalYearEarnings           Int?                          @default(0) @map("total_year_earnings")
+  totalMonthEarnings          Int?                          @default(0) @map("total_month_earnings")
+  createdAt                   DateTime                      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt                   DateTime                      @default(now()) @map("updated_at") @db.Timestamptz(6)
+  clinic                      Clinic[]
+  patient                     Patient[]
+  appointment                 Appointment[]
   patientAppointmentsRegistry PatientAppointmentsRegistry[]
 
   @@map("psychologist")
 }
 
 model Clinic {
-  id String @id @default(uuid())
-  name String
-  address String?
-  city String
-  state String
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
-  psychologistId String @map("psychologist_id")
-  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
-  patient Patient[]
+  id          String        @id @default(uuid())
+  name        String
+  address     String?
+  city        String
+  state       String
+  createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
+  patient     Patient[]
   appointment Appointment[]
+
+  psychologistId String       @map("psychologist_id")
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
 
   @@map("clinic")
 }
 
 model Patient {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  cpf String @unique
-  telephone String
-  paymentMethod PaymentMethod @map("payment_method") @default(HEALTH_INSURANCE)
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
-  appointment Appointment[]
+  id                          String                        @id @default(uuid())
+  name                        String
+  email                       String                        @unique
+  cpf                         String                        @unique
+  telephone                   String
+  paymentMethod               PaymentMethod                 @default(HEALTH_INSURANCE) @map("payment_method")
+  createdAt                   DateTime                      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt                   DateTime                      @default(now()) @map("updated_at") @db.Timestamptz(6)
+  appointment                 Appointment[]
   patientAppointmentsRegistry PatientAppointmentsRegistry[]
 
-  psychologistId String @map("psychologist_id")
-  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
-  clinicId String @map("clinic_id")
-  clinic Clinic @relation(fields: [clinicId], references: [id])
+  psychologistId String       @map("psychologist_id")
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+  clinicId       String       @map("clinic_id")
+  clinic         Clinic       @relation(fields: [clinicId], references: [id])
 
   @@map("patient")
 }
@@ -102,13 +103,12 @@ model Appointment {
   createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt        DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
 
-    patientId      String       @map("patient_id")
+  patientId      String       @map("patient_id")
   patient        Patient      @relation(fields: [patientId], references: [id])
   psychologistId String       @map("psychologist_id")
   psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
   clinicId       String       @map("clinic_id")
   clinic         Clinic       @relation(fields: [clinicId], references: [id])
-
 
   @@map("appointment")
 }
