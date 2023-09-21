@@ -1,3 +1,4 @@
+import { Plan, Role } from '@prisma/client';
 import { randomUUID } from 'crypto';
 import { IPsychologistProps } from '../../interfaces/psychologist';
 import { PsychologistDto } from './dto';
@@ -45,7 +46,7 @@ export class PsychologistEntity extends PsychologistDto {
     return this.role;
   }
 
-  public set setRole(role: string) {
+  public set setRole(role: Role) {
     this.role = role;
   }
 
@@ -57,11 +58,11 @@ export class PsychologistEntity extends PsychologistDto {
     this.price = price;
   }
 
-  public get getPlan(): string | null | undefined {
+  public get getPlan(): Plan {
     return this.plan;
   }
 
-  public set setPlan(plan: string) {
+  public set setPlan(plan: Plan) {
     this.plan = plan;
   }
 

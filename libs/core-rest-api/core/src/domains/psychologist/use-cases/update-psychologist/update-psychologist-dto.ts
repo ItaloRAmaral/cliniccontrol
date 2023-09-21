@@ -1,3 +1,4 @@
+import { Plan, Role } from '@prisma/client';
 import { IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
 export class UpdatePsychologistDto {
@@ -18,7 +19,7 @@ export class UpdatePsychologistDto {
 
   @IsOptional()
   @IsString()
-  role?: string;
+  role?: Role;
 
   @IsOptional()
   @IsNumber()
@@ -26,7 +27,7 @@ export class UpdatePsychologistDto {
 
   @IsOptional()
   @IsString()
-  plan?: string;
+  plan?: Plan;
 
   @IsOptional()
   @IsNumber()

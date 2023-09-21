@@ -16,7 +16,10 @@
     "conventional-graduate": "lerna version --yes --conventional-graduate --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "conventional-graduate:no-push": "lerna version --yes --conventional-graduate --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
     "test:unit": "nx run-many --target=test --all=true",
-    "env:setup": "cp .env.example .env"
+    "env:setup": "cp .env.example .env",
+    "prisma-scripts": "********************** PRISMA SCRIPTS ********************",
+    "prisma:core:schema:validate": "prisma validate --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma",
+    "prisma:core:schema:migrate": "prisma migrate dev --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma"
   },
   "private": true,
   "dependencies": {

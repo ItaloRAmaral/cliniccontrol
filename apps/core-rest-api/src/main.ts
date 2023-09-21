@@ -2,19 +2,18 @@
  * This is not a production server yet!
  * This is only a minimal backend to get started.
  */
-import { Logger, ValidationPipe, INestApplication } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { version } from '@clinicControl/root/package.json';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { version } from "@clinicControl/root/package.json"
-
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app/app.module';
 
 const setupOpenApi = (app: INestApplication) => {
   // Setting up Swagger document
   const options = new DocumentBuilder()
-    .setTitle('Clinic Controll Restful API')
-    .setDescription('Clinic Controll Restful API')
+    .setTitle('Clinic Control Restful API')
+    .setDescription('Clinic Control Restful API')
     .setVersion(version)
     .build();
 
