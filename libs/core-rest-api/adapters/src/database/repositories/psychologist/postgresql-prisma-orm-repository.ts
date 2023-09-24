@@ -5,6 +5,7 @@ import { UpdatePsychologistDto } from '@clinicControl/core-rest-api/core/src/dom
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { PostgreSqlPrismaOrmService } from '../../../database/infra/prisma/prisma.service';
+import { PostgresqlPrismaPsychologistMapper } from '../../mappers/postgresql-prisma-psychologist-mapper';
 
 @Injectable()
 export class PostgresqlPrismaOrmPsychologistRepository
@@ -25,12 +26,13 @@ export class PostgresqlPrismaOrmPsychologistRepository
       );
     }
 
-    const newPsychologist =
-      await this.postgreSqlPrismaOrmService.psychologist.create({
-        data: psychologist,
-      });
+    const toPrismaEntity =
+      PostgresqlPrismaPsychologistMapper.toPrismaCreate(psychologist);
 
-    return newPsychologist as PsychologistEntity;
+    const newPsychologist =
+      await this.postgreSqlPrismaOrmService.psychologist.create(toPrismaEntity);
+
+    return PostgresqlPrismaPsychologistMapper.toDomain(newPsychologist);
   }
 
   async findPsychologistByEmail(
@@ -47,7 +49,7 @@ export class PostgresqlPrismaOrmPsychologistRepository
       return null;
     }
 
-    return psychologist as PsychologistEntity;
+    return PostgresqlPrismaPsychologistMapper.toDomain(psychologist);
   }
 
   async findPsychologistById(id: string): Promise<PsychologistEntity | null> {
@@ -62,14 +64,14 @@ export class PostgresqlPrismaOrmPsychologistRepository
       return null;
     }
 
-    return psychologist as PsychologistEntity;
+    return PostgresqlPrismaPsychologistMapper.toDomain(psychologist);
   }
 
   async getPsychologists(): Promise<PsychologistEntity[]> {
     const psychologists =
       await this.postgreSqlPrismaOrmService.psychologist.findMany();
 
-    return psychologists as PsychologistEntity[];
+    return PostgresqlPrismaPsychologistMapper.toDomainMany(psychologists);
   }
 
   async updatePsychologist(
@@ -83,15 +85,10 @@ export class PostgresqlPrismaOrmPsychologistRepository
       );
     }
 
-    await this.postgreSqlPrismaOrmService.psychologist.update({
-      where: {
-        id: newPsychologist.id,
-      },
-      data: {
-        ...newPsychologist,
-        updatedAt: new Date(),
-      },
-    });
+    const toPrismaEntity =
+      PostgresqlPrismaPsychologistMapper.toPrismaUpdate(newPsychologist);
+
+    await this.postgreSqlPrismaOrmService.psychologist.update(toPrismaEntity);
   }
 
   async deletePsychologist(email: string): Promise<void> {
