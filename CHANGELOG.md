@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.2.0-beta.0...cliniccontrol@1.2.0-beta.1) (2023-09-24)
+
+### Features
+
+- **CC-70:** add docs to patient and psychologist and adjust others ([002dc72](https://github.com/ItaloRAmaral/cliniccontrol/commit/002dc7212cb4cd55572aa6c919e335ea6883e739))
+
 ## [1.2.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.1.0...cliniccontrol@1.2.0-beta.0) (2023-09-14)
 
 ### Features
