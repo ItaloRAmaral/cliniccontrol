@@ -1,4 +1,4 @@
-import { IsString, IsDate, IsOptional } from 'class-validator';
+import { IsDate, IsOptional, IsString } from 'class-validator';
 
 export class CreateClinicDto {
   @IsString()
@@ -9,7 +9,7 @@ export class CreateClinicDto {
 
   @IsOptional()
   @IsString()
-  adress?: string | null;
+  address?: string | null;
 
   @IsString()
   city!: string;

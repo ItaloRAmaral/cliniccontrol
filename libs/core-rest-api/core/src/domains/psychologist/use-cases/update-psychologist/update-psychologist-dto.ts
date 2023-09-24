@@ -1,5 +1,6 @@
-import { Plan, Role } from '@prisma/client';
+// import { Plan, Role } from '@prisma/client';
 import { IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { Plan, Role } from '../../../../shared/interfaces/payments';
 
 export class UpdatePsychologistDto {
   @IsString()

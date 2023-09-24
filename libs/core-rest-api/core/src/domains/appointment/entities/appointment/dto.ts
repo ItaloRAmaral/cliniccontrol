@@ -1,4 +1,5 @@
 import { IsBoolean, IsDate, IsOptional, IsString } from 'class-validator';
+import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
 export class AppointmentDto {
   @IsString()
@@ -24,7 +25,7 @@ export class AppointmentDto {
 
   @IsOptional()
   @IsDate()
-  confirmationDate!: Date | null;
+  confirmationDate?: Date | null;
 
   @IsBoolean()
   cancelled!: boolean;
@@ -45,7 +46,7 @@ export class AppointmentDto {
   paid?: boolean;
 
   @IsString()
-  paymentMethod!: string;
+  paymentMethod!: PaymentMethod;
 
   @IsDate()
   createdAt!: Date;

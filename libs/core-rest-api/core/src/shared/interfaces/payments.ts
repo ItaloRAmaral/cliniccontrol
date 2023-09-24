@@ -1,8 +1,20 @@
 export enum PaymentMethod {
-  CREDIT_CARD = 'Credit Card',
-  DEBIT_CARD = 'Debit Card',
-  PIX = 'Pix',
-  MONEY = 'Money',
-  HEALTH_INSURANCE = 'Health Insurance',
-  OTHER = 'Other',
+  CREDIT_CARD,
+  DEBIT_CARD,
+  PIX,
+  MONEY,
+  HEALTH_INSURANCE,
+  OTHER,
+}
+
+export enum Role {
+  ADMIN,
+  PSYCHOLOGIST,
+  PATIENT,
+}
+
+export enum Plan {
+  FREE,
+  BASIC,
+  PREMIUM,
 }

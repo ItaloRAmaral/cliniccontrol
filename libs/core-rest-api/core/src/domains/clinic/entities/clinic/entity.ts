@@ -8,7 +8,7 @@ export class ClinicEntity extends ClinicDto {
     Object.assign(this, props);
     this.id = props.id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
-    this.adress = props.adress ?? null;
+    this.address = props.address ?? null;
   }
 
   public get getId(): string {
@@ -31,12 +31,12 @@ export class ClinicEntity extends ClinicDto {
     this.psychologistId = psychologistId;
   }
 
-  public get getAdress(): string | null | undefined {
-    return this.adress;
+  public get getaddress(): string | null | undefined {
+    return this.address;
   }
 
-  public set setAdress(adress: string) {
-    this.adress = adress;
+  public set setaddress(address: string) {
+    this.address = address;
   }
 
   public get getCity(): string {

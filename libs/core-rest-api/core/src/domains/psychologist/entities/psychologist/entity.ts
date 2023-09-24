@@ -1,5 +1,6 @@
-import { Plan, Role } from '@prisma/client';
+// import { Plan, Role } from '@prisma/client';
 import { randomUUID } from 'crypto';
+import { Plan, Role } from '../../../../shared/interfaces/payments';
 import { IPsychologistProps } from '../../interfaces/psychologist';
 import { PsychologistDto } from './dto';
 
@@ -42,7 +43,7 @@ export class PsychologistEntity extends PsychologistDto {
     this.password = password;
   }
 
-  public get getRole(): string {
+  public get getRole(): Role {
     return this.role;
   }
 

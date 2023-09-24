@@ -14,7 +14,7 @@ export class UpdateClinicDto {
 
   @IsOptional()
   @IsString()
-  adress?: string | null;
+  address?: string | null;
 
   @IsOptional()
   @IsString()
