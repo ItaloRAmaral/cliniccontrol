@@ -23,7 +23,7 @@ const setupOpenApi = (app: INestApplication) => {
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
-  const globalPrefix = 'api';
+  const globalPrefix = 'core';
   app.setGlobalPrefix(globalPrefix);
 
   app.useGlobalPipes(
