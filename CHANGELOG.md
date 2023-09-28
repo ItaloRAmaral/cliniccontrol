@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-beta.2](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.2.0-beta.1...cliniccontrol@1.2.0-beta.2) (2023-09-28)
+
+**Note:** Version bump only for package cliniccontrol
+
 ## [1.2.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.2.0-beta.0...cliniccontrol@1.2.0-beta.1) (2023-09-24)
 
 ### Features
