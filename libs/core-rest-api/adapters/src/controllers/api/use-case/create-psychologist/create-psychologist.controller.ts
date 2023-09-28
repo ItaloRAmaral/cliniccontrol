@@ -10,28 +10,28 @@ import { plainToInstance } from 'class-transformer';
 
 @ApiTags()
 @Controller({
-  path: 'psychologist'
+  path: 'psychologist',
 })
-export class CreatePsychologistController{
+export class CreatePsychologistController {
   constructor(
-    private prisma : PostgreSqlPrismaOrmService,
+    private prisma: PostgreSqlPrismaOrmService,
     private createPsychologistService: CreatePsychologistService
-  ) {
-  }
+  ) {}
   @Post('create')
-    async execute(
-      @Body() createPsychologistDto: CreatePsychologistDto
-    ): Promise< null | undefined | void >{
-      try {
-        const createPsychologistDtoInstance = plainToInstance(
-          CreatePsychologistDto,
-          createPsychologistDto
-        );
-        await applicationValidateOrReject(createPsychologistDtoInstance);
-        await this.createPsychologistService.execute(createPsychologistDto)
+  async execute(
+    @Body() createPsychologistDto: CreatePsychologistDto
+  ): Promise<null | undefined | void> {
+    try {
+      const createPsychologistDtoInstance = plainToInstance(
+        CreatePsychologistDto,
+        createPsychologistDto
+      );
 
-      } catch(e) {
-        throw new GlobalAppHttpException(e)
-      }
+      await applicationValidateOrReject(createPsychologistDtoInstance);
+
+      await this.createPsychologistService.execute(createPsychologistDto);
+    } catch (e) {
+      throw new GlobalAppHttpException(e);
     }
+  }
 }
