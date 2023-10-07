@@ -1,4 +1,3 @@
-// import { Plan, Role } from '@prisma/client';
 import { randomUUID } from 'crypto';
 import { Plan, Role } from '../../../../shared/interfaces/payments';
 import { IPsychologistProps } from '../../interfaces/psychologist';
