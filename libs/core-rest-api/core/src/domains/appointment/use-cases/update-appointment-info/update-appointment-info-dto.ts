@@ -1,4 +1,10 @@
-import { IsBoolean, IsDate, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsEnum,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
 export class UpdatedAppointmentInfoDto {
@@ -38,6 +44,6 @@ export class UpdatedAppointmentInfoDto {
   paid?: boolean;
 
   @IsOptional()
-  @IsString()
+  @IsEnum(PaymentMethod)
   paymentMethod?: PaymentMethod;
 }

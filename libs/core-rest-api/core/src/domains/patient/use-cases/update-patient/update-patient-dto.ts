@@ -1,4 +1,4 @@
-import { IsMobilePhone, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsMobilePhone, IsOptional, IsString } from 'class-validator';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
 export class UpdatePatientDto {
@@ -22,7 +22,7 @@ export class UpdatePatientDto {
   phone?: string;
 
   @IsOptional()
-  @IsString()
+  @IsEnum(PaymentMethod)
   paymentMethod?: PaymentMethod;
 
   @IsOptional()

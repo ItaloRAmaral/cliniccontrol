@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { IAppointmentProps } from '../../interfaces/appointment';
 import { AppointmentDto } from './dto';
 
@@ -114,11 +115,11 @@ export class AppointmentEntity extends AppointmentDto {
     this.paid = paid;
   }
 
-  public get getPaymentMethod(): string {
+  public get getPaymentMethod(): PaymentMethod {
     return this.paymentMethod;
   }
 
-  public set setPaymentMethod(paymentMethod: string) {
+  public set setPaymentMethod(paymentMethod: PaymentMethod) {
     this.paymentMethod = paymentMethod;
   }
 

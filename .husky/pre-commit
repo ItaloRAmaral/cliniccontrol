@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "Husy pre commit script"
+echo "Husky pre commit script..."
+echo "Running Unit Tests..."
 
-# pnpm test:unit
+pnpm test:unit

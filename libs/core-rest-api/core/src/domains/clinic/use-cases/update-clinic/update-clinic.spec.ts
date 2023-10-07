@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
@@ -42,14 +42,12 @@ describe('[clinic] Update Clinic Service', () => {
 
     const newClinicInfos: UpdateClinicDto = {
       id: createClinic.id,
-      city: faker.location.city()
+      city: faker.location.city(),
     };
 
     await service.execute(newClinicInfos);
 
-    const findClinic = await databaseRepository.findClinicById(
-      createClinic.id
-    );
+    const findClinic = await databaseRepository.findClinicById(createClinic.id);
 
     expect(findClinic).toEqual({
       ...createClinic,
@@ -63,7 +61,7 @@ describe('[clinic] Update Clinic Service', () => {
   it('should throw conflict exception if clinic do not exist', async () => {
     const newClinicInfos = {
       id: randomUUID(),
-      city: faker.location.city()
+      city: faker.location.city(),
     };
 
     await expect(service.execute(newClinicInfos)).rejects.toThrow(
