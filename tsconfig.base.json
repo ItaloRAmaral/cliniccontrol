@@ -26,5 +26,6 @@
       "@clinicControl/root/*": ["./*"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "types": ["vitest/globals"]
 }
