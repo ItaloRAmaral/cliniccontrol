@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateSingleAppointmentService } from './create-single-appointment.service';
 

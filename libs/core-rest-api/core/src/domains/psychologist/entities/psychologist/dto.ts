@@ -1,5 +1,11 @@
-// import { Plan, Role } from '@prisma/client';
-import { IsDate, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import {
+  IsDate,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
 import { Plan, Role } from '../../../../shared/interfaces/payments';
 
 export class PsychologistDto {
@@ -15,14 +21,14 @@ export class PsychologistDto {
   @IsString()
   password!: string;
 
-  @IsString()
+  @IsEnum(Role)
   role!: Role;
 
   @IsOptional()
   @IsNumber()
   price?: number | null;
 
-  @IsString()
+  @IsEnum(Plan)
   plan!: Plan;
 
   @IsOptional()

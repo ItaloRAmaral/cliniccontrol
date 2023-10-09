@@ -48,7 +48,7 @@ export class PatientEntity extends PatientDto {
     this.phone = phone;
   }
 
-  public get getPaymentMethod(): string {
+  public get getPaymentMethod(): PaymentMethod {
     return this.paymentMethod;
   }
 

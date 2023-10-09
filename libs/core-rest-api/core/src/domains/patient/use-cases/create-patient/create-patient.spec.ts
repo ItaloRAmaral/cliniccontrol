@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
@@ -13,7 +13,7 @@ describe('[patient] Create Patient Service', () => {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    phone: faker.phone.number('+5548988240149'),
+    phone: '+55 11 911111111',
     paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),
@@ -42,9 +42,8 @@ describe('[patient] Create Patient Service', () => {
   it('should create a new patient', async () => {
     const patient = await service.execute(fakePatient);
 
-    const patientDatabaseRepository = await databaseRepository.findPatientByEmail(
-      patient.email
-    );
+    const patientDatabaseRepository =
+      await databaseRepository.findPatientByEmail(patient.email);
     expect(patientDatabaseRepository?.email).toEqual(patient.email);
     expect(patient.email).toEqual(fakePatient.email);
   });

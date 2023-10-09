@@ -7,6 +7,7 @@ import { DatabaseRepositoriesModule } from '../../database/repositories/reposito
 import { envSchema } from '../../env/env';
 import { EnvModule } from '../../env/env.module';
 import { CreatePsychologistController } from './use-case/create-psychologist/create-psychologist.controller';
+import { NestjsCreatePsychologistService } from './use-case/create-psychologist/nestjs-create-psychologist.service';
 
 @Module({
   imports: [DatabaseRepositoriesModule, EnvModule, AuthModule, ConfigModule.forRoot({
@@ -14,6 +15,6 @@ import { CreatePsychologistController } from './use-case/create-psychologist/cre
     isGlobal: true
   })],
   controllers: [CreatePsychologistController],
-  providers: [PostgreSqlPrismaOrmService, CreatePsychologistService],
+  providers: [PostgreSqlPrismaOrmService, CreatePsychologistService, NestjsCreatePsychologistService],
 })
 export class ApiModule {}
