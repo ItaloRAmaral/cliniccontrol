@@ -12,15 +12,15 @@ import { randomUUID } from 'node:crypto';
 const prisma = new PrismaClient();
 
 function generateUniqueDatabaseURL(schemaId: string) {
-  if (!process.env.DATABASE_URL) {
+  if (!process.env['DATABASE_URL']) {
     throw new Error('Please provider a DATABASE_URL environment variable');
   }
 
   console.log('setting up test e2e url database...');
 
-  const url = new URL(process.env.DATABASE_URL);
+  const url = new URL(process.env['DATABASE_URL']);
 
-  console.log('url', process.env.DATABASE_URL);
+  console.log('url', process.env['DATABASE_URL']);
   url.searchParams.set('schema', schemaId);
 
   return url.toString();
@@ -30,10 +30,10 @@ const schemaId = randomUUID();
 
 beforeAll(async () => {
   const databaseURL = generateUniqueDatabaseURL(schemaId);
-  console.log('databaseURL', process.env.DATABASE_URL);
 
-  process.env.DATABASE_URL = databaseURL;
+  process.env['DATABASE_URL'] = databaseURL;
 
+  console.log('databaseURL', databaseURL);
   console.log('connecting test e2e database...');
   execSync(
     'pnpm prisma migrate deploy --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma'
