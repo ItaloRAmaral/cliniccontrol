@@ -16,9 +16,7 @@ export class PostgresqlPrismaOrmPsychologistRepository
   async createPsychologist(
     psychologist: CreatePsychologistDto
   ): Promise<PsychologistEntity> {
-    const isPsychologistExists = await this.findPsychologistByEmail(
-      psychologist.email
-    );
+    const isPsychologistExists = await this.findPsychologistByEmail(psychologist.email);
 
     if (isPsychologistExists) {
       throw new ConflictException(
@@ -29,21 +27,21 @@ export class PostgresqlPrismaOrmPsychologistRepository
     const toPrismaEntity =
       PostgresqlPrismaPsychologistMapper.toPrismaCreate(psychologist);
 
-    const newPsychologist =
-      await this.postgreSqlPrismaOrmService.psychologist.create(toPrismaEntity);
+    const newPsychologist = await this.postgreSqlPrismaOrmService['psychologist'].create(
+      toPrismaEntity
+    );
 
     return PostgresqlPrismaPsychologistMapper.toDomain(newPsychologist);
   }
 
-  async findPsychologistByEmail(
-    email: string
-  ): Promise<PsychologistEntity | null> {
-    const psychologist =
-      await this.postgreSqlPrismaOrmService.psychologist.findUnique({
+  async findPsychologistByEmail(email: string): Promise<PsychologistEntity | null> {
+    const psychologist = await this.postgreSqlPrismaOrmService['psychologist'].findUnique(
+      {
         where: {
           email: email,
         },
-      });
+      }
+    );
 
     if (!psychologist) {
       return null;
@@ -53,12 +51,13 @@ export class PostgresqlPrismaOrmPsychologistRepository
   }
 
   async findPsychologistById(id: string): Promise<PsychologistEntity | null> {
-    const psychologist =
-      await this.postgreSqlPrismaOrmService.psychologist.findUnique({
+    const psychologist = await this.postgreSqlPrismaOrmService['psychologist'].findUnique(
+      {
         where: {
           id: id,
         },
-      });
+      }
+    );
 
     if (!psychologist) {
       return null;
@@ -68,39 +67,34 @@ export class PostgresqlPrismaOrmPsychologistRepository
   }
 
   async getPsychologists(): Promise<PsychologistEntity[]> {
-    const psychologists =
-      await this.postgreSqlPrismaOrmService.psychologist.findMany();
+    const psychologists = await this.postgreSqlPrismaOrmService[
+      'psychologist'
+    ].findMany();
 
     return PostgresqlPrismaPsychologistMapper.toDomainMany(psychologists);
   }
 
-  async updatePsychologist(
-    newPsychologist: UpdatePsychologistDto
-  ): Promise<void> {
+  async updatePsychologist(newPsychologist: UpdatePsychologistDto): Promise<void> {
     const oldPsychologist = await this.findPsychologistById(newPsychologist.id);
 
     if (!oldPsychologist) {
-      throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
-      );
+      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']);
     }
 
     const toPrismaEntity =
       PostgresqlPrismaPsychologistMapper.toPrismaUpdate(newPsychologist);
 
-    await this.postgreSqlPrismaOrmService.psychologist.update(toPrismaEntity);
+    await this.postgreSqlPrismaOrmService['psychologist'].update(toPrismaEntity);
   }
 
   async deletePsychologist(email: string): Promise<void> {
     const isPsychologistExists = await this.findPsychologistByEmail(email);
 
     if (!isPsychologistExists) {
-      throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
-      );
+      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']);
     }
 
-    await this.postgreSqlPrismaOrmService.psychologist.delete({
+    await this.postgreSqlPrismaOrmService['psychologist'].delete({
       where: {
         email: email,
       },
