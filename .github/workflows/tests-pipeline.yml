@@ -42,8 +42,7 @@ jobs:
       - name: Set up environment variables
         run: |
           echo "DATABASE_URL=postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?schema=${{ secrets.POSTGRES_SCHEMA }}" >> $GITHUB_ENV
-      # - name: Run tests
-      #   run: pnpm run test:unit
+
       - name: Setting up docker compose
         run: docker compose up -d
 
@@ -52,8 +51,8 @@ jobs:
           pnpm run prisma:core:schema:generate
           pnpm run prisma:core:schema:migrate
 
-      - name: Run core-rest-api:adapters e2e tests
+      - name: Run core-rest-api-adapters e2e tests
         run: pnpm run test:e2e
 
-      - name: Run tests
+      - name: Run core-rest-api-core unit tests
         run: pnpm exec nx run core-rest-api-core:test
