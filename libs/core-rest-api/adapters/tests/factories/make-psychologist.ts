@@ -40,7 +40,7 @@ export class PsychologistFactory {
   ): Promise<PsychologistEntity> {
     const newPrismaPsychologist = makePsychologist(psychologist);
 
-    await this.postgreSqlPrismaOrmService.psychologist.create(
+    await this.postgreSqlPrismaOrmService['psychologist'].create(
       PostgresqlPrismaPsychologistMapper.toPrismaCreate(newPrismaPsychologist)
     );
 
