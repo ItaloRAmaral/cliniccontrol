@@ -21,6 +21,7 @@ jobs:
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
       POSTGRES_SCHEMA: ${{ secrets.POSTGRES_SCHEMA }}
+      API_KEY: ${{ secrets.API_KEY }}
 
     defaults:
       run:
