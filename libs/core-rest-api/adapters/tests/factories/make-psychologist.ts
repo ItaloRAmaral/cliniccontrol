@@ -1,3 +1,4 @@
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { Injectable } from '@nestjs/common';
 
 import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
@@ -8,10 +9,9 @@ import {
 } from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
 import { PostgreSqlPrismaOrmService } from '../../src/database/infra/prisma/prisma.service';
 import { PostgresqlPrismaPsychologistMapper } from '../../src/database/mappers/postgresql-prisma-psychologist-mapper';
-import { generateRandomPassword } from '../utils/random-password';
 
 /*
-  Criando uma factory para a entidade Psychologist, que será utilizada para criar testes dos casos de uso do domínio
+  Creating a factory for the Psychologist entity, which will be used to create tests for the domain's use cases
 */
 export function makePsychologist(
   override: Partial<CreatePsychologistDto> = {}
@@ -19,7 +19,7 @@ export function makePsychologist(
   const newPsychologist = new PsychologistEntity({
     name: 'Novo Usuário Teste',
     email: 'novo_usuario_teste@gmail.com',
-    password: generateRandomPassword(8),
+    password: faker.internet.password({ length: 8 }),
     role: Role.PSYCHOLOGIST,
     plan: Plan.PREMIUM,
     ...override,
@@ -29,7 +29,7 @@ export function makePsychologist(
 }
 
 /*
-  Criando uma factory para a entidade Psychologist do Prisma, que será utilizada para criar testes e2e (controllers)
+  Creating a factory for Prisma's Psychologist entity, which will be used to create e2e tests (controllers)
 */
 @Injectable()
 export class PsychologistFactory {

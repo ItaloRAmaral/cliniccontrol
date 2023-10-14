@@ -1,6 +1,8 @@
+import request from 'supertest';
+
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import request from 'supertest';
+
 import { makePsychologist } from '../../../../../tests/factories/make-psychologist';
 import { PostgreSqlPrismaOrmService } from '../../../../database/infra/prisma/prisma.service';
 import { ApiModule } from '../../api.module';
