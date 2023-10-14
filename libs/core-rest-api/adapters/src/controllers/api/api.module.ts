@@ -1,4 +1,3 @@
-import { CreatePsychologistService } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist.service';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from '../../auth/auth.module';
@@ -10,11 +9,16 @@ import { CreatePsychologistController } from './use-case/create-psychologist/cre
 import { NestjsCreatePsychologistService } from './use-case/create-psychologist/nestjs-create-psychologist.service';
 
 @Module({
-  imports: [DatabaseRepositoriesModule, EnvModule, AuthModule, ConfigModule.forRoot({
-    validate: (env) => envSchema.parse(env),
-    isGlobal: true
-  })],
+  imports: [
+    DatabaseRepositoriesModule,
+    EnvModule,
+    AuthModule,
+    ConfigModule.forRoot({
+      validate: (env) => envSchema.parse(env),
+      isGlobal: true,
+    }),
+  ],
   controllers: [CreatePsychologistController],
-  providers: [PostgreSqlPrismaOrmService, CreatePsychologistService, NestjsCreatePsychologistService],
+  providers: [PostgreSqlPrismaOrmService, NestjsCreatePsychologistService],
 })
 export class ApiModule {}

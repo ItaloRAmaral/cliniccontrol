@@ -1,5 +1,4 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ClinicDatabaseRepository } from '../../repositories/database-repository';
 import { CreateClinicService } from './create-clinic.service';
 
@@ -19,20 +18,8 @@ describe('[clinic] Create Clinic Service', () => {
   let databaseRepository: ClinicDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CreateClinicService,
-        {
-          provide: ClinicDatabaseRepository,
-          useClass: InMemoryClinicDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<CreateClinicService>(CreateClinicService);
-    databaseRepository = module.get<ClinicDatabaseRepository>(
-      ClinicDatabaseRepository
-    );
+    databaseRepository = new InMemoryClinicDatabaseRepository();
+    service = new CreateClinicService(databaseRepository);
   });
 
   it('should create a new clinic', async () => {

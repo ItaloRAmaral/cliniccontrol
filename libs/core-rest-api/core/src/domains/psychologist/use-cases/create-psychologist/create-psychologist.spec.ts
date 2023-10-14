@@ -1,7 +1,6 @@
 import { makePsychologist } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-psychologist';
 
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -15,20 +14,8 @@ describe('[psychologist] Create Psychologist Service', () => {
   let databaseRepository: PsychologistDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CreatePsychologistService,
-        {
-          provide: PsychologistDatabaseRepository,
-          useClass: InMemoryPsychologistDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<CreatePsychologistService>(CreatePsychologistService);
-    databaseRepository = module.get<PsychologistDatabaseRepository>(
-      PsychologistDatabaseRepository
-    );
+    databaseRepository = new InMemoryPsychologistDatabaseRepository();
+    service = new CreatePsychologistService(databaseRepository);
   });
 
   it('should create a new psychologist', async () => {

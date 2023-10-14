@@ -1,5 +1,4 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { Test, TestingModule } from '@nestjs/testing';
 import { CreateSingleAppointmentService } from './create-single-appointment.service';
 
 import { ConflictException } from '@nestjs/common';
@@ -26,22 +25,8 @@ describe('[appointment] Create Single Appointment Service', () => {
   let databaseRepository: AppointmentDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CreateSingleAppointmentService,
-        {
-          provide: AppointmentDatabaseRepository,
-          useClass: InMemoryAppointmentDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<CreateSingleAppointmentService>(
-      CreateSingleAppointmentService
-    );
-    databaseRepository = module.get<AppointmentDatabaseRepository>(
-      AppointmentDatabaseRepository
-    );
+    databaseRepository = new InMemoryAppointmentDatabaseRepository();
+    service = new CreateSingleAppointmentService(databaseRepository);
   });
 
   it('should create a new appointment', async () => {

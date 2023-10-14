@@ -21,7 +21,7 @@ export function makePsychologist(
     email: 'novo_usuario_teste@gmail.com',
     password: faker.internet.password({ length: 8 }),
     role: Role.PSYCHOLOGIST,
-    plan: Plan.PREMIUM,
+    plan: Plan.BASIC,
     ...override,
   });
 

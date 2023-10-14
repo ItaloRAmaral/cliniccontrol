@@ -1,6 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -21,20 +20,8 @@ describe('[clinic] Update Clinic Service', () => {
   let databaseRepository: ClinicDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        UpdateClinicService,
-        {
-          provide: ClinicDatabaseRepository,
-          useClass: InMemoryClinicDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<UpdateClinicService>(UpdateClinicService);
-    databaseRepository = module.get<ClinicDatabaseRepository>(
-      ClinicDatabaseRepository
-    );
+    databaseRepository = new InMemoryClinicDatabaseRepository();
+    service = new UpdateClinicService(databaseRepository);
   });
 
   it('should update a clinic', async () => {

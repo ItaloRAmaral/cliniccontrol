@@ -1,6 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryPatientDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -23,20 +22,8 @@ describe('[patient] Create Patient Service', () => {
   let databaseRepository: PatientDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CreatePatientService,
-        {
-          provide: PatientDatabaseRepository,
-          useClass: InMemoryPatientDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<CreatePatientService>(CreatePatientService);
-    databaseRepository = module.get<PatientDatabaseRepository>(
-      PatientDatabaseRepository
-    );
+    databaseRepository = new InMemoryPatientDatabaseRepository();
+    service = new CreatePatientService(databaseRepository);
   });
 
   it('should create a new patient', async () => {
