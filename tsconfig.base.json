@@ -16,13 +16,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "useUnknownInCatchVariables": true,
+    "esModuleInterop": true,
     "paths": {
       "@clinicControl/core-rest-api/adapters/src/*": [
         "libs/core-rest-api/adapters/src/*"
       ],
-      "@clinicControl/core-rest-api/core/src/*": [
-        "libs/core-rest-api/core/src/*"
-      ],
+      "@clinicControl/core-rest-api/core/src/*": ["libs/core-rest-api/core/src/*"],
       "@clinicControl/root/*": ["./*"]
     }
   },

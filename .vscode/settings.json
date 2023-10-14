@@ -10,14 +10,16 @@
     "Amaral",
     "CODEOWNERS",
     "CQRS",
+    "github",
+    "GITHUB",
     "instanceof",
     "italo",
     "keyof",
     "Luana",
     "postgre",
     "Postgre",
-    "Postgresql",
     "postgresql",
+    "Postgresql",
     "Vefago"
   ],
   "cSpell.language": "en,pt-BR"
