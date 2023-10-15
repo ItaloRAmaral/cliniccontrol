@@ -4,4 +4,4 @@
 echo "Husky pre commit script..."
 echo "Running Unit Tests..."
 
-pnpm test:unit
+pnpm run test:unit
