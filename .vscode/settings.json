@@ -8,7 +8,11 @@
   "editor.formatOnSave": true,
   "cSpell.words": [
     "Amaral",
+    "cacheable",
+    "cliniccontrol",
     "CODEOWNERS",
+    "commitlint",
+    "conventionalcommits",
     "CQRS",
     "github",
     "GITHUB",
@@ -16,10 +20,14 @@
     "italo",
     "keyof",
     "Luana",
+    "nestjs",
     "postgre",
     "Postgre",
     "postgresql",
     "Postgresql",
+    "preid",
+    "Rockenbach",
+    "unplugin",
     "Vefago"
   ],
   "cSpell.language": "en,pt-BR"

@@ -51,8 +51,8 @@ jobs:
           pnpm run prisma:core:schema:generate
           pnpm run prisma:core:schema:migrate
 
-      - name: Run core-rest-api-adapters e2e tests
+      - name: Run E2E Tests
         run: pnpm run test:e2e
 
-      - name: Run core-rest-api-core unit tests
-        run: pnpm exec nx run core-rest-api-core:test
+      - name: Run Unit Tests
+        run: pnpm run test:unit

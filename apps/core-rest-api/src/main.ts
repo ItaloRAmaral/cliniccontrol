@@ -36,19 +36,17 @@ async function bootstrap() {
   );
 
   // Enable version
-  app.enableVersioning({type: VersioningType.URI})
+  app.enableVersioning({ type: VersioningType.URI });
 
   // Setting up Swagger document
   setupOpenApi(app);
 
   // Listen on specified port
-  const configService = app.get(EnvService)
-  const port = configService.get('PORT')
+  const configService = app.get(EnvService);
+  const port = configService.get('PORT');
 
   await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
-  );
+  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
 
 bootstrap();
