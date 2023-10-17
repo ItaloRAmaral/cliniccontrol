@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from '../../auth/auth.module';
+import { CryptographyModule } from '../../cryptography/cryptography.module';
 import { PostgreSqlPrismaOrmService } from '../../database/infra/prisma/prisma.service';
 import { DatabaseRepositoriesModule } from '../../database/repositories/repositories.module';
 import { envSchema } from '../../env/env';
@@ -13,6 +14,7 @@ import { NestjsCreatePsychologistService } from './use-case/create-psychologist/
     DatabaseRepositoriesModule,
     EnvModule,
     AuthModule,
+    CryptographyModule,
     ConfigModule.forRoot({
       validate: (env) => envSchema.parse(env),
       isGlobal: true,

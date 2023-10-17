@@ -25,9 +25,7 @@ export class PostgresqlPrismaPsychologistMapper {
     return raw.map((psychologist) => this.toDomain(psychologist));
   }
 
-  static toPrismaCreate(
-    raw: CreatePsychologistDto
-  ): Prisma.PsychologistCreateArgs {
+  static toPrismaCreate(raw: CreatePsychologistDto): Prisma.PsychologistCreateArgs {
     raw.role as unknown as PrismaRole;
 
     return {
@@ -39,9 +37,7 @@ export class PostgresqlPrismaPsychologistMapper {
     };
   }
 
-  static toPrismaUpdate(
-    raw: UpdatePsychologistDto
-  ): Prisma.PsychologistUpdateArgs {
+  static toPrismaUpdate(raw: UpdatePsychologistDto): Prisma.PsychologistUpdateArgs {
     return {
       data: {
         ...raw,
