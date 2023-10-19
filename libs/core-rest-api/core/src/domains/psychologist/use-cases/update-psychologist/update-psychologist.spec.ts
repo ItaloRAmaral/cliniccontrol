@@ -12,7 +12,7 @@ describe('[psychologist] Update Psychologist Service', () => {
     email: faker.internet.email(),
     password: faker.internet.password({ length: 8 }),
     role: Role.PSYCHOLOGIST,
-    plan: Plan.PREMIUM,
+    plan: Plan.BASIC,
   };
 
   let service: UpdatePsychologistService;
