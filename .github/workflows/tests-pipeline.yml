@@ -13,6 +13,15 @@ env:
 jobs:
   tests-pipeline:
     runs-on: ubuntu-latest
+    env:
+      JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
+      JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_SCHEMA: ${{ secrets.POSTGRES_SCHEMA }}
+      API_KEY: ${{ secrets.API_KEY }}
 
     defaults:
       run:
@@ -20,7 +29,7 @@ jobs:
 
     steps:
       - name: 'Checkout Repository'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install PNPM
         uses: pnpm/action-setup@v2.2.1
@@ -30,5 +39,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run tests
+      - name: Set up environment variables
+        run: |
+          echo "DATABASE_URL=postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?schema=${{ secrets.POSTGRES_SCHEMA }}" >> $GITHUB_ENV
+
+      - name: Setting up docker compose
+        run: docker compose up -d
+
+      - name: Setting up prisma postgresql database
+        run: |
+          pnpm run prisma:core:schema:generate
+          pnpm run prisma:core:schema:migrate
+
+      - name: Run E2E Tests
+        run: pnpm run test:e2e
+
+      - name: Run Unit Tests
         run: pnpm run test:unit

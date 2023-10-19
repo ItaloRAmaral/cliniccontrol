@@ -1,4 +1,5 @@
-import { IsString } from 'class-validator';
+import { IsEnum, IsString } from 'class-validator';
+import { Plan, Role } from '../../../../shared/interfaces/payments';
 
 export class CreatePsychologistDto {
   @IsString()
@@ -10,9 +11,9 @@ export class CreatePsychologistDto {
   @IsString()
   password!: string;
 
-  @IsString()
-  role!: string;
+  @IsEnum(Role)
+  role!: Role;
 
-  @IsString()
-  plan!: string | null;
+  @IsEnum(Plan)
+  plan!: Plan;
 }

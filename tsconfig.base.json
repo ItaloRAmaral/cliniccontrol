@@ -9,22 +9,22 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2022",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2023", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "useUnknownInCatchVariables": true,
+    "esModuleInterop": true,
     "paths": {
       "@clinicControl/core-rest-api/adapters/src/*": [
         "libs/core-rest-api/adapters/src/*"
       ],
-      "@clinicControl/core-rest-api/core/src/*": [
-        "libs/core-rest-api/core/src/*"
-      ],
+      "@clinicControl/core-rest-api/core/src/*": ["libs/core-rest-api/core/src/*"],
       "@clinicControl/root/*": ["./*"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "types": ["vitest/globals"]
 }

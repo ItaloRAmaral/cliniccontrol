@@ -1,11 +1,10 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
 import { UpdatePatientDto } from './update-patient-dto';
 
-@Injectable()
 export class UpdatePatientService {
   constructor(private patientDatabaseRepository: PatientDatabaseRepository) {}
 

@@ -1,6 +1,5 @@
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryPatientDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -13,7 +12,7 @@ describe('[patient] Create Patient Service', () => {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    phone: faker.phone.number('+5548988240149'),
+    phone: '+55 11 911111111',
     paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),
@@ -23,28 +22,15 @@ describe('[patient] Create Patient Service', () => {
   let databaseRepository: PatientDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CreatePatientService,
-        {
-          provide: PatientDatabaseRepository,
-          useClass: InMemoryPatientDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<CreatePatientService>(CreatePatientService);
-    databaseRepository = module.get<PatientDatabaseRepository>(
-      PatientDatabaseRepository
-    );
+    databaseRepository = new InMemoryPatientDatabaseRepository();
+    service = new CreatePatientService(databaseRepository);
   });
 
   it('should create a new patient', async () => {
     const patient = await service.execute(fakePatient);
 
-    const patientDatabaseRepository = await databaseRepository.findPatientByEmail(
-      patient.email
-    );
+    const patientDatabaseRepository =
+      await databaseRepository.findPatientByEmail(patient.email);
     expect(patientDatabaseRepository?.email).toEqual(patient.email);
     expect(patient.email).toEqual(fakePatient.email);
   });

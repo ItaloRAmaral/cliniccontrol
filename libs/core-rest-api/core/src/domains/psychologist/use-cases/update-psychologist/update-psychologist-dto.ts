@@ -1,4 +1,5 @@
-import { IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { Plan, Role } from '../../../../shared/interfaces/payments';
 
 export class UpdatePsychologistDto {
   @IsString()
@@ -17,16 +18,16 @@ export class UpdatePsychologistDto {
   password?: string;
 
   @IsOptional()
-  @IsString()
-  role?: string;
+  @IsEnum(Role)
+  role?: Role;
 
   @IsOptional()
   @IsNumber()
   price?: number;
 
   @IsOptional()
-  @IsString()
-  plan?: string;
+  @IsEnum(Plan)
+  plan?: Plan;
 
   @IsOptional()
   @IsNumber()

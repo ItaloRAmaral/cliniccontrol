@@ -4,6 +4,7 @@
     "default": {
       "runner": "nx-cloud",
       "options": {
+        "cacheableOperations": ["build", "test", "e2e"],
         "accessToken": "MjJlOTVjOTMtZTFlOC00MGQxLWFkZmMtZjVlNTUxNGJlYmIzfHJlYWQtd3JpdGU="
       }
     }
@@ -14,7 +15,7 @@
       "inputs": ["production", "^production"]
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+      "inputs": ["default", "^production"]
     },
     "e2e": {
       "inputs": ["default", "^production"]

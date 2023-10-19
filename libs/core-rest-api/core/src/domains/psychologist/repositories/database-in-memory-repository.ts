@@ -1,11 +1,10 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { PsychologistEntity } from '../entities/psychologist/entity';
 import { CreatePsychologistDto } from '../use-cases/create-psychologist/create-psychologist-dto';
 import { UpdatePsychologistDto } from '../use-cases/update-psychologist/update-psychologist-dto';
 import { PsychologistDatabaseRepository } from './database-repository';
 
-@Injectable()
 export class InMemoryPsychologistDatabaseRepository
   implements PsychologistDatabaseRepository
 {

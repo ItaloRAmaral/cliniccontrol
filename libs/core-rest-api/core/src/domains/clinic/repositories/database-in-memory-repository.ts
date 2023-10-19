@@ -1,11 +1,10 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { CLINIC_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { ClinicEntity } from '../../clinic/entities/clinic/entity';
 import { CreateClinicDto } from '../../clinic/use-cases/create-clinic/create-clinic-dto';
 import { UpdateClinicDto } from '../use-cases/update-clinic/update-clinic-dto';
 import { ClinicDatabaseRepository } from './database-repository';
 
-@Injectable()
 export class InMemoryClinicDatabaseRepository
   implements ClinicDatabaseRepository
 {

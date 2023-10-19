@@ -1,4 +1,4 @@
-import { IsBoolean, IsDate, IsString } from 'class-validator';
+import { IsBoolean, IsDate, IsEnum, IsString } from 'class-validator';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
 export class CreateSingleAppointmentDto {
@@ -26,6 +26,6 @@ export class CreateSingleAppointmentDto {
   @IsBoolean()
   cancelled!: boolean;
 
-  @IsString()
+  @IsEnum(PaymentMethod)
   paymentMethod!: PaymentMethod;
 }

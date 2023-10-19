@@ -1,8 +1,7 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 
-@Injectable()
 export class DeletePsychologistService {
   constructor(
     private psychologistDatabaseRepository: PsychologistDatabaseRepository

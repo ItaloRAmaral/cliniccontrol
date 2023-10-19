@@ -1,6 +1,5 @@
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -21,20 +20,8 @@ describe('[clinic] Update Clinic Service', () => {
   let databaseRepository: ClinicDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        UpdateClinicService,
-        {
-          provide: ClinicDatabaseRepository,
-          useClass: InMemoryClinicDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<UpdateClinicService>(UpdateClinicService);
-    databaseRepository = module.get<ClinicDatabaseRepository>(
-      ClinicDatabaseRepository
-    );
+    databaseRepository = new InMemoryClinicDatabaseRepository();
+    service = new UpdateClinicService(databaseRepository);
   });
 
   it('should update a clinic', async () => {
@@ -42,14 +29,12 @@ describe('[clinic] Update Clinic Service', () => {
 
     const newClinicInfos: UpdateClinicDto = {
       id: createClinic.id,
-      city: faker.location.city()
+      city: faker.location.city(),
     };
 
     await service.execute(newClinicInfos);
 
-    const findClinic = await databaseRepository.findClinicById(
-      createClinic.id
-    );
+    const findClinic = await databaseRepository.findClinicById(createClinic.id);
 
     expect(findClinic).toEqual({
       ...createClinic,
@@ -63,7 +48,7 @@ describe('[clinic] Update Clinic Service', () => {
   it('should throw conflict exception if clinic do not exist', async () => {
     const newClinicInfos = {
       id: randomUUID(),
-      city: faker.location.city()
+      city: faker.location.city(),
     };
 
     await expect(service.execute(newClinicInfos)).rejects.toThrow(

@@ -1,5 +1,4 @@
-import { faker } from '@faker-js/faker';
-import { Test, TestingModule } from '@nestjs/testing';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ClinicDatabaseRepository } from '../../repositories/database-repository';
 import { DeleteClinicService } from './delete-clinic.service';
 
@@ -19,20 +18,8 @@ describe('[clinic] Delete Clinic Service', () => {
   let databaseRepository: ClinicDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        DeleteClinicService,
-        {
-          provide: ClinicDatabaseRepository,
-          useClass: InMemoryClinicDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<DeleteClinicService>(DeleteClinicService);
-    databaseRepository = module.get<ClinicDatabaseRepository>(
-      ClinicDatabaseRepository
-    );
+    databaseRepository = new InMemoryClinicDatabaseRepository();
+    service = new DeleteClinicService(databaseRepository);
   });
 
   it('should delete a new clinic', async () => {

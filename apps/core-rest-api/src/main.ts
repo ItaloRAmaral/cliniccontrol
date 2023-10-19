@@ -2,19 +2,19 @@
  * This is not a production server yet!
  * This is only a minimal backend to get started.
  */
-import { Logger, ValidationPipe, INestApplication } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { version } from '@clinicControl/root/package.json';
+import { INestApplication, Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { version } from "@clinicControl/root/package.json"
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-
-import { AppModule } from './app/app.module';
+import { ApiModule } from '@clinicControl/core-rest-api/adapters/src/controllers/api/api.module';
+import { EnvService } from '@clinicControl/core-rest-api/adapters/src/env/env.service';
 
 const setupOpenApi = (app: INestApplication) => {
   // Setting up Swagger document
   const options = new DocumentBuilder()
-    .setTitle('Clinic Controll Restful API')
-    .setDescription('Clinic Controll Restful API')
+    .setTitle('Clinic Control Restful API')
+    .setDescription('Clinic Control Restful API')
     .setVersion(version)
     .build();
 
@@ -23,8 +23,8 @@ const setupOpenApi = (app: INestApplication) => {
 };
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
+  const app = await NestFactory.create(ApiModule);
+  const globalPrefix = 'core';
   app.setGlobalPrefix(globalPrefix);
 
   app.useGlobalPipes(
@@ -35,15 +35,18 @@ async function bootstrap() {
     })
   );
 
+  // Enable version
+  app.enableVersioning({ type: VersioningType.URI });
+
   // Setting up Swagger document
   setupOpenApi(app);
 
   // Listen on specified port
-  const port = process.env.PORT || 3000;
+  const configService = app.get(EnvService);
+  const port = configService.get('PORT');
+
   await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
-  );
+  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
 
 bootstrap();

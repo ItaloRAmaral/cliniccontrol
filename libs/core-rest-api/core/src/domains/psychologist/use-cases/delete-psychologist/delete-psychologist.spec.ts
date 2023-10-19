@@ -1,39 +1,19 @@
-import { faker } from '@faker-js/faker';
+import { makePsychologist } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-psychologist';
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
-import { CreatePsychologistDto } from '../create-psychologist/create-psychologist-dto';
 import { DeletePsychologistService } from './delete-psychologist.service';
 
 describe('[psychologist] Delete Psychologist Service', () => {
-  const fakePsychologist: CreatePsychologistDto = {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    password: faker.internet.password({ length: 8 }),
-    role: faker.person.jobTitle(),
-    plan: 'premium',
-  };
+  const fakePsychologist = makePsychologist();
 
   let service: DeletePsychologistService;
   let databaseRepository: PsychologistDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        DeletePsychologistService,
-        {
-          provide: PsychologistDatabaseRepository,
-          useClass: InMemoryPsychologistDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<DeletePsychologistService>(DeletePsychologistService);
-    databaseRepository = module.get<PsychologistDatabaseRepository>(
-      PsychologistDatabaseRepository
-    );
+    databaseRepository = new InMemoryPsychologistDatabaseRepository();
+    service = new DeletePsychologistService(databaseRepository);
   });
 
   it('should delete a new psychologist', async () => {

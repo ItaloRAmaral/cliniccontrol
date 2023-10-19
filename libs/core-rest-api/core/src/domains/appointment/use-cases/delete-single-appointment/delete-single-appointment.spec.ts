@@ -1,6 +1,5 @@
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -25,22 +24,8 @@ describe('[appointment] Create Single Appointment Service', () => {
   let databaseRepository: AppointmentDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        DeleteSingleAppointmentService,
-        {
-          provide: AppointmentDatabaseRepository,
-          useClass: InMemoryAppointmentDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<DeleteSingleAppointmentService>(
-      DeleteSingleAppointmentService
-    );
-    databaseRepository = module.get<AppointmentDatabaseRepository>(
-      AppointmentDatabaseRepository
-    );
+    databaseRepository = new InMemoryAppointmentDatabaseRepository();
+    service = new DeleteSingleAppointmentService(databaseRepository);
   });
 
   it('should delete a new appointment', async () => {

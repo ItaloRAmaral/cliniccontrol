@@ -1,39 +1,21 @@
-import { faker } from '@faker-js/faker';
+import { makePsychologist } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-psychologist';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { Plan } from '../../../../shared/interfaces/payments';
 import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
-import { CreatePsychologistDto } from '../create-psychologist/create-psychologist-dto';
 import { UpdatePsychologistService } from './update-psychologist.service';
 
 describe('[psychologist] Update Psychologist Service', () => {
-  const fakePsychologist: CreatePsychologistDto = {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    password: faker.internet.password({ length: 8 }),
-    role: faker.person.jobTitle(),
-    plan: 'basic',
-  };
+  const fakePsychologist = makePsychologist();
 
   let service: UpdatePsychologistService;
   let databaseRepository: PsychologistDatabaseRepository;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        UpdatePsychologistService,
-        {
-          provide: PsychologistDatabaseRepository,
-          useClass: InMemoryPsychologistDatabaseRepository,
-        },
-      ],
-    }).compile();
-
-    service = module.get<UpdatePsychologistService>(UpdatePsychologistService);
-    databaseRepository = module.get<PsychologistDatabaseRepository>(
-      PsychologistDatabaseRepository
-    );
+    databaseRepository = new InMemoryPsychologistDatabaseRepository();
+    service = new UpdatePsychologistService(databaseRepository);
   });
 
   it('should update a new psychologist', async () => {
@@ -46,7 +28,7 @@ describe('[psychologist] Update Psychologist Service', () => {
       name: faker.person.fullName(),
       email: faker.internet.email(),
       password: faker.internet.password({ length: 5 }),
-      plan: 'premium',
+      plan: Plan.PREMIUM,
     };
 
     await service.execute(newPsychologistInfos);
@@ -73,13 +55,13 @@ describe('[psychologist] Update Psychologist Service', () => {
     expect(findPsychologist?.plan).toBe(newPsychologistInfos.plan);
   });
 
-  it('should not update a new psychologist and throw an ConflicException if not exists', async () => {
+  it('should not update a new psychologist and throw an ConflictException if not exists', async () => {
     const newPsychologistInfos = {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
       email: faker.internet.email(),
       password: faker.internet.password({ length: 5 }),
-      plan: 'premium',
+      plan: Plan.PREMIUM,
     };
 
     await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
