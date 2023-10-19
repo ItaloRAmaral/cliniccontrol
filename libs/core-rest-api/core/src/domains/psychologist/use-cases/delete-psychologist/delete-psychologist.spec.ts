@@ -1,12 +1,19 @@
-import { makePsychologist } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-psychologist';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { Plan, Role } from '../../../../shared/interfaces/payments';
 import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { DeletePsychologistService } from './delete-psychologist.service';
 
 describe('[psychologist] Delete Psychologist Service', () => {
-  const fakePsychologist = makePsychologist();
+  const fakePsychologist = {
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    password: faker.internet.password({ length: 8 }),
+    role: Role.PSYCHOLOGIST,
+    plan: Plan.PREMIUM,
+  };
 
   let service: DeletePsychologistService;
   let databaseRepository: PsychologistDatabaseRepository;
@@ -28,9 +35,7 @@ describe('[psychologist] Delete Psychologist Service', () => {
 
   it('should throw error if psychologist does not exist', async () => {
     await expect(service.execute(fakePsychologist.email)).rejects.toThrow(
-      new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
-      )
+      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND'])
     );
   });
 });
