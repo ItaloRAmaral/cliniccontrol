@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.0.1...@cliniccontrol/core-rest-api@1.1.0-beta.0) (2023-10-20)
+
+### Features
+
+- **CC-69:** add api guard ([e0af32c](https://github.com/ItaloRAmaral/cliniccontrol/commit/e0af32c2e4b875cff4f51d579686a2a7a953419a))
+- **CC-69:** create psychologist controller ([5b66004](https://github.com/ItaloRAmaral/cliniccontrol/commit/5b66004c8b42e6b3ee4a9373232ce74d37a4ba4c))
+- **CC-69:** created postgresql-prisma-orm-repository of psychologist ([ba33821](https://github.com/ItaloRAmaral/cliniccontrol/commit/ba33821a51d908b084de62d70a3f0c90ac48dffc))
+
 ## [1.0.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.0.1-beta.4...@cliniccontrol/core-rest-api@1.0.1) (2023-09-04)
 
 **Note:** Version bump only for package @cliniccontrol/core-rest-api
