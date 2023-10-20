@@ -109,19 +109,6 @@ jobs:
         run: |
           bash scripts/nx/set-nx-cloud-token.sh --access-token=${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
-      - name: Install dependencies
-        run: |
-          if [ "${{ env.package_manager == 'yarn' }}" == "true" ]; then
-            echo "Running yarn install --frozen-lockfile"
-            yarn install --frozen-lockfile
-          elif [ "${{ env.package_manager == 'pnpm' }}" == "true" ]; then
-            echo "Running pnpm install --frozen-lockfile"
-            pnpm install --frozen-lockfile
-          else
-            echo "Running npm ci"
-            npm ci
-          fi
-
       - name: Extract branch name
         run: |
           echo $GITHUB_REF
