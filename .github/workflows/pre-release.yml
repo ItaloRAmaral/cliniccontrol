@@ -30,36 +30,36 @@ env:
   API_KEY: ${{ secrets.API_KEY }}
 
 jobs:
-  check-commit-message:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v3
-        if: ${{ github.event_name != 'pull_request' }}
-        with:
-          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-          fetch-depth: 0
-          ref: main
+  # check-commit-message:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout main branch
+  #       uses: actions/checkout@v3
+  #       if: ${{ github.event_name != 'pull_request' }}
+  #       with:
+  #         token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+  #         fetch-depth: 0
+  #         ref: main
 
-      - name: Check commit message
-        id: check_commit_message
-        run: |
-          COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
-          if [[ $COMMIT_MESSAGE == *"skip-github-pipeline"* ]]; then
-            echo "Commit message contains 'skip-github-pipeline', workflow should be canceled."
-            echo "should_cancel=true" >> $GITHUB_ENV
-          else
-            echo "Commit message dos not contain 'skip-github-pipeline', workflow should proceed."
-            echo "should_cancel=false" >> $GITHUB_ENV
-          fi
+  #     - name: Check commit message
+  #       id: check_commit_message
+  #       run: |
+  #         COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
+  #         if [[ $COMMIT_MESSAGE == *"skip-github-pipeline"* ]]; then
+  #           echo "Commit message contains 'skip-github-pipeline', workflow should be canceled."
+  #           echo "should_cancel=true" >> $GITHUB_ENV
+  #         else
+  #           echo "Commit message dos not contain 'skip-github-pipeline', workflow should proceed."
+  #           echo "should_cancel=false" >> $GITHUB_ENV
+  #         fi
 
-      - name: Cancel workflow
-        if: env.should_cancel == 'true'
-        run: |
-          curl -X POST \
-          -H "Authorization: token ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel
+  #     - name: Cancel workflow
+  #       if: env.should_cancel == 'true'
+  #       run: |
+  #         curl -X POST \
+  #         -H "Authorization: token ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" \
+  #         -H "Accept: application/vnd.github.v3+json" \
+  #         https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel
 
   pre-release:
     runs-on: ubuntu-latest
