@@ -24,6 +24,7 @@ describe('[E2E] - Create Clinic', () => {
   });
 
   it('[POST] - Should successfully create a new clinic', async () => {
+    const {id} = makePsychologist();
     const newClinic = makePsychologist();
 
     const response = await request(app.getHttpServer())
