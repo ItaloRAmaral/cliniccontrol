@@ -6,8 +6,8 @@ import { PostgreSqlPrismaOrmService } from '../../database/infra/prisma/prisma.s
 import { DatabaseRepositoriesModule } from '../../database/repositories/repositories.module';
 import { envSchema } from '../../env/env';
 import { EnvModule } from '../../env/env.module';
-import { CreatePsychologistController } from './use-case/create-psychologist/create-psychologist.controller';
-import { NestjsCreatePsychologistService } from './use-case/create-psychologist/nestjs-create-psychologist.service';
+import { CreatePsychologistController } from './use-case/psychologist/create-psychologist/create-psychologist.controller';
+import { NestjsCreatePsychologistService } from './use-case/psychologist/create-psychologist/nestjs-create-psychologist.service';
 
 @Module({
   imports: [

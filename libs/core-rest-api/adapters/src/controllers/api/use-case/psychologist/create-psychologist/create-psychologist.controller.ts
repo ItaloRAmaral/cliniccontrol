@@ -5,7 +5,7 @@ import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/s
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
-import { ApiKeyGuard } from '../../guards/api-key.guard';
+import { ApiKeyGuard } from '../../../guards/api-key.guard';
 import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.service';
 
 @ApiTags()
@@ -13,9 +13,7 @@ import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.se
   path: 'psychologist',
 })
 export class CreatePsychologistController {
-  constructor(
-    private createPsychologistService: NestjsCreatePsychologistService
-  ) {}
+  constructor(private createPsychologistService: NestjsCreatePsychologistService) {}
 
   @Post('create')
   @UseGuards(ApiKeyGuard)
