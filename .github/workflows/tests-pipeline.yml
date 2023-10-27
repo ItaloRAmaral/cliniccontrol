@@ -43,13 +43,16 @@ jobs:
         run: |
           echo "DATABASE_URL=postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?schema=${{ secrets.POSTGRES_SCHEMA }}" >> $GITHUB_ENV
 
-      - name: Setting up docker compose
-        run: docker compose up -d
+      # - name: Setting up docker compose
+      #   run: docker compose up -d
 
-      - name: Setting up prisma postgresql database
-        run: |
-          pnpm run prisma:core:schema:generate
-          pnpm run prisma:core:schema:migrate
+      # - name: Setting up prisma postgresql database
+      #   run: |
+      #     pnpm run prisma:core:schema:generate
+      #     pnpm run prisma:core:schema:migrate
+
+      - name: Run core-setup script
+        run: pnpm run core-setup --action=migrate,generate
 
       - name: Run E2E Tests
         run: pnpm run test:e2e
