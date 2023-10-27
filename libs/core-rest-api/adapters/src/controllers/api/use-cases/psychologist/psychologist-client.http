@@ -1,6 +1,8 @@
 @baseUrl = http://localhost:3333/core
 @authToken = {{loginauthenticate.response.body.access_token}}
 
+### Create New User
+
 # @name create_psychologist
 POST http://localhost:3333/core/psychologist/create HTTP/1.1
 Content-Type: application/json
@@ -14,19 +16,15 @@ api-key: api-key
   "plan": "PREMIUM"
 }
 
-###
+### Authenticate User
 
 # @name loginauthenticate
 POST http://localhost:3333/core/psychologist/login HTTP/1.1
 Content-Type: application/json
-api-key: api-key
 
 {
-  "name": "Novo Usuario",
   "email": "novo_usuario@gmail.com",
-  "password": "01212012",
-  "role": "PSYCHOLOGIST",
-  "plan": "PREMIUM"
+  "password": "01212012"
 }
 
 ###
@@ -34,5 +32,4 @@ api-key: api-key
 # @name me
 GET http://localhost:3333/core/psychologist/me HTTP/1.1
 Content-Type: application/json
-api-key: api-key
 Authorization: Bearer {{authToken}}

@@ -1,4 +1,5 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
+import { Public } from '@clinicControl/core-rest-api/adapters/src/auth/public';
 import { CreatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
 import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
 import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/src/shared/validators/validate-or-reject';
@@ -17,6 +18,7 @@ export class CreatePsychologistController {
 
   @Post('create')
   @UseGuards(ApiKeyGuard)
+  @Public()
   async execute(
     @Body() createPsychologistDto: CreatePsychologistDto
   ): Promise<null | undefined | void> {
