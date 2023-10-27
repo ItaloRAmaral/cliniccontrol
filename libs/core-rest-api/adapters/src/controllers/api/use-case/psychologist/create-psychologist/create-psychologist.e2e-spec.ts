@@ -3,9 +3,9 @@ import request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { makePsychologist } from '../../../../../tests/factories/make-psychologist';
-import { PostgreSqlPrismaOrmService } from '../../../../database/infra/prisma/prisma.service';
-import { ApiModule } from '../../api.module';
+import { makePsychologist } from '../../../../../../tests/factories/make-psychologist';
+import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
+import { ApiModule } from '../../../api.module';
 
 describe('[E2E] - Create Psychologist Account', () => {
   let app: INestApplication;

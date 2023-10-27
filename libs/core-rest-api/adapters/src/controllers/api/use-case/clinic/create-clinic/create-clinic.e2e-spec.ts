@@ -3,9 +3,12 @@ import request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { makePsychologist } from '../../../../../tests/factories/make-psychologist';
-import { PostgreSqlPrismaOrmService } from '../../../../database/infra/prisma/prisma.service';
-import { ApiModule } from '../../api.module';
+import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
+import { Plan, Role } from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
+import { makeClinic } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-clinic';
+import { faker } from '@faker-js/faker';
+import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
+import { ApiModule } from '../../../api.module';
 
 describe('[E2E] - Create Clinic', () => {
   let app: INestApplication;
@@ -24,72 +27,34 @@ describe('[E2E] - Create Clinic', () => {
   });
 
   it('[POST] - Should successfully create a new clinic', async () => {
-    const {id} = makePsychologist();
-    const newClinic = makePsychologist();
-
-    const response = await request(app.getHttpServer())
+    const newPsychologist = 
+    new PsychologistEntity({
+      name: 'Novo Usuário Teste',
+      email: 'novo_usuario_teste@gmail.com',
+      password: faker.internet.password({ length: 8 }),
+      plan: Plan.BASIC,
+      role: Role.ADMIN
+    })
+  
+    await request(app.getHttpServer())
       .post('/psychologist/create')
       .set('api-key', 'api-key')
       .send(newPsychologist);
 
-    expect(response.statusCode).toBe(201);
-
-    const userOnDatabase = await prisma.psychologist.findUnique({
+    const createdPsychologist = await prisma.psychologist.findUnique({
       where: {
         email: 'novo_usuario_teste@gmail.com',
       },
     });
 
-    expect(userOnDatabase).toBeTruthy();
-  });
-
-  it('[POST] - Should return an error when trying to create a new psychologist without api-key', async () => {
-    const newPsychologist = makePsychologist({
-      email: 'novo_usuario_teste_not_created@gmail.com',
-    });
+    const psychologistId = createdPsychologist ? createdPsychologist?.id : ''
+    const newClinic = makeClinic(psychologistId);
 
     const response = await request(app.getHttpServer())
-      .post('/psychologist/create')
-      .send(newPsychologist);
-
-    expect(response.statusCode).toBe(401);
-
-    const userOnDatabase = await prisma.psychologist.findUnique({
-      where: {
-        email: 'novo_usuario_teste_not_created@gmail.com',
-      },
-    });
-
-    expect(userOnDatabase).toBeFalsy();
-    expect(response.body.message).toBe('API key is missing');
-  });
-
-  it('[POST] - Should return an error when trying to create a new psychologist that already exists', async () => {
-    const newPsychologist = makePsychologist({
-      email: 'novo_usuario_teste_new_entrie@gmail.com',
-    });
-
-    const response = await request(app.getHttpServer())
-      .post('/psychologist/create')
+      .post('/clinic/create')
       .set('api-key', 'api-key')
-      .send(newPsychologist);
+      .send(newClinic);
 
     expect(response.statusCode).toBe(201);
-
-    const userOnDatabase = await prisma.psychologist.findUnique({
-      where: {
-        email: 'novo_usuario_teste_new_entrie@gmail.com',
-      },
-    });
-
-    expect(userOnDatabase).toBeTruthy();
-
-    const response_new_post = await request(app.getHttpServer())
-      .post('/psychologist/create')
-      .set('api-key', 'api-key')
-      .send(newPsychologist);
-
-    expect(response_new_post.statusCode).toBe(409);
-    expect(response_new_post.body.message).toBe('psychologist already exists');
   });
 });
