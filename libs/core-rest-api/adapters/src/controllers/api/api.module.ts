@@ -7,7 +7,8 @@ import { PostgreSqlPrismaOrmService } from '../../database/infra/prisma/prisma.s
 import { DatabaseRepositoriesModule } from '../../database/repositories/repositories.module';
 import { envSchema } from '../../env/env';
 import { EnvModule } from '../../env/env.module';
-import { PsychologistLoginController } from './use-cases/psychologist/authenticate-psychologist/psychologist-login.controller';
+
+import { AuthenticatePsychologistController } from './use-cases/psychologist/authenticate-psychologist/authenticate-psychologist.controller';
 import { CreatePsychologistController } from './use-cases/psychologist/create-psychologist/create-psychologist.controller';
 
 import { NestjsAuthenticatePsychologistService } from './use-cases/psychologist/authenticate-psychologist/nestjs-authenticate-psychologist.service';
@@ -24,7 +25,7 @@ import { NestjsCreatePsychologistService } from './use-cases/psychologist/create
     AuthModule,
     CryptographyModule,
   ],
-  controllers: [CreatePsychologistController, PsychologistLoginController],
+  controllers: [CreatePsychologistController, AuthenticatePsychologistController],
   providers: [
     BcryptHasherService,
     PostgreSqlPrismaOrmService,

@@ -11,7 +11,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Dê algum tempo para que os serviços do docker-compose estejam prontos (se necessário)
-# sleep 10
+sleep 10
 
 # Rodar o script core-prisma-setup com os parâmetros passados
 echo "Executando run-prisma-setup..."

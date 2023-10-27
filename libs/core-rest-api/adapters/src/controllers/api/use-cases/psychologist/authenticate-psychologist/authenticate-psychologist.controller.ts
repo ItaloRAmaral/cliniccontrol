@@ -10,7 +10,7 @@ import { NestjsAuthenticatePsychologistService } from './nestjs-authenticate-psy
 @Controller({
   path: 'psychologist',
 })
-export class PsychologistLoginController {
+export class AuthenticatePsychologistController {
   constructor(
     private AuthenticatePsychologistService: NestjsAuthenticatePsychologistService,
     private jwtEncrypter: Encrypter
