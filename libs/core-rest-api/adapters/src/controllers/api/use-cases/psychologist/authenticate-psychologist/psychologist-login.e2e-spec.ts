@@ -54,10 +54,12 @@ describe('[E2E] -  Authenticate Psychologist', () => {
       email: 'new_user_entrie@email.com',
     });
 
-    const response = await request(app.getHttpServer()).post('/psychologist/login').send({
-      email: newPsychologist.email,
-      password: 'wrong_password',
-    });
+    const response = await request(app.getHttpServer())
+      .post('/psychologist/login')
+      .send({
+        email: newPsychologist.email,
+        password: faker.internet.password({ length: 3 }),
+      });
 
     expect(response.statusCode).toBe(401);
   });

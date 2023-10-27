@@ -43,7 +43,7 @@ describe('teste', () => {
   it('should throw an error if password is invalid', async () => {
     const loginCredentials = {
       email: fakePsychologist.email,
-      password: 'invalidPassword',
+      password: faker.internet.password({ length: 5 }),
     };
 
     await expect(loginService.execute(loginCredentials)).rejects.toThrow(
