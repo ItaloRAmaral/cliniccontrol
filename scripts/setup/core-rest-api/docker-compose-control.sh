@@ -11,6 +11,8 @@ for arg in "$@"; do
     fi
 done
 
+echo "Iniciando o docker-compose..."
+
 # Verificamos e executamos as ações em ordem
 for action in "${ACTIONS_ARRAY[@]}"; do
     if [ "$action" == "up" ]; then
