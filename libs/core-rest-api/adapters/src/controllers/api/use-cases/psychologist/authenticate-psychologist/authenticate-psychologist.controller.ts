@@ -1,9 +1,12 @@
-import { Public } from '@clinicControl/core-rest-api/adapters/src/auth/public';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
 import { AuthenticatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/authenticate-psychologist/authenticate-psychologist-dto';
 import { Encrypter } from '@clinicControl/core-rest-api/core/src/shared/cryptography/repository/encrypter-repository';
 import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+
+import { Public } from '../../../../../auth/public';
+import { AuthenticatePsychologistControllerResponse } from './authenticate-psychologist.interface';
 import { NestjsAuthenticatePsychologistService } from './nestjs-authenticate-psychologist.service';
 
 @ApiTags()
@@ -20,7 +23,7 @@ export class AuthenticatePsychologistController {
   @Public()
   async execute(
     @Body() psychologistLoginDto: AuthenticatePsychologistDto
-  ): Promise<unknown> {
+  ): Promise<AuthenticatePsychologistControllerResponse> {
     try {
       const { id, name, email } = await this.AuthenticatePsychologistService.execute(
         psychologistLoginDto
@@ -28,7 +31,7 @@ export class AuthenticatePsychologistController {
 
       const access_token = await this.jwtEncrypter.encrypt({ id, name, email });
 
-      return { id, name, email, access_token };
+      return { user: { id, name, email }, access_token };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }
