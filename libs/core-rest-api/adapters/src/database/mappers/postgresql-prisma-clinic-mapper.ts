@@ -22,9 +22,9 @@ export class PostgresqlPrismaClinicMapper {
     return {
       data: {
         ...raw,
-        city: 'xxxx',
-        name: 'yyyy',
-        state: 'SP',
+        city: raw.city,
+        name: raw.name,
+        state: raw.state,
         updatedAt: new Date()
       }
         
