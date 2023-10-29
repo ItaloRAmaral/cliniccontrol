@@ -40,9 +40,11 @@ describe('[E2E] -  Authenticate Psychologist', () => {
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toEqual({
-      id: newPsychologist.id,
-      name: newPsychologist.name,
-      email: newPsychologist.email,
+      user: {
+        id: newPsychologist.id,
+        name: newPsychologist.name,
+        email: newPsychologist.email,
+      },
       access_token: expect.any(String),
     });
   });
