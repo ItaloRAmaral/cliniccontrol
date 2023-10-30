@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3333/core
+
+# @name create_clinic
+POST http://localhost:3333/core/clinic/create HTTP/1.1
+Content-Type: application/json
+api-key: api-key
+
+{
+  "name": "Nova Clínica",
+  "psychologistId": "1684ce5b-637c-4527-9e36-0f8231e618ca",
+  "city": "Fake City",
+  "state": "Fake State",
+}
