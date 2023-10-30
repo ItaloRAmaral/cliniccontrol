@@ -6,8 +6,10 @@ import { PostgreSqlPrismaOrmService } from '../../database/infra/prisma/prisma.s
 import { DatabaseRepositoriesModule } from '../../database/repositories/repositories.module';
 import { envSchema } from '../../env/env';
 import { EnvModule } from '../../env/env.module';
-import { CreatePsychologistController } from './use-case/psychologist/create-psychologist/create-psychologist.controller';
-import { NestjsCreatePsychologistService } from './use-case/psychologist/create-psychologist/nestjs-create-psychologist.service';
+import { CreateClinicController } from './use-cases/clinic/create-clinic/create-clinic.controller';
+import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
+import { CreatePsychologistController } from './use-cases/psychologist/create-psychologist/create-psychologist.controller';
+import { NestjsCreatePsychologistService } from './use-cases/psychologist/create-psychologist/nestjs-create-psychologist.service';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { NestjsCreatePsychologistService } from './use-case/psychologist/create-
       isGlobal: true,
     }),
   ],
-  controllers: [CreatePsychologistController],
-  providers: [PostgreSqlPrismaOrmService, NestjsCreatePsychologistService],
+  controllers: [CreatePsychologistController, CreateClinicController],
+  providers: [PostgreSqlPrismaOrmService, NestjsCreatePsychologistService, NestjsCreateClinicService],
 })
 export class ApiModule {}
