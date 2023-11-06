@@ -28,7 +28,7 @@ export class PostgresqlPrismaOrmClinicRepository
 
     const toPrismaEntity = PostgresqlPrismaClinicMapper.toPrismaCreate({
       ...clinic,
-      
+
     });
 
     const newClinic = await this.postgreSqlPrismaOrmService['clinic'].create(
@@ -40,7 +40,7 @@ export class PostgresqlPrismaOrmClinicRepository
 
   async findClinicByName(name: string): Promise<ClinicEntity | null> {
 
-    const clinic = await this.postgreSqlPrismaOrmService['clinic'].findFirst( //-> Method find first, keep it?
+    const clinic = await this.postgreSqlPrismaOrmService['clinic'].findFirst(
       {
         where: {
           name: name,
