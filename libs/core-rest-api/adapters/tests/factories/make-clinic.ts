@@ -10,14 +10,14 @@ import { PostgresqlPrismaClinicMapper } from '../../src/database/mappers/postgre
   Creating a factory for the Clinic entity, which will be used to create tests for the domain's use cases
 */
 export function makeClinic(
-  psychologistId: string,
+  psychologistId?: string,
   override: Partial<CreateClinicDto> = {}
 ): ClinicEntity {
   const newClinic = new ClinicEntity({
     name: 'Nova Clinica',
     city: faker.location.city(),
     state: faker.location.state(),
-    psychologistId: psychologistId,
+    psychologistId: psychologistId ?? '',
     ...override,
   });
 
