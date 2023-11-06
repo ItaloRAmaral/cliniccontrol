@@ -5,6 +5,9 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { NestjsCreateClinicService } from './nestjs-create-clinic.service';
 
+interface createClinicResponse {
+  message: string
+}
 @ApiTags()
 @Controller({
   path: 'clinic',
@@ -17,15 +20,10 @@ export class CreateClinicController {
   @Post('create')
   async execute(
     @Body() createClinicDto: CreateClinicDto
-  ): Promise<null | undefined | void> {
+  ): Promise<createClinicResponse>{
     try {
-      // const createClinicDtoInstance = plainToInstance(
-      //   CreateClinicDto,
-      //   createClinicDto
-      // );
-      // await applicationValidateOrReject(createClinicDtoInstance);
-
-      await this.createClinicService.execute(createClinicDto);  
+      await this.createClinicService.execute(createClinicDto);
+      return {message: 'Clinic created successfully'}
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }
