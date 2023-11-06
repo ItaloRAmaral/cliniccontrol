@@ -27,7 +27,7 @@ describe('[E2E] - Create Clinic', () => {
   });
 
   it('[POST] - Should successfully create a new clinic', async () => {
-    const newPsychologist = 
+    const newPsychologist =
     new PsychologistEntity({
       name: 'Novo Usuário Teste',
       email: 'novo_usuario_teste@gmail.com',
@@ -35,7 +35,7 @@ describe('[E2E] - Create Clinic', () => {
       plan: Plan.BASIC,
       role: Role.ADMIN
     })
-  
+
     await request(app.getHttpServer())
       .post('/psychologist/create')
       .set('api-key', 'api-key')
@@ -47,12 +47,10 @@ describe('[E2E] - Create Clinic', () => {
       },
     });
 
-    const psychologistId = createdPsychologist ? createdPsychologist?.id : ''
-    const newClinic = makeClinic(psychologistId);
+    const newClinic = makeClinic(createdPsychologist?.id);
 
     const response = await request(app.getHttpServer())
       .post('/clinic/create')
-      .set('api-key', 'api-key')
       .send(newClinic);
 
     expect(response.statusCode).toBe(201);
