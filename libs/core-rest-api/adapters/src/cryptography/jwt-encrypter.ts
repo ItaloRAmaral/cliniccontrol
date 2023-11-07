@@ -1,4 +1,4 @@
-import { Encrypter } from '@clinicControl/core-rest-api/core/src/shared/cryptography/encrypter';
+import { Encrypter } from '@clinicControl/core-rest-api/core/src/shared/cryptography/repository/encrypter-repository';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
