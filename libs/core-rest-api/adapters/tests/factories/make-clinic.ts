@@ -14,13 +14,12 @@ export function makeClinic(
   override: Partial<CreateClinicDto> = {}
 ): ClinicEntity {
   const newClinic = new ClinicEntity({
-    name: 'Nova Clinica',
+    name: faker.word.noun(),
     city: faker.location.city(),
     state: faker.location.state(),
     psychologistId: psychologistId ?? '',
     ...override,
   });
-
   return newClinic;
 }
 
