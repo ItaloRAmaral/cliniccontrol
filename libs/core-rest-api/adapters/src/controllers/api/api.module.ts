@@ -11,10 +11,9 @@ import { EnvModule } from '../../env/env.module';
 import { CreateClinicController } from './use-cases/clinic/create-clinic/create-clinic.controller';
 import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
 import { AuthenticatePsychologistController } from './use-cases/psychologist/authenticate-psychologist/authenticate-psychologist.controller';
-import { CreatePsychologistController } from './use-cases/psychologists/psychologist/create-psychologist/create-psychologist.controller';
-
 import { NestjsAuthenticatePsychologistService } from './use-cases/psychologist/authenticate-psychologist/nestjs-authenticate-psychologist.service';
-import { NestjsCreatePsychologistService } from './use-cases/psychologists/psychologist/create-psychologist/nestjs-create-psychologist.service';
+import { CreatePsychologistController } from './use-cases/psychologist/create-psychologist/create-psychologist.controller';
+import { NestjsCreatePsychologistService } from './use-cases/psychologist/create-psychologist/nestjs-create-psychologist.service';
 
 @Module({
   imports: [
@@ -33,6 +32,6 @@ import { NestjsCreatePsychologistService } from './use-cases/psychologists/psych
     PostgreSqlPrismaOrmService,
     NestjsCreatePsychologistService,
     NestjsAuthenticatePsychologistService,
-  , NestjsCreateClinicService],
+   NestjsCreateClinicService],
 })
 export class ApiModule {}
