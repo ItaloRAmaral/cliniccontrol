@@ -5,10 +5,10 @@ import { ClinicDatabaseRepository } from '../../repositories/database-repository
 export class DeleteClinicService {
   constructor(private clinicDatabaseRepository: ClinicDatabaseRepository) {}
 
-  async execute(name: string): Promise<void> {
+  async execute(name: string, psychologistId: string): Promise<void> {
     // Validate if clinic exists in db
-    const isClinicExists = await this.clinicDatabaseRepository.findClinicByName(
-      name
+    const isClinicExists = await this.clinicDatabaseRepository.findClinicByNameAndPsychologistId(
+      name, psychologistId
     );
 
     if (!isClinicExists) {
@@ -16,6 +16,6 @@ export class DeleteClinicService {
     }
 
     // Delete clinic
-    await this.clinicDatabaseRepository.deleteClinic(name);
+    await this.clinicDatabaseRepository.deleteClinic(name, psychologistId);
   }
 }

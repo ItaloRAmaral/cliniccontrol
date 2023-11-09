@@ -11,10 +11,10 @@ export class InMemoryClinicDatabaseRepository
   private clinics: ClinicEntity[] = [];
 
   async createClinic(clinic: CreateClinicDto): Promise<ClinicEntity> {
-    const isClinicExists = await this.findClinicByName(clinic.name);
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(clinic.name, clinic.psychologistId);
 
     if (isClinicExists) {
-      throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_NAME']);
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']);
     }
 
     const newClinic = new ClinicEntity(clinic);
@@ -28,8 +28,8 @@ export class InMemoryClinicDatabaseRepository
     return this.clinics;
   }
 
-  async findClinicByName(name: string): Promise<ClinicEntity | null> {
-    return this.clinics.find((clinic) => clinic.name === name) ?? null;
+  async findClinicByNameAndPsychologistId(name: string, psychologistId: string): Promise<ClinicEntity | null> {
+    return this.clinics.find((clinic) => clinic.name === name && clinic.psychologistId === psychologistId) ?? null;
   }
 
   async findClinicById(id: string): Promise<ClinicEntity | null> {
@@ -55,8 +55,8 @@ export class InMemoryClinicDatabaseRepository
     this.clinics[clinicIndex] = updatedClinic;
   }
 
-  async deleteClinic(name: string): Promise<void> {
-    const isClinicExists = await this.findClinicByName(name);
+  async deleteClinic(name: string, psychologistId: string): Promise<void> {
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(name, psychologistId);
 
     if (!isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);

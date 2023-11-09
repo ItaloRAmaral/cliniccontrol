@@ -21,12 +21,13 @@ export class CreateClinicService {
 
     await applicationValidateOrReject(createClinicDtoInstance);
 
-    const isClinicExist = await this.clinicDatabaseRepository.findClinicByName(
-      createClinicDto.name
+    const isClinicExist = await this.clinicDatabaseRepository.findClinicByNameAndPsychologistId(
+      createClinicDto.name,
+      createClinicDto.psychologistId,
     );
 
     if (isClinicExist) {
-      throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_NAME']);
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']);
     }
 
     // Create
