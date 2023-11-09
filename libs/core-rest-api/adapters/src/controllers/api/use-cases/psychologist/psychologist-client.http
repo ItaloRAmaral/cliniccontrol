@@ -10,7 +10,7 @@ api-key: api-key
 
 {
   "name": "Novo Usuario",
-  "email": "novo_usuario_12@gmail.com",
+  "email": "novo_usuario_23@gmail.com",
   "password": "01212012",
   "role": "PSYCHOLOGIST",
   "plan": "PREMIUM"
