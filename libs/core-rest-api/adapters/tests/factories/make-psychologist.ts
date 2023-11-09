@@ -36,7 +36,7 @@ export class PsychologistFactory {
   constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
   async makePrismaPsychologist(
-    psychologist: CreatePsychologistDto
+    psychologist: Partial<CreatePsychologistDto> = {}
   ): Promise<PsychologistEntity> {
     const newPrismaPsychologist = makePsychologist(psychologist);
 

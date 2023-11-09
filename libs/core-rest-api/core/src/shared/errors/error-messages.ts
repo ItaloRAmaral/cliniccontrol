@@ -3,6 +3,7 @@ export const PSYCHOLOGIST_ERROR_MESSAGES = {
   INVALID_EMAIL: 'email must be an email',
   PSYCHOLOGIST_NOT_FOUND: 'psychologist not found',
   PSYCHOLOGIST_ALREADY_EXISTS: 'psychologist already exists',
+  INVALID_CREDENTIALS: 'invalid credentials',
 };
 
 export const CLINIC_ERROR_MESSAGES = {

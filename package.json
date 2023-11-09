@@ -1,6 +1,6 @@
 {
   "name": "cliniccontrol",
-  "version": "1.2.0-beta.4",
+  "version": "1.2.0",
   "license": "MIT",
   "authors": [
     {
@@ -29,7 +29,10 @@
     "prisma:core:schema:validate": "prisma validate --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma",
     "prisma:core:schema:migrate": "prisma migrate dev --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma",
     "prisma:core:schema:generate": "prisma generate --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma",
-    "prisma:core:schema:studio": "prisma studio --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma"
+    "prisma:core:schema:studio": "prisma studio --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma",
+    "core-setup": "bash ./scripts/setup/core-rest-api/run-setup.sh",
+    "core-prisma-setup": "bash ./scripts/setup/core-rest-api/run-prisma-setup.sh",
+    "core-docker-compose": "bash ./scripts/setup/core-rest-api/docker-compose-control.sh"
   },
   "private": true,
   "dependencies": {
