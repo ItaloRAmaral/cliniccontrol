@@ -18,11 +18,11 @@ export class PostgresqlPrismaOrmClinicRepository
   async createClinic(
     clinic: CreateClinicDto
   ): Promise<ClinicEntity> {
-    const isClinicExists = await this.findClinicByName(clinic.name);
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(clinic.name, clinic.psychologistId);
 
     if (isClinicExists) {
       throw new ConflictException(
-        CLINIC_ERROR_MESSAGES['CONFLICTING_NAME']
+        CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']
       );
     }
 
@@ -38,12 +38,13 @@ export class PostgresqlPrismaOrmClinicRepository
     return PostgresqlPrismaClinicMapper.toDomain(newClinic);
   }
 
-  async findClinicByName(name: string): Promise<ClinicEntity | null> {
+  async findClinicByNameAndPsychologistId(name: string, psychologistId: string): Promise<ClinicEntity | null> {
 
     const clinic = await this.postgreSqlPrismaOrmService['clinic'].findFirst(
       {
         where: {
-          name: name,
+          name,
+          psychologistId: psychologistId
         },
       }
     );
@@ -83,7 +84,7 @@ export class PostgresqlPrismaOrmClinicRepository
     const oldClinic = await this.findClinicById(newClinic.id);
 
     if (!oldClinic) {
-      throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_NAME']);
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']);
     }
 
     const toPrismaEntity =
@@ -92,8 +93,8 @@ export class PostgresqlPrismaOrmClinicRepository
     await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
   }
 
-  async deleteClinic(name: string): Promise<void> {
-    const isClinicExists = await this.findClinicByName(name);
+  async deleteClinic(name: string, psychologistId: string): Promise<void> {
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(name, psychologistId);
 
     if (!isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
