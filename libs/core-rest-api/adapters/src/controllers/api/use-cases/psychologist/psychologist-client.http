@@ -10,7 +10,7 @@ api-key: api-key
 
 {
   "name": "Novo Usuario",
-  "email": "novo_usuario_23@gmail.com",
+  "email": "novo_usuario_33@gmail.com",
   "password": "01212012",
   "role": "PSYCHOLOGIST",
   "plan": "PREMIUM"
@@ -23,7 +23,7 @@ POST http://localhost:3333/core/psychologist/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "novo_usuario@gmail.com",
+  "email": "novo_usuario_33@gmail.com",
   "password": "01212012"
 }
 

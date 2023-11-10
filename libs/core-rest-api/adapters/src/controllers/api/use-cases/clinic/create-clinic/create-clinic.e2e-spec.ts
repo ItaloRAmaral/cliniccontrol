@@ -5,6 +5,8 @@ import { Test } from '@nestjs/testing';
 
 import { makeClinic } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-clinic';
 import { makePsychologist } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-psychologist';
+import { faker } from '@faker-js/faker';
+import { hash } from 'bcryptjs';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 import { ApiModule } from '../../../api.module';
 
@@ -25,7 +27,8 @@ describe('[E2E] - Create Clinic', () => {
   });
 
   it('[POST] - Should successfully create a new clinic', async () => {
-    const newPsychologist = makePsychologist();
+    const password = faker.internet.password({ length: 8 });
+    const newPsychologist = makePsychologist({password: await hash(password, 8)});
 
     await request(app.getHttpServer())
       .post('/psychologist/create')
@@ -38,6 +41,14 @@ describe('[E2E] - Create Clinic', () => {
       },
     });
 
+    const login = await request(app.getHttpServer())
+      .post('/psychologist/login')
+      .send({
+        email: newPsychologist.email,
+        password,
+      });
+
+    console.log('login', login.body.access_token)
     const newClinic = makeClinic(createdPsychologist?.id);
 
     const response = await request(app.getHttpServer())
