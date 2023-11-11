@@ -2,7 +2,6 @@ import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domain
 import { PsychologistDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/psychologist/repositories/database-repository';
 import { CreatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
 import { UpdatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
-import { HashGenerator } from '@clinicControl/core-rest-api/core/src/shared/cryptography/hash-generator';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { PostgreSqlPrismaOrmService } from '../../../database/infra/prisma/prisma.service';
@@ -12,10 +11,7 @@ import { PostgresqlPrismaPsychologistMapper } from '../../mappers/postgresql-pri
 export class PostgresqlPrismaOrmPsychologistRepository
   implements PsychologistDatabaseRepository
 {
-  constructor(
-    private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService,
-    private hashGenerator: HashGenerator
-  ) {}
+  constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
   async createPsychologist(
     psychologist: CreatePsychologistDto
@@ -28,12 +24,8 @@ export class PostgresqlPrismaOrmPsychologistRepository
       );
     }
 
-    const hashedPassword = await this.hashGenerator.hash(psychologist.password);
-
-    const toPrismaEntity = PostgresqlPrismaPsychologistMapper.toPrismaCreate({
-      ...psychologist,
-      password: hashedPassword,
-    });
+    const toPrismaEntity =
+      PostgresqlPrismaPsychologistMapper.toPrismaCreate(psychologist);
 
     const newPsychologist = await this.postgreSqlPrismaOrmService['psychologist'].create(
       toPrismaEntity
