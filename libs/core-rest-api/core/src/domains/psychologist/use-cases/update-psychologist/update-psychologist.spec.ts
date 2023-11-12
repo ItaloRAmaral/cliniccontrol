@@ -1,5 +1,6 @@
+import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { ConflictException } from '@nestjs/common';
+import { BadRequestException, ConflictException } from '@nestjs/common';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { Plan, Role } from '../../../../shared/interfaces/payments';
 import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -17,10 +18,12 @@ describe('[psychologist] Update Psychologist Service', () => {
 
   let service: UpdatePsychologistService;
   let databaseRepository: PsychologistDatabaseRepository;
+  let hasherService: BcryptHasherService;
 
   beforeEach(async () => {
     databaseRepository = new InMemoryPsychologistDatabaseRepository();
     service = new UpdatePsychologistService(databaseRepository);
+    hasherService = new BcryptHasherService();
   });
 
   it('should update a new psychologist', async () => {
@@ -60,7 +63,7 @@ describe('[psychologist] Update Psychologist Service', () => {
     expect(findPsychologist?.plan).toBe(newPsychologistInfos.plan);
   });
 
-  it('should not update a new psychologist and throw an ConflictException if not exists', async () => {
+  it('should not update a new psychologist and throw an BadRequestException if not exists', async () => {
     const newPsychologistInfos = {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
@@ -70,7 +73,44 @@ describe('[psychologist] Update Psychologist Service', () => {
     };
 
     await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
-      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND'])
+      new BadRequestException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND'])
+    );
+  });
+
+  it('should not update a new psychologist and throw an BadRequestException if email is already in use', async () => {
+    const createPsychologist = await databaseRepository.createPsychologist(
+      fakePsychologist
+    );
+
+    const newPsychologistInfos = {
+      id: createPsychologist.id,
+      name: faker.person.fullName(),
+      email: createPsychologist.email,
+      password: faker.internet.password({ length: 5 }),
+      plan: Plan.PREMIUM,
+    };
+
+    await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
+      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['SAME_EMAIL'])
+    );
+  });
+
+  it('should not update a new psychologist and throw an BadRequestException if password is the same', async () => {
+    const createPsychologist = await databaseRepository.createPsychologist({
+      ...fakePsychologist,
+      password: await hasherService.hash(fakePsychologist.password),
+    });
+
+    const newPsychologistInfos = {
+      id: createPsychologist.id,
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      password: fakePsychologist.password,
+      plan: Plan.PREMIUM,
+    };
+
+    await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
+      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['SAME_PASSWORD'])
     );
   });
 });

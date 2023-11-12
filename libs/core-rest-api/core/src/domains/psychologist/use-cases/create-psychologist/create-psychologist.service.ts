@@ -4,7 +4,6 @@ import { BcryptHasherService } from '../../../../shared/cryptography/use-cases/b
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
 import { PsychologistEntity } from '../../entities/psychologist/entity';
-import { ICreatePsychologistServiceProps } from '../../interfaces/psychologist';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { CreatePsychologistDto } from './create-psychologist-dto';
 
@@ -14,7 +13,7 @@ export class CreatePsychologistService {
   constructor(private psychologistDatabaseRepository: PsychologistDatabaseRepository) {}
 
   async execute(
-    createPsychologistDto: ICreatePsychologistServiceProps
+    createPsychologistDto: CreatePsychologistDto
   ): Promise<PsychologistEntity> {
     // Validate
     const createPsychologistDtoInstance = plainToInstance(
