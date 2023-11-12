@@ -1,20 +1,19 @@
+import { faker } from '@faker-js/faker';
 import request from 'supertest';
 
 import { INestApplication } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 
-import { DatabaseRepositoriesModule } from '@clinicControl/core-rest-api/adapters/src/database/repositories/repositories.module';
 import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
 import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
-import { PsychologistFactory } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-psychologist';
-import { faker } from '@faker-js/faker';
-import { JwtService } from '@nestjs/jwt';
-import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
+
+import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
+import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
 import { ApiModule } from '../../../api.module';
 
 describe('[E2E] - Update Psychologist Account', () => {
   let app: INestApplication;
-  let prisma: PostgreSqlPrismaOrmService;
   let psychologistFactory: PsychologistFactory;
   let jwt: JwtService;
 
@@ -32,7 +31,6 @@ describe('[E2E] - Update Psychologist Account', () => {
 
     app = moduleRef.createNestApplication();
 
-    prisma = moduleRef.get(PostgreSqlPrismaOrmService);
     psychologistFactory = moduleRef.get(PsychologistFactory);
     jwt = moduleRef.get(JwtService);
 

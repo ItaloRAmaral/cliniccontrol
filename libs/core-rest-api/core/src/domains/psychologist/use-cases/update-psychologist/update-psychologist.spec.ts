@@ -1,6 +1,7 @@
-import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { BadRequestException, ConflictException } from '@nestjs/common';
+
+import { BcryptHasherService } from '../../../../shared/cryptography/use-cases/bcrypt-hasher.service';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { Plan, Role } from '../../../../shared/interfaces/payments';
 import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
