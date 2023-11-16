@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.2.0...@cliniccontrol/core-rest-api-core@1.3.0-beta.0) (2023-11-16)
+
+### Features
+
+- **CC-86:** created update psychologist endpoint and its related files ([3180809](https://github.com/ItaloRAmaral/cliniccontrol/commit/318080996c072843398e43ba5adb2d57e76f185f))
+- **CC-88:** created authenticate endpoint ([d96accb](https://github.com/ItaloRAmaral/cliniccontrol/commit/d96accba6db3c349648a1081788e18ea344b77b4))
+
 ## [1.2.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.2.0-beta.0...@cliniccontrol/core-rest-api-core@1.2.0) (2023-10-23)
 
 **Note:** Version bump only for package @cliniccontrol/core-rest-api-core

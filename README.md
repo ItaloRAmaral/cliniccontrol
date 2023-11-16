@@ -177,6 +177,7 @@ Distributed under the MIT License. See [LICENSE](https://github.com/italoRAmaral
 
 - **[Italo Amaral](https://github.com/italoRAmaral)** - _FullStack Developer_ - _Owner_
 - **[Luana Vefago](https://github.com/luanavfg)** - _FullStack Developer_ - _Owner_
+- **[Aline Crestani](https://www.linkedin.com/in/aline-crestani/)** - _Designer & UX/UI_ - _Owner_
 
 ## Acknowledgements/References
 
@@ -184,5 +185,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/italoRAmaral
 - [Explore](https://github.com/amaralc/explore)
 - [DDD Hexagonal CQRS ES EDA](https://github.com/bitloops/ddd-hexagonal-cqrs-es-eda)
 - [Domain Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon)
-
-.

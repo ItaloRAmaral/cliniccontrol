@@ -4,6 +4,8 @@ export const PSYCHOLOGIST_ERROR_MESSAGES = {
   PSYCHOLOGIST_NOT_FOUND: 'psychologist not found',
   PSYCHOLOGIST_ALREADY_EXISTS: 'psychologist already exists',
   INVALID_CREDENTIALS: 'invalid credentials',
+  SAME_PASSWORD: 'new password must be different from the old one',
+  SAME_EMAIL: 'new email must be different from the old one',
 };
 
 export const CLINIC_ERROR_MESSAGES = {
