@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class CreateClinicDto {
   @IsString()
@@ -16,12 +16,4 @@ export class CreateClinicDto {
 
   @IsString()
   state!: string;
-
-  @IsOptional()
-  @IsDate()
-  createdAt?: Date;
-
-  @IsOptional()
-  @IsDate()
-  updatedAt?: Date | null;
 }
