@@ -112,7 +112,7 @@ describe('[E2E] - Create Clinic', () => {
       .set('Authorization', `Bearer ${access_token}`)
       .send(clinic);
 
-    expect(createdClinicResponse.statusCode).toBe(500);
-    expect(createdClinicResponse.body.message).contain('An error occurred while processing your request');
+    expect(createdClinicResponse.statusCode).toBe(400);
+    expect(createdClinicResponse.body.message).contain("Invalid `this.postgreSqlPrismaOrmService['clinic'].create()`");
   });
 });

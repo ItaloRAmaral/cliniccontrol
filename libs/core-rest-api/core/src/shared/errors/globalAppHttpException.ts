@@ -54,7 +54,7 @@ export class GlobalAppHttpException {
         exceptionMessage += ` Prisma Error Code: ${error.code}.`;
       }
 
-      if (error.code === 'P2002') {
+      if (error.code === 'P2002' || error.code === 'P2003') {
         // Remover linhas e espaços extras
         const relevantLines = error.message
           .split('\n')
