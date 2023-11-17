@@ -6,6 +6,7 @@ const className = 'GlobalAppHttpException';
 
 export class GlobalAppHttpException {
   constructor(error: unknown, message?: string, status?: HttpStatus) {
+    console.log('error', error);
     this.bubbleUpHttpException(error, message, status);
     this.bubbleUpValidationException(error, message, status);
     this.bubbleUpPrismaException(error);

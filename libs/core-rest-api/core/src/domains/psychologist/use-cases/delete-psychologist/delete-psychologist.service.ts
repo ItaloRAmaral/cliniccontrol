@@ -3,18 +3,15 @@ import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-mes
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 
 export class DeletePsychologistService {
-  constructor(
-    private psychologistDatabaseRepository: PsychologistDatabaseRepository
-  ) {}
+  constructor(private psychologistDatabaseRepository: PsychologistDatabaseRepository) {}
 
   async execute(email: string): Promise<void> {
     // Validate if Psychologist exists
     const isPsychologistExists =
       await this.psychologistDatabaseRepository.findPsychologistByEmail(email);
+
     if (!isPsychologistExists) {
-      throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
-      );
+      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']);
     }
 
     // Delete psychologist

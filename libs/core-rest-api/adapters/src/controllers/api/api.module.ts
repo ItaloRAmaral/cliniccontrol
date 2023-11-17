@@ -11,13 +11,14 @@ import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/share
 import { PostgreSqlPrismaOrmService } from '../../database/infra/prisma/prisma.service';
 import { DatabaseRepositoriesModule } from '../../database/repositories/repositories.module';
 
-
 import { CreateClinicController } from './use-cases/clinic/create-clinic/create-clinic.controller';
 import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
 import { AuthenticatePsychologistController } from './use-cases/psychologist/authenticate-psychologist/authenticate-psychologist.controller';
 import { NestjsAuthenticatePsychologistService } from './use-cases/psychologist/authenticate-psychologist/nestjs-authenticate-psychologist.service';
 import { CreatePsychologistController } from './use-cases/psychologist/create-psychologist/create-psychologist.controller';
 import { NestjsCreatePsychologistService } from './use-cases/psychologist/create-psychologist/nestjs-create-psychologist.service';
+import { DeletePsychologistController } from './use-cases/psychologist/delete-psychologist/delete-psychologist.controller';
+import { NestjsDeletePsychologistService } from './use-cases/psychologist/delete-psychologist/nestjs-delete-psychologist.service';
 import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update-psychologist/nestjs-update-psychologist.service';
 
 @Module({
@@ -33,8 +34,10 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
   ],
   controllers: [
     CreatePsychologistController,
-    AuthenticatePsychologistController, CreateClinicController,
+    AuthenticatePsychologistController,
+    CreateClinicController,
     UpdatePsychologistController,
+    DeletePsychologistController,
   ],
   providers: [
     BcryptHasherService,
@@ -42,6 +45,8 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     NestjsCreatePsychologistService,
     NestjsAuthenticatePsychologistService,
     NestjsUpdatePsychologistService,
-   NestjsCreateClinicService],
+    NestjsCreateClinicService,
+    NestjsDeletePsychologistService,
+  ],
 })
 export class ApiModule {}
