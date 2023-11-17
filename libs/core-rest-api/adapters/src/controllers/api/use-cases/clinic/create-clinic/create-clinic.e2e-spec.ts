@@ -113,6 +113,6 @@ describe('[E2E] - Create Clinic', () => {
       .send(clinic);
 
     expect(createdClinicResponse.statusCode).toBe(500);
-    expect(createdClinicResponse.body.message).toBe('Internal server error');
+    expect(createdClinicResponse.body.message).contain('An error occurred while processing your request');
   });
 });
