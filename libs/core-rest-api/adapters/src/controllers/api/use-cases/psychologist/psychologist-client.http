@@ -1,5 +1,6 @@
 @baseUrl = http://localhost:3333/core
 @authToken = {{loginauthenticate.response.body.access_token}}
+@psychologist_id = {{loginauthenticate.response.body.user.id}}
 
 ### Create New User
 
@@ -9,9 +10,9 @@ Content-Type: application/json
 api-key: api-key
 
 {
-  "name": "Novo Usuario",
-  "email": "novo_usuario@gmail.com",
-  "password": "01212012",
+  "name": "Joe Doe",
+  "email": "jon_doe@email.com",
+  "password": "joe-password",
   "role": "PSYCHOLOGIST",
   "plan": "PREMIUM"
 }
@@ -23,12 +24,22 @@ POST http://localhost:3333/core/psychologist/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "novo_usuario@gmail.com",
-  "password": "01212012"
+  "email": "joe_doe@email.com",
+  "password": "joe-password"
 }
 
-###
+### Update User
 
+# @name update_psychologist
+PATCH http://localhost:3333/core/psychologist/{{psychologist_id}}/update HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "password": "joe-password-updated"
+}
+
+### Test Route
 # @name me
 GET http://localhost:3333/core/psychologist/me HTTP/1.1
 Content-Type: application/json

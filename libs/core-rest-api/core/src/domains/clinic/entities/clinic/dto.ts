@@ -22,7 +22,7 @@ export class ClinicDto {
 
   @IsOptional()
   @IsDate()
-  createdAt?: Date;
+  createdAt!: Date;
 
   @IsOptional()
   @IsDate()

@@ -6,8 +6,8 @@ import { Test } from '@nestjs/testing';
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { hash } from 'bcryptjs';
 
-import { DatabaseRepositoriesModule } from '@clinicControl/core-rest-api/adapters/src/database/repositories/repositories.module';
 import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
+import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
 import { ApiModule } from '../../../api.module';
 
 describe('[E2E] -  Authenticate Psychologist', () => {
