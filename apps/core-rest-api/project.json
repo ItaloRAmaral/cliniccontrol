@@ -14,6 +14,16 @@
         "outputPath": "dist/apps/core-rest-api",
         "main": "apps/core-rest-api/src/main.ts",
         "tsConfig": "apps/core-rest-api/tsconfig.app.json",
+        "transformers": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "classValidatorShim": true,
+              "introspectComments": true,
+              "dtoFileNameSuffix": ["dto.ts", "entity.ts"]
+            }
+          }
+        ],
         "assets": ["apps/core-rest-api/src/assets"],
         "isolatedConfig": true,
         "webpackConfig": "apps/core-rest-api/webpack.config.js"
