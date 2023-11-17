@@ -2,8 +2,9 @@ import { Controller, Delete, ForbiddenException, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { patchMethodDocs } from './docs';
 
-import { TokenPayload } from '@clinicControl/core-rest-api/adapters/src/auth/jwt.strategy';
 import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
+
+import { TokenPayload } from '../../../../../auth/jwt.strategy';
 import { CurrentUser } from '../../../decorators/current-user.decorator';
 import { emailParam, routeParamSchema } from './dto';
 import { NestjsDeletePsychologistService } from './nestjs-delete-psychologist.service';

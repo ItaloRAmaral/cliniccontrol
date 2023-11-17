@@ -4,4 +4,5 @@
 echo "Husky pre commit script..."
 echo "Running Unit Tests..."
 
+pnpm exec nx run-many --target=lint --all=true --parallel=3
 pnpm run test:unit

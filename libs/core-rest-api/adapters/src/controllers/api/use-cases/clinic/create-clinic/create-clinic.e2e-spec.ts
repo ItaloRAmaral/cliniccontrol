@@ -3,15 +3,15 @@ import request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { DatabaseRepositoriesModule } from '@clinicControl/core-rest-api/adapters/src/database/repositories/repositories.module';
 import { ClinicEntity } from '@clinicControl/core-rest-api/core/src/domains/clinic/entities/clinic/entity';
 import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
 import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
-import { makeClinic } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-clinic';
-import { PsychologistFactory } from '@clinicControl/root/libs/core-rest-api/adapters/tests/factories/make-psychologist';
 import { faker } from '@faker-js/faker';
 import { JwtService } from '@nestjs/jwt';
+import { makeClinic } from '../../../../../../tests/factories/make-clinic';
+import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
+import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
 import { ApiModule } from '../../../api.module';
 
 describe('[E2E] - Create Clinic', () => {
@@ -24,12 +24,12 @@ describe('[E2E] - Create Clinic', () => {
   let invalid_access_token: string;
   let psychologist: PsychologistEntity;
   let password: string;
-  let clinic: ClinicEntity
+  let clinic: ClinicEntity;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [ApiModule, DatabaseRepositoriesModule],
-      providers: [PsychologistFactory]
+      providers: [PsychologistFactory],
     }).compile();
 
     app = moduleRef.createNestApplication();
@@ -47,14 +47,14 @@ describe('[E2E] - Create Clinic', () => {
 
     // creating a psychologist account to use in tests
     psychologist = await psychologistFactory.makePrismaPsychologist({
-       password: hashedPassword,
+      password: hashedPassword,
     });
 
     psychologistId = psychologist.id;
     access_token = jwt.sign({
-       id: psychologistId,
-       name: psychologist.name,
-       email: psychologist.email,
+      id: psychologistId,
+      name: psychologist.name,
+      email: psychologist.email,
     });
 
     invalid_access_token = jwt.sign({ psychologistId });
@@ -87,12 +87,14 @@ describe('[E2E] - Create Clinic', () => {
 
     const createdClinicResponse = await request(app.getHttpServer())
       .post('/clinic/create')
-      .set('Authorization', `Bearer ${access_token}`)
+      .set('Authorization', `Bearer ${access_token}`);
 
     expect(createdClinicResponse.statusCode).toBe(400);
 
     expect(createdClinicResponse.body.message).toBe('Validation failed');
-    expect(createdClinicResponse.text).toBe('{"message":"Validation failed","causes":[{"property":"name","constraints":{"isString":"name must be a string"}},{"property":"psychologistId","constraints":{"isString":"psychologistId must be a string"}},{"property":"city","constraints":{"isString":"city must be a string"}},{"property":"state","constraints":{"isString":"state must be a string"}}]}');
+    expect(createdClinicResponse.text).toBe(
+      '{"message":"Validation failed","causes":[{"property":"name","constraints":{"isString":"name must be a string"}},{"property":"psychologistId","constraints":{"isString":"psychologistId must be a string"}},{"property":"city","constraints":{"isString":"city must be a string"}},{"property":"state","constraints":{"isString":"state must be a string"}}]}'
+    );
   });
 
   it('[POST] - Should unsuccessfully try to create a clinic that already exists', async () => {
@@ -113,6 +115,8 @@ describe('[E2E] - Create Clinic', () => {
       .send(clinic);
 
     expect(createdClinicResponse.statusCode).toBe(400);
-    expect(createdClinicResponse.body.message).contain("Invalid `this.postgreSqlPrismaOrmService['clinic'].create()`");
+    expect(createdClinicResponse.body.message).contain(
+      "Invalid `this.postgreSqlPrismaOrmService['clinic'].create()`"
+    );
   });
 });
