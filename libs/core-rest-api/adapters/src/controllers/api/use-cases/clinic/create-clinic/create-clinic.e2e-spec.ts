@@ -88,9 +88,7 @@ describe('[E2E] - Create Clinic', () => {
     const createdClinicResponse = await request(app.getHttpServer())
       .post('/clinic/create')
       .set('Authorization', `Bearer ${access_token}`)
-      // .send(newClinic);
 
-      console.log('createdClinicResponse', createdClinicResponse.text)
     expect(createdClinicResponse.statusCode).toBe(400);
 
     expect(createdClinicResponse.body.message).toBe('Validation failed');

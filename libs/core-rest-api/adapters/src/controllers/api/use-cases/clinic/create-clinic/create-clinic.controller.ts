@@ -8,7 +8,7 @@ import { NestjsCreateClinicService } from './nestjs-create-clinic.service';
 interface createClinicResponse {
   message: string
 }
-@ApiTags()
+@ApiTags('Clinic')
 @Controller({
   path: 'clinic',
 })

@@ -25,10 +25,7 @@ export class PostgresqlPrismaClinicMapper {
         city: raw.city,
         name: raw.name,
         state: raw.state,
-        updatedAt: new Date()
       }
-        
-    
     };
   }
 
