@@ -4,7 +4,7 @@ import { CreatePsychologistDto } from '@clinicControl/core-rest-api/core/src/dom
 import { UpdatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 import { ConflictException, Injectable } from '@nestjs/common';
-import { PostgreSqlPrismaOrmService } from '../../../database/infra/prisma/prisma.service';
+import { PostgreSqlPrismaOrmService } from '../../infra/prisma/prisma.service';
 import { PostgresqlPrismaPsychologistMapper } from '../../mappers/postgresql-prisma-psychologist-mapper';
 
 @Injectable()
