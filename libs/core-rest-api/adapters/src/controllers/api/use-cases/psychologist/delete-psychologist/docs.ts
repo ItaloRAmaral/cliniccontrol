@@ -7,8 +7,8 @@ const description = `
 
 ### Delete an existing Psychologist
 
-This endpoint help you to delete an existing Psychologist.
-You must at least provide one of the following body parameters
+This endpoint help you to delete an existing Psychologist. \n
+You must provide as route params an \`id\` of the Psychologist you want to delete.
 `;
 
 export const patchMethodDocs: Partial<OperationObject> = {
