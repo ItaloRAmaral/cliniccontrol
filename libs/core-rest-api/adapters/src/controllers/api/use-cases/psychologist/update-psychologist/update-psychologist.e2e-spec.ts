@@ -34,6 +34,14 @@ describe('[E2E] - Update Psychologist Account', () => {
     psychologistFactory = moduleRef.get(PsychologistFactory);
     jwt = moduleRef.get(JwtService);
 
+    // app.useGlobalPipes(
+    //   new ValidationPipe({
+    //     transformOptions: {
+    //       enableImplicitConversion: true, // With this option set to true, we no longer need to specify types with the @Type decorator;
+    //     },
+    //   })
+    // );
+
     await app.init();
 
     // hashing a static known password to use in tests
@@ -168,5 +176,23 @@ describe('[E2E] - Update Psychologist Account', () => {
 
     expect(response.statusCode).toBe(409);
     expect(response.body.message).toBe('new password must be different from the old one');
+  });
+
+  it('[PATCH] - Should return an error when trying to update a psychologist with an invalid body type params', async () => {
+    const updateInfos = {
+      name: 123,
+      email: 123,
+      price: '123',
+    };
+
+    const response = await request(app.getHttpServer())
+      .patch(`/psychologist/${id}/update`)
+      .set('Authorization', `Bearer ${access_token}`)
+      .send(updateInfos);
+
+    expect(response.statusCode).toBe(400);
+    expect(response.text).toBe(
+      '{"message":"Validation failed","causes":[{"property":"name","value":123,"constraints":{"isString":"name must be a string"}},{"property":"email","value":123,"constraints":{"isString":"email must be a string"}},{"property":"price","value":"123","constraints":{"isNumber":"price must be a number conforming to the specified constraints"}}]}'
+    );
   });
 });

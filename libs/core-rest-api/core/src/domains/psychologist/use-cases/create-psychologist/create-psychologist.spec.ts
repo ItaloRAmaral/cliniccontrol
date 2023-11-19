@@ -3,6 +3,8 @@ import { ConflictException } from '@nestjs/common';
 
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { Plan, Role } from '../../../../shared/interfaces/payments';
+import { InMemoryClinicDatabaseRepository } from '../../../clinic/repositories/database-in-memory-repository';
+import { ClinicDatabaseRepository } from '../../../clinic/repositories/database-repository';
 import { InMemoryPsychologistDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { CreatePsychologistService } from './create-psychologist.service';
@@ -18,9 +20,13 @@ describe('[psychologist] Create Psychologist Service', () => {
 
   let service: CreatePsychologistService;
   let databaseRepository: PsychologistDatabaseRepository;
+  let clinicDatabaseRepository: ClinicDatabaseRepository;
 
   beforeEach(async () => {
-    databaseRepository = new InMemoryPsychologistDatabaseRepository();
+    clinicDatabaseRepository = new InMemoryClinicDatabaseRepository();
+    databaseRepository = new InMemoryPsychologistDatabaseRepository(
+      clinicDatabaseRepository
+    );
     service = new CreatePsychologistService(databaseRepository);
   });
 

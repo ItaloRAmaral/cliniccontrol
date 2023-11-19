@@ -1,11 +1,12 @@
 import { ConflictException } from '@nestjs/common';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
+import { DeletedPsychologistInfo } from './dto';
 
 export class DeletePsychologistService {
   constructor(private psychologistDatabaseRepository: PsychologistDatabaseRepository) {}
 
-  async execute(email: string): Promise<void> {
+  async execute(email: string): Promise<DeletedPsychologistInfo> {
     // Validate if Psychologist exists
     const isPsychologistExists =
       await this.psychologistDatabaseRepository.findPsychologistByEmail(email);
@@ -15,6 +16,6 @@ export class DeletePsychologistService {
     }
 
     // Delete psychologist
-    await this.psychologistDatabaseRepository.deletePsychologist(email);
+    return await this.psychologistDatabaseRepository.deletePsychologist(email);
   }
 }

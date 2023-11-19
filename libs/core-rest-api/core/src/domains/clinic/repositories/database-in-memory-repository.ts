@@ -5,13 +5,15 @@ import { CreateClinicDto } from '../../clinic/use-cases/create-clinic/create-cli
 import { UpdateClinicDto } from '../use-cases/update-clinic/update-clinic-dto';
 import { ClinicDatabaseRepository } from './database-repository';
 
-export class InMemoryClinicDatabaseRepository
-  implements ClinicDatabaseRepository
-{
+export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepository {
   private clinics: ClinicEntity[] = [];
+  private deletedClinics: ClinicEntity[] = [];
 
   async createClinic(clinic: CreateClinicDto): Promise<ClinicEntity> {
-    const isClinicExists = await this.findClinicByNameAndPsychologistId(clinic.name, clinic.psychologistId);
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(
+      clinic.name,
+      clinic.psychologistId
+    );
 
     if (isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']);
@@ -28,8 +30,23 @@ export class InMemoryClinicDatabaseRepository
     return this.clinics;
   }
 
-  async findClinicByNameAndPsychologistId(name: string, psychologistId: string): Promise<ClinicEntity | null> {
-    return this.clinics.find((clinic) => clinic.name === name && clinic.psychologistId === psychologistId) ?? null;
+  async findClinicByNameAndPsychologistId(
+    name: string,
+    psychologistId: string
+  ): Promise<ClinicEntity | null> {
+    return (
+      this.clinics.find(
+        (clinic) => clinic.name === name && clinic.psychologistId === psychologistId
+      ) ?? null
+    );
+  }
+
+  async findClinicByPsychologistId(
+    psychologistId: string
+  ): Promise<ClinicEntity[] | null> {
+    return (
+      this.clinics.filter((clinic) => clinic.psychologistId === psychologistId) ?? null
+    );
   }
 
   async findClinicById(id: string): Promise<ClinicEntity | null> {
@@ -56,12 +73,35 @@ export class InMemoryClinicDatabaseRepository
   }
 
   async deleteClinic(name: string, psychologistId: string): Promise<void> {
-    const isClinicExists = await this.findClinicByNameAndPsychologistId(name, psychologistId);
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(
+      name,
+      psychologistId
+    );
 
     if (!isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
     }
 
     this.clinics = this.clinics.filter((clinic) => clinic.name !== name);
+  }
+
+  async deleteAllClinicsByPsychologistId(
+    psychologistId: string
+  ): Promise<ClinicEntity[]> {
+    const isClinicExists = await this.findClinicByPsychologistId(psychologistId);
+
+    if (!isClinicExists) {
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
+    }
+
+    const deletedClinics = this.clinics.filter(
+      (clinic) => clinic.psychologistId === psychologistId
+    );
+
+    this.clinics = this.clinics.filter(
+      (clinic) => clinic.psychologistId !== psychologistId
+    );
+
+    return deletedClinics;
   }
 }

@@ -4,8 +4,8 @@
   Esta classe é um mock para ser usada exclusivamente nos testes.
 */
 
-import { HashComparer } from '@clinicControl/core-rest-api/core/src/shared/cryptography/hash-comparer';
-import { HashGenerator } from '@clinicControl/core-rest-api/core/src/shared/cryptography/hash-generator';
+import { HashComparer } from '@clinicControl/core-rest-api/core/src/shared/cryptography/repository/hash-comparer-repository';
+import { HashGenerator } from '@clinicControl/core-rest-api/core/src/shared/cryptography/repository/hash-generator-repository';
 
 export class FakeHasher implements HashGenerator, HashComparer {
   async hash(plain: string): Promise<string> {

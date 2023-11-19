@@ -6,7 +6,6 @@ const className = 'GlobalAppHttpException';
 
 export class GlobalAppHttpException {
   constructor(error: unknown, message?: string, status?: HttpStatus) {
-    console.log('error', error);
     this.bubbleUpHttpException(error, message, status);
     this.bubbleUpValidationException(error, message, status);
     this.bubbleUpPrismaException(error);
@@ -63,7 +62,6 @@ export class GlobalAppHttpException {
           .map((line) => line.trim())
           .join(' ');
 
-        console.log('relevant lines', relevantLines);
         exceptionMessage = relevantLines;
         exceptionStatus = HttpStatus.BAD_REQUEST;
       }

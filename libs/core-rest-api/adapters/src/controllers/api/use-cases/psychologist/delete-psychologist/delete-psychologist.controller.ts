@@ -6,7 +6,7 @@ import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/sh
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
 import { CurrentUser } from '../../../decorators/current-user.decorator';
-import { emailParam, routeParamSchema } from './dto';
+import { IControllerResponse, RouteParamsDto } from './dto';
 import { NestjsDeletePsychologistService } from './nestjs-delete-psychologist.service';
 
 @ApiTags('Psychologist')
@@ -20,20 +20,33 @@ export class DeletePsychologistController {
   @Delete(':psychologistEmail/delete')
   @ApiOperation(patchMethodDocs)
   async execute(
-    @Param('psychologistEmail') psychologistEmail: emailParam,
+    @Param() { psychologistEmail }: RouteParamsDto,
     @CurrentUser() currentUser: TokenPayload
-  ) {
+  ): Promise<IControllerResponse> {
     try {
-      console.log('psychologist ID', psychologistEmail);
-      console.log('psychologist ID', typeof psychologistEmail);
-      routeParamSchema.parse(psychologistEmail);
-
       if (psychologistEmail !== currentUser.email) {
         throw new ForbiddenException('You can only delete your own account');
       }
 
-      console.log('psychologist ID', currentUser);
-      // this.deletePsychologistService.execute(psychologistEmail);
+      const serviceResponse = await this.deletePsychologistService.execute(
+        psychologistEmail
+      );
+
+      const deletedPsychologistResponseInfo = {
+        user: {
+          id: serviceResponse.deletedPsychologist.id,
+          name: serviceResponse.deletedPsychologist.name,
+          email: serviceResponse.deletedPsychologist.email,
+          role: serviceResponse.deletedPsychologist.role,
+        },
+        associatedClinics: serviceResponse.associatedClinics,
+        deletedAt: new Date(),
+      };
+
+      return {
+        message: 'Psychologist deleted successfully',
+        data: deletedPsychologistResponseInfo,
+      };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

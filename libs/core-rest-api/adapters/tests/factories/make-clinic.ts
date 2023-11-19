@@ -20,6 +20,7 @@ export function makeClinic(
     psychologistId: psychologistId ?? '',
     ...override,
   });
+
   return newClinic;
 }
 
@@ -30,9 +31,7 @@ export function makeClinic(
 export class ClinicFactory {
   constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
-  async makePrismaClinic(
-    clinic: CreateClinicDto
-  ): Promise<ClinicEntity> {
+  async makePrismaClinic(clinic: Partial<CreateClinicDto> = {}): Promise<ClinicEntity> {
     const newPrismaClinic = makeClinic(clinic.psychologistId, clinic);
 
     await this.postgreSqlPrismaOrmService['clinic'].create(

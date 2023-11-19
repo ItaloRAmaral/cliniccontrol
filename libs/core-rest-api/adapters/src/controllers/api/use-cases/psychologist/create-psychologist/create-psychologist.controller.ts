@@ -9,6 +9,11 @@ import { Public } from '../../../../../auth/public';
 import { ApiKeyGuard } from '../../../guards/api-key.guard';
 import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.service';
 
+/**
+ * ExecutionContext
+ * @see https://docs.nestjs.com/fundamentals/execution-context#low-level-approach
+ */
+
 @ApiTags()
 @Controller({
   path: 'psychologist',

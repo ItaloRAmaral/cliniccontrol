@@ -83,8 +83,6 @@ describe('[E2E] - Create Clinic', () => {
   });
 
   it('[POST] - Should unsuccessfully try to create a new clinic without body request', async () => {
-    const newClinic = makeClinic(psychologistId);
-
     const createdClinicResponse = await request(app.getHttpServer())
       .post('/clinic/create')
       .set('Authorization', `Bearer ${access_token}`);
