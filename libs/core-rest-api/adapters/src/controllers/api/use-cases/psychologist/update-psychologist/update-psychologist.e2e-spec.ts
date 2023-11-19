@@ -34,14 +34,6 @@ describe('[E2E] - Update Psychologist Account', () => {
     psychologistFactory = moduleRef.get(PsychologistFactory);
     jwt = moduleRef.get(JwtService);
 
-    // app.useGlobalPipes(
-    //   new ValidationPipe({
-    //     transformOptions: {
-    //       enableImplicitConversion: true, // With this option set to true, we no longer need to specify types with the @Type decorator;
-    //     },
-    //   })
-    // );
-
     await app.init();
 
     // hashing a static known password to use in tests
