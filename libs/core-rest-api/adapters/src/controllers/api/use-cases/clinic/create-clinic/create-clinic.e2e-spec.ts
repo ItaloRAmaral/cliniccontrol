@@ -10,18 +10,15 @@ import { faker } from '@faker-js/faker';
 import { JwtService } from '@nestjs/jwt';
 import { makeClinic } from '../../../../../../tests/factories/make-clinic';
 import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
-import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
 import { ApiModule } from '../../../api.module';
 
 describe('[E2E] - Create Clinic', () => {
-  let prisma: PostgreSqlPrismaOrmService;
   let app: INestApplication;
   let psychologistFactory: PsychologistFactory;
   let jwt: JwtService;
   let psychologistId: string;
   let access_token: string;
-  let invalid_access_token: string;
   let psychologist: PsychologistEntity;
   let password: string;
   let clinic: ClinicEntity;
@@ -34,7 +31,6 @@ describe('[E2E] - Create Clinic', () => {
 
     app = moduleRef.createNestApplication();
 
-    prisma = moduleRef.get(PostgreSqlPrismaOrmService);
     psychologistFactory = moduleRef.get(PsychologistFactory);
     jwt = moduleRef.get(JwtService);
 
@@ -57,7 +53,6 @@ describe('[E2E] - Create Clinic', () => {
       email: psychologist.email,
     });
 
-    invalid_access_token = jwt.sign({ psychologistId });
     clinic = makeClinic(psychologistId);
   });
 
