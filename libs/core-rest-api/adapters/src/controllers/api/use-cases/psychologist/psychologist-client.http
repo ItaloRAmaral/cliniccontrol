@@ -42,9 +42,9 @@ Authorization: Bearer {{authToken}}
 
 ### Test Route
 # @name delete_psychologist
-# DELETE http://localhost:3333/core/psychologist/{{psychologist_email}}/delete HTTP/1.1
+DELETE http://localhost:3333/core/psychologist/{{psychologist_email}}/delete HTTP/1.1
 # DELETE http://localhost:3333/core/psychologist/wrong_email@gmail.com/delete HTTP/1.1
-DELETE http://localhost:3333/core/psychologist/a/delete HTTP/1.1
+# DELETE http://localhost:3333/core/psychologist/invalid_email/delete HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
