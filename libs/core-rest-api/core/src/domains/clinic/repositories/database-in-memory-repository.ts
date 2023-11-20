@@ -2,6 +2,7 @@ import { ConflictException } from '@nestjs/common';
 import { CLINIC_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { ClinicEntity } from '../../clinic/entities/clinic/entity';
 import { CreateClinicDto } from '../../clinic/use-cases/create-clinic/create-clinic-dto';
+import { DeletedClinicInfo } from '../use-cases/delete-clinic/dto';
 import { UpdateClinicDto } from '../use-cases/update-clinic/update-clinic-dto';
 import { ClinicDatabaseRepository } from './database-repository';
 
@@ -72,7 +73,7 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     this.clinics[clinicIndex] = updatedClinic;
   }
 
-  async deleteClinic(name: string, psychologistId: string): Promise<void> {
+  async deleteClinic(name: string, psychologistId: string): Promise<DeletedClinicInfo> {
     const isClinicExists = await this.findClinicByNameAndPsychologistId(
       name,
       psychologistId
@@ -83,6 +84,9 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     }
 
     this.clinics = this.clinics.filter((clinic) => clinic.name !== name);
+    return {
+      deletedClinic: isClinicExists
+    }
   }
 
   async deleteAllClinicsByPsychologistId(

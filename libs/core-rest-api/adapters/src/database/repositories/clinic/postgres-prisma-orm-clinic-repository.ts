@@ -1,6 +1,7 @@
 import { ClinicEntity } from '@clinicControl/core-rest-api/core/src/domains/clinic/entities/clinic/entity';
 import { ClinicDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/clinic/repositories/database-repository';
 import { CreateClinicDto } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/create-clinic/create-clinic-dto';
+import { DeletedClinicInfo } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/delete-clinic/dto';
 import { UpdateClinicDto } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 import { CLINIC_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 import { ConflictException, Injectable } from '@nestjs/common';
@@ -87,7 +88,7 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
     await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
   }
 
-  async deleteClinic(name: string, psychologistId: string): Promise<void> {
+  async deleteClinic(name: string, psychologistId: string): Promise<DeletedClinicInfo> {
     const isClinicExists = await this.findClinicByNameAndPsychologistId(
       name,
       psychologistId
@@ -98,11 +99,17 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
     }
 
     const clinicId = isClinicExists.id;
-    await this.postgreSqlPrismaOrmService['clinic'].delete({
+    const deletedClinic = await this.postgreSqlPrismaOrmService['clinic'].delete({
       where: {
         id: clinicId,
       },
     });
+
+    const responseObject = {
+      deletedClinic: PostgresqlPrismaClinicMapper.toDomain(deletedClinic),
+    }
+
+    return responseObject
   }
 
   async deleteAllClinicsByPsychologistId(
