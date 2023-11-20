@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-adapters@1.2.0-beta.0...@cliniccontrol/core-rest-api-adapters@1.2.0-beta.1) (2023-11-20)
+
+### Features
+
+- **CC-81:** add client.http ([21dcc38](https://github.com/ItaloRAmaral/cliniccontrol/commit/21dcc38a922287daff4dd6909aa7395b7eb830c6))
+- **CC-81:** add clinic controller and service to api module ([90d49fc](https://github.com/ItaloRAmaral/cliniccontrol/commit/90d49fc17db61f080c42f5425ef6892207f14c7f))
+- **CC-81:** add configs for auth ([e9d5b7d](https://github.com/ItaloRAmaral/cliniccontrol/commit/e9d5b7d951db1cbdd4763289633ad82b8b92c975))
+- **CC-81:** add create clinic e2e test and refactor folder organization ([9cdff17](https://github.com/ItaloRAmaral/cliniccontrol/commit/9cdff17ae465b422cceb7341b6f1e7c0a3fe553b))
+- **CC-81:** add prisma clinic mapper ([a8c737e](https://github.com/ItaloRAmaral/cliniccontrol/commit/a8c737e8dfa3a79cf46cf47e76f9e9360fac3937))
+- **CC-81:** add prisma clinic repository and rename psychologist repository ([0b714fc](https://github.com/ItaloRAmaral/cliniccontrol/commit/0b714fc854d630754c53c328fe957c123d4b2fcb))
+- **CC-81:** add repository in repositories module ([0ffbb4d](https://github.com/ItaloRAmaral/cliniccontrol/commit/0ffbb4d833f5467bb7977fb7ffa251a2e7d3cac5))
+- **CC-81:** add response message in clinic creation ([6fb6ad4](https://github.com/ItaloRAmaral/cliniccontrol/commit/6fb6ad4a791583cc39dab42c0aed086a152c6003))
+- **CC-81:** adjust e2e create clinic test ([0670b96](https://github.com/ItaloRAmaral/cliniccontrol/commit/0670b961156e79e982ef6ec21c936081221409d7))
+- **CC-81:** adjust test ([65d8c6c](https://github.com/ItaloRAmaral/cliniccontrol/commit/65d8c6cf198c4512cfe206cfd7ff6a84aaf5684a))
+- **CC-81:** make clinic factory ([56b7d4e](https://github.com/ItaloRAmaral/cliniccontrol/commit/56b7d4e54e8afb6b7864071f8c9acd865e69d4e3))
+- **CC-85:** delete psychologist endpoint ([b35eb27](https://github.com/ItaloRAmaral/cliniccontrol/commit/b35eb2712cffadbb5e96d6a4fce1baf113024a38))
+- **CC-85:** new prisma migration ([8e11de6](https://github.com/ItaloRAmaral/cliniccontrol/commit/8e11de62c8b29f50d2cc9bdc62a21d9616d05670))
+
+### Bug Fixes
+
+- **CC-81:** adjust errors and delete logs ([b94d417](https://github.com/ItaloRAmaral/cliniccontrol/commit/b94d41750e9b2036e7c4143fc5ac881119838430))
+
 ## [1.2.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-adapters@1.1.0...@cliniccontrol/core-rest-api-adapters@1.2.0-beta.0) (2023-11-16)
 
 ### Features

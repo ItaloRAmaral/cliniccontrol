@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.3.0-beta.0...@cliniccontrol/core-rest-api-core@1.3.0-beta.1) (2023-11-20)
+
+### Features
+
+- **CC-85:** delete psychologist endpoint ([b35eb27](https://github.com/ItaloRAmaral/cliniccontrol/commit/b35eb2712cffadbb5e96d6a4fce1baf113024a38))
+
 ## [1.3.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.2.0...@cliniccontrol/core-rest-api-core@1.3.0-beta.0) (2023-11-16)
 
 ### Features
