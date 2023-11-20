@@ -2,6 +2,9 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo "Husky pre commit script..."
-echo "Running Unit Tests..."
 
+echo "Running Project Lint Validation..."
+pnpm exec nx run-many --target=lint --all=true --parallel=3
+
+echo "Running Unit Tests..."
 pnpm run test:unit

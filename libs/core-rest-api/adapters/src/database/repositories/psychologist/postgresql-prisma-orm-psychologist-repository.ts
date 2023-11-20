@@ -87,17 +87,37 @@ export class PostgresqlPrismaOrmPsychologistRepository
     await this.postgreSqlPrismaOrmService['psychologist'].update(toPrismaEntity);
   }
 
-  async deletePsychologist(email: string): Promise<void> {
-    const isPsychologistExists = await this.findPsychologistByEmail(email);
+  async deletePsychologist(email: string): Promise<any> {
+    const psychologist = await this.postgreSqlPrismaOrmService['psychologist'].findUnique(
+      {
+        where: { email: email },
+        include: { clinic: true }, // Inclui as clínicas associadas
+      }
+    );
 
-    if (!isPsychologistExists) {
+    if (!psychologist) {
       throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']);
     }
 
-    await this.postgreSqlPrismaOrmService['psychologist'].delete({
+    const clinicNames = psychologist.clinic.map((clinic) => {
+      return { name: clinic.name, id: clinic.id };
+    });
+
+    const deletedPsychologist = await this.postgreSqlPrismaOrmService[
+      'psychologist'
+    ].delete({
       where: {
         email: email,
       },
     });
+
+    // Retorna as informações requeridas
+    const responseObject = {
+      deletedPsychologist:
+        PostgresqlPrismaPsychologistMapper.toDomain(deletedPsychologist),
+      associatedClinics: clinicNames,
+    };
+
+    return responseObject;
   }
 }

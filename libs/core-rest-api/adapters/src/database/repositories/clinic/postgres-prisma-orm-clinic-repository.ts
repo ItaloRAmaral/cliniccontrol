@@ -8,27 +8,20 @@ import { PostgreSqlPrismaOrmService } from '../../../database/infra/prisma/prism
 import { PostgresqlPrismaClinicMapper } from '../../mappers/postgresql-prisma-clinic-mapper';
 
 @Injectable()
-export class PostgresqlPrismaOrmClinicRepository
-  implements ClinicDatabaseRepository
-{
-  constructor(
-    private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService,
-  ) {}
-
-  async createClinic(
-    clinic: CreateClinicDto
-  ): Promise<ClinicEntity> {
-    const isClinicExists = await this.findClinicByNameAndPsychologistId(clinic.name, clinic.psychologistId);
+export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseRepository {
+  constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
+  async createClinic(clinic: CreateClinicDto): Promise<ClinicEntity> {
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(
+      clinic.name,
+      clinic.psychologistId
+    );
 
     if (isClinicExists) {
-      throw new ConflictException(
-        CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']
-      );
+      throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']);
     }
 
     const toPrismaEntity = PostgresqlPrismaClinicMapper.toPrismaCreate({
       ...clinic,
-
     });
 
     const newClinic = await this.postgreSqlPrismaOrmService['clinic'].create(
@@ -38,16 +31,16 @@ export class PostgresqlPrismaOrmClinicRepository
     return PostgresqlPrismaClinicMapper.toDomain(newClinic);
   }
 
-  async findClinicByNameAndPsychologistId(name: string, psychologistId: string): Promise<ClinicEntity | null> {
-
-    const clinic = await this.postgreSqlPrismaOrmService['clinic'].findFirst(
-      {
-        where: {
-          name,
-          psychologistId: psychologistId
-        },
-      }
-    );
+  async findClinicByNameAndPsychologistId(
+    name: string,
+    psychologistId: string
+  ): Promise<ClinicEntity | null> {
+    const clinic = await this.postgreSqlPrismaOrmService['clinic'].findFirst({
+      where: {
+        name,
+        psychologistId: psychologistId,
+      },
+    });
 
     if (!clinic) {
       return null;
@@ -57,13 +50,11 @@ export class PostgresqlPrismaOrmClinicRepository
   }
 
   async findClinicById(id: string): Promise<ClinicEntity | null> {
-    const clinic = await this.postgreSqlPrismaOrmService['clinic'].findUnique(
-      {
-        where: {
-          id,
-        },
-      }
-    );
+    const clinic = await this.postgreSqlPrismaOrmService['clinic'].findUnique({
+      where: {
+        id,
+      },
+    });
 
     if (!clinic) {
       return null;
@@ -72,10 +63,14 @@ export class PostgresqlPrismaOrmClinicRepository
     return PostgresqlPrismaClinicMapper.toDomain(clinic);
   }
 
+  async findClinicByPsychologistId(
+    psychologistId: string
+  ): Promise<ClinicEntity[] | null> {
+    throw new Error('Method not implemented.');
+  }
+
   async getClinics(): Promise<ClinicEntity[]> {
-    const clinics = await this.postgreSqlPrismaOrmService[
-      'clinic'
-    ].findMany();
+    const clinics = await this.postgreSqlPrismaOrmService['clinic'].findMany();
 
     return PostgresqlPrismaClinicMapper.toDomainMany(clinics);
   }
@@ -87,24 +82,32 @@ export class PostgresqlPrismaOrmClinicRepository
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']);
     }
 
-    const toPrismaEntity =
-      PostgresqlPrismaClinicMapper.toPrismaUpdate(newClinic);
+    const toPrismaEntity = PostgresqlPrismaClinicMapper.toPrismaUpdate(newClinic);
 
     await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
   }
 
   async deleteClinic(name: string, psychologistId: string): Promise<void> {
-    const isClinicExists = await this.findClinicByNameAndPsychologistId(name, psychologistId);
+    const isClinicExists = await this.findClinicByNameAndPsychologistId(
+      name,
+      psychologistId
+    );
 
     if (!isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
     }
 
-    const clinicId = isClinicExists.id
+    const clinicId = isClinicExists.id;
     await this.postgreSqlPrismaOrmService['clinic'].delete({
       where: {
         id: clinicId,
       },
     });
+  }
+
+  async deleteAllClinicsByPsychologistId(
+    psychologistId: string
+  ): Promise<ClinicEntity[]> {
+    throw new Error('Method not implemented.');
   }
 }

@@ -1,7 +1,9 @@
 import { ConflictException } from '@nestjs/common';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
+import { ClinicDatabaseRepository } from '../../clinic/repositories/database-repository';
 import { PsychologistEntity } from '../entities/psychologist/entity';
 import { CreatePsychologistDto } from '../use-cases/create-psychologist/create-psychologist-dto';
+import { DeletedPsychologistInfo } from '../use-cases/delete-psychologist/dto';
 import { UpdatePsychologistDto } from '../use-cases/update-psychologist/update-psychologist-dto';
 import { PsychologistDatabaseRepository } from './database-repository';
 
@@ -10,10 +12,10 @@ export class InMemoryPsychologistDatabaseRepository
 {
   private psychologists: PsychologistEntity[] = [];
 
+  constructor(private clinicRepository: ClinicDatabaseRepository) {}
+
   async createPsychologist(psychologist: CreatePsychologistDto) {
-    const isPsychologistExists = await this.findPsychologistByEmail(
-      psychologist.email
-    );
+    const isPsychologistExists = await this.findPsychologistByEmail(psychologist.email);
 
     if (isPsychologistExists) {
       throw new ConflictException(
@@ -30,30 +32,23 @@ export class InMemoryPsychologistDatabaseRepository
 
   async findPsychologistByEmail(email: string) {
     return (
-      this.psychologists.find((psychologist) => psychologist.email === email) ??
-      null
+      this.psychologists.find((psychologist) => psychologist.email === email) ?? null
     );
   }
 
   async findPsychologistById(id: string): Promise<PsychologistEntity | null> {
-    return (
-      this.psychologists.find((psychologist) => psychologist.id === id) ?? null
-    );
+    return this.psychologists.find((psychologist) => psychologist.id === id) ?? null;
   }
 
   async getPsychologists(): Promise<PsychologistEntity[]> {
     return this.psychologists;
   }
 
-  async updatePsychologist(
-    newPsychologist: UpdatePsychologistDto
-  ): Promise<void> {
+  async updatePsychologist(newPsychologist: UpdatePsychologistDto): Promise<void> {
     const oldPsychologist = await this.findPsychologistById(newPsychologist.id);
 
     if (!oldPsychologist) {
-      throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
-      );
+      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']);
     }
 
     const psychologistIndex = this.psychologists.findIndex((psychologist) => {
@@ -68,17 +63,25 @@ export class InMemoryPsychologistDatabaseRepository
     this.psychologists[psychologistIndex] = updatedPsychologist;
   }
 
-  async deletePsychologist(email: string): Promise<void> {
+  async deletePsychologist(email: string): Promise<DeletedPsychologistInfo> {
     const isPsychologistExists = await this.findPsychologistByEmail(email);
 
     if (!isPsychologistExists) {
-      throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
-      );
+      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']);
     }
+
+    const associatedClinics =
+      await this.clinicRepository.deleteAllClinicsByPsychologistId(
+        isPsychologistExists.id
+      );
 
     this.psychologists = this.psychologists.filter(
       (psychologists) => psychologists.email !== email
     );
+
+    return {
+      deletedPsychologist: isPsychologistExists,
+      associatedClinics,
+    };
   }
 }

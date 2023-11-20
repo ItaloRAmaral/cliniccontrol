@@ -29,7 +29,8 @@
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "passWithNoTests": true,
-        "config": "libs/core-rest-api/adapters/vitest.config.e2e.ts"
+        "config": "libs/core-rest-api/adapters/vitest.config.e2e.ts",
+        "reportsDirectory": "../../../coverage/libs/core-rest-api/adapters"
       },
       "configurations": {
         "ci": {

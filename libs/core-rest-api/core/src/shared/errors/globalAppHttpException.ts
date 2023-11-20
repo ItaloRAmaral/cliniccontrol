@@ -62,7 +62,6 @@ export class GlobalAppHttpException {
           .map((line) => line.trim())
           .join(' ');
 
-        console.log('relevant lines', relevantLines);
         exceptionMessage = relevantLines;
         exceptionStatus = HttpStatus.BAD_REQUEST;
       }

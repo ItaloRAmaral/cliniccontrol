@@ -63,7 +63,7 @@ model Clinic {
   appointment Appointment[]
 
   psychologistId String       @map("psychologist_id")
-  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id], onDelete: Cascade)
 
   @@map("clinic")
 }
