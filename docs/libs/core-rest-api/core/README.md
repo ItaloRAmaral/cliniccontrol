@@ -16,7 +16,7 @@
 
 ---
 
-## 📚 Core Rest Api Library Index
+## 📋 Core Rest Api Library Index
 
 - [Core Domains](./domains/)
   - [Appointment](./domains/appointment.md)
