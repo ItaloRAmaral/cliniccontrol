@@ -83,7 +83,7 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
     }
 
-    this.clinics = this.clinics.filter((clinic) => clinic.name !== name);
+    this.clinics = this.clinics.filter((clinic) => clinic.name !== name || clinic.psychologistId !== psychologistId);
     return {
       deletedClinic: isClinicExists
     }

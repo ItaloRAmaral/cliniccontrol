@@ -2,10 +2,7 @@ import { IsString } from 'class-validator';
 
 export class RouteParamsDto {
   @IsString()
-  psychologistId!: string;
-
-  @IsString()
-  clinicName!: string;
+  clinicId!: string;
 }
 
 interface Response {

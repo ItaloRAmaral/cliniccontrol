@@ -6,10 +6,10 @@ import { DeletedClinicInfo } from './dto';
 export class DeleteClinicService {
   constructor(private clinicDatabaseRepository: ClinicDatabaseRepository) {}
 
-  async execute(name: string, psychologistId: string): Promise<DeletedClinicInfo> {
+  async execute(clinicId: string): Promise<DeletedClinicInfo> {
     // Validate if clinic exists in db
-    const isClinicExists = await this.clinicDatabaseRepository.findClinicByNameAndPsychologistId(
-      name, psychologistId
+    const isClinicExists = await this.clinicDatabaseRepository.findClinicById(
+      clinicId
     );
 
     if (!isClinicExists) {
@@ -17,6 +17,6 @@ export class DeleteClinicService {
     }
 
     // Delete clinic
-    return await this.clinicDatabaseRepository.deleteClinic(name, psychologistId);
+    return await this.clinicDatabaseRepository.deleteClinic(isClinicExists.name, isClinicExists.psychologistId);
   }
 }

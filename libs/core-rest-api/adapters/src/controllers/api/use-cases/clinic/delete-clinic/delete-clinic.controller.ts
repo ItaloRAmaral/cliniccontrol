@@ -16,10 +16,10 @@ export class DeleteClinicController {
 
   @Delete(':clinicId/delete')
   async execute(
-    @Param() { clinicName, psychologistId }: RouteParamsDto
+    @Param() { clinicId }: RouteParamsDto
   ): Promise<IControllerResponse>{
     try {
-      const serviceResponse = await this.deleteClinicService.execute(clinicName, psychologistId);
+      const serviceResponse = await this.deleteClinicService.execute(clinicId);
 
       const deletedClinicResponseInfo = {
         clinic: {
