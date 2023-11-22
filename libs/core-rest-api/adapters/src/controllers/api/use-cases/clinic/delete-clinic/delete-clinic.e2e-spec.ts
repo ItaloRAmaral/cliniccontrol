@@ -18,11 +18,9 @@ import { ApiModule } from '../../../api.module';
 describe('[E2E] - Delete Clinic', () => {
   let prisma: PostgreSqlPrismaOrmService;
   let app: INestApplication;
-
   let psychologistFactory: PsychologistFactory;
   let clinicFactory: ClinicFactory;
   let jwt: JwtService;
-
   let id: string;
   let access_token: string;
   let invalid_access_token: string;
@@ -58,7 +56,8 @@ describe('[E2E] - Delete Clinic', () => {
     psychologist = await psychologistFactory.makePrismaPsychologist({
       password: hashedPassword,
     });
-
+    id = psychologist.id;
+    // creating a clinic to use in tests
     clinic = await clinicFactory.makePrismaClinic({
       name: faker.company.name(),
       address: faker.location.streetAddress(),
@@ -67,20 +66,17 @@ describe('[E2E] - Delete Clinic', () => {
       state: faker.location.city()
     });
 
-    id = psychologist.id;
     access_token = jwt.sign({
       id,
       name: psychologist.name,
       email: psychologist.email,
     });
-
     invalid_access_token = jwt.sign({ id });
   });
 
   it('[DELETE] - Should return an error when trying to delete a clinic without access_token', async () => {
-    const response = await request(app.getHttpServer()).delete(
-      `/clinic/${clinic.id}/delete`
-    );
+    const response = await request(app.getHttpServer())
+      .delete(`/clinic/${clinic.id}/delete`);
 
     expect(response.status).toBe(401);
     expect(response.body.message).toBe('Invalid JWT token');
@@ -119,7 +115,7 @@ describe('[E2E] - Delete Clinic', () => {
     }));
 
     const deletedClinic = await prisma['clinic'].findUnique({
-      where: { id },
+      where: { id: clinic.id },
     });
 
     expect(deletedClinic).toBeNull();
