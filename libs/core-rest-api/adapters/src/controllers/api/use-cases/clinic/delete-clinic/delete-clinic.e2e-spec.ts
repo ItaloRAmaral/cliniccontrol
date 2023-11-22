@@ -106,7 +106,7 @@ describe('[E2E] - Delete Clinic', () => {
     expect(response.body.message).toBe('clinic not found');
   });
 
-  it.only('[DELETE] - Should successfully delete a clinic', async () => {
+  it('[DELETE] - Should successfully delete a clinic', async () => {
     const response = await request(app.getHttpServer())
       .delete(`/clinic/${clinic.id}/delete`)
       .set('Authorization', `Bearer ${access_token}`);
