@@ -10,6 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../adapters/src/controllers/api/shared/utils/e2e-tests-initial-setup.ts"],
   "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }

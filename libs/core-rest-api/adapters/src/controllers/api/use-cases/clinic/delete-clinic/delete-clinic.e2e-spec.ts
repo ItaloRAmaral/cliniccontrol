@@ -1,19 +1,14 @@
-import { faker } from '@faker-js/faker';
-import request from 'supertest';
-
-import { INestApplication, ValidationPipe } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { Test } from '@nestjs/testing';
-
-import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
-import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ClinicEntity } from '@clinicControl/core-rest-api/core/src/domains/clinic/entities/clinic/entity';
+import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
+import { faker } from '@faker-js/faker';
+import { INestApplication } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import request from 'supertest';
 import { ClinicFactory } from '../../../../../../tests/factories/make-clinic';
 import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
-import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
-import { ApiModule } from '../../../api.module';
+import { setupE2ETest } from '../../../shared/utils/e2e-tests-initial-setup';
 
 describe('[E2E] - Delete Clinic', () => {
   let prisma: PostgreSqlPrismaOrmService;
@@ -25,53 +20,22 @@ describe('[E2E] - Delete Clinic', () => {
   let access_token: string;
   let invalid_access_token: string;
   let psychologist: PsychologistEntity;
-  let clinic: ClinicEntity
+  let clinic: ClinicEntity;
   let hashedPassword: string;
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [ApiModule, DatabaseRepositoriesModule],
-      providers: [PsychologistFactory, ClinicFactory],
-    }).compile();
-
-    app = moduleRef.createNestApplication();
-
-    prisma = moduleRef.get(PostgreSqlPrismaOrmService);
-
-    clinicFactory = moduleRef.get(ClinicFactory);
-    psychologistFactory = moduleRef.get(PsychologistFactory);
-    jwt = moduleRef.get(JwtService);
-
-    // Necessary to validate dto route params in controller
-    app.useGlobalPipes(new ValidationPipe());
-
-    await app.init();
-
-    // hashing a static known password to use in tests
-    const bcrypt = new BcryptHasherService();
-    const password = faker.internet.password({ length: 8 });
-    hashedPassword = await bcrypt.hash(password);
-
-    // creating a psychologist account to use in tests
-    psychologist = await psychologistFactory.makePrismaPsychologist({
-      password: hashedPassword,
-    });
-    id = psychologist.id;
-    // creating a clinic to use in tests
-    clinic = await clinicFactory.makePrismaClinic({
-      name: faker.company.name(),
-      address: faker.location.streetAddress(),
-      city: faker.location.city(),
-      psychologistId: psychologist.id,
-      state: faker.location.city()
-    });
-
-    access_token = jwt.sign({
-      id,
-      name: psychologist.name,
-      email: psychologist.email,
-    });
-    invalid_access_token = jwt.sign({ id });
+    const setup = await setupE2ETest();
+    prisma = setup.prisma;
+    app = setup.app;
+    psychologistFactory = setup.psychologistFactory;
+    clinicFactory = setup.clinicFactory;
+    jwt = setup.jwt;
+    id = setup.id;
+    access_token = setup.access_token;
+    invalid_access_token = setup.invalid_access_token;
+    psychologist = setup.psychologist;
+    clinic = setup.clinic;
+    hashedPassword = setup.hashedPassword;
   });
 
   it('[DELETE] - Should return an error when trying to delete a clinic without access_token', async () => {
