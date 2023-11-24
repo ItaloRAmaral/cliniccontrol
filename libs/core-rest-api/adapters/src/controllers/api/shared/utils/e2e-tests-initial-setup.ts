@@ -37,6 +37,15 @@ export async function setupE2ETest() {
     password: hashedPassword,
   });
 
+  // Creating access_tokens to use in tests
+  const id: string = psychologist.id;
+  const access_token: string = jwt.sign({
+    id,
+    name: psychologist.name,
+    email: psychologist.email,
+  });
+  const invalid_access_token: string = jwt.sign({ id });
+
   // Creating a clinic to use in tests
   const clinic = await clinicFactory.makePrismaClinic({
     name: faker.company.name(),
@@ -45,14 +54,6 @@ export async function setupE2ETest() {
     psychologistId: psychologist.id,
     state: faker.location.city(),
   });
-
-  const id: string = psychologist.id;
-  const access_token: string = jwt.sign({
-    id,
-    name: psychologist.name,
-    email: psychologist.email,
-  });
-  const invalid_access_token: string = jwt.sign({ id });
 
   return {
     prisma,
