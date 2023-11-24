@@ -2,8 +2,10 @@
 
 <p align="center">
   <h1 align="center"> - Shared Utils -</h3>
+  Exploring the Core Utility Types and Functions in the Clinic Control Project: Enhancing Code Efficiency and Reusability
 
   <p align="center">
+      <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>

@@ -1,8 +1,9 @@
 <br/>
 <p align="center">
   <h1 align="center"> - Authentication Module -</h3>
-
+   Explore the Authentication Module of Clinic Control Project: A Comprehensive Guide to JWT-Based Security and Access Control
   <p align="center">
+  <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>

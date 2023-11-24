@@ -1,8 +1,9 @@
 <br/>
 <p align="center">
   <h1 align="center"> - Controllers Documentation -</h3>
-
+  Delve into the Dynamics of Controllers in the Clinic Control Project: Key Insights into Controller Functionality and Integration
   <p align="center">
+  <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>

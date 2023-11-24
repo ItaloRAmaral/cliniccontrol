@@ -2,7 +2,9 @@
 
 <p align="center">
   <h1 align="center"> - Shared Errors -</h3>
+  A Deep Dive into the Shared Error Handling Mechanisms in the Clinic Control Project: Streamlining Error Responses Across the Application
   <p align="center">
+      <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>

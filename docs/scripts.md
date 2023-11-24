@@ -48,7 +48,7 @@ scripts
 
 <h3 id="nx">🛠️ Nx</h3>
 
-#### `set-nx-cloud-token.sh`
+<code id="set-nx-cloud-token.sh">set-nx-cloud-token.sh</code>
 
 This bash script accepts named arguments and overwrites the token from nx.json with a fake token of your choice.
 
@@ -58,10 +58,10 @@ Call this script with the following command:
   bash scripts/nx/set-token.sh --access-token=my-secret-token
 ```
 
-<h3 id="nx">🛠️ Setup</h3>
+<h3 id="setup">🛠️ Setup</h3>
 <h4 id="core-rest-api">🔧 Core-rest-api</h4>
 
-#### `run-setup.sh`
+<code id="run-setup.sh">run-setup.sh</code>
 
 This bash script is designed to automate the setup of a Docker Compose-based environment and the execution of the Prisma migration. It accepts named arguments and performs the following actions:
 
@@ -75,7 +75,7 @@ This bash script is designed to automate the setup of a Docker Compose-based env
   bash scripts/setup/core-rest-api/run-setup.sh --action=<prisma_action>
 ```
 
-#### `run-prisma-setup.sh`
+<code id="run-prisma-setup.sh">run-prisma-setup.sh</code>
 
 This bash script is designed to automate the execution of the Prisma migration, Prisma client generation, and Prisma Studio opening. It accepts named arguments and performs the following actions:
 
@@ -88,7 +88,7 @@ This bash script is designed to automate the execution of the Prisma migration, 
   bash ./scripts/setup/core-rest-api/run-prisma-setup.sh --action=<prisma_action>
 ```
 
-#### `docker-compose-control.sh`
+<code id="docker-compose-control.sh">docker-compose-control.sh</code>
 
 This bash script is designed to automate the control of Docker Compose services. It accepts named arguments and performs the following actions:
 

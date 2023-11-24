@@ -1,8 +1,10 @@
 <br/>
 <p align="center">
-  <h1 align="center"> - Env -</h3>
+  <h1 align="center"> - Env Module -</h3>
+  Unveiling the Environment Setup for the Clinic Control Project: A Guide to Configuring and Managing Essential Environmental Variables
 
   <p align="center">
+  <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>

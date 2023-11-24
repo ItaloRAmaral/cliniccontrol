@@ -1,8 +1,9 @@
 <br/>
 <p align="center">
-  <h1 align="center"> - Database -</h3>
-
+  <h1 align="center"> - Database Module -</h3>
+  Dive into the Core Database Architecture of the Clinic Control Project: Explore In-Depth Information and Technical Insights
   <p align="center">
+    <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>

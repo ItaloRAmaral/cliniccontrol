@@ -2,9 +2,9 @@
 
 <p align="center">
   <h1 align="center"> - Psychologist Core Domain -</h3>
+  Exploring the Psychologist Core Domain in the Clinic Control Project: A Detailed Guide to the Architecture and Logic of Psychologist Management
 
   <p align="center">
-    <br/>
     <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
@@ -51,9 +51,9 @@ The **`InMemoryPsychologistDatabaseRepository`** class is responsible for provid
 
 The **Use Cases** subfolder contains a set of use cases that encapsulate the business logic related to **psychologists**. Each use case corresponds to a specific operation:
 
-- **Create **Psychologist****: Handles the creation of new **psychologist** records, enforcing business rules and validation.
-- **Update **Psychologist****: Manages updates to **psychologist** information, ensuring data consistency and adherence to business rules.
-- **Delete **Psychologist****: Provides functionality for deleting **psychologist** records while handling any associated side-effects or constraints.
+- **Create **Psychologist\***\*: Handles the creation of new **psychologist\*\* records, enforcing business rules and validation.
+- **Update **Psychologist\***\*: Manages updates to **psychologist\*\* information, ensuring data consistency and adherence to business rules.
+- **Delete **Psychologist\***\*: Provides functionality for deleting **psychologist\*\* records while handling any associated side-effects or constraints.
 
 These use cases represent the core functionalities of the application, following the Clean Architecture principle of separating business logic from the infrastructure and frameworks.
 

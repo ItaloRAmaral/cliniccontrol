@@ -1,8 +1,9 @@
 <br/>
 <p align="center">
   <h1 align="center"> - Cryptography Module -</h3>
-
+   Explore the Essentials of the Cryptography Module in the Clinic Control Project: Securing Data through Advanced Encryption Techniques
   <p align="center">
+  <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>
