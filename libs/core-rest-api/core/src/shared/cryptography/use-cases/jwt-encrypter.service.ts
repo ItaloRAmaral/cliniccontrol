@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { Encrypter } from '../encrypter';
+import { Encrypter } from '../repository/encrypter-repository';
 
 export class JwtEncrypterService implements Encrypter {
   constructor(private jwtService: JwtService) {}

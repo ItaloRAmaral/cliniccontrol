@@ -4,25 +4,25 @@
   <h1 align="center"> - Shared Utils -</h3>
 
   <p align="center">
-    <br/>
-    <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
-    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/core">Core Docs</a>
+    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>
     -
-    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/adapters">Adapters Docs</a>
+    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Request Feature</a>
+    -
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol">Home</a>
   </p>
 </p>
 
 ---
 
-## 📚 Table of Contents
+## 📋 Table of Contents
 
-- [Replace](#Replace)
+- [🔁 Replace](#replace)
 
 ---
 
-## Replace
+<h2 id="replace">🔁 Replace</h2>
 
 In TypeScript, utility types can be powerful tools for code reusability and type manipulation. The Replace<T, R> utility type aims to substitute properties in type T with properties in type R.
 

@@ -1,8 +1,11 @@
 <br/>
 <p align="center">
-  <h1 align="center"> - Adapters Documentation -</h3>
+  <h2 align="center"> - Project Libraries Summary -</h3>
 
   <p align="center">
+    Discover the Comprehensive Guide to <strong>Project Libraries:</strong> A Central Index for Extensive Documentation and Insights into Each Library Component
+    <br/>
+    <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
     <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>
@@ -17,10 +20,6 @@
 
 ## 📋 Table of Contents
 
-- [🔒 Auth](./auth.md#overview)
-- [🎮 Controllers/api](./controllers.md)
-  - [🎨 Decorators](./controllers.md#decorators)
-  - [🛡️ Guards](./controllers.md#guards)
-- [🔐 Cryptography](./cryptography.md#overview)
-- [💾 Database](./database.md#database-module)
-- [🌍 Env](./env.md#introduction)
+- [🎯 Core-rest-api](./core-rest-api/README.md)
+  - [core](./core-rest-api/core/README.md)
+  - [adapters](./core-rest-api/adapters/README.md)

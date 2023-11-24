@@ -11,6 +11,8 @@
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/core">Core Docs</a>
     -
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/adapters">Adapters Docs</a>
+    -
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol">Home</a>
   </p>
 </p>
 
@@ -126,10 +128,6 @@ Controllers act as driven ports in the Hexagonal Architecture. They take externa
 `adapters/src/database/`
 
 This folder contains the actual implementation of your repositories, making it the adapter that plugs into your driving ports. It could include various mechanisms for accessing databases, third-party services, or other storage solutions.
-
-`adapters/src/events (?)`
-
-This is potentially where you could place any event-driven external interfaces or additional driven ports, like message queue handlers or WebSocket handlers, should your application require them.
 
 <!-- ## 🎯 Objectives
 
