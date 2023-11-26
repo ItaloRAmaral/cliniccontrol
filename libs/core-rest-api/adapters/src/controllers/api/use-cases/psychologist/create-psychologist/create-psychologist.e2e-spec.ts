@@ -24,25 +24,6 @@ describe('[E2E] - Create Psychologist Account', () => {
   });
 
   it('[POST] - Should return an error when trying to create a new psychologist that already exists', async () => {
-    // // const newPsychologist = makePsychologist({
-    // //   email: 'novo_usuario_teste_new_entrie@gmail.com',
-    // // });
-
-    // const response = await request(app.getHttpServer())
-    //   .post('/psychologist/create')
-    //   .set('api-key', 'api-key')
-    //   .send(psychologist);
-
-    // expect(response.statusCode).toBe(201);
-
-    // const userOnDatabase = await prisma.psychologist.findUnique({
-    //   where: {
-    //     email: 'novo_usuario_teste_new_entrie@gmail.com',
-    //   },
-    // });
-
-    // expect(userOnDatabase).toBeTruthy();
-
     const response = await request(app.getHttpServer())
       .post('/psychologist/create')
       .set('api-key', 'api-key')
