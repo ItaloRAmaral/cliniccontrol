@@ -67,5 +67,6 @@ export async function setupE2ETest() {
     psychologist,
     clinic,
     hashedPassword,
+    password,
   };
 }
