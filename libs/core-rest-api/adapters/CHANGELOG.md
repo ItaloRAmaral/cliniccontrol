@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-adapters@1.2.0...@cliniccontrol/core-rest-api-adapters@1.3.0-beta.0) (2023-11-27)
+
+### Features
+
+- **CC-82:** add all files to delete-clinic use case controller ([4d219b9](https://github.com/ItaloRAmaral/cliniccontrol/commit/4d219b92e9925daff41a46fec1da08fbb232b84c))
+- **CC-82:** add clinic delete servie in api module ([85f5631](https://github.com/ItaloRAmaral/cliniccontrol/commit/85f5631eeb1544faf59bbb0f33a4342c22d632e4))
+- **CC-82:** add delete route in client-http ([c56d1d5](https://github.com/ItaloRAmaral/cliniccontrol/commit/c56d1d59bdc1275d00c79e4cf34ca117198bef7a))
+- **CC-82:** define DeletedClinicInfo as return of deleting clinic use case ([23ba918](https://github.com/ItaloRAmaral/cliniccontrol/commit/23ba918e4c66616592b95d53b5c5083e28e0e469))
+
 ## [1.2.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-adapters@1.2.0-beta.1...@cliniccontrol/core-rest-api-adapters@1.2.0) (2023-11-20)
 
 **Note:** Version bump only for package @cliniccontrol/core-rest-api-adapters

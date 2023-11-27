@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.3.0...@cliniccontrol/core-rest-api-core@1.4.0-beta.0) (2023-11-27)
+
+### Features
+
+- **CC-82:** define DeletedClinicInfo as return of deleting clinic use case ([23ba918](https://github.com/ItaloRAmaral/cliniccontrol/commit/23ba918e4c66616592b95d53b5c5083e28e0e469))
+
 ## [1.3.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.3.0-beta.1...@cliniccontrol/core-rest-api-core@1.3.0) (2023-11-20)
 
 **Note:** Version bump only for package @cliniccontrol/core-rest-api-core

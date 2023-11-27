@@ -13,6 +13,8 @@ import { DatabaseRepositoriesModule } from '../../database/repositories/reposito
 
 import { CreateClinicController } from './use-cases/clinic/create-clinic/create-clinic.controller';
 import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
+import { DeleteClinicController } from './use-cases/clinic/delete-clinic/delete-clinic.controller';
+import { NestjsDeleteClinicService } from './use-cases/clinic/delete-clinic/nestjs-delete-clinic.service';
 import { AuthenticatePsychologistController } from './use-cases/psychologist/authenticate-psychologist/authenticate-psychologist.controller';
 import { NestjsAuthenticatePsychologistService } from './use-cases/psychologist/authenticate-psychologist/nestjs-authenticate-psychologist.service';
 import { CreatePsychologistController } from './use-cases/psychologist/create-psychologist/create-psychologist.controller';
@@ -36,6 +38,7 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     CreatePsychologistController,
     AuthenticatePsychologistController,
     CreateClinicController,
+    DeleteClinicController,
     UpdatePsychologistController,
     DeletePsychologistController,
   ],
@@ -45,8 +48,9 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     NestjsCreatePsychologistService,
     NestjsAuthenticatePsychologistService,
     NestjsUpdatePsychologistService,
-    NestjsCreateClinicService,
     NestjsDeletePsychologistService,
+    NestjsCreateClinicService,
+    NestjsDeleteClinicService
   ],
 })
 export class ApiModule {}

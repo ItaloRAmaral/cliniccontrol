@@ -25,7 +25,7 @@ describe('[clinic] Delete Clinic Service', () => {
   it('should delete a new clinic', async () => {
     const createClinic = await databaseRepository.createClinic(fakeClinic);
 
-    await service.execute(createClinic.name, createClinic.psychologistId);
+    await service.execute(createClinic.id);
 
     const getClinics = await databaseRepository.getClinics();
 
@@ -33,7 +33,7 @@ describe('[clinic] Delete Clinic Service', () => {
   });
 
   it('should throw conflict exception if clinic do not exists', async () => {
-    await expect(service.execute(fakeClinic.name, fakeClinic.psychologistId)).rejects.toThrow(
+    await expect(service.execute(fakeClinic.name)).rejects.toThrow(
       ConflictException
     );
   });
