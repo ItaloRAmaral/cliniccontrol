@@ -88,10 +88,9 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
     await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
   }
 
-  async deleteClinic(name: string, psychologistId: string): Promise<DeletedClinicInfo> {
-    const isClinicExists = await this.findClinicByNameAndPsychologistId(
-      name,
-      psychologistId
+  async deleteClinic(id: string): Promise<DeletedClinicInfo> {
+    const isClinicExists = await this.findClinicById(
+      id
     );
 
     if (!isClinicExists) {

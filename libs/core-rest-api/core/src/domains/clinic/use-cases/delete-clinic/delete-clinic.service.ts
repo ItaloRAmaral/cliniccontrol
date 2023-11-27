@@ -17,6 +17,6 @@ export class DeleteClinicService {
     }
 
     // Delete clinic
-    return await this.clinicDatabaseRepository.deleteClinic(isClinicExists.name, isClinicExists.psychologistId);
+    return await this.clinicDatabaseRepository.deleteClinic(isClinicExists.id);
   }
 }

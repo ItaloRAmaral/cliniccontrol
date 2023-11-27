@@ -73,17 +73,16 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     this.clinics[clinicIndex] = updatedClinic;
   }
 
-  async deleteClinic(name: string, psychologistId: string): Promise<DeletedClinicInfo> {
-    const isClinicExists = await this.findClinicByNameAndPsychologistId(
-      name,
-      psychologistId
+  async deleteClinic(id: string): Promise<DeletedClinicInfo> {
+    const isClinicExists = await this.findClinicById(
+      id
     );
 
     if (!isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
     }
 
-    this.clinics = this.clinics.filter((clinic) => clinic.name !== name || clinic.psychologistId !== psychologistId);
+    this.clinics = this.clinics.filter((clinic) => clinic.id !== id);
     return {
       deletedClinic: isClinicExists
     }
