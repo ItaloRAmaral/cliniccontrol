@@ -1,70 +1,39 @@
 import { faker } from '@faker-js/faker';
 import request from 'supertest';
 
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Test } from '@nestjs/testing';
 
 import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
-import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
 
-import { ClinicFactory } from '../../../../../../tests/factories/make-clinic';
 import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
-import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
-import { ApiModule } from '../../../api.module';
+import { setupE2ETest } from '../../../shared/utils/e2e-tests-initial-setup';
 
 describe('[E2E] - Delete Psychologist Account', () => {
   let prisma: PostgreSqlPrismaOrmService;
   let app: INestApplication;
 
   let psychologistFactory: PsychologistFactory;
-  let clinicFactory: ClinicFactory;
   let jwt: JwtService;
 
-  let id: string;
   let access_token: string;
   let invalid_access_token: string;
   let psychologist: PsychologistEntity;
   let hashedPassword: string;
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [ApiModule, DatabaseRepositoriesModule],
-      providers: [PsychologistFactory, ClinicFactory],
-    }).compile();
+    const setup = await setupE2ETest();
+    prisma = setup.prisma;
+    app = setup.app;
+    psychologistFactory = setup.psychologistFactory;
 
-    app = moduleRef.createNestApplication();
+    jwt = setup.jwt;
+    access_token = setup.access_token;
+    invalid_access_token = setup.invalid_access_token;
 
-    prisma = moduleRef.get(PostgreSqlPrismaOrmService);
-
-    clinicFactory = moduleRef.get(ClinicFactory);
-    psychologistFactory = moduleRef.get(PsychologistFactory);
-    jwt = moduleRef.get(JwtService);
-
-    // Necessary to validate dto route params in controller
-    app.useGlobalPipes(new ValidationPipe());
-
-    await app.init();
-
-    // hashing a static known password to use in tests
-    const bcrypt = new BcryptHasherService();
-    const password = faker.internet.password({ length: 8 });
-    hashedPassword = await bcrypt.hash(password);
-
-    // creating a psychologist account to use in tests
-    psychologist = await psychologistFactory.makePrismaPsychologist({
-      password: hashedPassword,
-    });
-
-    id = psychologist.id;
-    access_token = jwt.sign({
-      id,
-      name: psychologist.name,
-      email: psychologist.email,
-    });
-
-    invalid_access_token = jwt.sign({ id });
+    psychologist = setup.psychologist;
+    hashedPassword = setup.hashedPassword;
   });
 
   it('[DELETE] - Should return an error when trying to delete a psychologist without access_token', async () => {
@@ -106,9 +75,20 @@ describe('[E2E] - Delete Psychologist Account', () => {
   });
 
   it('[DELETE] - Should successfully delete a psychologist account with no associated clinics', async () => {
+    const newPsychologist = await psychologistFactory.makePrismaPsychologist({
+      password: hashedPassword,
+      email: faker.internet.email(),
+    });
+
+    const new_access_token = jwt.sign({
+      id: newPsychologist.id,
+      name: newPsychologist.name,
+      email: newPsychologist.email,
+    });
+
     const response = await request(app.getHttpServer())
-      .delete(`/psychologist/${psychologist.email}/delete`)
-      .set('Authorization', `Bearer ${access_token}`);
+      .delete(`/psychologist/${newPsychologist.email}/delete`)
+      .set('Authorization', `Bearer ${new_access_token}`);
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Psychologist deleted successfully');
@@ -116,28 +96,16 @@ describe('[E2E] - Delete Psychologist Account', () => {
     expect(response.body.data.associatedClinics).toHaveLength(0);
 
     const deletedPsychologist = await prisma['psychologist'].findUnique({
-      where: { id },
+      where: { id: newPsychologist.id },
     });
 
     expect(deletedPsychologist).toBeNull();
   });
 
   it('[DELETE] - Should successfully delete a psychologist account with associated clinics', async () => {
-    const newPsychologist = await psychologistFactory.makePrismaPsychologist({
-      password: hashedPassword,
-    });
-
-    const new_access_token = jwt.sign({
-      id,
-      name: psychologist.name,
-      email: psychologist.email,
-    });
-
-    await clinicFactory.makePrismaClinic({ psychologistId: newPsychologist.id });
-
     const response = await request(app.getHttpServer())
       .delete(`/psychologist/${psychologist.email}/delete`)
-      .set('Authorization', `Bearer ${new_access_token}`);
+      .set('Authorization', `Bearer ${access_token}`);
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Psychologist deleted successfully');
@@ -145,12 +113,12 @@ describe('[E2E] - Delete Psychologist Account', () => {
     expect(response.body.data.associatedClinics).not.toHaveLength(0);
 
     const deletedPsychologist = await prisma['psychologist'].findUnique({
-      where: { id: newPsychologist.id },
+      where: { id: psychologist.id },
       include: { clinic: true },
     });
 
     const deletedClinic = await prisma['clinic'].findFirst({
-      where: { psychologistId: newPsychologist.id },
+      where: { psychologistId: psychologist.id },
     });
 
     expect(deletedPsychologist).toBeNull();

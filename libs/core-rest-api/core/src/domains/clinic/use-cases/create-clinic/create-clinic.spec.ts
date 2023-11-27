@@ -25,7 +25,7 @@ describe('[clinic] Create Clinic Service', () => {
   it('should create a new clinic', async () => {
     const createClinic = await service.execute(fakeClinic);
 
-    const clinic = await databaseRepository.findClinicByNameAndPsychologistId(createClinic.name, createClinic.psychologistId);
+    const clinic = await databaseRepository.findClinicById(createClinic.id);
 
     expect(clinic?.name).toEqual(createClinic.name);
     expect(createClinic.name).toEqual(fakeClinic.name);

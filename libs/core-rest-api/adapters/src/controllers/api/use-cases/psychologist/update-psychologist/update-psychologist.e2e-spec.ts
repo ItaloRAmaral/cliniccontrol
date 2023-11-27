@@ -1,59 +1,30 @@
-import { faker } from '@faker-js/faker';
 import request from 'supertest';
 
 import { INestApplication } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { Test } from '@nestjs/testing';
-
-import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
-import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
 
 import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
-import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
-import { ApiModule } from '../../../api.module';
+import { setupE2ETest } from '../../../shared/utils/e2e-tests-initial-setup';
 
 describe('[E2E] - Update Psychologist Account', () => {
   let app: INestApplication;
   let psychologistFactory: PsychologistFactory;
-  let jwt: JwtService;
 
   let id: string;
   let access_token: string;
   let invalid_access_token: string;
-  let psychologist: PsychologistEntity;
   let password: string;
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [ApiModule, DatabaseRepositoriesModule],
-      providers: [PsychologistFactory],
-    }).compile();
+    const setup = await setupE2ETest();
+    app = setup.app;
 
-    app = moduleRef.createNestApplication();
+    psychologistFactory = setup.psychologistFactory;
 
-    psychologistFactory = moduleRef.get(PsychologistFactory);
-    jwt = moduleRef.get(JwtService);
+    id = setup.id;
+    password = setup.password;
 
-    await app.init();
-
-    // hashing a static known password to use in tests
-    const bcrypt = new BcryptHasherService();
-    password = faker.internet.password({ length: 8 });
-    const hashedPassword = await bcrypt.hash(password);
-
-    // creating a psychologist account to use in tests
-    psychologist = await psychologistFactory.makePrismaPsychologist({
-      password: hashedPassword,
-    });
-
-    id = psychologist.id;
-    access_token = jwt.sign({
-      id,
-      name: psychologist.name,
-      email: psychologist.email,
-    });
-
-    invalid_access_token = jwt.sign({ id });
+    access_token = setup.access_token;
+    invalid_access_token = setup.invalid_access_token;
   });
 
   it('[PATCH] - Should successfully update a psychologist account', async () => {
@@ -183,8 +154,10 @@ describe('[E2E] - Update Psychologist Account', () => {
       .send(updateInfos);
 
     expect(response.statusCode).toBe(400);
-    expect(response.text).toBe(
-      '{"message":"Validation failed","causes":[{"property":"name","value":123,"constraints":{"isString":"name must be a string"}},{"property":"email","value":123,"constraints":{"isString":"email must be a string"}},{"property":"price","value":"123","constraints":{"isNumber":"price must be a number conforming to the specified constraints"}}]}'
-    );
+    expect(response.body.message).toEqual([
+      'name must be a string',
+      'email must be a string',
+      'price must be a number conforming to the specified constraints',
+    ]);
   });
 });
