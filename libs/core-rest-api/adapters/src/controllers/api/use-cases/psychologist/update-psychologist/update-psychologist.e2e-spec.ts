@@ -9,7 +9,7 @@ describe('[E2E] - Update Psychologist Account', () => {
   let app: INestApplication;
   let psychologistFactory: PsychologistFactory;
 
-  let id: string;
+  let psychologistId: string;
   let access_token: string;
   let invalid_access_token: string;
   let password: string;
@@ -20,7 +20,7 @@ describe('[E2E] - Update Psychologist Account', () => {
 
     psychologistFactory = setup.psychologistFactory;
 
-    id = setup.id;
+    psychologistId = setup.id;
     password = setup.password;
 
     access_token = setup.access_token;
@@ -34,7 +34,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
@@ -48,7 +48,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .send(updateInfos);
 
     expect(response.statusCode).toBe(401);
@@ -61,7 +61,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .set('Authorization', `Bearer ${invalid_access_token}`)
       .send(updateInfos);
 
@@ -87,7 +87,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     const updateInfos = {};
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
@@ -105,7 +105,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
@@ -119,7 +119,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
@@ -133,7 +133,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
@@ -149,7 +149,7 @@ describe('[E2E] - Update Psychologist Account', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/${id}/update`)
+      .patch(`/psychologist/${psychologistId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
