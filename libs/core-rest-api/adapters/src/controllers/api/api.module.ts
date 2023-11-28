@@ -15,6 +15,8 @@ import { CreateClinicController } from './use-cases/clinic/create-clinic/create-
 import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
 import { DeleteClinicController } from './use-cases/clinic/delete-clinic/delete-clinic.controller';
 import { NestjsDeleteClinicService } from './use-cases/clinic/delete-clinic/nestjs-delete-clinic.service';
+import { NestjsUpdateClinicService } from './use-cases/clinic/update-clinic/nestjs-update-clinic.service';
+import { UpdateClinicController } from './use-cases/clinic/update-clinic/update-clinic.controller';
 import { AuthenticatePsychologistController } from './use-cases/psychologist/authenticate-psychologist/authenticate-psychologist.controller';
 import { NestjsAuthenticatePsychologistService } from './use-cases/psychologist/authenticate-psychologist/nestjs-authenticate-psychologist.service';
 import { CreatePsychologistController } from './use-cases/psychologist/create-psychologist/create-psychologist.controller';
@@ -35,21 +37,23 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     CryptographyModule,
   ],
   controllers: [
-    CreatePsychologistController,
     AuthenticatePsychologistController,
-    CreateClinicController,
-    DeleteClinicController,
+    CreatePsychologistController,
     UpdatePsychologistController,
     DeletePsychologistController,
+    CreateClinicController,
+    UpdateClinicController,
+    DeleteClinicController
   ],
   providers: [
     BcryptHasherService,
     PostgreSqlPrismaOrmService,
-    NestjsCreatePsychologistService,
     NestjsAuthenticatePsychologistService,
+    NestjsCreatePsychologistService,
     NestjsUpdatePsychologistService,
     NestjsDeletePsychologistService,
     NestjsCreateClinicService,
+    NestjsUpdateClinicService,
     NestjsDeleteClinicService
   ],
 })
