@@ -28,6 +28,19 @@ Authorization: Bearer {{authToken}}
 
 ####
 
+# @name update_clinic
+
+PATCH http://localhost:3333/core/clinic/8d40bb8d-fd0b-4753-83cf-87bac7b3c6e7/update HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "New Name Clinic"
+}
+
+
+####
+
 # @name delete_clinic
 
 DELETE http://localhost:3333/core/clinic/159b4134-9d2a-4198-98c3-ac031eb31998/delete HTTP/1.1
