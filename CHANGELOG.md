@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.4.0...cliniccontrol@1.5.0-beta.0) (2023-12-10)
+
+### Features
+
+- **CC-83:** add update clinic controller and service ([03dc867](https://github.com/ItaloRAmaral/cliniccontrol/commit/03dc867eb6c7cb4035334ddaf3f8ee9eb6415171))
+- **CC-83:** add update clinic in api module ([1b7584a](https://github.com/ItaloRAmaral/cliniccontrol/commit/1b7584adbb6e3ba0ab9b7586a06eecd196748eda))
+- **CC-83:** add update clinic in client-http ([75984d9](https://github.com/ItaloRAmaral/cliniccontrol/commit/75984d97db95624e23a95e737bcb07b53323fc49))
+
 ## [1.4.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.4.0-beta.0...cliniccontrol@1.4.0) (2023-11-27)
 
 **Note:** Version bump only for package cliniccontrol
