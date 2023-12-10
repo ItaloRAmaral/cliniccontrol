@@ -11,29 +11,31 @@
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/core">Core Docs</a>
     -
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/adapters">Adapters Docs</a>
+    -
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol">Home</a>
   </p>
 </p>
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
-- [📌 Introduction](#-introduction)
-- [🤔 Why "Core Rest Api Service"?](#-why-core-rest-api-service)
-- [📂 Folder Structure](#-folder-structure)
-- [📚 Definitions](#-definitions)
+- 📌 [Introduction](#introduction)
+- 🤔 [Why "Core Rest Api Service"?](#why-core-rest-api-service)
+- 🗂️ [Folder Structure](#folder-structure)
+- 📚 [Definitions](#definitions)
 
-## 📌 Introduction
+<h3 id="introduction">📌 Introduction</h3>
 
 This library provides the core of the <strong>core-rest-api service</strong>, containing the domain logic and the business rules of the application.
 
 The domain logic is implemented using the <strong>Hexagonal Architecture</strong>, which separates the core logic of the application from the services that it uses, making the system more maintainable, scalable, and testable.
 
-## 🤔 Why "Core Rest API Service"?
+<h3 id="why-core-rest-api-service">🤔 Why "Core Rest Api Service"?</h3>
 
 The name core-rest-api service was chosen to emphasize its role as the central unit handling RESTful APIs that govern the core entities—psychologists, patients, appointments, and clinics of our system. It is the core of the system, the heart of the application.
 
-## 📂 Folder Structure
+<h3 id="folder-structure">🗂️ Folder Structure</h3>
 
 ```
 core-rest-api
@@ -65,7 +67,7 @@ core-rest-api
             └── (under development)
 ```
 
-## 📚 Definitions
+<h3 id="definitions">📚 Definitions</h3>
 
 `core/`
 
@@ -126,10 +128,6 @@ Controllers act as driven ports in the Hexagonal Architecture. They take externa
 `adapters/src/database/`
 
 This folder contains the actual implementation of your repositories, making it the adapter that plugs into your driving ports. It could include various mechanisms for accessing databases, third-party services, or other storage solutions.
-
-`adapters/src/events (?)`
-
-This is potentially where you could place any event-driven external interfaces or additional driven ports, like message queue handlers or WebSocket handlers, should your application require them.
 
 <!-- ## 🎯 Objectives
 

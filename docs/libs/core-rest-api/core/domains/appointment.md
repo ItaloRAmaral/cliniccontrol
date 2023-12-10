@@ -2,9 +2,9 @@
 
 <p align="center">
   <h1 align="center"> - Appointment Core Domain -</h3>
+  Insight into the Appointment Core Domain of the Clinic Control Project: Detailed Guide to Appointment Management and System Integration
 
   <p align="center">
-    <br/>
     <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -

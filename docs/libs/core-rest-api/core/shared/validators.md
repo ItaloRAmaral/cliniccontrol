@@ -2,28 +2,29 @@
 
 <p align="center">
   <h1 align="center"> - Shared Validators -</h3>
+  Navigating Through the Shared Validation Utilities of the Clinic Control Project: Streamlining Data Validation Across the Application.
 
   <p align="center">
-    Your Guide to Centralized Validation Logic
-    <br/>
     <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
-    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/core">Core Docs</a>
+    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>
     -
-    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/adapters">Adapters Docs</a>
+    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Request Feature</a>
+    -
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol">Home</a>
   </p>
 </p>
 
 ---
 
-## 📚 Table of Contents
+## 📋 Table of Contents
 
-- [applicationValidateOrReject](#applicationValidateOrReject)
+- [✅ ApplicationValidateOrReject](#applicationValidateOrReject)
 
 ---
 
-## applicationValidateOrReject
+<h2 id="applicationValidateOrReject"> ✅ ApplicationValidateOrReject</h2>
 
 The function **_applicationValidateOrReject_** is a utility function designed to encapsulate object validation logic using the class-validator library to validate properties against a series of decorators and constraints. This is particularly useful for maintaining data integrity and enforcing business rules in your application.
 

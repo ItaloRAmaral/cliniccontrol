@@ -2,9 +2,9 @@
 
 <p align="center">
   <h1 align="center"> - Patient Core Domain -</h3>
+  A Comprehensive Overview of the Patient Core Domain in Clinic Control Project: Deep Dive into Patient Management and Data Structure
 
   <p align="center">
-    <br/>
     <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -

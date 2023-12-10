@@ -24,30 +24,30 @@
 
 </div>
 
-## Table Of Contents
+## 📋 Table Of Contents
 
-- [About the Project](#about-the-project)
-  - [Features](#features)
-  - [Project Structure](#project-structure)
-    - [Definitions](#definitions)
-  - [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Roadmap](#roadmap)
-<!-- - [Contributing](#contributing)
-- [License](#license) -->
-- [Authors](#authors)
-- [Acknowledgements](#acknowledgements)
+- [📖 About the Project](#about-the-project)
+  - [✨ Features](#features)
+  - [🏗️ Project Structure](#project-structure)
+    - [📚 Definitions](#definitions)
+  - [🛠️ Built With](#built-with)
+- [🚀 Getting Started](#getting-started)
+  - [🔧 Prerequisites](#prerequisites)
+  - [⚙️ Installation](#installation)
+- [▶️ Usage](#usage)
+- [🗺️ Roadmap](#roadmap)
+<!-- - [🤝 Contributing](#contributing)
+- [📜 License](#license) -->
+- [👥 Authors](#authors)
+- [📝 Acknowledgements](#acknowledgements)
 
-## About The Project
+<h2 id="about-the-project">📖 About The Project</h2>
 
 <!-- ![Screen Shot](images/screenshot.png) -->
 
 In the fast-paced and demanding field of psychology, professionals need an effective way to manage their practices without getting bogged down by administrative tasks. Our project aims to simplify and streamline these processes so that psychologists can focus more on what really matters: their patients.
 
-#### Features
+<h3 id="features">✨ Features</h3>
 
 - <b>⏳- Schedule Management:</b> Easily schedule appointments, set reminders, and automate cancellations to manage your time efficiently.
 - <b>⏳- Cost Tracking:</b> Accurately record and analyze costs such as rent, utilities, and supplies, to get a clear picture of your overhead expenses.
@@ -56,7 +56,7 @@ In the fast-paced and demanding field of psychology, professionals need an effec
 - <b>⏳- Data Visualization:</b> Use intuitive graphs and charts to understand your practice's performance metrics, like client retention, earnings, and more.
 - <b>⏳- User-Friendly Interface:</b> Designed with user experience in mind, making it easy for anyone to use, even with little to no technical expertise.
 
-## Project Structure
+<h3 id="project-structure">🏗️ Project Structure</h3>
 
 ```
 cliniccontrol
@@ -83,7 +83,7 @@ We have chosen to use a monorepo structure for this project, which allows us to 
 
 Along with the monorepo structure, we have also chosen to use [Hexagonal Architecture](https://github.com/Sairyss/domain-driven-hexagon), which separates the core logic of the application from the services that it uses, making the system more maintainable, scalable, and testable.
 
-### Definitions
+<h3 id="definitions">📚 Definitions</h3>
 
 ### Apps
 
@@ -107,7 +107,7 @@ This directory houses the domain-specific logic, business rules, and use-cases o
 
 Here you will find various adapters that act as the bridge between your core business logic and external services or databases. Whether it's a database driver, third-party API, or other kinds of service integrations, this folder enables seamless connectivity without affecting the core domain logic.
 
-## Built With
+<h3 id="built-with">🛠️ Built With</h3>
 
 This project leverages a robust and modern tech stack to deliver a fast, secure, and scalable solution. Below are some of the key technologies, frameworks, and architectures we've used:
 
@@ -128,11 +128,11 @@ This project leverages a robust and modern tech stack to deliver a fast, secure,
 
 - [NestJS:](https://nestjs.com) A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
 
-## Getting Started
+<h2 id="getting-started">🚀 Getting Started</h2>
 
 _under development_
 
-### Prerequisites
+<h3 id="prerequisites">🔧 Prerequisites</h3>
 
 In order to run the application the following should have been installed on your local machine:
 
@@ -146,18 +146,55 @@ In order to run the application the following should have been installed on your
 - [Nx Console Plugin](https://nx.dev/latest/react/getting-started/console)
 - [Code Spell Plugin](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 - [Excalidraw Plugin](https://marketplace.visualstudio.com/items?itemName=ViktorQvarfordt.vscode-excalidraw)
+- [Docker Plugin](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 
 ### Installation
+
+<h3 id="installation">⚙️ Installation</h3>
 
 - Fork this repository
 - Clone the forked repository to your local machine
 - Run `pnpm install` to install all dependencies
 
-## Usage
+### Project Setup
+
+<h3 id=""></h3>
+
+- Run `pnpm run env:setup` to create the `.env` file and set the environment variables
+- To create `JWT_PRIVATE_KEY` and `JWT_PUBLIC_KEY` follow the steps below:
+
+  - Run the following commands to generate **_private_** and **_public_** keys:
+
+  ```bash
+  openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+  openssl rsa -pubout -in private_key.pem -out public_key.pem
+  ```
+
+  - Run the following commands to generate **_private_** and **_public_** keys in base64:
+
+  ```bash
+  base64 -i private_key.pem > private_key-base64.txt
+  base64 -i public_key.pem > public_key-base64.txt
+  ```
+
+  - Copy the private key in base64 and paste it in the `.env` file as the value of `JWT_PRIVATE_KEY`
+  - Copy the public key and paste it in the `.env` file as the value of `JWT_PUBLIC_KEY`
+
+- To setup `core-rest-api service` containers and database, follow the steps below:
+
+```bash
+  pnpm run core-setup --action=migrate,generate   # setup docker container and run migrations and generate prisma client
+
+  pnpm exec nx run core-rest-api:serve   # start the core-rest-api service in development mode
+```
+
+###### For more information about scripts and commands, please checkout to the [scripts]()
+
+<h2 id="usage">▶️ Usage</h2>
 
 _under development_
 
-## Roadmap
+<h2 id="roadmap"> 🗺️ Roadmap</h2>
 
 See the [open issues](https://github.com/italoRAmaral/cliniccontrol/issues) for a list of proposed features (and known issues).
 
@@ -173,13 +210,13 @@ _under development_ -->
 
 Distributed under the MIT License. See [LICENSE](https://github.com/italoRAmaral/cliniccontrol/blob/main/LICENSE.md) for more information. -->
 
-## Authors
+<h2 id="authors">👥 Authors</h2>
 
 - **[Italo Amaral](https://github.com/italoRAmaral)** - _FullStack Developer_ - _Owner_
 - **[Luana Vefago](https://github.com/luanavfg)** - _FullStack Developer_ - _Owner_
 - **[Aline Crestani](https://www.linkedin.com/in/aline-crestani/)** - _Designer & UX/UI_ - _Owner_
 
-## Acknowledgements/References
+<h2 id="acknowledgements">📝 Acknowledgements/References</h2>
 
 - [ImgShields](https://shields.io/)
 - [Explore](https://github.com/amaralc/explore)

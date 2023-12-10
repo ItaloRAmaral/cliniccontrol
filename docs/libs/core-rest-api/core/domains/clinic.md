@@ -2,9 +2,8 @@
 
 <p align="center">
   <h1 align="center"> - Clinic Core Domain -</h3>
-
+   Delving Into the Clinic Core Domain of the Clinic Control Project: Exploring the Architecture and Functionality of Clinic Management
   <p align="center">
-    <br/>
     <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -

@@ -8,22 +8,24 @@
     <br/>
     <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs"><strong><< Index</strong></a>
     -
-    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/core">Core Docs</a>
+    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Report Bug</a>
     -
-    <a href="https://github.com/ItaloRAmaral/cliniccontrol/tree/main/docs/libs/core-rest-api/adapters">Adapters Docs</a>
+    <a href="https://github.com/italoRAmaral/cliniccontrol/issues">Request Feature</a>
+    -
+    <a href="https://github.com/ItaloRAmaral/cliniccontrol">Home</a>
   </p>
 </p>
 
 ---
 
-## 📚 Core Rest Api Library Index
+## 📋 Table of Contents
 
-- [Core Domains](./domains/)
-  - [Appointment](./domains/appointment.md)
-  - [Clinic](./domains/clinic.md)
-  - [Patient](./domains/patient.md)
-  - [Psychologist](./domains/appointment.md)
-- [Shared](./shared/)
-  - [Errors](./shared/errors.md)
-  - [Utils](./shared/utils.md)
-  - [Validators](./shared/validators.md)
+- [📂 Core Domains](./domains/)
+  - [📅 Appointment](./domains/appointment.md)
+  - [🏥 Clinic](./domains/clinic.md)
+  - [👤 Patient](./domains/patient.md)
+  - [🧑‍⚕️ Psychologist](./domains/psychologist.md)
+- [🔄 Shared](./shared/)
+  - [❌ Errors](./shared/errors.md)
+  - [🛠 Utils](./shared/utils.md)
+  - [🔍 Validators](./shared/validators.md)
