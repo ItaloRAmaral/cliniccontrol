@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.5.0...cliniccontrol@1.6.0-beta.0) (2023-12-11)
+
+### Features
+
+- **CC-102:** criação da entidade, repositorio e dtos de criação de registro de consulta ([1e80ff6](https://github.com/ItaloRAmaral/cliniccontrol/commit/1e80ff67a6f5976d7bbef8fa785e1532394022a3))
+
 ## [1.5.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.5.0-beta.1...cliniccontrol@1.5.0) (2023-12-10)
 
 **Note:** Version bump only for package cliniccontrol
