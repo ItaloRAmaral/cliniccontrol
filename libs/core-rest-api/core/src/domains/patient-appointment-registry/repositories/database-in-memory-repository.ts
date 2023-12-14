@@ -1,25 +1,25 @@
 import { ConflictException } from '@nestjs/common';
 import { PATIENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
 import { PatientDatabaseRepository } from '../../patient/repositories/database-repository';
-import { PatientAppointmentsRegistryEntity } from '../entities/registry/entity';
+import { PatientAppointmentRegistryEntity } from '../entities/registry/entity';
 import {
-  ICreatePatientAppointmentsRegistry,
+  ICreatePatientAppointmentRegistry,
   IFindPatientAppointmentRegistryByIdAndDate,
   IFindPatientAppointmentRegistryByIdAndPeriod,
   IUpdatePatientAppointmentRegistry,
 } from '../interfaces/registry';
-import { PatientAppointmentsRegistryRepository } from './database-repository';
+import { PatientAppointmentRegistryDatabaseRepository } from './database-repository';
 
-export class InMemoryPatientAppointmentsRegistryRepository
-  implements PatientAppointmentsRegistryRepository
+export class InMemoryPatientAppointmentRegistryDatabaseRepository
+  implements PatientAppointmentRegistryDatabaseRepository
 {
-  private patientAppointmentsRegistry: PatientAppointmentsRegistryEntity[] = [];
+  private patientAppointmentsRegistry: PatientAppointmentRegistryEntity[] = [];
 
   constructor(private patientDatabaseRepository: PatientDatabaseRepository) {}
 
   async createPatientAppointmentRegistry(
-    params: ICreatePatientAppointmentsRegistry
-  ): Promise<PatientAppointmentsRegistryEntity> {
+    params: ICreatePatientAppointmentRegistry
+  ): Promise<PatientAppointmentRegistryEntity> {
     const isPatientExists = await this.patientDatabaseRepository.findPatientById(
       params.patientId
     );
@@ -28,7 +28,7 @@ export class InMemoryPatientAppointmentsRegistryRepository
       throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
     }
 
-    const newPatientAppointmentRegistry = new PatientAppointmentsRegistryEntity(params);
+    const newPatientAppointmentRegistry = new PatientAppointmentRegistryEntity(params);
     this.patientAppointmentsRegistry.push(newPatientAppointmentRegistry);
 
     return newPatientAppointmentRegistry;
@@ -36,7 +36,7 @@ export class InMemoryPatientAppointmentsRegistryRepository
 
   async getAllAppointmentsRegistryByPatient(
     patientId: string
-  ): Promise<PatientAppointmentsRegistryEntity[] | null> {
+  ): Promise<PatientAppointmentRegistryEntity[] | null> {
     return (
       this.patientAppointmentsRegistry.filter(
         (patientAppointmentRegistry) => patientAppointmentRegistry.patientId === patientId
@@ -46,7 +46,7 @@ export class InMemoryPatientAppointmentsRegistryRepository
 
   async findPatientAppointmentRegistryById(
     id: string
-  ): Promise<PatientAppointmentsRegistryEntity | null> {
+  ): Promise<PatientAppointmentRegistryEntity | null> {
     return (
       this.patientAppointmentsRegistry.find(
         (patientAppointmentRegistry) => patientAppointmentRegistry.id === id
@@ -56,7 +56,7 @@ export class InMemoryPatientAppointmentsRegistryRepository
 
   async findPatientAppointmentRegistryByIdAndDate(
     params: IFindPatientAppointmentRegistryByIdAndDate
-  ): Promise<PatientAppointmentsRegistryEntity | null> {
+  ): Promise<PatientAppointmentRegistryEntity | null> {
     return (
       this.patientAppointmentsRegistry.find(
         (patientAppointmentRegistry) =>
@@ -68,7 +68,7 @@ export class InMemoryPatientAppointmentsRegistryRepository
 
   async findPatientAppointmentRegistryByIdAndPeriod(
     params: IFindPatientAppointmentRegistryByIdAndPeriod
-  ): Promise<PatientAppointmentsRegistryEntity | null> {
+  ): Promise<PatientAppointmentRegistryEntity | null> {
     return (
       this.patientAppointmentsRegistry.find(
         (patientAppointmentRegistry) =>
@@ -81,7 +81,7 @@ export class InMemoryPatientAppointmentsRegistryRepository
 
   async updatePatientAppointmentRegistry(
     params: IUpdatePatientAppointmentRegistry
-  ): Promise<PatientAppointmentsRegistryEntity> {
+  ): Promise<PatientAppointmentRegistryEntity> {
     const patientAppointmentRegistry = await this.findPatientAppointmentRegistryById(
       params.id
     );

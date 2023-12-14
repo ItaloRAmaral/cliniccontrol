@@ -1,6 +1,6 @@
 import { IsDate, IsJSON, IsOptional, IsString } from 'class-validator';
 
-export class PatientAppointmentsRegistryDto {
+export class PatientAppointmentRegistryDto {
   @IsString()
   id!: string;
 
