@@ -1,0 +1,52 @@
+import { ConflictException } from "@nestjs/common";
+import { plainToInstance } from "class-transformer";
+import { PATIENT_ERROR_MESSAGES, PSYCHOLOGIST_ERROR_MESSAGES } from "../../../../shared/errors/error-messages";
+import { applicationValidateOrReject } from "../../../../shared/validators/validate-or-reject";
+import { PatientDatabaseRepository } from "../../../patient/repositories/database-repository";
+import { PsychologistDatabaseRepository } from "../../../psychologist/repositories/database-repository";
+import { PatientAppointmentRegistryEntity } from "../../entities/registry/entity";
+import { PatientAppointmentRegistryDatabaseRepository } from "../../repositories/database-repository";
+import { CreatePatientAppointmentRegistryDto } from "./create-appointment-registry-dto";
+
+export class CreatePatientAppointmentRegistryService {
+  constructor(private psychologistDatabaseRepository: PsychologistDatabaseRepository, private patientDatabaseRepository: PatientDatabaseRepository, private patientAppointmentRegistryDatabaseRepository: PatientAppointmentRegistryDatabaseRepository) {}
+
+  async execute(
+    createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryDto
+  ): Promise<PatientAppointmentRegistryEntity> {
+    // Validate
+    const createPatientAppointmentRegistryDtoInstance = plainToInstance(
+      CreatePatientAppointmentRegistryDto,
+      createPatientAppointmentRegistryDto
+    );
+    await applicationValidateOrReject(createPatientAppointmentRegistryDtoInstance);
+
+    const isPatientExists =
+      await this.patientDatabaseRepository.findPatientById(
+        createPatientAppointmentRegistryDto.patientId
+      );
+      const isPsychologistExists =
+      await this.psychologistDatabaseRepository.findPsychologistById(
+        createPatientAppointmentRegistryDto.psychologistId
+      );
+
+    if (!isPatientExists) {
+      throw new ConflictException(
+        PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']
+      );
+    }
+    if (!isPsychologistExists) {
+      throw new ConflictException(
+        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
+      );
+    }
+
+    // Create
+    const patientAppointmentRegistry = await this.patientAppointmentRegistryDatabaseRepository.createPatientAppointmentRegistry({
+      ...createPatientAppointmentRegistryDto,
+    });
+
+    return patientAppointmentRegistry;
+  }
+
+}
