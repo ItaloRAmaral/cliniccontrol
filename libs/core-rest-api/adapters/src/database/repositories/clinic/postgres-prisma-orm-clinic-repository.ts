@@ -67,6 +67,7 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
   async findClinicByPsychologistId(
     psychologistId: string
   ): Promise<ClinicEntity[] | null> {
+    console.log(psychologistId)
     throw new Error('Method not implemented.');
   }
 
@@ -114,6 +115,7 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
   async deleteAllClinicsByPsychologistId(
     psychologistId: string
   ): Promise<ClinicEntity[]> {
+    console.log(psychologistId)
     throw new Error('Method not implemented.');
   }
 }

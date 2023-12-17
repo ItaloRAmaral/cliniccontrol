@@ -87,7 +87,7 @@ export class PostgresqlPrismaOrmPsychologistRepository
     await this.postgreSqlPrismaOrmService['psychologist'].update(toPrismaEntity);
   }
 
-  async deletePsychologist(email: string): Promise<any> {
+  async deletePsychologist(email: string) {
     const psychologist = await this.postgreSqlPrismaOrmService['psychologist'].findUnique(
       {
         where: { email: email },
