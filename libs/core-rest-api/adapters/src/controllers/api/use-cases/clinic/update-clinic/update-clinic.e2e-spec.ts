@@ -3,27 +3,19 @@ import request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 
 import { ClinicEntity } from '@clinicControl/core-rest-api/core/src/domains/clinic/entities/clinic/entity';
-import { PsychologistFactory } from '../../../../../../tests/factories/make-psychologist';
 import { setupE2ETest } from '../../../shared/utils/e2e-tests-initial-setup';
 
 describe('[E2E] - Update Clinic', () => {
   let app: INestApplication;
-  let psychologistFactory: PsychologistFactory;
   let clinic: ClinicEntity
-  let psychologistId: string;
   let access_token: string;
   let invalid_access_token: string;
-  let password: string;
 
   beforeAll(async () => {
     const setup = await setupE2ETest();
     app = setup.app;
 
-    psychologistFactory = setup.psychologistFactory;
-
     clinic = setup.clinic
-    psychologistId = setup.id;
-    password = setup.password;
 
     access_token = setup.access_token;
     invalid_access_token = setup.invalid_access_token;
