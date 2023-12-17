@@ -15,11 +15,11 @@ export class UpdatePatientDto {
 
   @IsOptional()
   @IsString()
-  CPF?: string;
+  cpf?: string;
 
   @IsOptional()
   @IsMobilePhone('pt-BR')
-  phone?: string;
+  telephone?: string;
 
   @IsOptional()
   @IsEnum(PaymentMethod)

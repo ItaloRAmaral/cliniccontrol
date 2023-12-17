@@ -10,8 +10,8 @@ describe('[patient] Delete Patient Service', () => {
   const fakePatient = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    phone: '+55 11 911111111',
+    cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
+    telephone: '+55 11 911111111',
     paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),
@@ -36,8 +36,6 @@ describe('[patient] Delete Patient Service', () => {
   });
 
   it('should throw conflict exception if patient do not exist', async () => {
-    await expect(service.execute(fakePatient.email)).rejects.toThrow(
-      ConflictException
-    );
+    await expect(service.execute(fakePatient.email)).rejects.toThrow(ConflictException);
   });
 });

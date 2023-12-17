@@ -33,19 +33,19 @@ export class PatientEntity extends PatientDto {
   }
 
   public get getCPF(): string {
-    return this.CPF;
+    return this.cpf;
   }
 
   public set setCPF(CPF: string) {
-    this.CPF = CPF;
+    this.cpf = CPF;
   }
 
   public get getPhone(): string {
-    return this.phone;
+    return this.telephone;
   }
 
-  public set setPhone(phone: string) {
-    this.phone = phone;
+  public set setPhone(telephone: string) {
+    this.telephone = telephone;
   }
 
   public get getPaymentMethod(): PaymentMethod {
