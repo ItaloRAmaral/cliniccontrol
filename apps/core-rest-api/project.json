@@ -25,6 +25,7 @@
           }
         ],
         "assets": ["apps/core-rest-api/src/assets"],
+        "isolatedConfig": true,
         "webpackConfig": "apps/core-rest-api/webpack.config.js"
       },
       "configurations": {
