@@ -2,3 +2,5 @@
 /dist
 /coverage
 CODEOWNERS
+
+/.nx/cache
