@@ -1,8 +1,10 @@
-import { IsDate, IsJSON, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsObject, IsOptional, IsString } from 'class-validator';
+
+type Registry = Record<string, string>;
 
 export class CreatePatientAppointmentRegistryDto {
-  @IsJSON()
-  registry!: object;
+  @IsObject()
+  registry!: Registry;
 
   @IsString()
   psychologistId!: string;

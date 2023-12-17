@@ -1,6 +1,5 @@
 import { ConflictException } from '@nestjs/common';
 import { PATIENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
-import { PatientDatabaseRepository } from '../../patient/repositories/database-repository';
 import { PatientAppointmentRegistryEntity } from '../entities/registry/entity';
 import {
   ICreatePatientAppointmentRegistry,
@@ -15,19 +14,9 @@ export class InMemoryPatientAppointmentRegistryDatabaseRepository
 {
   private patientAppointmentsRegistry: PatientAppointmentRegistryEntity[] = [];
 
-  constructor(private patientDatabaseRepository: PatientDatabaseRepository) {}
-
   async createPatientAppointmentRegistry(
     params: ICreatePatientAppointmentRegistry
   ): Promise<PatientAppointmentRegistryEntity> {
-    const isPatientExists = await this.patientDatabaseRepository.findPatientById(
-      params.patientId
-    );
-
-    if (!isPatientExists) {
-      throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
-    }
-
     const newPatientAppointmentRegistry = new PatientAppointmentRegistryEntity(params);
     this.patientAppointmentsRegistry.push(newPatientAppointmentRegistry);
 
