@@ -20,10 +20,10 @@ Authorization: Bearer {{authToken}}
 
 {
   "name": "Abigail Doe",
-  "email": "abigail.doe@email.com",
+  "email": "abigail.do2e@email.com",
   "cpf": "123.456.789-00",
   "telephone": "(11) 99999-9999",
   "paymentMethod": "CREDIT_CARD",
   "psychologistId": "{{psychologist_id}}",
-  "clinicId": "200d53ab-3715-4c5e-9eb6-8977659ea3e7"
+  "clinicId": "1fcdadda-31d1-4358-81c7-7011c70e5014"
 }
