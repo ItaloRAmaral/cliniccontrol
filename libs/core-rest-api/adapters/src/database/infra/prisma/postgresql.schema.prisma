@@ -81,9 +81,9 @@ model Patient {
   patientAppointmentsRegistry PatientAppointmentsRegistry[]
 
   psychologistId String       @map("psychologist_id")
-  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id], onDelete: Cascade)
   clinicId       String       @map("clinic_id")
-  clinic         Clinic       @relation(fields: [clinicId], references: [id])
+  clinic         Clinic       @relation(fields: [clinicId], references: [id], onDelete: Cascade)
 
   @@map("patient")
 }
@@ -120,9 +120,9 @@ model PatientAppointmentsRegistry {
   registry  Json     @db.Json
 
   patientId      String       @map("patient_id")
-  patient        Patient      @relation(fields: [patientId], references: [id])
+  patient        Patient      @relation(fields: [patientId], references: [id], onDelete: Cascade)
   psychologistId String       @map("psychologist_id")
-  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id], onDelete: Cascade)
 
   @@map("patient_appointments_registry")
 }
