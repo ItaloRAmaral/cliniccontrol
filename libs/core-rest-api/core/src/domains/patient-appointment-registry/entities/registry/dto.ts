@@ -1,11 +1,16 @@
-import { IsDate, IsJSON, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsObject, IsOptional, IsString } from 'class-validator';
+
+export class Registry {
+  @IsString()
+  observations!: string;
+}
 
 export class PatientAppointmentRegistryDto {
   @IsString()
   id!: string;
 
-  @IsJSON()
-  registry!: object;
+  @IsObject()
+  registry!: Registry;
 
   @IsString()
   psychologistId!: string;

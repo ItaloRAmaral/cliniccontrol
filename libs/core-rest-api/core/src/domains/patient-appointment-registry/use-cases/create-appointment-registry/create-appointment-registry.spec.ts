@@ -26,7 +26,7 @@ import { PsychologistEntity } from '../../../psychologist/entities/psychologist/
 import { CreatePsychologistDto } from '../../../psychologist/use-cases/create-psychologist/create-psychologist-dto';
 import { CreatePatientAppointmentRegistryDto } from './create-appointment-registry-dto';
 
-describe('[] - Create Patient Appointment Registry Service', () => {
+describe('[registry] - Create Patient Appointment Registry Service', () => {
   const fakePatient: CreatePatientDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
@@ -60,7 +60,7 @@ describe('[] - Create Patient Appointment Registry Service', () => {
   beforeAll(async () => {
     clinicRepository = new InMemoryClinicDatabaseRepository();
     psychologistDatabaseRepository = new InMemoryPsychologistDatabaseRepository(
-      clinicRepository
+      clinicRepository,
     );
     patientDatabaseRepository = new InMemoryPatientDatabaseRepository();
 
@@ -69,12 +69,11 @@ describe('[] - Create Patient Appointment Registry Service', () => {
     service = new CreatePatientAppointmentRegistryService(
       psychologistDatabaseRepository,
       patientDatabaseRepository,
-      patientAppointmentRegistryDatabaseRepository
+      patientAppointmentRegistryDatabaseRepository,
     );
 
-    psychologist = await psychologistDatabaseRepository.createPsychologist(
-      fakePsychologist
-    );
+    psychologist =
+      await psychologistDatabaseRepository.createPsychologist(fakePsychologist);
     patient = await patientDatabaseRepository.createPatient(fakePatient);
 
     const registry = {
@@ -90,7 +89,7 @@ describe('[] - Create Patient Appointment Registry Service', () => {
 
   it('should create a new patient appointment registry', async () => {
     const patientAppointmentRegistry = await service.execute(
-      newPatientAppointmentRegistry
+      newPatientAppointmentRegistry,
     );
 
     expect(patientAppointmentRegistry).toBeDefined();
@@ -103,7 +102,7 @@ describe('[] - Create Patient Appointment Registry Service', () => {
     };
 
     await expect(service.execute(patientNotExistParams)).rejects.toThrow(
-      new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND'])
+      new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']),
     );
   });
 
@@ -114,7 +113,7 @@ describe('[] - Create Patient Appointment Registry Service', () => {
     };
 
     await expect(service.execute(psychologistNotExistParams)).rejects.toThrow(
-      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND'])
+      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']),
     );
   });
 });

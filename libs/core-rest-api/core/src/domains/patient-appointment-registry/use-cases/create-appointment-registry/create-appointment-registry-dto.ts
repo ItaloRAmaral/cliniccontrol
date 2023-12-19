@@ -1,6 +1,5 @@
 import { IsDate, IsObject, IsOptional, IsString } from 'class-validator';
-
-type Registry = Record<string, string>;
+import { Registry } from '../../entities/registry/dto';
 
 export class CreatePatientAppointmentRegistryDto {
   @IsObject()
