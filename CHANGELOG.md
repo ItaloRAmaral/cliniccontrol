@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-beta.2](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.1...cliniccontrol@1.6.0-beta.2) (2023-12-20)
+
+### Features
+
+- **CC-104:** create regristry dto ([bdedaba](https://github.com/ItaloRAmaral/cliniccontrol/commit/bdedabaa2f27a82cb15383894394f843bbe932e5))
+- **CC-104:** create regristry service ([4c50d0b](https://github.com/ItaloRAmaral/cliniccontrol/commit/4c50d0b1b02dc398adabfc59508a0abaadd0abb1))
+- **CC-104:** create regristry test ([01a792c](https://github.com/ItaloRAmaral/cliniccontrol/commit/01a792c21f6948246a767b52a2a43e5eeb2041dd))
+
 ## [1.6.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.0...cliniccontrol@1.6.0-beta.1) (2023-12-17)
 
 **Note:** Version bump only for package cliniccontrol
