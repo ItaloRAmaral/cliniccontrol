@@ -1,5 +1,5 @@
 import { Replace } from '../../../shared/utils';
-import { PatientAppointmentRegistryDto } from '../entities/registry/dto';
+import { PatientAppointmentRegistryDto, Registry } from '../entities/registry/dto';
 
 export type IPatientAppointmentRegistryProps = Replace<
   PatientAppointmentRegistryDto,
@@ -7,7 +7,7 @@ export type IPatientAppointmentRegistryProps = Replace<
 >;
 
 export interface ICreatePatientAppointmentRegistry {
-  registry: object;
+  registry: Registry;
   psychologistId: string;
   patientId: string;
 }
@@ -25,6 +25,6 @@ export interface IFindPatientAppointmentRegistryByIdAndPeriod {
 
 export interface IUpdatePatientAppointmentRegistry {
   id: string;
-  registry: object;
+  registry: Registry;
   updatedAt: Date;
 }
