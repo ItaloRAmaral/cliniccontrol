@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto';
 import 'reflect-metadata';
-import { IPatientAppointmentsRegistryProps } from '../../interfaces/registry';
-import { PatientAppointmentsRegistryDto } from './dto';
+import { IPatientAppointmentRegistryProps } from '../../interfaces/registry';
+import { PatientAppointmentRegistryDto, Registry } from './dto';
 
-export class PatientAppointmentsRegistryEntity extends PatientAppointmentsRegistryDto {
-  constructor(props: IPatientAppointmentsRegistryProps) {
+export class PatientAppointmentRegistryEntity extends PatientAppointmentRegistryDto {
+  constructor(props: IPatientAppointmentRegistryProps) {
     super();
     Object.assign(this, props);
     this.id = props.id ?? randomUUID();
@@ -16,11 +16,11 @@ export class PatientAppointmentsRegistryEntity extends PatientAppointmentsRegist
     return this.id;
   }
 
-  public get getRegistry(): object {
+  public get getRegistry(): Registry {
     return this.registry;
   }
 
-  public set setRegistry(registry: object) {
+  public set setRegistry(registry: Registry) {
     this.registry = registry;
   }
 

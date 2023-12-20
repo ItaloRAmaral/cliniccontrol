@@ -1,9 +1,9 @@
 {
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll.eslint": true,
-    "source.fixAll.tslint": true
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.tslint": "explicit"
   },
   "editor.formatOnSave": true,
   "cSpell.words": [
@@ -14,6 +14,7 @@
     "commitlint",
     "conventionalcommits",
     "CQRS",
+    "Decrypter",
     "encrypter",
     "Encrypter",
     "github",

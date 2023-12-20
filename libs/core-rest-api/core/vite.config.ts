@@ -13,7 +13,7 @@ export default defineConfig({
     swc.vite({
       module: { type: 'es6' },
     }),
-    tsconfigPaths()
+    tsconfigPaths(),
   ],
 
   // Uncomment this if you are using workers.
@@ -28,5 +28,6 @@ export default defineConfig({
       dir: '../../../node_modules/.vitest',
     },
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
   },
 });

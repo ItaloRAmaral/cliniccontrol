@@ -1,29 +1,29 @@
-import { PatientAppointmentsRegistryEntity } from '../entities/registry/entity';
+import { PatientAppointmentRegistryEntity } from '../entities/registry/entity';
 import {
-  ICreatePatientAppointmentsRegistry,
+  ICreatePatientAppointmentRegistry,
   IFindPatientAppointmentRegistryByIdAndDate,
   IFindPatientAppointmentRegistryByIdAndPeriod,
   IUpdatePatientAppointmentRegistry,
 } from '../interfaces/registry';
 
-export abstract class PatientAppointmentsRegistryRepository {
+export abstract class PatientAppointmentRegistryDatabaseRepository {
   abstract createPatientAppointmentRegistry(
-    params: ICreatePatientAppointmentsRegistry
-  ): Promise<PatientAppointmentsRegistryEntity>;
+    params: ICreatePatientAppointmentRegistry
+  ): Promise<PatientAppointmentRegistryEntity>;
   abstract getAllAppointmentsRegistryByPatient(
     patientId: string
-  ): Promise<PatientAppointmentsRegistryEntity[] | null>;
+  ): Promise<PatientAppointmentRegistryEntity[] | null>;
   abstract findPatientAppointmentRegistryById(
     id: string
-  ): Promise<PatientAppointmentsRegistryEntity | null>;
+  ): Promise<PatientAppointmentRegistryEntity | null>;
   abstract findPatientAppointmentRegistryByIdAndDate(
     params: IFindPatientAppointmentRegistryByIdAndDate
-  ): Promise<PatientAppointmentsRegistryEntity | null>;
+  ): Promise<PatientAppointmentRegistryEntity | null>;
   abstract findPatientAppointmentRegistryByIdAndPeriod(
     params: IFindPatientAppointmentRegistryByIdAndPeriod
-  ): Promise<PatientAppointmentsRegistryEntity | null>;
+  ): Promise<PatientAppointmentRegistryEntity | null>;
   abstract updatePatientAppointmentRegistry(
     params: IUpdatePatientAppointmentRegistry
-  ): Promise<PatientAppointmentsRegistryEntity>;
+  ): Promise<PatientAppointmentRegistryEntity>;
   abstract deletePatientAppointmentRegistry(id: string): Promise<void>;
 }
