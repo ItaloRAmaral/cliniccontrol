@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-beta.3](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.2...cliniccontrol@1.6.0-beta.3) (2023-12-21)
+
+### Features
+
+- **CC-107:** create patient endpoint ([64bdd4b](https://github.com/ItaloRAmaral/cliniccontrol/commit/64bdd4b54ad0ac1b532bdce830c9f64ceaca2db0))
+- **CC-107:** updated psychologist-clinic-patient relation on delete ([6b8a312](https://github.com/ItaloRAmaral/cliniccontrol/commit/6b8a31276b0e1cc4ba9663185c05ef9aaa127abe))
+
 ## [1.6.0-beta.2](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.1...cliniccontrol@1.6.0-beta.2) (2023-12-20)
 
 ### Features

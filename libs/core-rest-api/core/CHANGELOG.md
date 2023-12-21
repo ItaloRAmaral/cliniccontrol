@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-beta.3](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.5.0-beta.2...@cliniccontrol/core-rest-api-core@1.5.0-beta.3) (2023-12-21)
+
+### Features
+
+- **CC-107:** create patient endpoint ([64bdd4b](https://github.com/ItaloRAmaral/cliniccontrol/commit/64bdd4b54ad0ac1b532bdce830c9f64ceaca2db0))
+
 ## [1.5.0-beta.2](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.5.0-beta.1...@cliniccontrol/core-rest-api-core@1.5.0-beta.2) (2023-12-20)
 
 ### Features
