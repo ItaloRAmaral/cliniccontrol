@@ -1,0 +1,36 @@
+@authToken = {{$dotenv AUTH_TOKEN}}
+@apiKey = {{$dotenv API_KEY}}
+####
+
+# @name create_clinic
+POST http://localhost:3333/core/clinic/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "{{$dotenv CLINIC_NAME}}",
+  "psychologistId": "{{$dotenv PSYCHOLOGIST_ID}}",
+  "city": "{{$dotenv CLINIC_CITY}}}}",
+  "state": "{{$dotenv CLINIC_STATE}}",
+}
+
+####
+
+# @name update_clinic
+
+PATCH http://localhost:3333/core/clinic/8d40bb8d-fd0b-4753-83cf-87bac7b3c6e7/update HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "New Name Clinic"
+}
+
+
+####
+
+# @name delete_clinic
+
+DELETE http://localhost:3333/core/clinic/{{$dotenv CLINIC_ID}}/delete HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}

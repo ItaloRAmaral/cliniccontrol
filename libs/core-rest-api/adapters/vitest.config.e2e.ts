@@ -10,7 +10,7 @@ export default defineConfig({
     swc.vite({
       module: { type: 'es6' },
     }),
-    tsconfigPaths()
+    tsconfigPaths(),
   ],
   test: {
     globals: true,
@@ -18,5 +18,6 @@ export default defineConfig({
     root: './libs/core-rest-api/adapters/',
     setupFiles: ['./tests/setup-e2e.ts'],
     environment: 'node',
+    reporters: ['default'],
   },
 });

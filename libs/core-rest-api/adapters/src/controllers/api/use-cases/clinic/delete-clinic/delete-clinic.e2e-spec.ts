@@ -25,7 +25,7 @@ describe('[E2E] - Delete Clinic', () => {
 
   it('[DELETE] - Should return an error when trying to delete a clinic without access_token', async () => {
     const response = await request(app.getHttpServer()).delete(
-      `/clinic/${clinic.id}/delete`
+      `/clinic/${clinic.id}/delete`,
     );
 
     expect(response.status).toBe(401);
@@ -63,12 +63,14 @@ describe('[E2E] - Delete Clinic', () => {
       expect.objectContaining({
         clinic: expect.objectContaining({ name: expect.any(String) }),
         deletedAt: expect.any(String),
-      })
+      }),
     );
 
     const deletedClinic = await prisma['clinic'].findUnique({
       where: { id: clinic.id },
     });
+
+    console.log('DELETED CLINIC ---->', deletedClinic);
 
     expect(deletedClinic).toBeNull();
   });

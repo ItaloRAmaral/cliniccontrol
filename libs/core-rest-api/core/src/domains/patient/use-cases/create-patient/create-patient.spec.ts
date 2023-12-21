@@ -11,8 +11,8 @@ describe('[patient] Create Patient Service', () => {
   const fakePatient: CreatePatientDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    phone: '+55 11 911111111',
+    cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
+    telephone: '+55 11 911111111',
     paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),
@@ -29,8 +29,9 @@ describe('[patient] Create Patient Service', () => {
   it('should create a new patient', async () => {
     const patient = await service.execute(fakePatient);
 
-    const patientDatabaseRepository =
-      await databaseRepository.findPatientByEmail(patient.email);
+    const patientDatabaseRepository = await databaseRepository.findPatientByEmail(
+      patient.email,
+    );
     expect(patientDatabaseRepository?.email).toEqual(patient.email);
     expect(patient.email).toEqual(fakePatient.email);
   });
@@ -38,8 +39,6 @@ describe('[patient] Create Patient Service', () => {
   it('should throw conflict exception if email already exists', async () => {
     await service.execute(fakePatient);
 
-    await expect(service.execute(fakePatient)).rejects.toThrow(
-      ConflictException
-    );
+    await expect(service.execute(fakePatient)).rejects.toThrow(ConflictException);
   });
 });

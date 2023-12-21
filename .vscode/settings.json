@@ -35,5 +35,10 @@
     "unplugin",
     "Vefago"
   ],
-  "cSpell.language": "en,pt-BR"
+  "cSpell.language": "en,pt-BR",
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "envFile": "/apps/core-rest-api/.env"
+    }
+  }
 }

@@ -13,8 +13,8 @@ describe('[patient] Update Patient Service', () => {
   const fakePatient: CreatePatientDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    phone: '+55 11 911111111',
+    cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
+    telephone: '+55 11 911111111',
     paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),
@@ -35,14 +35,12 @@ describe('[patient] Update Patient Service', () => {
       id: createPatient.id,
       email: faker.internet.email(),
       paymentMethod: PaymentMethod.PIX,
-      phone: '+55 11 911112111',
+      telephone: '+55 11 911112111',
     };
 
     await service.execute(newPatientInfos);
 
-    const findPatient = await databaseRepository.findPatientById(
-      createPatient.id
-    );
+    const findPatient = await databaseRepository.findPatientById(createPatient.id);
 
     expect(findPatient).toEqual({
       ...createPatient,
@@ -55,8 +53,8 @@ describe('[patient] Update Patient Service', () => {
     expect(findPatient?.paymentMethod).toBe(newPatientInfos.paymentMethod);
     expect(findPatient?.paymentMethod).not.toBe(fakePatient.paymentMethod);
 
-    expect(findPatient?.phone).not.toBe(fakePatient.phone);
-    expect(findPatient?.phone).toBe(newPatientInfos.phone);
+    expect(findPatient?.telephone).not.toBe(fakePatient.telephone);
+    expect(findPatient?.telephone).toBe(newPatientInfos.telephone);
   });
 
   it('should throw conflict exception if patient do not exist', async () => {
@@ -67,7 +65,7 @@ describe('[patient] Update Patient Service', () => {
     };
 
     await expect(service.execute(newPatientInfos)).rejects.toThrow(
-      new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND'])
+      new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']),
     );
   });
 });

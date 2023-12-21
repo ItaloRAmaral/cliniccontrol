@@ -3,23 +3,29 @@ import { faker } from '@faker-js/faker';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ClinicFactory } from '../../../../../tests/factories/make-clinic';
-import { PsychologistFactory } from '../../../../../tests/factories/make-psychologist';
+
 import { PostgreSqlPrismaOrmService } from '../../../../database/infra/prisma/prisma.service';
 import { DatabaseRepositoriesModule } from '../../../../database/repositories/repositories.module';
 import { ApiModule } from '../../api.module';
 
+import { ClinicFactory } from '../../../../../tests/factories/make-clinic';
+import { PatientFactory } from '../../../../../tests/factories/make-patient';
+import { PsychologistFactory } from '../../../../../tests/factories/make-psychologist';
+
 export async function setupE2ETest() {
   const moduleRef: TestingModule = await Test.createTestingModule({
     imports: [ApiModule, DatabaseRepositoriesModule],
-    providers: [PsychologistFactory, ClinicFactory],
+    providers: [PsychologistFactory, ClinicFactory, PatientFactory],
   }).compile();
 
   const app: INestApplication = moduleRef.createNestApplication();
 
   const prisma: PostgreSqlPrismaOrmService = moduleRef.get(PostgreSqlPrismaOrmService);
+
   const clinicFactory: ClinicFactory = moduleRef.get(ClinicFactory);
   const psychologistFactory: PsychologistFactory = moduleRef.get(PsychologistFactory);
+  const patientFactory: PatientFactory = moduleRef.get(PatientFactory);
+
   const jwt: JwtService = moduleRef.get(JwtService);
 
   // Necessary to validate DTO route params in the controller
@@ -55,18 +61,26 @@ export async function setupE2ETest() {
     state: faker.location.city(),
   });
 
+  // Creating a patient to use in tests
+  const patient = await patientFactory.makePrismaPatient({
+    psychologistId: psychologist.id,
+    clinicId: clinic.id,
+  });
+
   return {
     prisma,
     app,
     psychologistFactory,
-    clinicFactory,
-    jwt,
-    id,
-    access_token,
-    invalid_access_token,
     psychologist,
-    clinic,
+    id,
     hashedPassword,
     password,
+    jwt,
+    access_token,
+    invalid_access_token,
+    clinicFactory,
+    clinic,
+    patientFactory,
+    patient,
   };
 }

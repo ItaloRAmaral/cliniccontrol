@@ -1,0 +1,58 @@
+@authToken = {{$dotenv AUTH_TOKEN}}
+@apiKey = {{$dotenv API_KEY}}
+
+##################################### AUTH #####################################
+
+# @name loginauthenticate
+POST http://localhost:3333/core/psychologist/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "{{$dotenv PSYCHOLOGIST_EMAIL}}",
+  "password": "{{$dotenv PSYCHOLOGIST_PASSWORD}}"
+}
+##################################### PSYCHOLOGIST #####################################
+
+# @name create_psychologist
+POST http://localhost:3333/core/psychologist/create HTTP/1.1
+Content-Type: application/json
+api-key:{{apiKey}}
+
+{
+  "name": "{{$dotenv PSYCHOLOGIST_NAME}}",
+  "email": "{{$dotenv PSYCHOLOGIST_EMAIL}}",
+  "password": "{{$dotenv PSYCHOLOGIST_PASSWORD}}",
+  "role": "PSYCHOLOGIST",
+  "plan": "PREMIUM"
+}
+
+##################################### CLINIC #####################################
+
+# @name create_clinic
+POST http://localhost:3333/core/clinic/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "{{$dotenv CLINIC_NAME}}",
+  "psychologistId": "{{$dotenv PSYCHOLOGIST_ID}}",
+  "city": "{{$dotenv CLINIC_CITY}}}}",
+  "state": "{{$dotenv CLINIC_STATE}}"
+}
+
+##################################### PATIENT #####################################
+
+# @name create_patient
+POST http://localhost:3333/core/patient/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "{{$dotenv PATIENT_NAME}}",
+  "email": "{{$dotenv PATIENT_EMAIL}}",
+  "cpf": "{{$dotenv PATIENT_CPF}}",
+  "telephone": "{{$dotenv PATIENT_TELEPHONE}}",
+  "psychologistId": "{{$dotenv PSYCHOLOGIST_ID}}",
+  "clinicId": "{{$dotenv CLINIC_ID}}",
+  "paymentMethod": "CREDIT_CARD"
+}

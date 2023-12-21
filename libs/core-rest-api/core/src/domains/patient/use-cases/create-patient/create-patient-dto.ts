@@ -9,10 +9,10 @@ export class CreatePatientDto {
   email!: string;
 
   @IsString()
-  CPF!: string;
+  cpf!: string;
 
   @IsMobilePhone('pt-BR')
-  phone!: string;
+  telephone!: string;
 
   @IsEnum(PaymentMethod)
   paymentMethod!: PaymentMethod;

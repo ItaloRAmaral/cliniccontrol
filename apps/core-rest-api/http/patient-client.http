@@ -1,0 +1,19 @@
+@baseUrl = {{$dotenv BASE_URL}}
+# @authToken = {{loginauthenticate.response.body.access_token}}
+@authToken = {{$dotenv AUTH_TOKEN}}
+
+### Create a new patient
+# @name create_patient
+POST http://localhost:3333/core/patient/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "{{$dotenv PATIENT_NAME}}",
+  "email": "{{$dotenv PATIENT_EMAIL}}",
+  "cpf": "{{$dotenv PATIENT_CPF}}",
+  "telephone": "{{$dotenv PATIENT_TELEPHONE}}",
+  "psychologistId": "{{$dotenv PSYCHOLOGIST_ID}}",
+  "clinicId": "{{$dotenv CLINIC_ID}}",
+  "paymentMethod": "CREDIT_CARD"
+}
