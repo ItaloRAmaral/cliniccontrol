@@ -1,7 +1,5 @@
-@baseUrl = http://localhost:3333/core
-@authToken = {{loginauthenticate.response.body.access_token}}
-@psychologist_id = {{loginauthenticate.response.body.user.id}}
-@psychologist_email = {{loginauthenticate.response.body.user.email}}
+@authToken = {{$dotenv AUTH_TOKEN}}
+@apiKey = {{$dotenv API_KEY}}
 
 ### Create New User
 
@@ -11,9 +9,9 @@ Content-Type: application/json
 api-key: api-key
 
 {
-  "name": "Joe Doe",
-  "email": "joe_doe@email.com",
-  "password": "joe-password",
+  "name": "{{$dotenv PSYCHOLOGIST_NAME}}",
+  "email": "{{$dotenv PSYCHOLOGIST_EMAIL}}",
+  "password": "{{$dotenv PSYCHOLOGIST_PASSWORD}}",
   "role": "PSYCHOLOGIST",
   "plan": "PREMIUM"
 }
@@ -25,14 +23,14 @@ POST http://localhost:3333/core/psychologist/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "joe_doe@email.com",
-  "password": "joe-password"
+  "email": "{{$dotenv PSYCHOLOGIST_EMAIL}}",
+  "password": "{{$dotenv PSYCHOLOGIST_PASSWORD}}"
 }
 
 ### Update User
 
 # @name update_psychologist
-PATCH http://localhost:3333/core/psychologist/{{psychologist_id}}/update HTTP/1.1
+PATCH http://localhost:3333/core/psychologist/{{$dotenv PSYCHOLOGIST_ID}}/update HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
@@ -40,16 +38,11 @@ Authorization: Bearer {{authToken}}
   "password": "joe-password-updated"
 }
 
-### Test Route
+### Delete User
+
 # @name delete_psychologist
-DELETE http://localhost:3333/core/psychologist/{{psychologist_email}}/delete HTTP/1.1
+DELETE http://localhost:3333/core/psychologist/{{$dotenv PSYCHOLOGIST_EMAIL}}/delete HTTP/1.1
 # DELETE http://localhost:3333/core/psychologist/wrong_email@gmail.com/delete HTTP/1.1
 # DELETE http://localhost:3333/core/psychologist/invalid_email/delete HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer {{authToken}}
-
-### Test Route
-# @name me
-GET http://localhost:3333/core/psychologist/me HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}

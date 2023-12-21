@@ -1,9 +1,9 @@
 {
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll.eslint": true,
-    "source.fixAll.tslint": true
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.tslint": "explicit"
   },
   "editor.formatOnSave": true,
   "cSpell.words": [
@@ -34,5 +34,10 @@
     "unplugin",
     "Vefago"
   ],
-  "cSpell.language": "en,pt-BR"
+  "cSpell.language": "en,pt-BR",
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "envFile": "/apps/core-rest-api/.env"
+    }
+  }
 }

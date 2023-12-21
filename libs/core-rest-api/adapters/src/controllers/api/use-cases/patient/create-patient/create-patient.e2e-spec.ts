@@ -44,8 +44,6 @@ describe('[E2E] - Create New Patient', () => {
       .set('Authorization', `Bearer ${access_token}`)
       .send(newPatient);
 
-    console.log('CREATE PATIENT --------->', response.body);
-
     const patientOnDatabase = await prisma.patient.findUnique({
       where: {
         email: newPatient.email,
