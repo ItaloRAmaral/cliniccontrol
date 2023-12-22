@@ -8,5 +8,5 @@ export abstract class PatientDatabaseRepository {
   abstract findPatientById(patientId: string): Promise<PatientEntity | null>;
   abstract getPatients(): Promise<PatientEntity[]>;
   abstract updatePatient(patient: UpdatePatientDto): Promise<void>;
-  abstract deletePatient(email: string): Promise<void>;
+  abstract deletePatient(patientId: string): Promise<void>;
 }
