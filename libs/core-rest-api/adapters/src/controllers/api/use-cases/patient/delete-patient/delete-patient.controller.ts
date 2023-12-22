@@ -17,14 +17,19 @@ import { NestjsDeletePatientService } from './nestjs-delete-patient.service';
 export class DeletePatientController {
   constructor(private deletePatientService: NestjsDeletePatientService) {}
 
-  @Delete(':patientEmail/delete')
+  @Delete(':patientId/delete')
   @ApiOperation(deleteMethodDocs)
   async execute(
-    @Param() { patientEmail }: RouteParamsDto,
+    @Param() { patientId }: RouteParamsDto,
     @CurrentUser() currentUser: TokenPayload,
   ) {
     try {
-      await this.deletePatientService.execute(patientEmail);
+      const deletePatientDto = {
+        patientId,
+        psychologistId: currentUser.id,
+      };
+
+      await this.deletePatientService.execute(deletePatientDto);
 
       return {
         message: 'Patient deleted successfully',
