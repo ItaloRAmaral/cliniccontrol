@@ -79,7 +79,7 @@ describe('[E2E] - Update Psychologist Account', () => {
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
-    expect(response.statusCode).toBe(400);
+    expect(response.statusCode).toBe(404);
     expect(response.body.message).toBe('psychologist not found');
   });
 
