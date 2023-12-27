@@ -6,7 +6,7 @@ export const PSYCHOLOGIST_ERROR_MESSAGES = {
   INVALID_CREDENTIALS: 'invalid credentials',
   SAME_PASSWORD: 'new password must be different from the old one',
   SAME_EMAIL: 'new email must be different from the old one',
-  NOT_YOUR_PATIENT: 'this patient is not yours',
+  NOT_YOUR_PATIENT: 'this patient does not belong to you',
 };
 
 export const CLINIC_ERROR_MESSAGES = {
