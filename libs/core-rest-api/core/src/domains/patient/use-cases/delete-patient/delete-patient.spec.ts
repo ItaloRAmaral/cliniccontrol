@@ -1,6 +1,11 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+
+import {
+  PATIENT_ERROR_MESSAGES,
+  PSYCHOLOGIST_ERROR_MESSAGES,
+} from '../../../../shared/errors/error-messages';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { PatientEntity } from '../../entities/patient/entity';
 import { InMemoryPatientDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -46,6 +51,21 @@ describe('[patient] Delete Patient Service', () => {
   });
 
   it('should throw conflict exception if patient do not exist', async () => {
-    await expect(service.execute(deletePatientDto)).rejects.toThrow(ConflictException);
+    await expect(service.execute(deletePatientDto)).rejects.toThrow(
+      new NotFoundException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']),
+    );
+  });
+
+  it('should throw unauthorized exception if patient do not belong to psychologist', async () => {
+    const patient = await databaseRepository.createPatient(fakePatient);
+
+    deletePatientDto = {
+      patientId: patient.id,
+      psychologistId: randomUUID(),
+    };
+
+    await expect(service.execute(deletePatientDto)).rejects.toThrow(
+      new UnauthorizedException(PSYCHOLOGIST_ERROR_MESSAGES['NOT_YOUR_PATIENT']),
+    );
   });
 });

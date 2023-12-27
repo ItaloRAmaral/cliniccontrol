@@ -1,4 +1,4 @@
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 
 import {
@@ -24,11 +24,11 @@ export class DeletePatientService {
       await this.patientDatabaseRepository.findPatientById(patientId);
 
     if (!isPatientExists) {
-      throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
+      throw new NotFoundException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
     }
 
     if (isPatientExists.psychologistId !== psychologistId) {
-      throw new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['NOT_YOUR_PATIENT']);
+      throw new UnauthorizedException(PSYCHOLOGIST_ERROR_MESSAGES['NOT_YOUR_PATIENT']);
     }
 
     // Delete patient
