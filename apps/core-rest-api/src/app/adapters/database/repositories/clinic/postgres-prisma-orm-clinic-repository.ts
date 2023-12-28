@@ -1,10 +1,10 @@
-import { ClinicEntity } from '@clinicControl/core-rest-api/core/src/domains/clinic/entities/clinic/entity';
-import { ClinicDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/clinic/repositories/database-repository';
-import { CreateClinicDto } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/create-clinic/create-clinic-dto';
-import { DeletedClinicInfo } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/delete-clinic/dto';
-import { UpdateClinicDto } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/update-clinic/update-clinic-dto';
-import { CLINIC_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 import { ConflictException, Injectable } from '@nestjs/common';
+import { ClinicEntity } from '../../../../core/domains/clinic/entities/clinic/entity';
+import { ClinicDatabaseRepository } from '../../../../core/domains/clinic/repositories/database-repository';
+import { CreateClinicDto } from '../../../../core/domains/clinic/use-cases/create-clinic/create-clinic-dto';
+import { DeletedClinicInfo } from '../../../../core/domains/clinic/use-cases/delete-clinic/dto';
+import { UpdateClinicDto } from '../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
+import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PostgreSqlPrismaOrmService } from '../../../database/infra/prisma/prisma.service';
 import { PostgresqlPrismaClinicMapper } from '../../mappers/postgresql-prisma-clinic-mapper';
 

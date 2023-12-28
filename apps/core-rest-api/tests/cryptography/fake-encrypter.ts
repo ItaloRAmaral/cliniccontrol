@@ -3,7 +3,7 @@
   Esta classe é um mock para ser usada exclusivamente nos testes.
 */
 
-import { Encrypter } from '@clinicControl/core-rest-api/core/src/shared/cryptography/repository/encrypter-repository';
+import { Encrypter } from '../../src/app/core/shared/cryptography/repository/encrypter-repository';
 
 export class FakeEncrypter implements Encrypter {
   async encrypt(payload: Record<string, unknown>): Promise<string> {

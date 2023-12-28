@@ -1,10 +1,10 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { Injectable } from '@nestjs/common';
 
-import { ClinicEntity } from '@clinicControl/core-rest-api/core/src/domains/clinic/entities/clinic/entity';
-import { CreateClinicDto } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/create-clinic/create-clinic-dto';
-import { PostgreSqlPrismaOrmService } from '../../src/database/infra/prisma/prisma.service';
-import { PostgresqlPrismaClinicMapper } from '../../src/database/mappers/postgresql-prisma-clinic-mapper';
+import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
+import { PostgresqlPrismaClinicMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-clinic-mapper';
+import { ClinicEntity } from '../../src/app/core/domains/clinic/entities/clinic/entity';
+import { CreateClinicDto } from '../../src/app/core/domains/clinic/use-cases/create-clinic/create-clinic-dto';
 
 /*
   Creating a factory for the Clinic entity, which will be used to create tests for the domain's use cases

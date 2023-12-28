@@ -1,5 +1,5 @@
-import { Plan } from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
 import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { Plan } from '../../../../../../core/shared/interfaces/payments';
 
 export class UpdatePsychologistControllerDto {
   @IsOptional()

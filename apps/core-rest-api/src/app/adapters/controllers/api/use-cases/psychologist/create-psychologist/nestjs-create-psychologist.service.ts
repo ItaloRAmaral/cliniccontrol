@@ -1,6 +1,6 @@
-import { PsychologistDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/psychologist/repositories/database-repository';
-import { CreatePsychologistService } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist.service';
 import { Injectable } from '@nestjs/common';
+import { PsychologistDatabaseRepository } from '../../../../../../core/domains/psychologist/repositories/database-repository';
+import { CreatePsychologistService } from '../../../../../../core/domains/psychologist/use-cases/create-psychologist/create-psychologist.service';
 
 @Injectable()
 export class NestjsCreatePsychologistService extends CreatePsychologistService {

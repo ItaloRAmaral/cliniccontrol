@@ -1,8 +1,8 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { ConflictException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
-import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
+import { APPOINTMENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
+import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { AppointmentEntity } from '../../entities/appointment/entity';
 import { ICreateAppointmentServiceProps } from '../../interfaces/appointment';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';

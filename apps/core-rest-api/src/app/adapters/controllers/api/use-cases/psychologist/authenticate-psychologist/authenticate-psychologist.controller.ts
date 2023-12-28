@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { AuthenticatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/authenticate-psychologist/authenticate-psychologist-dto';
-import { Encrypter } from '@clinicControl/core-rest-api/core/src/shared/cryptography/repository/encrypter-repository';
-import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
+import { AuthenticatePsychologistDto } from '../../../../../../core/domains/psychologist/use-cases/authenticate-psychologist/authenticate-psychologist-dto';
+import { Encrypter } from '../../../../../../core/shared/cryptography/repository/encrypter-repository';
+import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
 import { Public } from '../../../../../auth/public';
 import { AuthenticatePsychologistControllerResponse } from './authenticate-psychologist.interface';

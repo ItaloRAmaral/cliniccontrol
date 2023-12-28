@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { ClinicDatabaseRepository } from '../../clinic/repositories/database-repository';
 import { PsychologistEntity } from '../entities/psychologist/entity';
 import { CreatePsychologistDto } from '../use-cases/create-psychologist/create-psychologist-dto';

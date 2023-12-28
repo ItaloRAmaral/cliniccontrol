@@ -1,14 +1,11 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { Injectable } from '@nestjs/common';
 
-import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
-import { CreatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
-import {
-  Plan,
-  Role,
-} from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
-import { PostgreSqlPrismaOrmService } from '../../src/database/infra/prisma/prisma.service';
-import { PostgresqlPrismaPsychologistMapper } from '../../src/database/mappers/postgresql-prisma-psychologist-mapper';
+import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
+import { PostgresqlPrismaPsychologistMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-psychologist-mapper';
+import { PsychologistEntity } from '../../src/app/core/domains/psychologist/entities/psychologist/entity';
+import { CreatePsychologistDto } from '../../src/app/core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { Plan, Role } from '../../src/app/core/shared/interfaces/payments';
 
 /*
   Creating a factory for the Psychologist entity, which will be used to create tests for the domain's use cases

@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { PATIENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
+import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PatientEntity } from '../entities/patient/entity';
 import { CreatePatientDto } from '../use-cases/create-patient/create-patient-dto';
 import { UpdatePatientDto } from '../use-cases/update-patient/update-patient-dto';

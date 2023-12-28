@@ -1,10 +1,10 @@
 import request from 'supertest';
 
-import { PatientEntity } from '@clinicControl/core-rest-api/core/src/domains/patient/entities/patient/entity';
-import { CreatePatientDto } from '@clinicControl/core-rest-api/core/src/domains/patient/use-cases/create-patient/create-patient-dto';
 import { INestApplication } from '@nestjs/common';
-import { makePatient } from '../../../../../../../../../tests/factories/make-patient';
+import { makePatient } from '../../../../../../../../tests/factories/make-patient';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
+import { PatientEntity } from '../../../../../../core/domains/patient/entities/patient/entity';
+import { CreatePatientDto } from '../../../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
 describe('[E2E] - Create New Patient', () => {

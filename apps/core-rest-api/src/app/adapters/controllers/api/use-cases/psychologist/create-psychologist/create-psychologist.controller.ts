@@ -2,9 +2,9 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
 
-import { CreatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
-import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
-import { applicationValidateOrReject } from '@clinicControl/core-rest-api/core/src/shared/validators/validate-or-reject';
+import { CreatePsychologistDto } from '../../../../../../core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
+import { applicationValidateOrReject } from '../../../../../../shared/validators/validate-or-reject';
 import { Public } from '../../../../../auth/public';
 import { ApiKeyGuard } from '../../../guards/api-key.guard';
 import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.service';

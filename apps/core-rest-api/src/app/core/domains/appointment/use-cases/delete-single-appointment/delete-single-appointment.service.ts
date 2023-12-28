@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { APPOINTMENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
 
 export class DeleteSingleAppointmentService {

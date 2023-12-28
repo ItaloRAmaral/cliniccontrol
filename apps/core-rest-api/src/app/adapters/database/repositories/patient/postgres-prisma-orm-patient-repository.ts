@@ -1,10 +1,10 @@
-import { PATIENT_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 import { ConflictException, Injectable } from '@nestjs/common';
+import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 
-import { PatientEntity } from '@clinicControl/core-rest-api/core/src/domains/patient/entities/patient/entity';
-import { PatientDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/patient/repositories/database-repository';
-import { CreatePatientDto } from '@clinicControl/core-rest-api/core/src/domains/patient/use-cases/create-patient/create-patient-dto';
-import { UpdatePatientDto } from '@clinicControl/core-rest-api/core/src/domains/patient/use-cases/update-patient/update-patient-dto';
+import { PatientEntity } from '../../../../core/domains/patient/entities/patient/entity';
+import { PatientDatabaseRepository } from '../../../../core/domains/patient/repositories/database-repository';
+import { CreatePatientDto } from '../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { UpdatePatientDto } from '../../../../core/domains/patient/use-cases/update-patient/update-patient-dto';
 import { PostgreSqlPrismaOrmService } from '../../infra/prisma/prisma.service';
 import { PostgresqlPrismaPatientMapper } from '../../mappers/postgresql-prisma-patient-mapper';
 

@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { DeletedPsychologistInfo } from './dto';
 

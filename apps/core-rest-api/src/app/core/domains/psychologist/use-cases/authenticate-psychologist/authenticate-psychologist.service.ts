@@ -1,7 +1,7 @@
 import { UnauthorizedException } from '@nestjs/common';
 
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { BcryptHasherService } from '../../../../shared/cryptography/use-cases/bcrypt-hasher.service';
-import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PsychologistEntity } from '../../entities/psychologist/entity';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
 import { AuthenticatePsychologistDto } from './authenticate-psychologist-dto';

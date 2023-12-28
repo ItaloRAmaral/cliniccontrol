@@ -1,9 +1,9 @@
-import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
-import { PsychologistDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/psychologist/repositories/database-repository';
-import { CreatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
-import { UpdatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
-import { PSYCHOLOGIST_ERROR_MESSAGES } from '@clinicControl/core-rest-api/core/src/shared/errors/error-messages';
 import { ConflictException, Injectable } from '@nestjs/common';
+import { PsychologistEntity } from '../../../../core/domains/psychologist/entities/psychologist/entity';
+import { PsychologistDatabaseRepository } from '../../../../core/domains/psychologist/repositories/database-repository';
+import { CreatePsychologistDto } from '../../../../core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { UpdatePsychologistDto } from '../../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PostgreSqlPrismaOrmService } from '../../infra/prisma/prisma.service';
 import { PostgresqlPrismaPsychologistMapper } from '../../mappers/postgresql-prisma-psychologist-mapper';
 

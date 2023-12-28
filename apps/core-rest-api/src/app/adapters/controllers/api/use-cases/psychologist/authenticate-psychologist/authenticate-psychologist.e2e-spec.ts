@@ -4,8 +4,8 @@ import { INestApplication } from '@nestjs/common';
 
 import { fakerPT_BR as faker } from '@faker-js/faker';
 
-import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
+import { PsychologistEntity } from '../../../../../../core/domains/psychologist/entities/psychologist/entity';
 
 describe('[E2E] -  Authenticate Psychologist', () => {
   let app: INestApplication;

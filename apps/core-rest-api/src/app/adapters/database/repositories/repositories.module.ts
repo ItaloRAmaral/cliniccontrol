@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import { ClinicDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/clinic/repositories/database-repository';
-import { PatientDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/patient/repositories/database-repository';
-import { PsychologistDatabaseRepository } from '@clinicControl/core-rest-api/core/src/domains/psychologist/repositories/database-repository';
+import { ClinicDatabaseRepository } from '../../../core/domains/clinic/repositories/database-repository';
+import { PatientDatabaseRepository } from '../../../core/domains/patient/repositories/database-repository';
+import { PsychologistDatabaseRepository } from '../../../core/domains/psychologist/repositories/database-repository';
 
 import { PostgreSqlPrismaOrmService } from '../infra/prisma/prisma.service';
 import { PostgresqlPrismaOrmClinicRepository } from './clinic/postgres-prisma-orm-clinic-repository';

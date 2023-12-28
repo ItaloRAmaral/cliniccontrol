@@ -1,7 +1,7 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { CLINIC_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { ClinicDatabaseRepository } from '../../repositories/database-repository';
 import { CreateClinicDto } from '../create-clinic/create-clinic-dto';

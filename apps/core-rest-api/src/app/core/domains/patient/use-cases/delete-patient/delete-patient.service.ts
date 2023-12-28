@@ -1,6 +1,6 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { ConflictException } from '@nestjs/common';
-import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { PATIENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
 
 export class DeletePatientService {

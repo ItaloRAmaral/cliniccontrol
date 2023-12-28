@@ -3,9 +3,9 @@ import request from 'supertest';
 
 import { INestApplication } from '@nestjs/common';
 
-import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
-import { makePsychologist } from '../../../../../../../../../tests/factories/make-psychologist';
+import { makePsychologist } from '../../../../../../../../tests/factories/make-psychologist';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
+import { PsychologistEntity } from '../../../../../../core/domains/psychologist/entities/psychologist/entity';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
 describe('[E2E] - Create Psychologist Account', () => {

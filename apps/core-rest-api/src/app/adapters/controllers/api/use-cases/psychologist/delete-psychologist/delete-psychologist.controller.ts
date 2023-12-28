@@ -2,7 +2,7 @@ import { Controller, Delete, ForbiddenException, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { patchMethodDocs } from './docs';
 
-import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
+import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
 import { CurrentUser } from '../../../decorators/current-user.decorator';

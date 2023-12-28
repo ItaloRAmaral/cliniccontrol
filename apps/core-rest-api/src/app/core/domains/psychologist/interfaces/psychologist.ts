@@ -1,4 +1,4 @@
-import { Replace } from '../../../shared/utils';
+import { Replace } from '../../../../shared/utils';
 import { PsychologistDto } from '../entities/psychologist/dto';
 
 export type IPsychologistProps = Replace<

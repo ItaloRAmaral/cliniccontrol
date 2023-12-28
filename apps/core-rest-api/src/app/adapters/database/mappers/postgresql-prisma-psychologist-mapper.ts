@@ -1,16 +1,13 @@
-import { PsychologistEntity } from '@clinicControl/core-rest-api/core/src/domains/psychologist/entities/psychologist/entity';
-import { CreatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
-import { UpdatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
-import {
-  Plan,
-  Role,
-} from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
 import {
   Prisma,
   Plan as PrismaPlan,
   Psychologist as PrismaPsychologistDto,
   Role as PrismaRole,
 } from '@prisma/client';
+import { PsychologistEntity } from '../../../core/domains/psychologist/entities/psychologist/entity';
+import { CreatePsychologistDto } from '../../../core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { UpdatePsychologistDto } from '../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
+import { Plan, Role } from '../../../core/shared/interfaces/payments';
 
 export class PostgresqlPrismaPsychologistMapper {
   static toDomain(raw: PrismaPsychologistDto): PsychologistEntity {

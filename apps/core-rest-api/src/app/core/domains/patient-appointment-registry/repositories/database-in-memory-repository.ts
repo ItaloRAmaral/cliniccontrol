@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { PATIENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
+import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PatientAppointmentRegistryEntity } from '../entities/registry/entity';
 import {
   ICreatePatientAppointmentRegistry,

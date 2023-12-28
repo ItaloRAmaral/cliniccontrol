@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { APPOINTMENT_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
+import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { AppointmentEntity } from '../entities/appointment/entity';
 import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
 import { UpdatedAppointmentDateDto } from '../use-cases/update-appointment-date/update-appointment-date-dto';

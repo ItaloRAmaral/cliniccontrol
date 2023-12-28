@@ -1,10 +1,10 @@
-import { ClinicEntity } from '@clinicControl/core-rest-api/core/src/domains/clinic/entities/clinic/entity';
-import { CreateClinicDto } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/create-clinic/create-clinic-dto';
-import { UpdateClinicDto } from '@clinicControl/core-rest-api/core/src/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 import {
   Prisma,
   Clinic as PrismaClinicDto,
 } from '@prisma/client';
+import { ClinicEntity } from '../../../core/domains/clinic/entities/clinic/entity';
+import { CreateClinicDto } from '../../../core/domains/clinic/use-cases/create-clinic/create-clinic-dto';
+import { UpdateClinicDto } from '../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 
 export class PostgresqlPrismaClinicMapper {
   static toDomain(raw: PrismaClinicDto): ClinicEntity {

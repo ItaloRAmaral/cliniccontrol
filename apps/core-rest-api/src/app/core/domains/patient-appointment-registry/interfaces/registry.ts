@@ -1,4 +1,4 @@
-import { Replace } from '../../../shared/utils';
+import { Replace } from '../../../../shared/utils';
 import { PatientAppointmentRegistryDto, Registry } from '../entities/registry/dto';
 
 export type IPatientAppointmentRegistryProps = Replace<

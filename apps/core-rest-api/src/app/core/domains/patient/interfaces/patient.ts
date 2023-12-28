@@ -1,4 +1,4 @@
-import { Replace } from '../../../shared/utils';
+import { Replace } from '../../../../shared/utils';
 import { PatientDto } from '../entities/patient/dto';
 import { CreatePatientDto } from '../use-cases/create-patient/create-patient-dto';
 

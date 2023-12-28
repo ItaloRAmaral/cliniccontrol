@@ -2,8 +2,8 @@ import { BadRequestException, Body, Controller, Param, Patch } from '@nestjs/com
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { patchMethodDocs } from './docs';
 
-import { UpdatePsychologistDto } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
-import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
+import { UpdatePsychologistDto } from '../../../../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
+import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import { UpdatePsychologistControllerDto } from './dto';
 import { NestjsUpdatePsychologistService } from './nestjs-update-psychologist.service';
 

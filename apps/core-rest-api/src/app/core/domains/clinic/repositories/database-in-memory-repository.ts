@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { CLINIC_ERROR_MESSAGES } from '../../../shared/errors/error-messages';
+import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { ClinicEntity } from '../entities/clinic/entity';
 import { CreateClinicDto } from '../use-cases/create-clinic/create-clinic-dto';
 import { DeletedClinicInfo } from '../use-cases/delete-clinic/dto';

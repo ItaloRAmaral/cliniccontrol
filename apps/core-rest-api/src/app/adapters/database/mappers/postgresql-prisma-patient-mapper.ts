@@ -4,10 +4,10 @@ import {
   PaymentMethod as PrismaPaymentMethod,
 } from '@prisma/client';
 
-import { PatientEntity } from '@clinicControl/core-rest-api/core/src/domains/patient/entities/patient/entity';
-import { CreatePatientDto } from '@clinicControl/core-rest-api/core/src/domains/patient/use-cases/create-patient/create-patient-dto';
-import { UpdatePatientDto } from '@clinicControl/core-rest-api/core/src/domains/patient/use-cases/update-patient/update-patient-dto';
-import { PaymentMethod } from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
+import { PatientEntity } from '../../../core/domains/patient/entities/patient/entity';
+import { CreatePatientDto } from '../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { UpdatePatientDto } from '../../../core/domains/patient/use-cases/update-patient/update-patient-dto';
+import { PaymentMethod } from '../../../core/shared/interfaces/payments';
 
 export class PostgresqlPrismaPatientMapper {
   static toDomain(raw: PrismaPatientDto): PatientEntity {

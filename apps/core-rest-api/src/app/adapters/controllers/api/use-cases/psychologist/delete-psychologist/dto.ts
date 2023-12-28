@@ -1,5 +1,5 @@
-import { AssociatedClinics } from '@clinicControl/core-rest-api/core/src/domains/psychologist/use-cases/delete-psychologist/dto';
 import { IsEmail } from 'class-validator';
+import { AssociatedClinics } from '../../../../../../core/domains/psychologist/use-cases/delete-psychologist/dto';
 
 export class RouteParamsDto {
   @IsEmail()

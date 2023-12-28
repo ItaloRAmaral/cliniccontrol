@@ -1,6 +1,6 @@
-import { Encrypter } from '@clinicControl/core-rest-api/core/src/shared/cryptography/repository/encrypter-repository';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Encrypter } from '../../core/shared/cryptography/repository/encrypter-repository';
 
 @Injectable()
 export class JwtEncrypter implements Encrypter {

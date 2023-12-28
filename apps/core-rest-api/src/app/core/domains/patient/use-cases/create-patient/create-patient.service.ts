@@ -1,8 +1,8 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { ConflictException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
-import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
+import { PATIENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
+import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { PatientEntity } from '../../entities/patient/entity';
 import { ICreatePatientServiceProps } from '../../interfaces/patient';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';

@@ -1,7 +1,7 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ConflictException } from '@nestjs/common';
 
-import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { Plan, Role } from '../../../../shared/interfaces/payments';
 import { InMemoryClinicDatabaseRepository } from '../../../clinic/repositories/database-in-memory-repository';
 import { ClinicDatabaseRepository } from '../../../clinic/repositories/database-repository';

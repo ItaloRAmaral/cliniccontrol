@@ -5,7 +5,7 @@ import { randomUUID } from 'crypto';
 import {
   PATIENT_ERROR_MESSAGES,
   PSYCHOLOGIST_ERROR_MESSAGES,
-} from '../../../../shared/errors/error-messages';
+} from '../../../../../shared/errors/error-messages';
 import { PaymentMethod, Plan, Role } from '../../../../shared/interfaces/payments';
 
 import { ClinicDatabaseRepository } from '../../../clinic/repositories/database-repository';
@@ -30,8 +30,8 @@ describe('[registry] - Create Patient Appointment Registry Service', () => {
   const fakePatient: CreatePatientDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    phone: '+55 11 911111111',
+    cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
+    telephone: '+55 11 911111111',
     paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),

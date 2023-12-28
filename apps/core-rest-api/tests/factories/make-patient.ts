@@ -1,11 +1,12 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { Injectable } from '@nestjs/common';
 
-import { PatientEntity } from '@clinicControl/core-rest-api/core/src/domains/patient/entities/patient/entity';
-import { CreatePatientDto } from '@clinicControl/core-rest-api/core/src/domains/patient/use-cases/create-patient/create-patient-dto';
-import { PaymentMethod } from '@clinicControl/core-rest-api/core/src/shared/interfaces/payments';
-import { PostgreSqlPrismaOrmService } from '../../src/database/infra/prisma/prisma.service';
-import { PostgresqlPrismaPatientMapper } from '../../src/database/mappers/postgresql-prisma-patient-mapper';
+import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
+import { PostgresqlPrismaPatientMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-patient-mapper';
+
+import { PatientEntity } from '../../src/app/core/domains/patient/entities/patient/entity';
+import { CreatePatientDto } from '../../src/app/core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { PaymentMethod } from '../../src/app/core/shared/interfaces/payments';
 
 export function makePatient(override: Partial<CreatePatientDto> = {}): PatientEntity {
   const newPatient = new PatientEntity({

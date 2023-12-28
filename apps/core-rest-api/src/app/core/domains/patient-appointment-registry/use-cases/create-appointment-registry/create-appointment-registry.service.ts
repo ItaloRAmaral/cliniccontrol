@@ -1,12 +1,12 @@
 import { ConflictException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 
-import { DataEncrypterService } from '../../../../shared/cryptography/use-cases/data-encrypter.service';
 import {
   PATIENT_ERROR_MESSAGES,
   PSYCHOLOGIST_ERROR_MESSAGES,
-} from '../../../../shared/errors/error-messages';
-import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
+} from '../../../../../shared/errors/error-messages';
+import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
+import { DataEncrypterService } from '../../../../shared/cryptography/use-cases/data-encrypter.service';
 
 import { PatientDatabaseRepository } from '../../../patient/repositories/database-repository';
 import { PsychologistDatabaseRepository } from '../../../psychologist/repositories/database-repository';

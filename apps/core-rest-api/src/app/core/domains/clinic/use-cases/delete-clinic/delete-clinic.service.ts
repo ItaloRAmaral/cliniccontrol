@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { CLINIC_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { ClinicDatabaseRepository } from '../../repositories/database-repository';
 import { DeletedClinicInfo } from './dto';
 

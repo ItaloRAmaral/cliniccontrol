@@ -7,7 +7,7 @@ import { envSchema } from '../../env/env';
 import { EnvModule } from '../../env/env.module';
 import { UpdatePsychologistController } from './use-cases/psychologist/update-psychologist/update-psychologist.controller';
 
-import { BcryptHasherService } from '@clinicControl/core-rest-api/core/src/shared/cryptography/use-cases/bcrypt-hasher.service';
+import { BcryptHasherService } from '../../../core/shared/cryptography/use-cases/bcrypt-hasher.service';
 import { PostgreSqlPrismaOrmService } from '../../database/infra/prisma/prisma.service';
 import { DatabaseRepositoriesModule } from '../../database/repositories/repositories.module';
 

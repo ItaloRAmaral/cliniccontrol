@@ -2,7 +2,7 @@ import request from 'supertest';
 
 import { INestApplication } from '@nestjs/common';
 
-import { PsychologistFactory } from '../../../../../../../../../tests/factories/make-psychologist';
+import { PsychologistFactory } from '../../../../../../../../tests/factories/make-psychologist';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 
 describe('[E2E] - Update Psychologist Account', () => {

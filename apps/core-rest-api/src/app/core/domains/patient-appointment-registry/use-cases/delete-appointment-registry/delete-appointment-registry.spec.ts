@@ -16,7 +16,7 @@ import { InMemoryPatientAppointmentRegistryDatabaseRepository } from '../../repo
 import { DeletePatientAppointmentRegistryService } from './delete-appointment-registry.service';
 
 import { ConflictException } from '@nestjs/common';
-import { PATIENT_APPOINTMENT_REGISTRY_MESSAGES } from '../../../../shared/errors/error-messages';
+import { PATIENT_APPOINTMENT_REGISTRY_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { PatientEntity } from '../../../patient/entities/patient/entity';
 import { CreatePatientDto } from '../../../patient/use-cases/create-patient/create-patient-dto';
 import { PsychologistEntity } from '../../../psychologist/entities/psychologist/entity';
@@ -27,8 +27,8 @@ describe('[registry] - Create Patient Appointment Registry Service', () => {
   const fakePatient: CreatePatientDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    CPF: faker.number.int({ min: 0, max: 10000000000 }).toString(),
-    phone: '+55 11 911111111',
+    cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
+    telephone: '+55 11 911111111',
     paymentMethod: PaymentMethod.CREDIT_CARD,
     psychologistId: randomUUID(),
     clinicId: randomUUID(),

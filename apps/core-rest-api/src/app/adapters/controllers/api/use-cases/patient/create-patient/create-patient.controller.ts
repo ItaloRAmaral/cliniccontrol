@@ -2,9 +2,9 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { postMethodDocs } from './docs';
 
-import { GlobalAppHttpException } from '@clinicControl/core-rest-api/core/src/shared/errors/globalAppHttpException';
+import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
-import { CreatePatientDto } from '@clinicControl/core-rest-api/core/src/domains/patient/use-cases/create-patient/create-patient-dto';
+import { CreatePatientDto } from '../../../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
 import { NestjsCreatePatientService } from './nestjs-create-patient.service';
 
 @ApiTags('patient')

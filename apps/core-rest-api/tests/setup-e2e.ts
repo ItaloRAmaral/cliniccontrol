@@ -36,7 +36,7 @@ beforeAll(async () => {
   console.log('databaseURL', databaseURL);
   console.log('connecting test e2e database...');
   execSync(
-    'pnpm prisma migrate deploy --schema=./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma'
+    'pnpm prisma migrate deploy --schema=./apps/core-rest-api/src/app/adapters/database/infra/prisma/postgresql.schema.prisma'
   );
 });
 
