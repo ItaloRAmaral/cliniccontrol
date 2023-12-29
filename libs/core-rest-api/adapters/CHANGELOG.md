@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-adapters@1.5.0-beta.0...@cliniccontrol/core-rest-api-adapters@1.5.0-beta.1) (2023-12-29)
+
+### Features
+
+- **CC-111:** delete patient endpoint ([d23b3d2](https://github.com/ItaloRAmaral/cliniccontrol/commit/d23b3d270d7068a8271e0140b3da29de371cc7e7))
+
 ## [1.5.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-adapters@1.4.1-beta.0...@cliniccontrol/core-rest-api-adapters@1.5.0-beta.0) (2023-12-21)
 
 ### Features
