@@ -1,4 +1,4 @@
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../shared/validators/validate-or-reject';
@@ -10,20 +10,18 @@ export class UpdatePatientService {
 
   async execute(newPatientInfo: UpdatePatientDto): Promise<void> {
     // Validate props types
-    const updatePatientDtoInstance = plainToInstance(
-      UpdatePatientDto,
-      newPatientInfo
-    );
+    const updatePatientDtoInstance = plainToInstance(UpdatePatientDto, newPatientInfo);
 
     await applicationValidateOrReject(updatePatientDtoInstance);
 
     // Check if patient exists
-    const isPatientExists =
-      await this.patientDatabaseRepository.findPatientById(newPatientInfo.id);
+    const isPatientExists = await this.patientDatabaseRepository.findPatientById(
+      newPatientInfo.id,
+    );
 
     // If not exists, throw error
     if (!isPatientExists) {
-      throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
+      throw new NotFoundException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
     }
 
     // Create

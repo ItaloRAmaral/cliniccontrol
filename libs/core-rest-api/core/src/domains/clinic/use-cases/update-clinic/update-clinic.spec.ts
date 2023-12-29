@@ -1,5 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -52,7 +52,7 @@ describe('[clinic] Update Clinic Service', () => {
     };
 
     await expect(service.execute(newClinicInfos)).rejects.toThrow(
-      new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND'])
+      new NotFoundException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']),
     );
   });
 });

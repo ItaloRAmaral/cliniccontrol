@@ -17,3 +17,9 @@ Authorization: Bearer {{authToken}}
   "clinicId": "{{$dotenv CLINIC_ID}}",
   "paymentMethod": "CREDIT_CARD"
 }
+
+### Delete a patient
+# @name delete_patient
+DELETE http://localhost:3333/core/patient/{{$dotenv PATIENT_ID}}/delete HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}

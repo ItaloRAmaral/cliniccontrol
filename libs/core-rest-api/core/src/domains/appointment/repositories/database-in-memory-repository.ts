@@ -12,16 +12,12 @@ export class InMemoryAppointmentDatabaseRepository
   private appointments: AppointmentEntity[] = [];
 
   async createSingleAppointment(
-    appointment: CreateSingleAppointmentDto
+    appointment: CreateSingleAppointmentDto,
   ): Promise<AppointmentEntity> {
-    const isAppointmentExist = await this.findSingleAppointmentByDate(
-      appointment.date
-    );
+    const isAppointmentExist = await this.findSingleAppointmentByDate(appointment.date);
 
     if (isAppointmentExist) {
-      throw new ConflictException(
-        APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']
-      );
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']);
     }
 
     const newAppointment = new AppointmentEntity(appointment);
@@ -32,22 +28,19 @@ export class InMemoryAppointmentDatabaseRepository
   }
 
   async findSingleAppointmentByDate(
-    appointmentDate: Date
+    appointmentDate: Date,
   ): Promise<AppointmentEntity | null> {
     return (
-      this.appointments.find(
-        (appointment) => appointment.date === appointmentDate
-      ) ?? null
+      this.appointments.find((appointment) => appointment.date === appointmentDate) ??
+      null
     );
   }
 
   async findSingleAppointmentById(
-    appointmentId: string
+    appointmentId: string,
   ): Promise<AppointmentEntity | null> {
     return (
-      this.appointments.find(
-        (appointment) => appointment.id === appointmentId
-      ) ?? null
+      this.appointments.find((appointment) => appointment.id === appointmentId) ?? null
     );
   }
 
@@ -56,16 +49,14 @@ export class InMemoryAppointmentDatabaseRepository
   }
 
   async updateAppointmentInfo(
-    newAppointmentInfo: UpdatedAppointmentInfoDto
+    newAppointmentInfo: UpdatedAppointmentInfoDto,
   ): Promise<void> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(
-      newAppointmentInfo.id
+      newAppointmentInfo.id,
     );
 
     if (!oldAppointmentInfo) {
-      throw new ConflictException(
-        APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']
-      );
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']);
     }
 
     const appointmentIndex = this.appointments.findIndex((appointment) => {
@@ -81,20 +72,18 @@ export class InMemoryAppointmentDatabaseRepository
   }
 
   async updateAppointmentDate(
-    newAppointmentInfo: UpdatedAppointmentDateDto
+    newAppointmentInfo: UpdatedAppointmentDateDto,
   ): Promise<void> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(
-      newAppointmentInfo.id
+      newAppointmentInfo.id,
     );
 
     if (!oldAppointmentInfo) {
-      throw new ConflictException(
-        APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']
-      );
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']);
     }
 
     const appointmentIndex = this.appointments.findIndex((appointment) => {
-      return (appointment.id = newAppointmentInfo.id);
+      return appointment.id === newAppointmentInfo.id;
     });
 
     const updateAppointmentDate = Object.assign(oldAppointmentInfo, {
@@ -106,18 +95,14 @@ export class InMemoryAppointmentDatabaseRepository
   }
 
   async deleteSingleAppointment(appointmentId: string): Promise<void> {
-    const isAppointmentExist = await this.findSingleAppointmentById(
-      appointmentId
-    );
+    const isAppointmentExist = await this.findSingleAppointmentById(appointmentId);
 
     if (!isAppointmentExist) {
-      throw new ConflictException(
-        APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']
-      );
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']);
     }
 
     this.appointments = this.appointments.filter(
-      (appointment) => appointment.id !== appointmentId
+      (appointment) => appointment.id !== appointmentId,
     );
   }
 }

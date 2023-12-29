@@ -43,10 +43,10 @@ export class PostgresqlPrismaOrmPatientRepository implements PatientDatabaseRepo
     return PostgresqlPrismaPatientMapper.toDomain(patient);
   }
 
-  async findPatientById(id: string): Promise<PatientEntity | null> {
+  async findPatientById(patientId: string): Promise<PatientEntity | null> {
     const patient = await this.postgresqlPrismaOrmService['patient'].findUnique({
       where: {
-        id: id,
+        id: patientId,
       },
     });
 
@@ -77,8 +77,8 @@ export class PostgresqlPrismaOrmPatientRepository implements PatientDatabaseRepo
     await this.postgresqlPrismaOrmService['patient'].update(toPrismaEntity);
   }
 
-  async deletePatient(email: string): Promise<void> {
-    const isPatientExists = await this.findPatientByEmail(email);
+  async deletePatient(patientId: string): Promise<void> {
+    const isPatientExists = await this.findPatientById(patientId);
 
     if (!isPatientExists) {
       throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
@@ -86,7 +86,7 @@ export class PostgresqlPrismaOrmPatientRepository implements PatientDatabaseRepo
 
     await this.postgresqlPrismaOrmService['patient'].delete({
       where: {
-        email: email,
+        id: patientId,
       },
     });
   }

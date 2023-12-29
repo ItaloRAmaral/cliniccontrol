@@ -2,11 +2,8 @@ import swc from 'unplugin-swc';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-
 export default defineConfig({
   plugins: [
-    nxViteTsPaths(),
     swc.vite({
       module: { type: 'es6' },
     }),
