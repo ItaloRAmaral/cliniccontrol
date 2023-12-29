@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-beta.4](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.5.0-beta.3...@cliniccontrol/core-rest-api-core@1.5.0-beta.4) (2023-12-28)
+
+### Features
+
+- **CC-109:** add delete-appointment registry dto ([3171e99](https://github.com/ItaloRAmaral/cliniccontrol/commit/3171e99f7aef7b6e04ac1df2371cf61bf830625b))
+- **CC-109:** add delete-appointment registry service ([d9d4270](https://github.com/ItaloRAmaral/cliniccontrol/commit/d9d4270827033b4fbcc31f92d8fded4e5b8b6786))
+- **CC-109:** add delete-appointment registry test and error message ([d347214](https://github.com/ItaloRAmaral/cliniccontrol/commit/d3472145bfd269762d6589081fb813e7622bcaa4))
+
 ## [1.5.0-beta.3](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api-core@1.5.0-beta.2...@cliniccontrol/core-rest-api-core@1.5.0-beta.3) (2023-12-21)
 
 ### Features

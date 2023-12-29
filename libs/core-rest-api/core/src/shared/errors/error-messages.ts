@@ -25,3 +25,7 @@ export const APPOINTMENT_ERROR_MESSAGES = {
   APPOINTMENT_NOT_FOUND: 'appointment not found',
   APPOINTMENT_DATE_CHANGE_NOT_ALLOWED: 'appointment date change not allowed',
 };
+
+export const PATIENT_APPOINTMENT_REGISTRY_MESSAGES = {
+  REGISTRY_NOT_FOUNT: 'registry not found'
+}
