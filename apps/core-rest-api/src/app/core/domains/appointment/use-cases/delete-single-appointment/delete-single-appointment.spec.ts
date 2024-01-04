@@ -1,5 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
@@ -7,7 +7,7 @@ import { AppointmentDatabaseRepository } from '../../repositories/database-repos
 import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
 import { DeleteSingleAppointmentService } from './delete-single-appointment.service';
 
-describe('[appointment] Create Single Appointment Service', () => {
+describe('[appointment] Delete Single Appointment Service', () => {
   const fakeAppointment: CreateSingleAppointmentDto = {
     psychologistId: randomUUID(),
     patientId: randomUUID(),
@@ -29,9 +29,8 @@ describe('[appointment] Create Single Appointment Service', () => {
   });
 
   it('should delete a new appointment', async () => {
-    const createAppointment = await databaseRepository.createSingleAppointment(
-      fakeAppointment
-    );
+    const createAppointment =
+      await databaseRepository.createSingleAppointment(fakeAppointment);
     await service.execute(createAppointment.id);
     const getAppointments = await databaseRepository.getAppointments();
 
@@ -39,12 +38,11 @@ describe('[appointment] Create Single Appointment Service', () => {
   });
 
   it('should throw error if appointment does not exist', async () => {
-    const createAppointment = await databaseRepository.createSingleAppointment(
-      fakeAppointment
-    );
+    const createAppointment =
+      await databaseRepository.createSingleAppointment(fakeAppointment);
     await service.execute(createAppointment.id);
     await expect(service.execute(createAppointment.id)).rejects.toThrow(
-      ConflictException
+      NotFoundException,
     );
   });
 });

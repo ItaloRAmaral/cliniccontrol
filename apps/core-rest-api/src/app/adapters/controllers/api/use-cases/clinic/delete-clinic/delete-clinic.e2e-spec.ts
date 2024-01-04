@@ -48,7 +48,7 @@ describe('[E2E] - Delete Clinic', () => {
       .delete(`/clinic/${wrongId}/delete`)
       .set('Authorization', `Bearer ${access_token}`);
 
-    expect(response.status).toBe(409);
+    expect(response.status).toBe(404);
     expect(response.body.message).toBe('clinic not found');
   });
 

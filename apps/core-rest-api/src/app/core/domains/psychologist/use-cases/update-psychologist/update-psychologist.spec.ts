@@ -1,5 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { BcryptHasherService } from '../../../../shared/cryptography/use-cases/bcrypt-hasher.service';
@@ -31,7 +31,7 @@ describe('[psychologist] Update Psychologist Service', () => {
   beforeAll(async () => {
     clinicDatabaseRepository = new InMemoryClinicDatabaseRepository();
     databaseRepository = new InMemoryPsychologistDatabaseRepository(
-      clinicDatabaseRepository
+      clinicDatabaseRepository,
     );
     service = new UpdatePsychologistService(databaseRepository);
     hasherService = new BcryptHasherService();
@@ -59,7 +59,7 @@ describe('[psychologist] Update Psychologist Service', () => {
     await service.execute(newPsychologistInfos);
 
     const findPsychologist = await databaseRepository.findPsychologistById(
-      psychologist.id
+      psychologist.id,
     );
 
     expect(findPsychologist).toEqual({
@@ -87,7 +87,7 @@ describe('[psychologist] Update Psychologist Service', () => {
     };
 
     await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
-      new BadRequestException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND'])
+      new NotFoundException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']),
     );
   });
 
@@ -99,7 +99,7 @@ describe('[psychologist] Update Psychologist Service', () => {
     };
 
     await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
-      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['SAME_EMAIL'])
+      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['SAME_EMAIL']),
     );
   });
 
@@ -113,7 +113,7 @@ describe('[psychologist] Update Psychologist Service', () => {
     };
 
     await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
-      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['SAME_PASSWORD'])
+      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['SAME_PASSWORD']),
     );
   });
 
@@ -135,7 +135,7 @@ describe('[psychologist] Update Psychologist Service', () => {
     };
 
     await expect(service.execute(newPsychologistInfos)).rejects.toThrow(
-      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL'])
+      new ConflictException(PSYCHOLOGIST_ERROR_MESSAGES['CONFLICTING_EMAIL']),
     );
   });
 });

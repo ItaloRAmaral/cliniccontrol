@@ -7,7 +7,7 @@ import { ClinicEntity } from '../../../../../../core/domains/clinic/entities/cli
 
 describe('[E2E] - Update Clinic', () => {
   let app: INestApplication;
-  let clinic: ClinicEntity
+  let clinic: ClinicEntity;
   let access_token: string;
   let invalid_access_token: string;
 
@@ -15,7 +15,7 @@ describe('[E2E] - Update Clinic', () => {
     const setup = await setupE2ETest();
     app = setup.app;
 
-    clinic = setup.clinic
+    clinic = setup.clinic;
 
     access_token = setup.access_token;
     invalid_access_token = setup.invalid_access_token;
@@ -72,7 +72,7 @@ describe('[E2E] - Update Clinic', () => {
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 
-    expect(response.statusCode).toBe(409);
+    expect(response.statusCode).toBe(404);
     expect(response.body.message).toBe('clinic not found');
   });
 

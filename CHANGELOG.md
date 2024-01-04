@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-beta.5](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.4...cliniccontrol@1.6.0-beta.5) (2023-12-29)
+
+### Features
+
+- **CC-111:** delete patient endpoint ([d23b3d2](https://github.com/ItaloRAmaral/cliniccontrol/commit/d23b3d270d7068a8271e0140b3da29de371cc7e7))
+
 ## [1.6.0-beta.4](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.3...cliniccontrol@1.6.0-beta.4) (2023-12-28)
 
 ### Features

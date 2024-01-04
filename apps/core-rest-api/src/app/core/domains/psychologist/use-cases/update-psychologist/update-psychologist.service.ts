@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
@@ -16,21 +16,19 @@ export class UpdatePsychologistService {
     // Validate
     const updatePsychologistDtoInstance = plainToInstance(
       UpdatePsychologistDto,
-      updatePsychologist
+      updatePsychologist,
     );
     await applicationValidateOrReject(updatePsychologistDtoInstance);
 
     // Check if psychologist exists
     const isPsychologistExists =
       await this.psychologistDatabaseRepository.findPsychologistById(
-        updatePsychologist.id
+        updatePsychologist.id,
       );
 
     // If not exists, throw error
     if (!isPsychologistExists) {
-      throw new BadRequestException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']
-      );
+      throw new NotFoundException(PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_NOT_FOUND']);
     }
 
     if (updatePsychologist.email === isPsychologistExists.email) {
@@ -44,7 +42,7 @@ export class UpdatePsychologistService {
     ) {
       const isEmailAlreadyInUse =
         await this.psychologistDatabaseRepository.findPsychologistByEmail(
-          updatePsychologist.email
+          updatePsychologist.email,
         );
 
       if (isEmailAlreadyInUse) {
@@ -56,7 +54,7 @@ export class UpdatePsychologistService {
     if (updatePsychologist.password) {
       const isPasswordTheSame = await this.hasherService.compare(
         updatePsychologist.password,
-        isPsychologistExists.password
+        isPsychologistExists.password,
       );
 
       if (isPasswordTheSame) {

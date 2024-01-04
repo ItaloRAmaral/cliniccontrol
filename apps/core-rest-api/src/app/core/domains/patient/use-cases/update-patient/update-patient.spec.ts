@@ -1,5 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { PATIENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
@@ -65,7 +65,7 @@ describe('[patient] Update Patient Service', () => {
     };
 
     await expect(service.execute(newPatientInfos)).rejects.toThrow(
-      new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']),
+      new NotFoundException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']),
     );
   });
 });

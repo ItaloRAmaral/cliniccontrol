@@ -1,4 +1,4 @@
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
 
@@ -14,7 +14,7 @@ export class DeleteSingleAppointmentService {
       );
 
     if (!isAppointmentExists) {
-      throw new ConflictException(
+      throw new NotFoundException(
         APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']
       );
     }

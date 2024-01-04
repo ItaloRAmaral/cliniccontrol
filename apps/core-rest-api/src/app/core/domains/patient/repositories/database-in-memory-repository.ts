@@ -5,18 +5,14 @@ import { CreatePatientDto } from '../use-cases/create-patient/create-patient-dto
 import { UpdatePatientDto } from '../use-cases/update-patient/update-patient-dto';
 import { PatientDatabaseRepository } from './database-repository';
 
-export class InMemoryPatientDatabaseRepository
-  implements PatientDatabaseRepository
-{
+export class InMemoryPatientDatabaseRepository implements PatientDatabaseRepository {
   private patients: PatientEntity[] = [];
 
   async createPatient(patient: CreatePatientDto): Promise<PatientEntity> {
     const isPatientExists = await this.findPatientByEmail(patient.email);
 
     if (isPatientExists) {
-      throw new ConflictException(
-        PATIENT_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']
-      );
+      throw new ConflictException(PATIENT_ERROR_MESSAGES['CONFLICTING_CREDENTIALS']);
     }
 
     const newPatient = new PatientEntity(patient);
@@ -56,13 +52,13 @@ export class InMemoryPatientDatabaseRepository
     this.patients[patientIndex] = updatedPatient;
   }
 
-  async deletePatient(email: string): Promise<void> {
-    const isPatientExists = await this.findPatientByEmail(email);
+  async deletePatient(patientId: string): Promise<void> {
+    const isPatientExists = await this.findPatientById(patientId);
 
     if (!isPatientExists) {
       throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
     }
 
-    this.patients = this.patients.filter((patient) => patient.email !== email);
+    this.patients = this.patients.filter((patient) => patient.id !== patientId);
   }
 }

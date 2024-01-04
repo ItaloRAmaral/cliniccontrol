@@ -1,5 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker';
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
@@ -31,9 +31,8 @@ describe('[appointment] Update Appointment Info Service', () => {
   });
 
   it('should update an appointment', async () => {
-    const createAppointment = await databaseRepository.createSingleAppointment(
-      fakeAppointment
-    );
+    const createAppointment =
+      await databaseRepository.createSingleAppointment(fakeAppointment);
 
     const newAppointmentInfo: UpdatedAppointmentInfoDto = {
       id: createAppointment.id,
@@ -43,7 +42,7 @@ describe('[appointment] Update Appointment Info Service', () => {
 
     await service.execute(newAppointmentInfo);
     const findAppointment = await databaseRepository.findSingleAppointmentById(
-      newAppointmentInfo.id
+      newAppointmentInfo.id,
     );
 
     expect(findAppointment).toEqual({
@@ -53,12 +52,8 @@ describe('[appointment] Update Appointment Info Service', () => {
 
     expect(findAppointment?.paid).toBe(newAppointmentInfo.paid);
 
-    expect(findAppointment?.paymentMethod).toBe(
-      newAppointmentInfo.paymentMethod
-    );
-    expect(findAppointment?.paymentMethod).not.toBe(
-      fakeAppointment.paymentMethod
-    );
+    expect(findAppointment?.paymentMethod).toBe(newAppointmentInfo.paymentMethod);
+    expect(findAppointment?.paymentMethod).not.toBe(fakeAppointment.paymentMethod);
   });
 
   it('should throw error if appointment does not exist', async () => {
@@ -69,7 +64,7 @@ describe('[appointment] Update Appointment Info Service', () => {
     };
 
     await expect(service.execute(newAppointmentInfo)).rejects.toThrow(
-      new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND'])
+      new NotFoundException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']),
     );
   });
 });

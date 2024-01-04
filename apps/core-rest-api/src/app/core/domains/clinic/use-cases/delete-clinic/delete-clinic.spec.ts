@@ -2,7 +2,7 @@ import { fakerPT_BR as faker } from '@faker-js/faker';
 import { ClinicDatabaseRepository } from '../../repositories/database-repository';
 import { DeleteClinicService } from './delete-clinic.service';
 
-import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
 
@@ -33,8 +33,6 @@ describe('[clinic] Delete Clinic Service', () => {
   });
 
   it('should throw conflict exception if clinic do not exists', async () => {
-    await expect(service.execute(fakeClinic.name)).rejects.toThrow(
-      ConflictException
-    );
+    await expect(service.execute(fakeClinic.name)).rejects.toThrow(NotFoundException);
   });
 });
