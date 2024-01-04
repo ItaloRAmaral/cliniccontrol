@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-beta.6](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.5...cliniccontrol@1.6.0-beta.6) (2024-01-04)
+
+### Features
+
+- **CC-113:** update dependencies and fix clinic-client ([c3eb216](https://github.com/ItaloRAmaral/cliniccontrol/commit/c3eb216c1f2bd3673ab08e3346690334fba7da3e))
+
 ## [1.6.0-beta.5](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.6.0-beta.4...cliniccontrol@1.6.0-beta.5) (2023-12-29)
 
 ### Features
