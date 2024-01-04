@@ -6,9 +6,9 @@ import { INestApplication, Logger, ValidationPipe, VersioningType } from '@nestj
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-import { ApiModule } from '@clinicControl/core-rest-api/adapters/src/controllers/api/api.module';
-import { EnvService } from '@clinicControl/core-rest-api/adapters/src/env/env.service';
 import { version } from '../package.json';
+import { ApiModule } from './app/adapters/controllers/api/api.module';
+import { EnvService } from './app/adapters/env/env.service';
 import { mainDescriptionMarkdown } from './main.docs';
 
 const setupOpenApi = (app: INestApplication) => {

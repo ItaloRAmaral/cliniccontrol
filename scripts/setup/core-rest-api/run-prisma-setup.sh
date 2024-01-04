@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCHEMA_PATH="./libs/core-rest-api/adapters/src/database/infra/prisma/postgresql.schema.prisma"
+SCHEMA_PATH="./apps/core-rest-api/src/app/adapters/database/infra/prisma/postgresql.schema.prisma"
 
 # Analisamos todos os argumentos fornecidos
 for arg in "$@"; do

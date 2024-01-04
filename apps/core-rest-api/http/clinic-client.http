@@ -11,7 +11,7 @@ Authorization: Bearer {{authToken}}
   "name": "{{$dotenv CLINIC_NAME}}",
   "psychologistId": "{{$dotenv PSYCHOLOGIST_ID}}",
   "city": "{{$dotenv CLINIC_CITY}}}}",
-  "state": "{{$dotenv CLINIC_STATE}}",
+  "state": "{{$dotenv CLINIC_STATE}}"
 }
 
 ####
