@@ -1,0 +1,26 @@
+@authToken = {{$dotenv AUTH_TOKEN}}
+@apiKey = {{$dotenv API_KEY}}
+
+### Create New Appointment Registry
+
+# @name create_patient_appointment_registry
+POST http://localhost:3333/core/appointment-registry/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "registry": {
+    "observations": "well"
+  },
+  "psychologistId": "{{$dotenv PSYCHOLOGIST_ID}}",
+  "patientId": "{{$dotenv PATIENT_ID}}"
+}
+
+### Delete User
+
+# @name delete_psychologist
+DELETE http://localhost:3333/core/psychologist/{{$dotenv PSYCHOLOGIST_EMAIL}}/delete HTTP/1.1
+# DELETE http://localhost:3333/core/psychologist/wrong_email@gmail.com/delete HTTP/1.1
+# DELETE http://localhost:3333/core/psychologist/invalid_email/delete HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
