@@ -26,5 +26,4 @@ export interface IFindPatientAppointmentRegistryByIdAndPeriod {
 export interface IUpdatePatientAppointmentRegistry {
   id: string;
   registry: Registry;
-  updatedAt: Date;
 }
