@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.3.0...@cliniccontrol/core-rest-api@1.4.0-beta.0) (2024-01-12)
+
+### Features
+
+- **SENS-116:** added updated apoointment registry core use case ([7dfe4d0](https://github.com/ItaloRAmaral/cliniccontrol/commit/7dfe4d0f5c348d83388b806ebc9293d0b07a0d90))
+
 ## [1.3.0](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.3.0-beta.1...@cliniccontrol/core-rest-api@1.3.0) (2024-01-04)
 
 **Note:** Version bump only for package @cliniccontrol/core-rest-api
