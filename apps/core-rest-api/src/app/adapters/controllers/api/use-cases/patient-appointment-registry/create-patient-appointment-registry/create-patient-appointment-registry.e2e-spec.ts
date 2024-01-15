@@ -2,13 +2,13 @@ import { faker } from "@faker-js/faker";
 import { INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Test } from '@nestjs/testing';
+import request from 'supertest';
 import { PsychologistFactory } from '../../../../../../../../tests/factories/make-psychologist';
+import { PatientAppointmentRegistryEntity } from '../../../../../../core/domains/patient-appointment-registry/entities/registry/entity';
 import { PsychologistEntity } from '../../../../../../core/domains/psychologist/entities/psychologist/entity';
 import { BcryptHasherService } from '../../../../../../core/shared/cryptography/use-cases/bcrypt-hasher.service';
 import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
 import { ApiModule } from "../../../api.module";
-import request from 'supertest';
-import { PatientAppointmentRegistryEntity } from "@clinicControl/core-rest-api/core/domains/patient-appointment-registry/entities/registry/entity";
 
 describe('[E2E] - Create Appointment Registry', () => {
   let app: INestApplication;
