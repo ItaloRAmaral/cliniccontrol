@@ -1,4 +1,4 @@
-import { IsDate, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsObject, IsString } from 'class-validator';
 import { Registry } from '../../entities/registry/dto';
 
 export class CreatePatientAppointmentRegistryDto {
@@ -11,7 +11,7 @@ export class CreatePatientAppointmentRegistryDto {
   @IsString()
   patientId!: string;
 
-  @IsOptional()
-  @IsDate()
-  updatedAt?: Date | null;
+  // @IsOptional()
+  // @IsDate()
+  // updatedAt?: Date | null;
 }
