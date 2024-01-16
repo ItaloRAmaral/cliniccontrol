@@ -6,7 +6,7 @@ import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
 import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
-import { UpdatedAppointmentInfoDto } from './update-appointment-info-dto';
+import { UpdateAppointmentInfoDto } from './update-appointment-info-dto';
 import { UpdateAppointmentInfoService } from './update-appointment-info.service';
 
 describe('[appointment] Update Appointment Info Service', () => {
@@ -34,7 +34,7 @@ describe('[appointment] Update Appointment Info Service', () => {
     const createAppointment =
       await databaseRepository.createSingleAppointment(fakeAppointment);
 
-    const newAppointmentInfo: UpdatedAppointmentInfoDto = {
+    const newAppointmentInfo: UpdateAppointmentInfoDto = {
       id: createAppointment.id,
       paid: true,
       paymentMethod: PaymentMethod.PIX,
@@ -57,7 +57,7 @@ describe('[appointment] Update Appointment Info Service', () => {
   });
 
   it('should throw error if appointment does not exist', async () => {
-    const newAppointmentInfo: UpdatedAppointmentInfoDto = {
+    const newAppointmentInfo: UpdateAppointmentInfoDto = {
       id: randomUUID(),
       paid: true,
       paymentMethod: PaymentMethod.PIX,

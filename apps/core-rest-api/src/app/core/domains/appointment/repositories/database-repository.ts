@@ -1,7 +1,7 @@
 import { AppointmentEntity } from '../entities/appointment/entity';
 import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
 import { UpdatedAppointmentDateDto } from '../use-cases/update-appointment-date/update-appointment-date-dto';
-import { UpdatedAppointmentInfoDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
+import { UpdateAppointmentInfoDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
 
 export abstract class AppointmentDatabaseRepository {
   abstract createSingleAppointment(
@@ -15,7 +15,7 @@ export abstract class AppointmentDatabaseRepository {
   ): Promise<AppointmentEntity | null>;
   abstract getAppointments(): Promise<AppointmentEntity[]>;
   abstract updateAppointmentInfo(
-    newAppointmentInfo: UpdatedAppointmentInfoDto
+    newAppointmentInfo: UpdateAppointmentInfoDto
   ): Promise<void>;
   abstract updateAppointmentDate(
     newAppointmentInfo: UpdatedAppointmentDateDto
