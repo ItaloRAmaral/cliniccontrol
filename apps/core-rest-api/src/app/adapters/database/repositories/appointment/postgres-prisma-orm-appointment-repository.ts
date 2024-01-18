@@ -1,4 +1,4 @@
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { AppointmentEntity } from '../../../../core/domains/appointment/entities/appointment/entity';
 import { AppointmentDatabaseRepository } from '../../../../core/domains/appointment/repositories/database-repository';
 import { CreateSingleAppointmentDto } from '../../../../core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
@@ -8,6 +8,7 @@ import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-mess
 import { PostgreSqlPrismaOrmService } from "../../infra/prisma/prisma.service";
 import { PostgresqlPrismaAppointmentMapper } from '../../mappers/postgresql-prisma-appointment-mapper';
 
+@Injectable()
 export class PostgresqlPrismaOrmAppointmentRepository implements AppointmentDatabaseRepository {
   constructor(private postgresqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
