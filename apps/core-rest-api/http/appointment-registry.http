@@ -16,11 +16,10 @@ Authorization: Bearer {{authToken}}
   "patientId": "{{$dotenv PATIENT_ID}}"
 }
 
-### Delete User
+### Update Registry
 
-# @name delete_psychologist
-DELETE http://localhost:3333/core/psychologist/{{$dotenv PSYCHOLOGIST_EMAIL}}/delete HTTP/1.1
-# DELETE http://localhost:3333/core/psychologist/wrong_email@gmail.com/delete HTTP/1.1
-# DELETE http://localhost:3333/core/psychologist/invalid_email/delete HTTP/1.1
+# @name update_patient_appointment_registry
+PATCH http://localhost:3333/core/appointment-registry/update HTTP/1.1
+
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
