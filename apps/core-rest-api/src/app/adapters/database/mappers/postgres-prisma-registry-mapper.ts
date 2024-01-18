@@ -2,6 +2,7 @@ import { Prisma, PatientAppointmentRegistry as PrismaPatientAppointmentRegistryD
 import { Registry } from '../../../core/domains/patient-appointment-registry/entities/registry/dto';
 import { PatientAppointmentRegistryEntity } from '../../../core/domains/patient-appointment-registry/entities/registry/entity';
 import { CreatePatientAppointmentRegistryDto } from '../../../core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
+import { UpdatePatientAppointmentRegistryDto } from '../../../core/domains/patient-appointment-registry/use-cases/update-appointment-registry/update-appointment-registry-dto';
 
 export class PostgresqlPrismaPatientAppointmentRegistryMapper {
   static toDomain(raw: PrismaPatientAppointmentRegistryDto): PatientAppointmentRegistryEntity {
@@ -21,6 +22,18 @@ export class PostgresqlPrismaPatientAppointmentRegistryMapper {
         ...raw,
         registry: raw.registry as object
       }
+    };
+  }
+
+  static toPrismaUpdate(raw: UpdatePatientAppointmentRegistryDto): Prisma.PatientAppointmentRegistryUpdateArgs {
+    return {
+      data: {
+        ...raw,
+        registry: raw.registry as object
+      },
+      where: {
+        id: raw.id,
+      },
     };
   }
 }
