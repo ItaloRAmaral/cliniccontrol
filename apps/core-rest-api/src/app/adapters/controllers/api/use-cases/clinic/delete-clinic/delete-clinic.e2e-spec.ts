@@ -69,9 +69,6 @@ describe('[E2E] - Delete Clinic', () => {
     const deletedClinic = await prisma['clinic'].findUnique({
       where: { id: clinic.id },
     });
-
-    console.log('DELETED CLINIC ---->', deletedClinic);
-
     expect(deletedClinic).toBeNull();
   });
 });
