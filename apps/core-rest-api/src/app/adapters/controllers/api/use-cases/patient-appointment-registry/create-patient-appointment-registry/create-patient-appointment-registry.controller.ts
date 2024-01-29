@@ -10,12 +10,19 @@ import { NestjsCreatePatientAppointmentRegistryService } from './nestjs-create-p
   path: 'appointment-registry',
 })
 export class CreatePatientAppointmentRegistryController {
-  constructor(private createPatientAppointmentRegistryService: NestjsCreatePatientAppointmentRegistryService) {}
+  constructor(
+    private createPatientAppointmentRegistryService: NestjsCreatePatientAppointmentRegistryService,
+  ) {}
 
   @Post('create')
-  async execute(@Body() createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryDto): Promise<CreatePatientAppointmentRegistryOutputDto> {
+  async execute(
+    @Body() createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryDto,
+  ): Promise<CreatePatientAppointmentRegistryOutputDto> {
     try {
-      await this.createPatientAppointmentRegistryService.execute(createPatientAppointmentRegistryDto);
+      await this.createPatientAppointmentRegistryService.execute(
+        createPatientAppointmentRegistryDto,
+      );
+
       return { message: 'Appointment registry created successfully' };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);

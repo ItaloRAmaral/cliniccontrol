@@ -10,8 +10,4 @@ export class CreatePatientAppointmentRegistryDto {
 
   @IsString()
   patientId!: string;
-
-  // @IsOptional()
-  // @IsDate()
-  // updatedAt?: Date | null;
 }
