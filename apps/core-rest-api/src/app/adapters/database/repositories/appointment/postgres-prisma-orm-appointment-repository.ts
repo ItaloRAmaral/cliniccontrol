@@ -29,6 +29,7 @@ export class PostgresqlPrismaOrmAppointmentRepository implements AppointmentData
         date: appointmentDate,
       }
     })
+
     if (!appointment) {
       return null;
     }
@@ -37,7 +38,7 @@ export class PostgresqlPrismaOrmAppointmentRepository implements AppointmentData
   }
 
   async createSingleAppointment(appointment: CreateSingleAppointmentDto): Promise<AppointmentEntity> {
-    const isAppointmentExists = await this.findSingleAppointmentByDate(appointment.date);
+    const isAppointmentExists = await this.findSingleAppointmentByDate(new Date(appointment.date));
 
     if (isAppointmentExists) {
       throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']);
