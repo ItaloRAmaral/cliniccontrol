@@ -12,7 +12,7 @@ export function makeAppointment(override: Partial<CreateSingleAppointmentDto> = 
   const newAppointment = new AppointmentEntity({
     psychologistId: faker.string.uuid(),
     patientId: faker.string.uuid(),
-    date: faker.date.future(),
+    date: (faker.date.future()).toString(),
     online: false,
     clinicId: faker.string.uuid(),
     confirmed: true,
@@ -34,7 +34,7 @@ export class AppointmentFactory {
     const newPrismaAppointment = makeAppointment(appointment);
 
     await this.postgreSqlPrismaOrmService['appointment'].create(
-      PostgresqlPrismaAppointmentMapper.toPrismaCreate(newPrismaAppointment),
+      PostgresqlPrismaAppointmentMapper.toPrismaCreate({...newPrismaAppointment, date: (newPrismaAppointment.date).toString()}),
     );
 
     return newPrismaAppointment;

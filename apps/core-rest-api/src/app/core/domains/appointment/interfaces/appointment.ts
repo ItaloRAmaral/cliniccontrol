@@ -11,6 +11,7 @@ export type IAppointmentProps = Replace<
     missed?: boolean | null;
     cancellationDate?: Date | null;
     paid?: boolean | null;
+    date: string
   }
 >;
 export type ICreateAppointmentServiceProps = Replace<

@@ -1,4 +1,4 @@
-import { IsBoolean, IsDate, IsEnum, IsString } from 'class-validator';
+import { IsBoolean, IsDate, IsEnum, IsOptional, IsString } from 'class-validator';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
 export class CreateSingleAppointmentDto {
@@ -8,8 +8,8 @@ export class CreateSingleAppointmentDto {
   @IsString()
   patientId!: string;
 
-  @IsDate()
-  date!: Date;
+  @IsString()
+  date!: string;
 
   @IsBoolean()
   online!: boolean;
@@ -21,7 +21,8 @@ export class CreateSingleAppointmentDto {
   confirmed!: boolean;
 
   @IsDate()
-  confirmationDate!: Date | null;
+  @IsOptional()
+  confirmationDate?: Date | null;
 
   @IsBoolean()
   cancelled!: boolean;
