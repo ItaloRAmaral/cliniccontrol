@@ -18,15 +18,15 @@ export class CreateSingleAppointmentService {
     const createSingleAppointmentDtoInstance = plainToInstance(
       CreateSingleAppointmentDto,
       createSingleAppointmentDto
-    );
+      );
 
     await applicationValidateOrReject(createSingleAppointmentDtoInstance);
 
+    const appointmentDate = new Date(createSingleAppointmentDto.date)
     const isAppointmentExist =
       await this.appointmentDatabaseRepository.findSingleAppointmentByDate(
-        createSingleAppointmentDto.date
+        appointmentDate
       );
-
     if (isAppointmentExist) {
       throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']);
     }
@@ -36,7 +36,6 @@ export class CreateSingleAppointmentService {
       await this.appointmentDatabaseRepository.createSingleAppointment(
         createSingleAppointmentDto
       );
-
     return createSingleAppointment;
   }
 }
