@@ -21,7 +21,7 @@ import { CreatePsychologistController } from './use-cases/psychologist/create-ps
 import { DeletePsychologistController } from './use-cases/psychologist/delete-psychologist/delete-psychologist.controller';
 
 import { CreateAppointmentController } from './use-cases/appointment/create-appointment/create-appointment.controller';
-import { NestjsCreateAppointmentService } from './use-cases/appointment/create-appointment/nestjs-create-appointment.services';
+import { NestjsCreateAppointmentService } from './use-cases/appointment/create-appointment/nestjs-create-appointment.service';
 import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
 import { NestjsDeleteClinicService } from './use-cases/clinic/delete-clinic/nestjs-delete-clinic.service';
 import { NestjsUpdateClinicService } from './use-cases/clinic/update-clinic/nestjs-update-clinic.service';
