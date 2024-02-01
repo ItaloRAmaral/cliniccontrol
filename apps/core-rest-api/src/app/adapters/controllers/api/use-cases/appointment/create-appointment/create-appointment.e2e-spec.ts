@@ -3,7 +3,7 @@ import { INestApplication } from "@nestjs/common";
 import request from 'supertest';
 import { makeAppointment } from '../../../../../../../../tests/factories/make-appointment';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
-import { CreateSingleAppointmentDto } from '../../../../../../core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
+import { AppointmentEntity } from '../../../../../../core/domains/appointment/entities/appointment/entity';
 import { PaymentMethod } from '../../../../../../core/shared/interfaces/payments';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
@@ -17,7 +17,6 @@ describe('[E2E] - Create New Appointment', () => {
   let clinicId: string;
   let patientId: string;
 
-  // let patient: PatientEntity;
 
   beforeAll(async () => {
     const setup = await setupE2ETest();
@@ -34,7 +33,7 @@ describe('[E2E] - Create New Appointment', () => {
   });
 
   it('[POST] - Should successfully create a new appointment', async () => {
-    const newAppointment: CreateSingleAppointmentDto = makeAppointment({
+    const newAppointment: AppointmentEntity = makeAppointment({
       psychologistId,
       clinicId,
       patientId,
@@ -45,7 +44,6 @@ describe('[E2E] - Create New Appointment', () => {
       online: false,
       paymentMethod: PaymentMethod.CREDIT_CARD
     });
-
     const response = await request(app.getHttpServer())
       .post('/appointment/create')
       .set('Authorization', `Bearer ${access_token}`)

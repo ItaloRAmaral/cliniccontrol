@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { CreateSingleAppointmentDto } from '../../../../../../core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
+import { CreateSingleAppointmentInputDto } from "./dto";
 import { NestjsCreateAppointmentService } from "./nestjs-create-appointment.service";
 
 interface CreateAppointmentResponse {
@@ -17,9 +17,9 @@ export class CreateAppointmentController {
 
   @Post('create')
   // @ApiOperation(postMethodDocs)
-  async execute(@Body() createAppointmentDto: CreateSingleAppointmentDto): Promise<CreateAppointmentResponse>{
+  async execute(@Body() createAppointmentDto: CreateSingleAppointmentInputDto): Promise<CreateAppointmentResponse>{
     try {
-      await this.createAppointmentService.execute(createAppointmentDto);
+      await this.createAppointmentService.execute({...createAppointmentDto, date: new Date(createAppointmentDto.date)});
 
       return {
         message: 'Appointment created successfully',
