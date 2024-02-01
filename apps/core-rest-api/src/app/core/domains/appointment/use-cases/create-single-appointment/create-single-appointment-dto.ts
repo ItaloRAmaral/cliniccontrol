@@ -8,8 +8,8 @@ export class CreateSingleAppointmentDto {
   @IsString()
   patientId!: string;
 
-  @IsString()
-  date!: string;
+  @IsDate()
+  date!: Date;
 
   @IsBoolean()
   online!: boolean;

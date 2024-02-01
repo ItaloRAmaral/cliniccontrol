@@ -14,7 +14,7 @@ export class InMemoryAppointmentDatabaseRepository
   async createSingleAppointment(
     appointment: CreateSingleAppointmentDto,
   ): Promise<AppointmentEntity> {
-    const isAppointmentExist = await this.findSingleAppointmentByDate(new Date(appointment.date));
+    const isAppointmentExist = await this.findSingleAppointmentByDate(appointment.date);
 
     if (isAppointmentExist) {
       throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']);

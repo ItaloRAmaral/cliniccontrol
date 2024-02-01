@@ -22,10 +22,9 @@ export class CreateSingleAppointmentService {
 
     await applicationValidateOrReject(createSingleAppointmentDtoInstance);
 
-    const appointmentDate = new Date(createSingleAppointmentDto.date)
     const isAppointmentExist =
       await this.appointmentDatabaseRepository.findSingleAppointmentByDate(
-        appointmentDate
+        createSingleAppointmentDto.date
       );
     if (isAppointmentExist) {
       throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']);
