@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { PATIENT_APPOINTMENT_REGISTRY_MESSAGES } from '../../../../../shared/errors/error-messages';
+import { PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { PatientAppointmentRegistryDatabaseRepository } from '../../repositories/database-repository';
 import { UpdatePatientAppointmentRegistryDto } from './update-appointment-registry-dto';
@@ -27,7 +27,7 @@ export class UpdatePatientAppointmentRegistryService {
 
     if (!isRegistryExists) {
       throw new NotFoundException(
-        PATIENT_APPOINTMENT_REGISTRY_MESSAGES['REGISTRY_NOT_FOUNT'],
+        PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES['REGISTRY_NOT_FOUND'],
       );
     }
 

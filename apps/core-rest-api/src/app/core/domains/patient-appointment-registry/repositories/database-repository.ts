@@ -21,7 +21,7 @@ export abstract class PatientAppointmentRegistryDatabaseRepository {
   ): Promise<PatientAppointmentRegistryEntity | null>;
   abstract findPatientAppointmentRegistryByIdAndPeriod(
     params: IFindPatientAppointmentRegistryByIdAndPeriod
-  ): Promise<PatientAppointmentRegistryEntity | null>;
+  ): Promise<PatientAppointmentRegistryEntity[] | []>;
   abstract updatePatientAppointmentRegistry(
     params: IUpdatePatientAppointmentRegistry
   ): Promise<PatientAppointmentRegistryEntity>;
