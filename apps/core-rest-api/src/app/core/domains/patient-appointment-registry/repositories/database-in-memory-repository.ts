@@ -57,14 +57,14 @@ export class InMemoryPatientAppointmentRegistryDatabaseRepository
 
   async findPatientAppointmentRegistryByIdAndPeriod(
     params: IFindPatientAppointmentRegistryByIdAndPeriod
-  ): Promise<PatientAppointmentRegistryEntity | null> {
+  ): Promise<PatientAppointmentRegistryEntity[] | []> {
     return (
-      this.patientAppointmentsRegistry.find(
+      this.patientAppointmentsRegistry.filter(
         (patientAppointmentRegistry) =>
           patientAppointmentRegistry.patientId === params.patientId &&
           patientAppointmentRegistry.createdAt >= params.startDate &&
           patientAppointmentRegistry.createdAt <= params.endDate
-      ) ?? null
+      ) ?? []
     );
   }
 

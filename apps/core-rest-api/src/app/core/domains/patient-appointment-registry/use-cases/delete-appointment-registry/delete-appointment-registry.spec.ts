@@ -16,7 +16,7 @@ import { InMemoryPatientAppointmentRegistryDatabaseRepository } from '../../repo
 import { DeletePatientAppointmentRegistryService } from './delete-appointment-registry.service';
 
 import { ConflictException } from '@nestjs/common';
-import { PATIENT_APPOINTMENT_REGISTRY_MESSAGES } from '../../../../../shared/errors/error-messages';
+import { PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { PatientEntity } from '../../../patient/entities/patient/entity';
 import { CreatePatientDto } from '../../../patient/use-cases/create-patient/create-patient-dto';
 import { PsychologistEntity } from '../../../psychologist/entities/psychologist/entity';
@@ -97,7 +97,7 @@ describe('[registry] - Create Patient Appointment Registry Service', () => {
       id: 'id-not-existent'
     }
     await expect(service.execute(patientAppointmentRegistry)).rejects.toThrow(
-      new ConflictException(PATIENT_APPOINTMENT_REGISTRY_MESSAGES['REGISTRY_NOT_FOUNT']),
+      new ConflictException(PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES['REGISTRY_NOT_FOUND']),
     );
   });
 });
