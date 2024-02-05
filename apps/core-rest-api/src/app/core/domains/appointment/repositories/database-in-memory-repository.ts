@@ -3,7 +3,7 @@ import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-mess
 import { AppointmentEntity } from '../entities/appointment/entity';
 import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
 import { UpdatedAppointmentDateDto } from '../use-cases/update-appointment-date/update-appointment-date-dto';
-import { UpdatedAppointmentInfoDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
+import { UpdateAppointmentInfoDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
 import { AppointmentDatabaseRepository } from './database-repository';
 
 export class InMemoryAppointmentDatabaseRepository
@@ -49,7 +49,7 @@ export class InMemoryAppointmentDatabaseRepository
   }
 
   async updateAppointmentInfo(
-    newAppointmentInfo: UpdatedAppointmentInfoDto,
+    newAppointmentInfo: UpdateAppointmentInfoDto,
   ): Promise<void> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(
       newAppointmentInfo.id,

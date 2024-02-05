@@ -1,4 +1,3 @@
-import { fakerPT_BR as faker } from '@faker-js/faker';
 import { CreateSingleAppointmentService } from './create-single-appointment.service';
 
 import { ConflictException } from '@nestjs/common';
@@ -12,11 +11,11 @@ describe('[appointment] Create Single Appointment Service', () => {
   const fakeAppointment: CreateSingleAppointmentDto = {
     psychologistId: randomUUID(),
     patientId: randomUUID(),
-    date: faker.date.recent({ days: 10 }),
+    date: new Date(),
     online: false,
     clinicId: randomUUID(),
     confirmed: true,
-    confirmationDate: faker.date.recent({ days: 5 }),
+    confirmationDate: new Date(),
     cancelled: false,
     paymentMethod: PaymentMethod.CREDIT_CARD,
   };

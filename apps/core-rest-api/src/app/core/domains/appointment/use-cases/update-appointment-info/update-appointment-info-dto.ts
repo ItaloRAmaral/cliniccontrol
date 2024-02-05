@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
-export class UpdatedAppointmentInfoDto {
+export class UpdateAppointmentInfoDto {
   @IsString()
   id!: string;
 

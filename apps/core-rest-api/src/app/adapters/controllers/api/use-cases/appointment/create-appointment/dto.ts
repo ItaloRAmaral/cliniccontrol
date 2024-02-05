@@ -1,15 +1,15 @@
 import { IsBoolean, IsDate, IsEnum, IsOptional, IsString } from 'class-validator';
-import { PaymentMethod } from '../../../../shared/interfaces/payments';
+import { PaymentMethod } from '../../../../../../core/shared/interfaces/payments';
 
-export class CreateSingleAppointmentDto {
+export class CreateSingleAppointmentInputDto {
   @IsString()
   psychologistId!: string;
 
   @IsString()
   patientId!: string;
 
-  @IsDate()
-  date!: Date;
+  @IsString()
+  date!: string;
 
   @IsBoolean()
   online!: boolean;
