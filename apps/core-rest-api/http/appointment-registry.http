@@ -16,10 +16,9 @@ Authorization: Bearer {{authToken}}
   "patientId": "{{$dotenv PATIENT_ID}}"
 }
 
-### Update Registry
+### delete Registry
 
-# @name update_patient_appointment_registry
-PATCH http://localhost:3333/core/appointment-registry/update HTTP/1.1
-
+# @name delete_patient_appointment_registry
+DELETE http://localhost:3333/core/appointment-registry/{{$dotenv PATIENT_APPOINTMENT_REGISTRY_ID}}/delete HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}

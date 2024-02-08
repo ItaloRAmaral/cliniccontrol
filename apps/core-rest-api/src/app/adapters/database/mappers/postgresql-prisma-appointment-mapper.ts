@@ -14,7 +14,6 @@ export class PostgresqlPrismaAppointmentMapper {
     return new AppointmentEntity({
       ...raw,
       paymentMethod: raw.paymentMethod as unknown as PaymentMethod,
-      date: (raw.date).toString()
     });
   }
 
@@ -23,7 +22,7 @@ export class PostgresqlPrismaAppointmentMapper {
       data: {
         ...raw,
         paymentMethod: raw.paymentMethod as unknown as PrismaPaymentMethod,
-        date: new Date(raw.date)
+        date: new Date(raw.date),
       },
     };
   }
@@ -32,7 +31,7 @@ export class PostgresqlPrismaAppointmentMapper {
     return {
       data: {
         ...raw,
-        done: raw.done as boolean
+        done: raw.done as boolean,
       },
       where: {
         id: raw.id,

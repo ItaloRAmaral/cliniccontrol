@@ -27,6 +27,8 @@ import { NestjsDeleteClinicService } from './use-cases/clinic/delete-clinic/nest
 import { NestjsUpdateClinicService } from './use-cases/clinic/update-clinic/nestjs-update-clinic.service';
 import { CreatePatientAppointmentRegistryController } from './use-cases/patient-appointment-registry/create-patient-appointment-registry/create-patient-appointment-registry.controller';
 import { NestjsCreatePatientAppointmentRegistryService } from './use-cases/patient-appointment-registry/create-patient-appointment-registry/nestjs-create-patient-appointment-registry.service';
+import { DeletePatientAppointmentRegistryController } from './use-cases/patient-appointment-registry/delete-patient-appointment-registry/delete-patient-appointment-registry.controller';
+import { NestjsDeletePatientAppointmentRegistryService } from './use-cases/patient-appointment-registry/delete-patient-appointment-registry/nestjs-delete-patient-appointment-registry.service';
 import { NestjsCreatePatientService } from './use-cases/patient/create-patient/nestjs-create-patient.service';
 import { NestjsDeletePatientService } from './use-cases/patient/delete-patient/nestjs-delete-patient.service';
 import { NestjsAuthenticatePsychologistService } from './use-cases/psychologist/authenticate-psychologist/nestjs-authenticate-psychologist.service';
@@ -56,7 +58,8 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     CreatePatientController,
     DeletePatientController,
     CreatePatientAppointmentRegistryController,
-    CreateAppointmentController
+    CreateAppointmentController,
+    DeletePatientAppointmentRegistryController,
   ],
   providers: [
     BcryptHasherService,
@@ -71,7 +74,8 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     NestjsCreatePatientService,
     NestjsDeletePatientService,
     NestjsCreatePatientAppointmentRegistryService,
-    NestjsCreateAppointmentService
+    NestjsCreateAppointmentService,
+    NestjsDeletePatientAppointmentRegistryService,
   ],
 })
 export class ApiModule {}

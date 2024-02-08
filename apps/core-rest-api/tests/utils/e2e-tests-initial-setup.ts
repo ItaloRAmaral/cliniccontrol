@@ -10,12 +10,18 @@ import { DatabaseRepositoriesModule } from '../../src/app/adapters/database/repo
 
 import { ClinicFactory } from '../factories/make-clinic';
 import { PatientFactory } from '../factories/make-patient';
+import { PatientAppointmentRegistryFactory } from '../factories/make-patient-appointment-registry';
 import { PsychologistFactory } from '../factories/make-psychologist';
 
 export async function setupE2ETest() {
   const moduleRef: TestingModule = await Test.createTestingModule({
     imports: [ApiModule, DatabaseRepositoriesModule],
-    providers: [PsychologistFactory, ClinicFactory, PatientFactory],
+    providers: [
+      PsychologistFactory,
+      ClinicFactory,
+      PatientFactory,
+      PatientAppointmentRegistryFactory,
+    ],
   }).compile();
 
   const app: INestApplication = moduleRef.createNestApplication();
@@ -25,6 +31,8 @@ export async function setupE2ETest() {
   const clinicFactory: ClinicFactory = moduleRef.get(ClinicFactory);
   const psychologistFactory: PsychologistFactory = moduleRef.get(PsychologistFactory);
   const patientFactory: PatientFactory = moduleRef.get(PatientFactory);
+  const patientAppointmentRegistryFactory: PatientAppointmentRegistryFactory =
+    moduleRef.get(PatientAppointmentRegistryFactory);
 
   const jwt: JwtService = moduleRef.get(JwtService);
 
@@ -67,6 +75,14 @@ export async function setupE2ETest() {
     clinicId: clinic.id,
   });
 
+  // Creating a patient appointment registry to use in tests
+  const patientAppointmentRegistry =
+    await patientAppointmentRegistryFactory.makePrismaPatientAppointmentRegistry({
+      psychologistId: psychologist.id,
+      patientId: patient.id,
+      registry: { observations: 'get well' },
+    });
+
   return {
     prisma,
     app,
@@ -82,5 +98,6 @@ export async function setupE2ETest() {
     clinic,
     patientFactory,
     patient,
+    patientAppointmentRegistry,
   };
 }
