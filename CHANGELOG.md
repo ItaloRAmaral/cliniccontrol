@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0-beta.2](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.7.0-beta.1...cliniccontrol@1.7.0-beta.2) (2024-02-08)
+
+### Features
+
+- add appointment e2e tests file ([266f723](https://github.com/ItaloRAmaral/cliniccontrol/commit/266f723ef626266e0e46435afe7badf1c3a04497))
+- add appointment mapper ([8ae8d81](https://github.com/ItaloRAmaral/cliniccontrol/commit/8ae8d814810600f729969a107ed0e1cf85cc3edc))
+- add create appointment controller ([5aaa605](https://github.com/ItaloRAmaral/cliniccontrol/commit/5aaa605d6297690ba659b9c4f7192ea0ad92fa04))
+- add create appointment nestjs service ([51b65cb](https://github.com/ItaloRAmaral/cliniccontrol/commit/51b65cb06d0cc00f5c15dbe28322f012442066ab))
+- add create appointment route in api module ([3de5a9d](https://github.com/ItaloRAmaral/cliniccontrol/commit/3de5a9de3515219551cfabcc0b4765ead7f1cf43))
+- add postgres prisma orm repository ([ca55bde](https://github.com/ItaloRAmaral/cliniccontrol/commit/ca55bdef820a0a95564db9d831160ee36d61558c))
+- **CC-120:** add appointment E2E test ([8202ec7](https://github.com/ItaloRAmaral/cliniccontrol/commit/8202ec7e8fbf47d808d1d8c80af189464fa48ae6))
+- **CC-120:** add appointment factory ([37e1eb6](https://github.com/ItaloRAmaral/cliniccontrol/commit/37e1eb6987ba6089bd253e20e8ecd3447c64f10e))
+- **CC-120:** add appointment fake client ([0ce1160](https://github.com/ItaloRAmaral/cliniccontrol/commit/0ce11604e47bfa13a9e3084848baed0d13b8d4ec))
+- **CC-120:** add repository in repositories module ([0adfae9](https://github.com/ItaloRAmaral/cliniccontrol/commit/0adfae98c1ce11b7e8b5e53ce823f46ead08b5e7))
+- **CC-120:** create input dto for appointment controller ([1f1ab00](https://github.com/ItaloRAmaral/cliniccontrol/commit/1f1ab0028f0d6948c9cd8793af01cf03673113af))
+- **CC-125:** created delete patient appointment registry endpoint and its e2e ([86cba82](https://github.com/ItaloRAmaral/cliniccontrol/commit/86cba82b93eb24b39f5333dacc57b26163f4d9e7))
+
 ## [1.7.0-beta.1](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.7.0-beta.0...cliniccontrol@1.7.0-beta.1) (2024-02-04)
 
 ### Features
