@@ -5,7 +5,7 @@ import { INestApplication } from '@nestjs/common';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { PatientAppointmentRegistryEntity } from '../../../../../../core/domains/patient-appointment-registry/entities/registry/entity';
 
-describe.only('[E2E] -  Delete Appointment Registry', () => {
+describe('[E2E] -  Delete Appointment Registry', () => {
   let app: INestApplication;
 
   let access_token: string;
