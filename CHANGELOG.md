@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0-beta.3](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.7.0-beta.2...cliniccontrol@1.7.0-beta.3) (2024-02-08)
+
+### Features
+
+- **CC-127:** add update registry controller and adjust core ([d23fe3a](https://github.com/ItaloRAmaral/cliniccontrol/commit/d23fe3a1da9b2d2e059b68d56178227131bdc5a4))
+
 ## [1.7.0-beta.2](https://github.com/ItaloRAmaral/cliniccontrol/compare/cliniccontrol@1.7.0-beta.1...cliniccontrol@1.7.0-beta.2) (2024-02-08)
 
 ### Features
