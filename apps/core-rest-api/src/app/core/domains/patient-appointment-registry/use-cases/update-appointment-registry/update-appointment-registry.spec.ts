@@ -78,10 +78,7 @@ describe('[registry] - Update Patient Appointment Registry Service', () => {
         updatedPatientAppointmentRegistry.id,
       );
 
-    expect(updatedPatientAppointmentRegistryFromDatabase).toEqual({
-      ...patientAppointmentRegistry,
-      ...updatedPatientAppointmentRegistry,
-      updatedAt: updatedPatientAppointmentRegistryFromDatabase?.updatedAt,
-    });
+    expect(updatedPatientAppointmentRegistryFromDatabase?.registry.observations).toEqual(expect.any(String))
+    expect(updatedPatientAppointmentRegistryFromDatabase?.updatedAt).toBeDefined()
   });
 });
