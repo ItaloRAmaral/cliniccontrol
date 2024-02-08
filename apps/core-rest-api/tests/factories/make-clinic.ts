@@ -11,7 +11,7 @@ import { CreateClinicDto } from '../../src/app/core/domains/clinic/use-cases/cre
 */
 export function makeClinic(
   psychologistId?: string,
-  override: Partial<CreateClinicDto> = {}
+  override: Partial<CreateClinicDto> = {},
 ): ClinicEntity {
   const newClinic = new ClinicEntity({
     name: faker.word.noun(),
@@ -35,7 +35,8 @@ export class ClinicFactory {
     const newPrismaClinic = makeClinic(clinic.psychologistId, clinic);
 
     await this.postgreSqlPrismaOrmService['clinic'].create(
-      PostgresqlPrismaClinicMapper.toPrismaCreate(newPrismaClinic)
+      // PostgresqlPrismaClinicMapper.toPrismaCreate(newPrismaClinic)
+      PostgresqlPrismaClinicMapper.toPrismaCreate(newPrismaClinic),
     );
 
     return newPrismaClinic;
