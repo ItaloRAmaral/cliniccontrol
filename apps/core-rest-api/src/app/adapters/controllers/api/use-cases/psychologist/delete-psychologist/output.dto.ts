@@ -1,14 +1,12 @@
-import { IsEmail } from 'class-validator';
+import { IsObject, IsString } from 'class-validator';
 import { AssociatedClinics } from '../../../../../../core/domains/psychologist/use-cases/delete-psychologist/dto';
 
-export class RouteParamsDto {
-  @IsEmail()
-  psychologistEmail!: string;
-}
+export class DeletePsychologistControllerOutputDto {
+  @IsString()
+  message!: string;
 
-interface Response {
-  message: string;
-  data: {
+  @IsObject()
+  data!: {
     user: {
       id: string;
       name: string;
@@ -19,5 +17,3 @@ interface Response {
     deletedAt: Date;
   };
 }
-
-export type IControllerResponse = Response | Error;

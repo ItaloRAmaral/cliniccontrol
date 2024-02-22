@@ -4,8 +4,9 @@ import { postMethodDocs } from './docs';
 
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
-import { CreatePatientInputDto } from '../../../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { CreatePatientControllerInputDto } from './input.dto';
 import { NestjsCreatePatientService } from './nestjs-create-patient.service';
+import { CreatePatientControllerOutputDto } from './output.dto';
 
 @ApiTags('patient')
 @ApiBearerAuth()
@@ -17,7 +18,9 @@ export class CreatePatientController {
 
   @Post('create')
   @ApiOperation(postMethodDocs)
-  async execute(@Body() createPatientDto: CreatePatientInputDto) {
+  async execute(
+    @Body() createPatientDto: CreatePatientControllerInputDto,
+  ): Promise<CreatePatientControllerOutputDto> {
     try {
       await this.createPatientService.execute(createPatientDto);
 

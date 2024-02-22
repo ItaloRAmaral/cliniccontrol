@@ -6,8 +6,9 @@ import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAp
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
 import { CurrentUser } from '../../../decorators/current-user.decorator';
-import { IControllerResponse, RouteParamsDto } from './dto';
+import { DeletePsychologistControllerInputDto } from './input.dto';
 import { NestjsDeletePsychologistService } from './nestjs-delete-psychologist.service';
+import { DeletePsychologistControllerOutputDto } from './output.dto';
 
 @ApiTags('Psychologist')
 @ApiBearerAuth()
@@ -20,17 +21,16 @@ export class DeletePsychologistController {
   @Delete(':psychologistEmail/delete')
   @ApiOperation(patchMethodDocs)
   async execute(
-    @Param() { psychologistEmail }: RouteParamsDto,
-    @CurrentUser() currentUser: TokenPayload
-  ): Promise<IControllerResponse> {
+    @Param() { psychologistEmail }: DeletePsychologistControllerInputDto,
+    @CurrentUser() currentUser: TokenPayload,
+  ): Promise<DeletePsychologistControllerOutputDto> {
     try {
       if (psychologistEmail !== currentUser.email) {
         throw new ForbiddenException('You can only delete your own account');
       }
 
-      const serviceResponse = await this.deletePsychologistService.execute(
-        psychologistEmail
-      );
+      const serviceResponse =
+        await this.deletePsychologistService.execute(psychologistEmail);
 
       const deletedPsychologistResponseInfo = {
         user: {

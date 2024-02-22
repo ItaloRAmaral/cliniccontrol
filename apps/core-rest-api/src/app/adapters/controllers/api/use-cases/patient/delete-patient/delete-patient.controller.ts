@@ -6,8 +6,9 @@ import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAp
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
 import { CurrentUser } from '../../../decorators/current-user.decorator';
-import { RouteParamsDto } from './dto';
+import { DeletePatientControllerInputDto } from './input.dto';
 import { NestjsDeletePatientService } from './nestjs-delete-patient.service';
+import { DeletePatientControllerOutputDto } from './output.dto';
 
 @ApiTags('patient')
 @ApiBearerAuth()
@@ -20,9 +21,9 @@ export class DeletePatientController {
   @Delete(':patientId/delete')
   @ApiOperation(deleteMethodDocs)
   async execute(
-    @Param() { patientId }: RouteParamsDto,
+    @Param() { patientId }: DeletePatientControllerInputDto,
     @CurrentUser() currentUser: TokenPayload,
-  ) {
+  ): Promise<DeletePatientControllerOutputDto> {
     try {
       const deletePatientDto = {
         patientId,

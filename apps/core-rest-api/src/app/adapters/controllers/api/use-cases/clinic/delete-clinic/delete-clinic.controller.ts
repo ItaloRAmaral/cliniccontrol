@@ -1,22 +1,21 @@
 import { Controller, Delete, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { IControllerResponse, RouteParamsDto } from './dto';
+import { DeleteClinicControllerInputDto } from './input.dto';
 import { NestjsDeleteClinicService } from './nestjs-delete-clinic.service';
+import { DeleteClinicControllerOutputDto } from './output.dto';
 
 @ApiTags('Clinic')
 @Controller({
   path: 'clinic',
 })
 export class DeleteClinicController {
-  constructor(
-    private deleteClinicService: NestjsDeleteClinicService
-  ) {}
+  constructor(private deleteClinicService: NestjsDeleteClinicService) {}
 
   @Delete(':clinicId/delete')
   async execute(
-    @Param() { clinicId }: RouteParamsDto
-  ): Promise<IControllerResponse>{
+    @Param() { clinicId }: DeleteClinicControllerInputDto,
+  ): Promise<DeleteClinicControllerOutputDto> {
     try {
       const serviceResponse = await this.deleteClinicService.execute(clinicId);
 
@@ -29,8 +28,8 @@ export class DeleteClinicController {
 
       return {
         message: 'Clinic deleted successfully',
-        data:  deletedClinicResponseInfo
-      }
+        data: deletedClinicResponseInfo,
+      };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

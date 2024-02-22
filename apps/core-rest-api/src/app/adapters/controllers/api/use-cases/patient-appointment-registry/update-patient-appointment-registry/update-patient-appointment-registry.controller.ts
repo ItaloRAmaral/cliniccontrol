@@ -2,8 +2,9 @@ import { Body, Controller, Param, Patch } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Registry } from '../../../../../../core/domains/patient-appointment-registry/entities/registry/dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { UpdatePatientAppointmentRegistryInputDto, UpdatePatientAppointmentRegistryOutputDto } from './dto';
+import { UpdatePatientAppointmentRegistryControllerInputDto } from './input.dto';
 import { NestjsUpdatePatientAppointmentRegistryService } from './nestjs-update-patient-appointment-registry.service';
+import { UpdatePatientAppointmentRegistryControllerOutputDto } from './output.dto';
 
 @ApiTags('Update Patient Appointment Registry')
 @Controller({
@@ -17,10 +18,10 @@ export class UpdatePatientAppointmentRegistryController {
   @Patch(':id/update')
   async execute(
     @Param()
-    { id }: UpdatePatientAppointmentRegistryInputDto,
+    { id }: UpdatePatientAppointmentRegistryControllerInputDto,
     @Body()
-    registry : Registry,
-  ): Promise<UpdatePatientAppointmentRegistryOutputDto> {
+    registry: Registry,
+  ): Promise<UpdatePatientAppointmentRegistryControllerOutputDto> {
     try {
       await this.updatePatientAppointmentRegistryService.execute({ id, registry });
 

@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreatePatientAppointmentRegistryInputDto } from '../../../../../../core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { CreatePatientAppointmentRegistryOutputDto } from './dto';
+import { CreatePatientAppointmentRegistryControllerInputDto } from './input.dto';
 import { NestjsCreatePatientAppointmentRegistryService } from './nestjs-create-patient-appointment-registry.service';
+import { CreatePatientAppointmentRegistryControllerOutputDto } from './output.dto';
 
 @ApiTags('Create Patient Appointment Registry')
 @Controller({
@@ -16,8 +16,9 @@ export class CreatePatientAppointmentRegistryController {
 
   @Post('create')
   async execute(
-    @Body() createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryInputDto,
-  ): Promise<CreatePatientAppointmentRegistryOutputDto> {
+    @Body()
+    createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryControllerInputDto,
+  ): Promise<CreatePatientAppointmentRegistryControllerOutputDto> {
     try {
       await this.createPatientAppointmentRegistryService.execute(
         createPatientAppointmentRegistryDto,
