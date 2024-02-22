@@ -2,17 +2,17 @@ import { fakerPT_BR as faker } from '@faker-js/faker';
 
 import { PaymentMethod, Plan, Role } from '../../../../shared/interfaces/payments';
 import { PatientEntity } from '../../../patient/entities/patient/entity';
-import { CreatePatientDto } from '../../../patient/use-cases/create-patient/create-patient-dto';
+import { CreatePatientInputDto } from '../../../patient/use-cases/create-patient/create-patient-dto';
 import { PsychologistEntity } from '../../../psychologist/entities/psychologist/entity';
-import { CreatePsychologistDto } from '../../../psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { CreatePsychologistInputDto } from '../../../psychologist/use-cases/create-psychologist/create-psychologist-dto';
 import { PatientAppointmentRegistryEntity } from '../../entities/registry/entity';
 import { InMemoryPatientAppointmentRegistryDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PatientAppointmentRegistryDatabaseRepository } from '../../repositories/database-repository';
-import { UpdatePatientAppointmentRegistryDto } from './update-appointment-registry-dto';
+import { UpdatePatientAppointmentRegistryInputDto } from './update-appointment-registry-dto';
 import { UpdatePatientAppointmentRegistryService } from './update-appointment-registry.service';
 
 describe('[registry] - Update Patient Appointment Registry Service', () => {
-  const fakePsychologist: CreatePsychologistDto = {
+  const fakePsychologist: CreatePsychologistInputDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     password: faker.internet.password({ length: 8 }),
@@ -33,7 +33,7 @@ describe('[registry] - Update Patient Appointment Registry Service', () => {
 
     psychologist = new PsychologistEntity(fakePsychologist);
 
-    const fakePatient: CreatePatientDto = {
+    const fakePatient: CreatePatientInputDto = {
       name: faker.person.fullName(),
       email: faker.internet.email(),
       cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
@@ -66,7 +66,7 @@ describe('[registry] - Update Patient Appointment Registry Service', () => {
       observations: faker.lorem.paragraph(),
     };
 
-    const updatedPatientAppointmentRegistry: UpdatePatientAppointmentRegistryDto = {
+    const updatedPatientAppointmentRegistry: UpdatePatientAppointmentRegistryInputDto = {
       id: patientAppointmentRegistry.id,
       registry: newRegistryInfo,
     };
@@ -78,7 +78,9 @@ describe('[registry] - Update Patient Appointment Registry Service', () => {
         updatedPatientAppointmentRegistry.id,
       );
 
-    expect(updatedPatientAppointmentRegistryFromDatabase?.registry.observations).toEqual(expect.any(String))
-    expect(updatedPatientAppointmentRegistryFromDatabase?.updatedAt).toBeDefined()
+    expect(updatedPatientAppointmentRegistryFromDatabase?.registry.observations).toEqual(
+      expect.any(String),
+    );
+    expect(updatedPatientAppointmentRegistryFromDatabase?.updatedAt).toBeDefined();
   });
 });

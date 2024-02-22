@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, Param, Patch } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { UpdateClinicDto } from '../../../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
+import { UpdateClinicInputDto } from '../../../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import { UpdateClinicControllerDto } from './dto';
 import { NestjsUpdateClinicService } from './nestjs-update-clinic.service';
@@ -17,7 +17,7 @@ export class UpdateClinicController {
   @Patch(':clinicId/update')
   async execute(
     @Param('clinicId') clinicId: string,
-    @Body() updateClinicDto: UpdateClinicControllerDto
+    @Body() updateClinicDto: UpdateClinicControllerDto,
   ) {
     try {
       const isReqBodyEmpty = Object.keys(updateClinicDto).length === 0;
@@ -29,7 +29,7 @@ export class UpdateClinicController {
       const clinic = {
         id: clinicId.toString(),
         ...updateClinicDto,
-      } as UpdateClinicDto;
+      } as UpdateClinicInputDto;
 
       await this.updateClinicService.execute(clinic);
 

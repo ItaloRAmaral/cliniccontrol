@@ -4,11 +4,11 @@ import { randomUUID } from 'crypto';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryPatientDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
-import { CreatePatientDto } from './create-patient-dto';
+import { CreatePatientInputDto } from './create-patient-dto';
 import { CreatePatientService } from './create-patient.service';
 
 describe('[patient] Create Patient Service', () => {
-  const fakePatient: CreatePatientDto = {
+  const fakePatient: CreatePatientInputDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),

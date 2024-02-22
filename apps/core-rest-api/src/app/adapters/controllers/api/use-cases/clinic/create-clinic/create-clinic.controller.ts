@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateClinicDto } from '../../../../../../core/domains/clinic/use-cases/create-clinic/create-clinic-dto';
+import { CreateClinicInputDto } from '../../../../../../core/domains/clinic/use-cases/create-clinic/create-clinic-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import { NestjsCreateClinicService } from './nestjs-create-clinic.service';
 
@@ -16,7 +16,9 @@ export class CreateClinicController {
   constructor(private createClinicService: NestjsCreateClinicService) {}
 
   @Post('create')
-  async execute(@Body() createClinicDto: CreateClinicDto): Promise<CreateClinicResponse> {
+  async execute(
+    @Body() createClinicDto: CreateClinicInputDto,
+  ): Promise<CreateClinicResponse> {
     try {
       await this.createClinicService.execute(createClinicDto);
       return { message: 'Clinic created successfully' };

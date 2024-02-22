@@ -4,7 +4,7 @@ import { INestApplication } from '@nestjs/common';
 
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { Registry } from '../../../../../../core/domains/patient-appointment-registry/entities/registry/dto';
-import { CreatePatientAppointmentRegistryDto } from '../../../../../../core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
+import { CreatePatientAppointmentRegistryInputDto } from '../../../../../../core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
 import { PatientEntity } from '../../../../../../core/domains/patient/entities/patient/entity';
 import { PsychologistEntity } from '../../../../../../core/domains/psychologist/entities/psychologist/entity';
 
@@ -33,7 +33,7 @@ describe('[E2E] - Create Appointment Registry', () => {
   });
 
   it('[POST] - Should successfully create a new registry', async () => {
-    const appointmentRegistry: CreatePatientAppointmentRegistryDto = {
+    const appointmentRegistry: CreatePatientAppointmentRegistryInputDto = {
       patientId: patient.id,
       psychologistId: psychologist.id,
       registry,
@@ -51,7 +51,7 @@ describe('[E2E] - Create Appointment Registry', () => {
   });
 
   it('[POST] - Should return an error when trying to create a registry with an invalid patient id', async () => {
-    const appointmentRegistry: CreatePatientAppointmentRegistryDto = {
+    const appointmentRegistry: CreatePatientAppointmentRegistryInputDto = {
       patientId: 'invalid_patient_id',
       psychologistId: psychologist.id,
       registry,
@@ -67,7 +67,7 @@ describe('[E2E] - Create Appointment Registry', () => {
   });
 
   it('[POST] - Should return an error when trying to create a registry with an invalid psychologist id', async () => {
-    const appointmentRegistry: CreatePatientAppointmentRegistryDto = {
+    const appointmentRegistry: CreatePatientAppointmentRegistryInputDto = {
       patientId: patient.id,
       psychologistId: 'invalid_psychologist_id',
       registry,
@@ -83,7 +83,7 @@ describe('[E2E] - Create Appointment Registry', () => {
   });
 
   it('[POST] - Should return an error when trying to create a registry without token', async () => {
-    const appointmentRegistry: CreatePatientAppointmentRegistryDto = {
+    const appointmentRegistry: CreatePatientAppointmentRegistryInputDto = {
       patientId: patient.id,
       psychologistId: psychologist.id,
       registry,

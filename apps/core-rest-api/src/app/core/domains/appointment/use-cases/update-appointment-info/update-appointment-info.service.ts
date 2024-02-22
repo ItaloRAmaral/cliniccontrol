@@ -3,15 +3,15 @@ import { plainToInstance } from 'class-transformer';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { UpdateAppointmentInfoDto } from './update-appointment-info-dto';
+import { UpdateAppointmentInfoInputDto } from './update-appointment-info-dto';
 
 export class UpdateAppointmentInfoService {
   constructor(private appointmentDatabaseRepository: AppointmentDatabaseRepository) {}
 
-  async execute(newAppointmentInfo: UpdateAppointmentInfoDto): Promise<void> {
+  async execute(newAppointmentInfo: UpdateAppointmentInfoInputDto): Promise<void> {
     // Validate props types
     const updateAppointmentDtoInstance = plainToInstance(
-      UpdateAppointmentInfoDto,
+      UpdateAppointmentInfoInputDto,
       newAppointmentInfo,
     );
 

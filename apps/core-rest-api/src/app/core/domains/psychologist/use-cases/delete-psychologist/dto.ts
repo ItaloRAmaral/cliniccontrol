@@ -5,7 +5,7 @@ export interface AssociatedClinics {
   name: string;
 }
 
-export interface DeletedPsychologistInfo {
+export interface DeletedPsychologistOutputDto {
   deletedPsychologist: PsychologistEntity;
   associatedClinics: AssociatedClinics[];
 }

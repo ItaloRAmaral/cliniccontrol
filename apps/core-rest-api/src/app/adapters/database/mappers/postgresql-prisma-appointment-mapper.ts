@@ -5,8 +5,8 @@ import {
 } from '@prisma/client';
 
 import { AppointmentEntity } from '../../../core/domains/appointment/entities/appointment/entity';
-import { CreateSingleAppointmentDto } from '../../../core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
-import { UpdateAppointmentInfoDto } from '../../../core/domains/appointment/use-cases/update-appointment-info/update-appointment-info-dto';
+import { CreateSingleAppointmentInputDto } from '../../../core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
+import { UpdateAppointmentInfoInputDto } from '../../../core/domains/appointment/use-cases/update-appointment-info/update-appointment-info-dto';
 import { PaymentMethod } from '../../../core/shared/interfaces/payments';
 
 export class PostgresqlPrismaAppointmentMapper {
@@ -17,7 +17,9 @@ export class PostgresqlPrismaAppointmentMapper {
     });
   }
 
-  static toPrismaCreate(raw: CreateSingleAppointmentDto): Prisma.AppointmentCreateArgs {
+  static toPrismaCreate(
+    raw: CreateSingleAppointmentInputDto,
+  ): Prisma.AppointmentCreateArgs {
     return {
       data: {
         ...raw,
@@ -27,7 +29,9 @@ export class PostgresqlPrismaAppointmentMapper {
     };
   }
 
-  static toPrismaUpdate(raw: UpdateAppointmentInfoDto): Prisma.AppointmentUpdateArgs {
+  static toPrismaUpdate(
+    raw: UpdateAppointmentInfoInputDto,
+  ): Prisma.AppointmentUpdateArgs {
     return {
       data: {
         ...raw,

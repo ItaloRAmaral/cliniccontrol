@@ -5,10 +5,12 @@ import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infr
 
 import { PostgresqlPrismaAppointmentMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-appointment-mapper';
 import { AppointmentEntity } from '../../src/app/core/domains/appointment/entities/appointment/entity';
-import { CreateSingleAppointmentDto } from '../../src/app/core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
+import { CreateSingleAppointmentInputDto } from '../../src/app/core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
 import { PaymentMethod } from '../../src/app/core/shared/interfaces/payments';
 
-export function makeAppointment(override: Partial<CreateSingleAppointmentDto> = {}): AppointmentEntity {
+export function makeAppointment(
+  override: Partial<CreateSingleAppointmentInputDto> = {},
+): AppointmentEntity {
   const newAppointment = new AppointmentEntity({
     psychologistId: faker.string.uuid(),
     patientId: faker.string.uuid(),
@@ -29,7 +31,7 @@ export class AppointmentFactory {
   constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
   async makePrismaAppointment(
-    appointment: Partial<CreateSingleAppointmentDto> = {},
+    appointment: Partial<CreateSingleAppointmentInputDto> = {},
   ): Promise<AppointmentEntity> {
     const newPrismaAppointment = makeAppointment(appointment);
 

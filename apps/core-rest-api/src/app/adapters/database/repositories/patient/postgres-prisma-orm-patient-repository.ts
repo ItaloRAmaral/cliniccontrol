@@ -3,8 +3,8 @@ import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages
 
 import { PatientEntity } from '../../../../core/domains/patient/entities/patient/entity';
 import { PatientDatabaseRepository } from '../../../../core/domains/patient/repositories/database-repository';
-import { CreatePatientDto } from '../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
-import { UpdatePatientDto } from '../../../../core/domains/patient/use-cases/update-patient/update-patient-dto';
+import { CreatePatientInputDto } from '../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { UpdatePatientInputDto } from '../../../../core/domains/patient/use-cases/update-patient/update-patient-dto';
 import { PostgreSqlPrismaOrmService } from '../../infra/prisma/prisma.service';
 import { PostgresqlPrismaPatientMapper } from '../../mappers/postgresql-prisma-patient-mapper';
 
@@ -12,7 +12,7 @@ import { PostgresqlPrismaPatientMapper } from '../../mappers/postgresql-prisma-p
 export class PostgresqlPrismaOrmPatientRepository implements PatientDatabaseRepository {
   constructor(private postgresqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
-  async createPatient(patient: CreatePatientDto): Promise<PatientEntity> {
+  async createPatient(patient: CreatePatientInputDto): Promise<PatientEntity> {
     const isPatientExists = await this.findPatientByEmail(patient.email);
 
     if (isPatientExists) {
@@ -63,7 +63,7 @@ export class PostgresqlPrismaOrmPatientRepository implements PatientDatabaseRepo
     return patients.map((patient) => PostgresqlPrismaPatientMapper.toDomain(patient));
   }
 
-  async updatePatient(newPatientInfo: UpdatePatientDto): Promise<void> {
+  async updatePatient(newPatientInfo: UpdatePatientInputDto): Promise<void> {
     const oldPatientInfo = await this.findPatientById(newPatientInfo.id);
 
     if (!oldPatientInfo) {

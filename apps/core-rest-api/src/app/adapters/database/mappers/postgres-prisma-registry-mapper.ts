@@ -4,8 +4,8 @@ import {
 } from '@prisma/client';
 import { Registry } from '../../../core/domains/patient-appointment-registry/entities/registry/dto';
 import { PatientAppointmentRegistryEntity } from '../../../core/domains/patient-appointment-registry/entities/registry/entity';
-import { CreatePatientAppointmentRegistryDto } from '../../../core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
-import { UpdatePatientAppointmentRegistryDto } from '../../../core/domains/patient-appointment-registry/use-cases/update-appointment-registry/update-appointment-registry-dto';
+import { CreatePatientAppointmentRegistryInputDto } from '../../../core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
+import { UpdatePatientAppointmentRegistryInputDto } from '../../../core/domains/patient-appointment-registry/use-cases/update-appointment-registry/update-appointment-registry-dto';
 
 export class PostgresqlPrismaPatientAppointmentRegistryMapper {
   static toDomain(
@@ -26,7 +26,7 @@ export class PostgresqlPrismaPatientAppointmentRegistryMapper {
   }
 
   static toPrismaCreate(
-    raw: CreatePatientAppointmentRegistryDto,
+    raw: CreatePatientAppointmentRegistryInputDto,
   ): Prisma.PatientAppointmentRegistryCreateArgs {
     return {
       data: {
@@ -37,7 +37,7 @@ export class PostgresqlPrismaPatientAppointmentRegistryMapper {
   }
 
   static toPrismaUpdate(
-    raw: UpdatePatientAppointmentRegistryDto,
+    raw: UpdatePatientAppointmentRegistryInputDto,
   ): Prisma.PatientAppointmentRegistryUpdateArgs {
     return {
       data: {

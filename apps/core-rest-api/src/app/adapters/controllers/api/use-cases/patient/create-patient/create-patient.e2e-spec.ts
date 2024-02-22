@@ -4,7 +4,7 @@ import { INestApplication } from '@nestjs/common';
 import { makePatient } from '../../../../../../../../tests/factories/make-patient';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { PatientEntity } from '../../../../../../core/domains/patient/entities/patient/entity';
-import { CreatePatientDto } from '../../../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { CreatePatientInputDto } from '../../../../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
 describe('[E2E] - Create New Patient', () => {
@@ -33,7 +33,7 @@ describe('[E2E] - Create New Patient', () => {
   });
 
   it('[POST] - Should successfully create a new patient account', async () => {
-    const newPatient: CreatePatientDto = makePatient({
+    const newPatient: CreatePatientInputDto = makePatient({
       email: 'new_patient@email.com',
       psychologistId,
       clinicId,

@@ -1,5 +1,5 @@
-import { ClinicEntity } from "../../entities/clinic/entity";
+import { ClinicEntity } from '../../entities/clinic/entity';
 
-export interface DeletedClinicInfo {
+export interface DeletedClinicOutputDto {
   deletedClinic: ClinicEntity;
 }

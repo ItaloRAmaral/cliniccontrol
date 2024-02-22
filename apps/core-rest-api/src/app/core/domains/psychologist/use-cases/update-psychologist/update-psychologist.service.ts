@@ -5,17 +5,17 @@ import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../../shared/errors/error-
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { BcryptHasherService } from '../../../../shared/cryptography/use-cases/bcrypt-hasher.service';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
-import { UpdatePsychologistDto } from './update-psychologist-dto';
+import { UpdatePsychologistInputDto } from './update-psychologist-dto';
 
 export class UpdatePsychologistService {
   private hasherService: BcryptHasherService = new BcryptHasherService();
 
   constructor(private psychologistDatabaseRepository: PsychologistDatabaseRepository) {}
 
-  async execute(updatePsychologist: UpdatePsychologistDto): Promise<void> {
+  async execute(updatePsychologist: UpdatePsychologistInputDto): Promise<void> {
     // Validate
     const updatePsychologistDtoInstance = plainToInstance(
-      UpdatePsychologistDto,
+      UpdatePsychologistInputDto,
       updatePsychologist,
     );
     await applicationValidateOrReject(updatePsychologistDtoInstance);

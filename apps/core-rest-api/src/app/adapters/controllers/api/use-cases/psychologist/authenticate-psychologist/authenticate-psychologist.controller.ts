@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { AuthenticatePsychologistDto } from '../../../../../../core/domains/psychologist/use-cases/authenticate-psychologist/authenticate-psychologist-dto';
+import { AuthenticatePsychologistInputDto } from '../../../../../../core/domains/psychologist/use-cases/authenticate-psychologist/authenticate-psychologist-dto';
 import { Encrypter } from '../../../../../../core/shared/cryptography/repository/encrypter-repository';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
@@ -16,18 +16,17 @@ import { NestjsAuthenticatePsychologistService } from './nestjs-authenticate-psy
 export class AuthenticatePsychologistController {
   constructor(
     private AuthenticatePsychologistService: NestjsAuthenticatePsychologistService,
-    private jwtEncrypter: Encrypter
+    private jwtEncrypter: Encrypter,
   ) {}
 
   @Post('login')
   @Public()
   async execute(
-    @Body() psychologistLoginDto: AuthenticatePsychologistDto
+    @Body() psychologistLoginDto: AuthenticatePsychologistInputDto,
   ): Promise<AuthenticatePsychologistControllerResponse> {
     try {
-      const { id, name, email } = await this.AuthenticatePsychologistService.execute(
-        psychologistLoginDto
-      );
+      const { id, name, email } =
+        await this.AuthenticatePsychologistService.execute(psychologistLoginDto);
 
       const access_token = await this.jwtEncrypter.encrypt({ id, name, email });
 
