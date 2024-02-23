@@ -22,6 +22,8 @@ import { DeletePsychologistController } from './use-cases/psychologist/delete-ps
 
 import { CreateAppointmentController } from './use-cases/appointment/create-appointment/create-appointment.controller';
 import { NestjsCreateAppointmentService } from './use-cases/appointment/create-appointment/nestjs-create-appointment.service';
+import { DeleteAppointmentController } from './use-cases/appointment/delete-appointment/delete-appointment.controller';
+import { NestjsDeleteAppointmentService } from './use-cases/appointment/delete-appointment/nestjs-delete-appointment.service';
 import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
 import { NestjsDeleteClinicService } from './use-cases/clinic/delete-clinic/nestjs-delete-clinic.service';
 import { NestjsUpdateClinicService } from './use-cases/clinic/update-clinic/nestjs-update-clinic.service';
@@ -61,6 +63,7 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     DeletePatientController,
     CreatePatientAppointmentRegistryController,
     CreateAppointmentController,
+    DeleteAppointmentController,
     DeletePatientAppointmentRegistryController,
     UpdatePatientAppointmentRegistryController
   ],
@@ -78,6 +81,7 @@ import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update
     NestjsDeletePatientService,
     NestjsCreatePatientAppointmentRegistryService,
     NestjsCreateAppointmentService,
+    NestjsDeleteAppointmentService,
     NestjsDeletePatientAppointmentRegistryService,
     NestjsUpdatePatientAppointmentRegistryService
   ],
