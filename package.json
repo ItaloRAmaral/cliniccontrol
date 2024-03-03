@@ -43,6 +43,7 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.3.0",
     "@nestjs/swagger": "^7.1.17",
+    "@nestjs/typeorm": "^10.0.2",
     "@prisma/client": "^5.7.1",
     "@swc/helpers": "~0.5.3",
     "bcryptjs": "^2.4.3",
@@ -54,6 +55,8 @@
     "reflect-metadata": "^0.1.14",
     "rxjs": "^7.8.1",
     "tslib": "^2.6.2",
+    "typeorm": "^0.3.20",
+    "typeorm-model-generator": "^0.4.6",
     "zod": "^3.22.4",
     "zod-validation-error": "^2.1.0"
   },

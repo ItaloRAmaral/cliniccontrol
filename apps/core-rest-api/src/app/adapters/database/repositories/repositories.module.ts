@@ -1,66 +1,70 @@
 import { Module } from '@nestjs/common';
-
-import { ClinicDatabaseRepository } from '../../../core/domains/clinic/repositories/database-repository';
-import { PatientDatabaseRepository } from '../../../core/domains/patient/repositories/database-repository';
-import { PsychologistDatabaseRepository } from '../../../core/domains/psychologist/repositories/database-repository';
-
-import { AppointmentDatabaseRepository } from '../../../core/domains/appointment/repositories/database-repository';
-import { PatientAppointmentRegistryDatabaseRepository } from '../../../core/domains/patient-appointment-registry/repositories/database-repository';
-import { PostgreSqlPrismaOrmService } from '../infra/prisma/prisma.service';
-import { PostgresqlPrismaOrmAppointmentRepository } from './appointment/postgres-prisma-orm-appointment-repository';
-import { PostgresqlPrismaOrmClinicRepository } from './clinic/postgres-prisma-orm-clinic-repository';
-import { PostgresqlPrismaOrmPatientAppointmentRegistryRepository } from './patient-appointment-registry/postgresql-prisma-orm-registry-repository';
-import { PostgresqlPrismaOrmPatientRepository } from './patient/postgres-prisma-orm-patient-repository';
-import { PostgresqlPrismaOrmPsychologistRepository } from './psychologist/postgresql-prisma-orm-psychologist-repository';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Appointment } from '../infra/typeorm/entities/Appointment';
+import { Clinic } from '../infra/typeorm/entities/Clinic';
+import { Patient } from '../infra/typeorm/entities/Patient';
+import { PatientAppointmentRegistry } from '../infra/typeorm/entities/PatientAppointmentRegistry';
+import { Psychologist } from '../infra/typeorm/entities/psychologist.entitie';
+import { PostgresTypeOrmRepository } from './psychologist/teste';
 
 @Module({
-  imports: [],
+  imports: [
+    TypeOrmModule.forFeature([
+      Psychologist,
+      Appointment,
+      Clinic,
+      Patient,
+      PatientAppointmentRegistry,
+    ]),
+  ],
   controllers: [],
   providers: [
-    PostgreSqlPrismaOrmService,
-    {
-      provide: PsychologistDatabaseRepository,
-      useClass: PostgresqlPrismaOrmPsychologistRepository,
-    },
-    {
-      provide: ClinicDatabaseRepository,
-      useClass: PostgresqlPrismaOrmClinicRepository,
-    },
-    {
-      provide: PatientDatabaseRepository,
-      useClass: PostgresqlPrismaOrmPatientRepository,
-    },
-    {
-      provide: PatientAppointmentRegistryDatabaseRepository,
-      useClass: PostgresqlPrismaOrmPatientAppointmentRegistryRepository,
-    },
-    {
-      provide: AppointmentDatabaseRepository,
-      useClass: PostgresqlPrismaOrmAppointmentRepository,
-    },
+    PostgresTypeOrmRepository,
+    // PostgreSqlPrismaOrmService,
+    // {
+    //   provide: PsychologistDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmPsychologistRepository,
+    // },
+    // {
+    //   provide: ClinicDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmClinicRepository,
+    // },
+    // {
+    //   provide: PatientDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmPatientRepository,
+    // },
+    // {
+    //   provide: PatientAppointmentRegistryDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmPatientAppointmentRegistryRepository,
+    // },
+    // {
+    //   provide: AppointmentDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmAppointmentRepository,
+    // },
   ],
   exports: [
-    PostgreSqlPrismaOrmService,
-    {
-      provide: PsychologistDatabaseRepository,
-      useClass: PostgresqlPrismaOrmPsychologistRepository,
-    },
-    {
-      provide: ClinicDatabaseRepository,
-      useClass: PostgresqlPrismaOrmClinicRepository,
-    },
-    {
-      provide: PatientDatabaseRepository,
-      useClass: PostgresqlPrismaOrmPatientRepository,
-    },
-    {
-      provide: PatientAppointmentRegistryDatabaseRepository,
-      useClass: PostgresqlPrismaOrmPatientAppointmentRegistryRepository,
-    },
-    {
-      provide: AppointmentDatabaseRepository,
-      useClass: PostgresqlPrismaOrmAppointmentRepository,
-    },
+    PostgresTypeOrmRepository,
+    // PostgreSqlPrismaOrmService,
+    // {
+    //   provide: PsychologistDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmPsychologistRepository,
+    // },
+    // {
+    //   provide: ClinicDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmClinicRepository,
+    // },
+    // {
+    //   provide: PatientDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmPatientRepository,
+    // },
+    // {
+    //   provide: PatientAppointmentRegistryDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmPatientAppointmentRegistryRepository,
+    // },
+    // {
+    //   provide: AppointmentDatabaseRepository,
+    //   useClass: PostgresqlPrismaOrmAppointmentRepository,
+    // },
   ],
 })
 export class DatabaseRepositoriesModule {}
