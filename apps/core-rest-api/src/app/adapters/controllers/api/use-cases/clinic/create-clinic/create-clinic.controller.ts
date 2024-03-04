@@ -17,8 +17,8 @@ export class CreateClinicController {
     @Body() createClinicDto: CreateClinicControllerInputDto,
   ): Promise<CreateClinicControllerOutputDto> {
     try {
-      await this.createClinicService.execute(createClinicDto);
-      return { message: 'Clinic created successfully' };
+      const clinic = await this.createClinicService.execute(createClinicDto);
+      return clinic
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }
