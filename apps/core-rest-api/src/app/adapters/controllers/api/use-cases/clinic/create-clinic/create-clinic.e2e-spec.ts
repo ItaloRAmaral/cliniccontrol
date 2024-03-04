@@ -1,58 +1,25 @@
 import request from 'supertest';
 
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
 
-import { faker } from '@faker-js/faker';
-import { JwtService } from '@nestjs/jwt';
 import { makeClinic } from '../../../../../../../../tests/factories/make-clinic';
-import { PsychologistFactory } from '../../../../../../../../tests/factories/make-psychologist';
+import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { ClinicEntity } from '../../../../../../core/domains/clinic/entities/clinic/entity';
-import { PsychologistEntity } from '../../../../../../core/domains/psychologist/entities/psychologist/entity';
-import { BcryptHasherService } from '../../../../../../core/shared/cryptography/use-cases/bcrypt-hasher.service';
-import { DatabaseRepositoriesModule } from '../../../../../database/repositories/repositories.module';
-import { ApiModule } from '../../../api.module';
+import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
 describe('[E2E] - Create Clinic', () => {
   let app: INestApplication;
-  let psychologistFactory: PsychologistFactory;
-  let jwt: JwtService;
+  let prisma: PostgreSqlPrismaOrmService;
   let psychologistId: string;
   let access_token: string;
-  let psychologist: PsychologistEntity;
-  let password: string;
   let clinic: ClinicEntity;
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [ApiModule, DatabaseRepositoriesModule],
-      providers: [PsychologistFactory],
-    }).compile();
-
-    app = moduleRef.createNestApplication();
-
-    psychologistFactory = moduleRef.get(PsychologistFactory);
-    jwt = moduleRef.get(JwtService);
-
-    await app.init();
-
-    // hashing a static known password to use in tests
-    const bcrypt = new BcryptHasherService();
-    password = faker.internet.password({ length: 8 });
-    const hashedPassword = await bcrypt.hash(password);
-
-    // creating a psychologist account to use in tests
-    psychologist = await psychologistFactory.makePrismaPsychologist({
-      password: hashedPassword,
-    });
-
-    psychologistId = psychologist.id;
-    access_token = jwt.sign({
-      id: psychologistId,
-      name: psychologist.name,
-      email: psychologist.email,
-    });
-
+    const setup = await setupE2ETest();
+    app = setup.app;
+    prisma = setup.prisma;
+    psychologistId = setup.psychologist.id;
+    access_token = setup.access_token;
     clinic = makeClinic(psychologistId);
   });
 
@@ -62,8 +29,19 @@ describe('[E2E] - Create Clinic', () => {
       .set('Authorization', `Bearer ${access_token}`)
       .send(clinic);
 
+    const clinicOnDatabase = await prisma.clinic.findUnique({
+      where: {
+        id: clinic.id,
+        psychologistId
+      },
+    });
+
     expect(createdClinicResponse.statusCode).toBe(201);
-    expect(createdClinicResponse.body.message).toBe('Clinic created successfully');
+    expect(createdClinicResponse.body).toEqual({
+      ...clinicOnDatabase,
+      createdAt: clinicOnDatabase?.createdAt.toISOString(),
+      updatedAt: clinicOnDatabase?.updatedAt.toISOString(),
+    });
   });
 
   it('[POST] - Should unsuccessfully try to create a new clinic without token', async () => {
@@ -84,9 +62,14 @@ describe('[E2E] - Create Clinic', () => {
 
     expect(createdClinicResponse.statusCode).toBe(400);
 
-    expect(createdClinicResponse.body.message).toBe('Validation failed');
+    expect(createdClinicResponse.body.message).toEqual([
+      "name must be a string",
+      "psychologistId must be a string",
+      "city must be a string",
+      "state must be a string"
+    ]);
     expect(createdClinicResponse.text).toBe(
-      '{"message":"Validation failed","causes":[{"property":"name","constraints":{"isString":"name must be a string"}},{"property":"psychologistId","constraints":{"isString":"psychologistId must be a string"}},{"property":"city","constraints":{"isString":"city must be a string"}},{"property":"state","constraints":{"isString":"state must be a string"}}]}'
+      '{"message":["name must be a string","psychologistId must be a string","city must be a string","state must be a string"],"error":"Bad Request","statusCode":400}'
     );
   });
 

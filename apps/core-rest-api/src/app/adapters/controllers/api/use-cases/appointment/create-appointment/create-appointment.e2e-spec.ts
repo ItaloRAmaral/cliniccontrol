@@ -56,7 +56,12 @@ describe('[E2E] - Create New Appointment', () => {
     });
 
     expect(response.statusCode).toBe(201);
-    expect(response.body.message).toBe('Appointment created successfully');
+    expect(response.body).toEqual({
+      ...appointmentOnDatabase,
+      createdAt: appointmentOnDatabase?.createdAt.toISOString(),
+      date: appointmentOnDatabase?.date.toISOString(),
+      updatedAt: appointmentOnDatabase?.updatedAt.toISOString(),
+    });
     expect(appointmentOnDatabase).toBeTruthy();
   });
 })
