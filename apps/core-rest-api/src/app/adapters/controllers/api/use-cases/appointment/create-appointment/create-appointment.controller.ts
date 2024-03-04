@@ -19,14 +19,12 @@ export class CreateAppointmentController {
     @Body() createAppointmentDto: CreateSingleAppointmentControllerInputDto,
   ): Promise<CreateAppointmentControllerOutputDto> {
     try {
-      await this.createAppointmentService.execute({
+      const appointment = await this.createAppointmentService.execute({
         ...createAppointmentDto,
         date: new Date(createAppointmentDto.date),
       });
 
-      return {
-        message: 'Appointment created successfully',
-      };
+      return appointment
     } catch (error) {
       throw new GlobalAppHttpException(error);
     }
