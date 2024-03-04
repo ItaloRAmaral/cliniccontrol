@@ -20,11 +20,11 @@ export class CreatePatientAppointmentRegistryController {
     createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryControllerInputDto,
   ): Promise<CreatePatientAppointmentRegistryControllerOutputDto> {
     try {
-      await this.createPatientAppointmentRegistryService.execute(
+      const patientAppointmentRegistry = await this.createPatientAppointmentRegistryService.execute(
         createPatientAppointmentRegistryDto,
       );
 
-      return { message: 'Appointment registry created successfully' };
+      return patientAppointmentRegistry
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }
