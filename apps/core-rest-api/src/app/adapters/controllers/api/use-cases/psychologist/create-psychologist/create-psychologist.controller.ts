@@ -8,6 +8,7 @@ import { Public } from '../../../../../auth/public';
 import { ApiKeyGuard } from '../../../guards/api-key.guard';
 import { CreatePsychologistControllerInputDto } from './input.dto';
 import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.service';
+import { CreatePsychologistControllerOutputDto } from './output.dto';
 
 /**
  * ExecutionContext
@@ -26,7 +27,7 @@ export class CreatePsychologistController {
   @Public()
   async execute(
     @Body() createPsychologistDto: CreatePsychologistControllerInputDto,
-  ): Promise<null | undefined | void> {
+  ): Promise<CreatePsychologistControllerOutputDto> {
     try {
       const createPsychologistDtoInstance = plainToInstance(
         CreatePsychologistControllerInputDto,
@@ -35,7 +36,9 @@ export class CreatePsychologistController {
 
       await applicationValidateOrReject(createPsychologistDtoInstance);
 
-      await this.createPsychologistService.execute(createPsychologistDto);
+      const psychologist = await this.createPsychologistService.execute(createPsychologistDto);
+
+      return psychologist
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }
