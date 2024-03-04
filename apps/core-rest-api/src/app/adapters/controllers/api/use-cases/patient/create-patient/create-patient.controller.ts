@@ -22,11 +22,9 @@ export class CreatePatientController {
     @Body() createPatientDto: CreatePatientControllerInputDto,
   ): Promise<CreatePatientControllerOutputDto> {
     try {
-      await this.createPatientService.execute(createPatientDto);
+      const patient = await this.createPatientService.execute(createPatientDto);
 
-      return {
-        message: 'Patient created successfully',
-      };
+      return patient
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }
