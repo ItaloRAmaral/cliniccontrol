@@ -1,10 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { makeAppointment } from '../../../../../../../../tests/factories/make-appointment';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { AppointmentEntity } from '../../../../../../core/domains/appointment/entities/appointment/entity';
-import { PaymentMethod } from '../../../../../../core/shared/interfaces/payments';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
 describe('[E2E] - Delete Appointment', () => {
@@ -13,9 +11,6 @@ describe('[E2E] - Delete Appointment', () => {
   let access_token: string;
   let invalid_access_token: string;
   let appointment: AppointmentEntity;
-  let psychologistId: string;
-  let clinicId: string;
-  let patientId: string;
 
   beforeAll(async () => {
     const setup = await setupE2ETest();
@@ -25,10 +20,6 @@ describe('[E2E] - Delete Appointment', () => {
     access_token = setup.access_token;
     invalid_access_token = setup.invalid_access_token;
     appointment = setup.appointment
-
-    clinicId = setup.clinic.id;
-    psychologistId = setup.psychologist.id;
-    patientId = setup.patient.id;
   });
 
   it('[DELETE] - Should return an error when trying to delete an appointment without access_token', async () => {
@@ -61,36 +52,15 @@ describe('[E2E] - Delete Appointment', () => {
   });
 
   it('[DELETE] - Should successfully delete an appointment', async () => {
-
-    console.log('psychologistId', psychologistId)
-    console.log('clinicId', clinicId)
-    console.log('patientId', patientId)
-    const newAppointment: AppointmentEntity = makeAppointment({
-      psychologistId,
-      clinicId,
-      patientId,
-      date: faker.date.recent({ days: 10 }),
-      cancelled: false,
-      confirmationDate: null,
-      confirmed: true,
-      online: false,
-      paymentMethod: PaymentMethod.CREDIT_CARD
-    });
-
-    await request(app.getHttpServer())
-      .post('/appointment/create')
-      .set('Authorization', `Bearer ${access_token}`)
-      .send(newAppointment);
-
     const response = await request(app.getHttpServer())
-      .delete(`/appointment/${newAppointment.id}/delete`)
+      .delete(`/appointment/${appointment.id}/delete`)
       .set('Authorization', `Bearer ${access_token}`);
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Appointment deleted successfully');
 
-    const deletedAppointment = await prisma['appointment'].findUnique({
-      where: { id: newAppointment.id },
+    const deletedAppointment = await prisma.appointment.findUnique({
+      where: { id: appointment.id },
     });
 
     expect(deletedAppointment).toBeNull();
