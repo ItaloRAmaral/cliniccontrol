@@ -22,19 +22,31 @@ describe('[E2E] - Delete Appointment', () => {
     appointment = setup.appointment
   });
 
+  async function deleteAppointmentWithoutAcessToken (appointmentId: string) {
+    const response = await request(app.getHttpServer())
+      .delete(`/appointment/${appointmentId}/delete`)
+
+    return response
+  }
+
+  async function deleteAppointmentWithAcessToken (appointmentId: string, accessToken?: string) {
+    const response = await request(app.getHttpServer())
+      .delete(`/appointment/${appointmentId}/delete`)
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    return response
+  }
+
   it('[DELETE] - Should return an error when trying to delete an appointment without access_token', async () => {
-    const response = await request(app.getHttpServer()).delete(
-      `/appointment/${appointment.id}/delete`,
-    );
+    const response = await deleteAppointmentWithoutAcessToken(appointment.id)
 
     expect(response.status).toBe(401);
     expect(response.body.message).toBe('Invalid JWT token');
   });
 
   it('[DELETE] - Should return an error when trying to delete an apppointment with invalid access_token', async () => {
-    const response = await request(app.getHttpServer())
-      .delete(`/appointment/${appointment.id}/delete`)
-      .set('Authorization', `Bearer ${invalid_access_token}`);
+    const accessToken = invalid_access_token
+    const response = await deleteAppointmentWithAcessToken(appointment.id, accessToken)
 
     expect(response.status).toBe(401);
     expect(response.body.message).toBe('Invalid JWT token');
@@ -42,19 +54,14 @@ describe('[E2E] - Delete Appointment', () => {
 
   it('[DELETE] - Should throw an error if route param is not an valid id', async () => {
     const wrongId = faker.string.uuid();
-
-    const response = await request(app.getHttpServer())
-      .delete(`/appointment/${wrongId}/delete`)
-      .set('Authorization', `Bearer ${access_token}`);
+    const response = await deleteAppointmentWithAcessToken(wrongId, access_token)
 
     expect(response.status).toBe(404);
     expect(response.body.message).toBe('appointment not found');
   });
 
   it('[DELETE] - Should successfully delete an appointment', async () => {
-    const response = await request(app.getHttpServer())
-      .delete(`/appointment/${appointment.id}/delete`)
-      .set('Authorization', `Bearer ${access_token}`);
+    const response = await deleteAppointmentWithAcessToken(appointment.id, access_token)
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Appointment deleted successfully');
