@@ -56,3 +56,21 @@ Authorization: Bearer {{authToken}}
   "clinicId": "{{$dotenv CLINIC_ID}}",
   "paymentMethod": "CREDIT_CARD"
 }
+
+##################################### APPOINTMENT #####################################
+
+# @name create_appointment
+POST http://localhost:3333/core/appointment/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "psychologistId": "{{$dotenv PSYCHOLOGIST_ID}}",
+  "clinicId": "{{$dotenv CLINIC_ID}}",
+  "patientId": "{{$dotenv PATIENT_ID}}",
+  "paymentMethod": "CREDIT_CARD",
+  "online": false,
+  "confirmed": true,
+  "cancelled": false,
+  "date": "2024-01-19T08:30:54"
+}
