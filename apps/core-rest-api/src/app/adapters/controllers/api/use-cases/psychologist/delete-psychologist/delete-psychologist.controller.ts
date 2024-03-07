@@ -29,23 +29,10 @@ export class DeletePsychologistController {
         throw new ForbiddenException('You can only delete your own account');
       }
 
-      const serviceResponse =
-        await this.deletePsychologistService.execute(psychologistEmail);
-
-      const deletedPsychologistResponseInfo = {
-        user: {
-          id: serviceResponse.deletedPsychologist.id,
-          name: serviceResponse.deletedPsychologist.name,
-          email: serviceResponse.deletedPsychologist.email,
-          role: serviceResponse.deletedPsychologist.role,
-        },
-        associatedClinics: serviceResponse.associatedClinics,
-        deletedAt: new Date(),
-      };
+      await this.deletePsychologistService.execute(psychologistEmail);
 
       return {
         message: 'Psychologist deleted successfully',
-        data: deletedPsychologistResponseInfo,
       };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
