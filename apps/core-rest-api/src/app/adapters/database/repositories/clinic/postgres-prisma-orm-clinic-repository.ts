@@ -76,7 +76,7 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
     return PostgresqlPrismaClinicMapper.toDomainMany(clinics);
   }
 
-  async updateClinic(newClinic: UpdateClinicInputDto): Promise<void> {
+  async updateClinic(newClinic: UpdateClinicInputDto): Promise<ClinicEntity> {
     const oldClinic = await this.findClinicById(newClinic.id);
 
     if (!oldClinic) {
@@ -85,7 +85,10 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
 
     const toPrismaEntity = PostgresqlPrismaClinicMapper.toPrismaUpdate(newClinic);
 
-    await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
+    const updatedPrismaClinicEntity =
+      await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
+
+    return PostgresqlPrismaClinicMapper.toDomain(updatedPrismaClinicEntity);
   }
 
   async deleteClinic(id: string): Promise<DeletedClinicOutputDto> {

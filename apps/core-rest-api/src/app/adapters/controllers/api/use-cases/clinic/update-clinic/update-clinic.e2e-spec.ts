@@ -33,6 +33,12 @@ describe('[E2E] - Update Clinic', () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body.message).toBe('Clinic updated successfully');
+    expect(response.body.updatedClinic).toEqual({
+      ...clinic,
+      ...updateInfos,
+      createdAt: clinic.createdAt.toISOString(),
+      updatedAt: response.body.updatedClinic.updatedAt,
+    });
   });
 
   it('[PATCH] - Should return an error when trying to update a clinic without access_token', async () => {

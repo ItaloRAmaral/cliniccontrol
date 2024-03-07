@@ -33,7 +33,7 @@ export class InMemoryPatientDatabaseRepository implements PatientDatabaseReposit
     return this.patients;
   }
 
-  async updatePatient(newPatientInfo: UpdatePatientInputDto): Promise<void> {
+  async updatePatient(newPatientInfo: UpdatePatientInputDto): Promise<PatientEntity> {
     const oldPatientInfo = await this.findPatientById(newPatientInfo.id);
 
     if (!oldPatientInfo) {
@@ -50,6 +50,8 @@ export class InMemoryPatientDatabaseRepository implements PatientDatabaseReposit
     });
 
     this.patients[patientIndex] = updatedPatient;
+
+    return updatedPatient;
   }
 
   async deletePatient(patientId: string): Promise<void> {

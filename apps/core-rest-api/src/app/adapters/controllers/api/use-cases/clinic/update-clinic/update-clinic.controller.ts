@@ -5,6 +5,7 @@ import { UpdateClinicInputDto } from '../../../../../../core/domains/clinic/use-
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import { UpdateClinicControllerInputDto } from './input.dto';
 import { NestjsUpdateClinicService } from './nestjs-update-clinic.service';
+import { UpdateClinicControllerOutputDto } from './output.dto';
 
 @ApiTags('Clinic')
 @ApiBearerAuth()
@@ -18,7 +19,7 @@ export class UpdateClinicController {
   async execute(
     @Param('clinicId') clinicId: string,
     @Body() updateClinicDto: UpdateClinicControllerInputDto,
-  ) {
+  ): Promise<UpdateClinicControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updateClinicDto).length === 0;
 
@@ -31,9 +32,9 @@ export class UpdateClinicController {
         ...updateClinicDto,
       } as UpdateClinicInputDto;
 
-      await this.updateClinicService.execute(clinic);
+      const updatedClinic = await this.updateClinicService.execute(clinic);
 
-      return { message: 'Clinic updated successfully' };
+      return { message: 'Clinic updated successfully', updatedClinic };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

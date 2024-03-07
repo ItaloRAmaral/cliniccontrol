@@ -14,7 +14,7 @@ export abstract class ClinicDatabaseRepository {
     psychologistId: string,
   ): Promise<ClinicEntity[] | null>;
   abstract findClinicById(id: string): Promise<ClinicEntity | null>;
-  abstract updateClinic(clinic: UpdateClinicInputDto): Promise<void>;
+  abstract updateClinic(clinic: UpdateClinicInputDto): Promise<ClinicEntity>;
   abstract deleteClinic(id: string): Promise<DeletedClinicOutputDto>;
   abstract deleteAllClinicsByPsychologistId(
     psychologistId: string,

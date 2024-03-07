@@ -54,7 +54,7 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     return this.clinics.find((clinic) => clinic.id === id) ?? null;
   }
 
-  async updateClinic(newClinicInfo: UpdateClinicInputDto): Promise<void> {
+  async updateClinic(newClinicInfo: UpdateClinicInputDto): Promise<ClinicEntity> {
     const oldClinicInfo = await this.findClinicById(newClinicInfo.id);
 
     if (!oldClinicInfo) {
@@ -71,6 +71,8 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     });
 
     this.clinics[clinicIndex] = updatedClinic;
+
+    return updatedClinic;
   }
 
   async deleteClinic(id: string): Promise<DeletedClinicOutputDto> {

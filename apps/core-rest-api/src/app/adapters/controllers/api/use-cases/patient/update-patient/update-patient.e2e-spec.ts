@@ -36,6 +36,12 @@ describe('[E2E] - Update Psychologist Account', () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body.message).toBe('Patient updated successfully');
+    expect(response.body.updatedPatient).toEqual({
+      ...patient,
+      ...updateInfos,
+      createdAt: patient.createdAt.toISOString(),
+      updatedAt: response.body.updatedPatient.updatedAt,
+    });
   });
 
   it('[PATCH] - Should return an error when trying to update a patient without access_token', async () => {

@@ -63,7 +63,7 @@ export class PostgresqlPrismaOrmPatientRepository implements PatientDatabaseRepo
     return patients.map((patient) => PostgresqlPrismaPatientMapper.toDomain(patient));
   }
 
-  async updatePatient(newPatientInfo: UpdatePatientInputDto): Promise<void> {
+  async updatePatient(newPatientInfo: UpdatePatientInputDto): Promise<PatientEntity> {
     const oldPatientInfo = await this.findPatientById(newPatientInfo.id);
 
     if (!oldPatientInfo) {
@@ -74,7 +74,10 @@ export class PostgresqlPrismaOrmPatientRepository implements PatientDatabaseRepo
       ...newPatientInfo,
     });
 
-    await this.postgresqlPrismaOrmService['patient'].update(toPrismaEntity);
+    const updatedPatientPrismaEntity =
+      await this.postgresqlPrismaOrmService['patient'].update(toPrismaEntity);
+
+    return PostgresqlPrismaPatientMapper.toDomain(updatedPatientPrismaEntity);
   }
 
   async deletePatient(patientId: string): Promise<void> {
