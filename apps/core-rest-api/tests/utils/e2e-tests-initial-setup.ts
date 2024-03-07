@@ -8,6 +8,7 @@ import { ApiModule } from '../../src/app/adapters/controllers/api/api.module';
 import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
 import { DatabaseRepositoriesModule } from '../../src/app/adapters/database/repositories/repositories.module';
 
+import { AppointmentFactory } from '../factories/make-appointment';
 import { ClinicFactory } from '../factories/make-clinic';
 import { PatientFactory } from '../factories/make-patient';
 import { PatientAppointmentRegistryFactory } from '../factories/make-patient-appointment-registry';
@@ -31,6 +32,7 @@ export async function setupE2ETest() {
   const clinicFactory: ClinicFactory = moduleRef.get(ClinicFactory);
   const psychologistFactory: PsychologistFactory = moduleRef.get(PsychologistFactory);
   const patientFactory: PatientFactory = moduleRef.get(PatientFactory);
+  const appointmentFactory: AppointmentFactory = moduleRef.get(AppointmentFactory);
   const patientAppointmentRegistryFactory: PatientAppointmentRegistryFactory =
     moduleRef.get(PatientAppointmentRegistryFactory);
 
@@ -75,6 +77,19 @@ export async function setupE2ETest() {
     clinicId: clinic.id,
   });
 
+    // Creating an appointment to use in tests
+    const appointment = await appointmentFactory.makePrismaAppointment({
+      psychologistId: psychologist.id,
+      clinicId: clinic.id,
+      patientId: patient.id,
+      date: faker.date.recent({ days: 10 }),
+      cancelled: false,
+      confirmationDate: null,
+      confirmed: true,
+      online: false,
+      paymentMethod: undefined
+    });
+
   // Creating a patient appointment registry to use in tests
   const patientAppointmentRegistry =
     await patientAppointmentRegistryFactory.makePrismaPatientAppointmentRegistry({
@@ -98,6 +113,8 @@ export async function setupE2ETest() {
     clinic,
     patientFactory,
     patient,
+    appointment,
+    appointmentFactory,
     patientAppointmentRegistry,
   };
 }
