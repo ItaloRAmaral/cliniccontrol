@@ -1,12 +1,12 @@
 import { IsBoolean, IsDate, IsEnum, IsOptional, IsString } from 'class-validator';
 import { PaymentMethod } from '../../../../../../core/shared/interfaces/payments';
 
-export class UpdateAppointmentControllerReqParamsInputDto {
+export class UpdateAppointmentControllerParamsInputDto {
   @IsString()
   id!: string;
 }
 
-export class UpdateAppointmentControllerBodyParamsInputDto {
+export class UpdateAppointmentControllerBodyInputDto {
   @IsOptional()
   @IsDate()
   date?: Date;
