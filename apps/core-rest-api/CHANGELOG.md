@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.4](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.4.0-beta.3...@cliniccontrol/core-rest-api@1.4.0-beta.4) (2024-03-06)
+
+### Features
+
+- **CC-99:** update patient endpoint ([70e5f61](https://github.com/ItaloRAmaral/cliniccontrol/commit/70e5f61aa6317a4598a4e7352f393ec16e9d1bce))
+
 ## [1.4.0-beta.3](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.4.0-beta.2...@cliniccontrol/core-rest-api@1.4.0-beta.3) (2024-02-08)
 
 ### Features
