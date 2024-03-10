@@ -20,6 +20,6 @@ export class DeleteSingleAppointmentService {
     }
 
     // Delete
-    this.appointmentDatabaseRepository.deleteSingleAppointment(appointmentId);
+    await this.appointmentDatabaseRepository.deleteSingleAppointment(appointmentId);
   }
 }

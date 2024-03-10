@@ -21,6 +21,7 @@ export async function setupE2ETest() {
       PsychologistFactory,
       ClinicFactory,
       PatientFactory,
+      AppointmentFactory,
       PatientAppointmentRegistryFactory,
     ],
   }).compile();
@@ -77,18 +78,18 @@ export async function setupE2ETest() {
     clinicId: clinic.id,
   });
 
-    // Creating an appointment to use in tests
-    const appointment = await appointmentFactory.makePrismaAppointment({
-      psychologistId: psychologist.id,
-      clinicId: clinic.id,
-      patientId: patient.id,
-      date: faker.date.recent({ days: 10 }),
-      cancelled: false,
-      confirmationDate: null,
-      confirmed: true,
-      online: false,
-      paymentMethod: undefined
-    });
+  // Creating an appointment to use in tests
+  const appointment = await appointmentFactory.makePrismaAppointment({
+    psychologistId: psychologist.id,
+    clinicId: clinic.id,
+    patientId: patient.id,
+    date: faker.date.recent({ days: 10 }),
+    cancelled: false,
+    confirmationDate: null,
+    confirmed: true,
+    online: false,
+    paymentMethod: undefined,
+  });
 
   // Creating a patient appointment registry to use in tests
   const patientAppointmentRegistry =
