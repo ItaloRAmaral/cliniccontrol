@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.5](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.4.0-beta.4...@cliniccontrol/core-rest-api@1.4.0-beta.5) (2024-03-10)
+
+### Features
+
+- **CC-131:** add appointment controller and nestjs service ([aa0d9b8](https://github.com/ItaloRAmaral/cliniccontrol/commit/aa0d9b8d78ec909253aa96723f412870baad9103))
+
 ## [1.4.0-beta.4](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.4.0-beta.3...@cliniccontrol/core-rest-api@1.4.0-beta.4) (2024-03-06)
 
 ### Features
