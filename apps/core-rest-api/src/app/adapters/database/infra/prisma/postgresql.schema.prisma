@@ -104,11 +104,11 @@ model Appointment {
   updatedAt        DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
 
   patientId      String       @map("patient_id")
-  patient        Patient      @relation(fields: [patientId], references: [id])
+  patient        Patient      @relation(fields: [patientId], references: [id], onDelete: Cascade)
   psychologistId String       @map("psychologist_id")
-  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id], onDelete: Cascade)
   clinicId       String       @map("clinic_id")
-  clinic         Clinic       @relation(fields: [clinicId], references: [id])
+  clinic         Clinic       @relation(fields: [clinicId], references: [id], onDelete: Cascade)
 
   @@map("appointment")
 }
