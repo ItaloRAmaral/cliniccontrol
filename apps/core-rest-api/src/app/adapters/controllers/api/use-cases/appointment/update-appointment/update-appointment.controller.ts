@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, Param, Patch } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { UpdateAppointmentControllerBodyParamsInputDto, UpdateAppointmentControllerReqParamsInputDto } from "./input.dto";
+import { UpdateAppointmentControllerBodyInputDto, UpdateAppointmentControllerParamsInputDto } from "./input.dto";
 import { NestjsUpdateAppointmentService } from "./nestjs-update-appointment.service";
 import { UpdateAppointmentControllerOutputDto } from "./output.dto";
 
@@ -16,10 +16,9 @@ export class UpdateAppointmentController {
 
   @Patch(':id/update')
   async execute(
-    @Param() { id }: UpdateAppointmentControllerReqParamsInputDto,
-    @Body() updateAppointmentDto: UpdateAppointmentControllerBodyParamsInputDto)
+    @Param() { id }: UpdateAppointmentControllerParamsInputDto,
+    @Body() updateAppointmentDto: UpdateAppointmentControllerBodyInputDto)
     : Promise<UpdateAppointmentControllerOutputDto>{
-
     try {
       const isReqBodyEmpty = Object.keys(updateAppointmentDto).length === 0;
 
