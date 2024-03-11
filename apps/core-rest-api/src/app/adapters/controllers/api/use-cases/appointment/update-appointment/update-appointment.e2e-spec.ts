@@ -1,8 +1,6 @@
-import request from 'supertest';
-
-import { INestApplication } from '@nestjs/common';
-
 import { faker } from '@faker-js/faker';
+import { INestApplication } from '@nestjs/common';
+import request from 'supertest';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { Replace } from '../../../../../../../app/shared/utils';
 import { AppointmentEntity } from '../../../../../../core/domains/appointment/entities/appointment/entity';
@@ -62,10 +60,6 @@ describe('[E2E] - Update Appointment', () => {
       cancelled: true,
     };
 
-    // const response = await request(app.getHttpServer())
-    //   .patch(`/appointment/${appointment.id}/update`)
-    //   .send(updatedAppointmentInfos);
-
     const response = await updateAppointmentWithoutAcessToken(appointment.id, updatedAppointmentInfos)
 
     expect(response.statusCode).toBe(401);
@@ -77,11 +71,6 @@ describe('[E2E] - Update Appointment', () => {
       confirmed: false,
     };
 
-    // const response = await request(app.getHttpServer())
-    //   .patch(`/appointment/${appointment.id}/update`)
-    //   .set('Authorization', `Bearer ${invalid_access_token}`)
-    //   .send(updatedAppointmentInfos);
-
     const response = await updateAppointmentWithAcessToken(appointment.id, updatedAppointmentInfos, invalid_access_token)
 
     expect(response.statusCode).toBe(401);
@@ -92,16 +81,10 @@ describe('[E2E] - Update Appointment', () => {
     const updatedAppointmentInfos = {
       confirmed: false,
     };
+    const response = await updateAppointmentWithAcessToken('invalid_id', updatedAppointmentInfos, access_token)
 
-    // const response = await request(app.getHttpServer())
-    //   .patch(`/appointment/invalid_id/update`)
-    //   .set('Authorization', `Bearer ${access_token}`)
-    //   .send(updatedAppointmentInfos);
-
-    const response = await updateAppointmentWithAcessToken(appointment.id, updatedAppointmentInfos, access_token)
-
-    expect(response.statusCode).toBe(400);
-    expect(response.body.message).toEqual(['id must be a UUID']);
+    expect(response.statusCode).toBe(404);
+    expect(response.body.message).toEqual('appointment not found');
   });
 
   it('[PATCH] - Should return an error when trying to update an appointment with non existent id', async () => {
@@ -111,11 +94,6 @@ describe('[E2E] - Update Appointment', () => {
       confirmed: false,
     };
 
-    // const response = await request(app.getHttpServer())
-    //   .patch(`/appointment/${nonExistentId}/update`)
-    //   .set('Authorization', `Bearer ${access_token}`)
-    //   .send(updatedAppointmentInfos);
-
     const response = await updateAppointmentWithAcessToken(nonExistentId, updatedAppointmentInfos, access_token)
 
     expect(response.statusCode).toBe(404);
@@ -124,11 +102,6 @@ describe('[E2E] - Update Appointment', () => {
 
   it('[PATCH] - Should return an error when trying to update an appointment with empty request body', async () => {
     const updatedAppointmentInfos = {};
-
-    // const response = await request(app.getHttpServer())
-    //   .patch(`/psychologist/${appointment.id}/update`)
-    //   .set('Authorization', `Bearer ${access_token}`)
-    //   .send(updatedAppointmentInfos);
 
     const response = await updateAppointmentWithAcessToken(appointment.id, updatedAppointmentInfos, access_token)
 
@@ -142,17 +115,12 @@ describe('[E2E] - Update Appointment', () => {
       cancelled: 'true'
     };
 
-    // const response = await request(app.getHttpServer())
-    //   .patch(`/psychologist/${appointment.id}/update`)
-    //   .set('Authorization', `Bearer ${access_token}`)
-    //   .send(updatedAppointmentInfos);
-
     const response = await updateAppointmentWithAcessToken(appointment.id, updatedAppointmentInfos, access_token)
 
     expect(response.statusCode).toBe(400);
     expect(response.body.message).toEqual([
-      'confirmed must be a boolean',
-      'cancelled must be a boolean',
+      'confirmed must be a boolean value',
+      'cancelled must be a boolean value',
     ]);
   });
 });
