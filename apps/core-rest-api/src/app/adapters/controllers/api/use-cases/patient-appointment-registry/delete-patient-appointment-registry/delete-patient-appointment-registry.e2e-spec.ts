@@ -4,9 +4,11 @@ import { INestApplication } from '@nestjs/common';
 
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { PatientAppointmentRegistryEntity } from '../../../../../../core/domains/patient-appointment-registry/entities/registry/entity';
+import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
 describe('[E2E] -  Delete Appointment Registry', () => {
   let app: INestApplication;
+  let prisma: PostgreSqlPrismaOrmService;
 
   let access_token: string;
 
@@ -16,7 +18,7 @@ describe('[E2E] -  Delete Appointment Registry', () => {
     const setup = await setupE2ETest();
 
     app = setup.app;
-
+    prisma = setup.prisma;
     access_token = setup.access_token;
 
     patientAppointmentRegistry = setup.patientAppointmentRegistry;
@@ -31,6 +33,12 @@ describe('[E2E] -  Delete Appointment Registry', () => {
     expect(response.body).toEqual({
       message: 'Appointment registry deleted successfully',
     });
+
+    const deletedPatientAppointmentRegistry = await prisma.patientAppointmentRegistry.findUnique({
+      where: { id:  patientAppointmentRegistry.id},
+    });
+    expect(deletedPatientAppointmentRegistry).toBeNull();
+
   });
 
   it('should return 404 if the appointment registry does not exist', async () => {

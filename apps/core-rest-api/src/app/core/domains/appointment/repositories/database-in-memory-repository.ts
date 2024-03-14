@@ -4,6 +4,7 @@ import { AppointmentEntity } from '../entities/appointment/entity';
 import { CreateSingleAppointmentInputDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
 import { UpdatedAppointmentDateInputDto } from '../use-cases/update-appointment-date/update-appointment-date-dto';
 import { UpdateAppointmentInfoInputDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
+import { UpdateAppointmentDto } from '../use-cases/update-single-appointment/update-appointment-dto';
 import { AppointmentDatabaseRepository } from './database-repository';
 
 export class InMemoryAppointmentDatabaseRepository
@@ -92,6 +93,29 @@ export class InMemoryAppointmentDatabaseRepository
     });
 
     this.appointments[appointmentIndex] = updateAppointmentDate;
+  }
+
+  async updateAppointment(
+    newAppointmentInfo: UpdateAppointmentDto,
+  ): Promise<void> {
+    const oldAppointmentInfo = await this.findSingleAppointmentById(
+      newAppointmentInfo.id,
+    );
+
+    if (!oldAppointmentInfo) {
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']);
+    }
+
+    const appointmentIndex = this.appointments.findIndex((appointment) => {
+      return appointment.id === newAppointmentInfo.id;
+    });
+
+    const updatedAppointment = Object.assign(oldAppointmentInfo, {
+      ...newAppointmentInfo,
+      updatedAt: new Date(),
+    });
+
+    this.appointments[appointmentIndex] = updatedAppointment;
   }
 
   async deleteSingleAppointment(appointmentId: string): Promise<void> {

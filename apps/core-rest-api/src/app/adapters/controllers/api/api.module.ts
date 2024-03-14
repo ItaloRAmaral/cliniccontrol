@@ -12,6 +12,8 @@ import { PostgreSqlPrismaOrmService } from '../../database/infra/prisma/prisma.s
 import { DatabaseRepositoriesModule } from '../../database/repositories/repositories.module';
 
 import { NestjsCreateAppointmentService } from './use-cases/appointment/create-appointment/nestjs-create-appointment.service';
+import { DeleteAppointmentController } from './use-cases/appointment/delete-appointment/delete-appointment.controller';
+import { NestjsDeleteAppointmentService } from './use-cases/appointment/delete-appointment/nestjs-delete-appointment.service';
 import { NestjsCreateClinicService } from './use-cases/clinic/create-clinic/nestjs-create-clinic.service';
 import { NestjsDeleteClinicService } from './use-cases/clinic/delete-clinic/nestjs-delete-clinic.service';
 import { NestjsUpdateClinicService } from './use-cases/clinic/update-clinic/nestjs-update-clinic.service';
@@ -24,6 +26,8 @@ import { NestjsDeletePsychologistService } from './use-cases/psychologist/delete
 import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update-psychologist/nestjs-update-psychologist.service';
 
 import { CreateAppointmentController } from './use-cases/appointment/create-appointment/create-appointment.controller';
+import { NestjsUpdateAppointmentService } from './use-cases/appointment/update-appointment/nestjs-update-appointment.service';
+import { UpdateAppointmentController } from './use-cases/appointment/update-appointment/update-appointment.controller';
 import { CreateClinicController } from './use-cases/clinic/create-clinic/create-clinic.controller';
 import { DeleteClinicController } from './use-cases/clinic/delete-clinic/delete-clinic.controller';
 import { UpdateClinicController } from './use-cases/clinic/update-clinic/update-clinic.controller';
@@ -63,9 +67,11 @@ import { DeletePsychologistController } from './use-cases/psychologist/delete-ps
     DeletePatientController,
     CreatePatientAppointmentRegistryController,
     CreateAppointmentController,
+    DeleteAppointmentController,
     DeletePatientAppointmentRegistryController,
     UpdatePatientAppointmentRegistryController,
     UpdatePatientController,
+    UpdateAppointmentController,
   ],
   providers: [
     BcryptHasherService,
@@ -81,9 +87,11 @@ import { DeletePsychologistController } from './use-cases/psychologist/delete-ps
     NestjsDeletePatientService,
     NestjsCreatePatientAppointmentRegistryService,
     NestjsCreateAppointmentService,
+    NestjsDeleteAppointmentService,
     NestjsDeletePatientAppointmentRegistryService,
     NestjsUpdatePatientAppointmentRegistryService,
     NestjsUpdatePatientService,
+    NestjsUpdateAppointmentService
   ],
 })
 export class ApiModule {}

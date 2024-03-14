@@ -1,8 +1,7 @@
 @authToken = {{$dotenv AUTH_TOKEN}}
 @apiKey = {{$dotenv API_KEY}}
 
-# @appointmentDate = {{require "./appointmentDate.js"}}
-####
+#### Create Appointment
 
 # @name create_appointment
 POST http://localhost:3333/core/appointment/create HTTP/1.1
@@ -19,3 +18,21 @@ Authorization: Bearer {{authToken}}
   "cancelled": false,
   "date": "2024-01-19T08:30:54"
 }
+
+### Update Appointment
+
+# @name update_appointment
+PATCH http://localhost:3333/core/appointment/{{$dotenv APPOINTMENT_ID}}/update HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "confirmed": true
+}
+
+### Delete Appointment
+# @name delete_appointment
+
+DELETE http://localhost:3333/core/appointment/{{$dotenv APPOINTMENT_ID}}/delete HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
