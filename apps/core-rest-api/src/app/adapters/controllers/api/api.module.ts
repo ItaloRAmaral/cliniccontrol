@@ -26,6 +26,8 @@ import { NestjsDeletePsychologistService } from './use-cases/psychologist/delete
 import { NestjsUpdatePsychologistService } from './use-cases/psychologist/update-psychologist/nestjs-update-psychologist.service';
 
 import { CreateAppointmentController } from './use-cases/appointment/create-appointment/create-appointment.controller';
+import { NestjsUpdateAppointmentService } from './use-cases/appointment/update-appointment/nestjs-update-appointment.service';
+import { UpdateAppointmentController } from './use-cases/appointment/update-appointment/update-appointment.controller';
 import { CreateClinicController } from './use-cases/clinic/create-clinic/create-clinic.controller';
 import { DeleteClinicController } from './use-cases/clinic/delete-clinic/delete-clinic.controller';
 import { UpdateClinicController } from './use-cases/clinic/update-clinic/update-clinic.controller';
@@ -69,6 +71,7 @@ import { DeletePsychologistController } from './use-cases/psychologist/delete-ps
     DeletePatientAppointmentRegistryController,
     UpdatePatientAppointmentRegistryController,
     UpdatePatientController,
+    UpdateAppointmentController,
   ],
   providers: [
     BcryptHasherService,
@@ -88,6 +91,7 @@ import { DeletePsychologistController } from './use-cases/psychologist/delete-ps
     NestjsDeletePatientAppointmentRegistryService,
     NestjsUpdatePatientAppointmentRegistryService,
     NestjsUpdatePatientService,
+    NestjsUpdateAppointmentService
   ],
 })
 export class ApiModule {}

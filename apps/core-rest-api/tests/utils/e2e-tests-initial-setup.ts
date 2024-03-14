@@ -88,7 +88,7 @@ export async function setupE2ETest() {
     confirmationDate: null,
     confirmed: true,
     online: false,
-    paymentMethod: undefined
+    paymentMethod: undefined,
   });
 
   // Creating a patient appointment registry to use in tests

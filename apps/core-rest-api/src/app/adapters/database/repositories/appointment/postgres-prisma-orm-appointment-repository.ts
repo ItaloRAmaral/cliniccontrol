@@ -88,6 +88,20 @@ export class PostgresqlPrismaOrmAppointmentRepository implements AppointmentData
     await this.postgresqlPrismaOrmService['appointment'].update(toPrismaEntity);
   }
 
+  async updateAppointment(newAppointmentInfo: UpdateAppointmentInfoDto): Promise<void> {
+    const oldAppointmentInfo = await this.findSingleAppointmentById(newAppointmentInfo.id);
+
+    if (!oldAppointmentInfo) {
+      throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']);
+    }
+
+    const toPrismaEntity = PostgresqlPrismaAppointmentMapper.toPrismaUpdate({
+      ...newAppointmentInfo,
+    });
+
+    await this.postgresqlPrismaOrmService['appointment'].update(toPrismaEntity);
+  }
+
   async deleteSingleAppointment(appointmentId: string): Promise<void> {
     const isAppointmentExists = await this.findSingleAppointmentById(appointmentId);
 
