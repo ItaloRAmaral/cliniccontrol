@@ -61,7 +61,7 @@ export class PostgresqlPrismaOrmAppointmentRepository
     });
 
     const newAppointment =
-      await this.postgresqlPrismaOrmService['appointment'].create(toPrismaEntity);
+      await this.postgresqlPrismaOrmService['appointment'].create({data: {...toPrismaEntity}});
 
     return PostgresqlPrismaAppointmentMapper.toDomain(newAppointment);
   }
@@ -110,7 +110,7 @@ export class PostgresqlPrismaOrmAppointmentRepository
     await this.postgresqlPrismaOrmService['appointment'].update(toPrismaEntity);
   }
 
-  async updateAppointment(newAppointmentInfo: UpdateAppointmentInfoDto): Promise<void> {
+  async updateAppointment(newAppointmentInfo: UpdateAppointmentInfoInputDto): Promise<void> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(newAppointmentInfo.id);
 
     if (!oldAppointmentInfo) {

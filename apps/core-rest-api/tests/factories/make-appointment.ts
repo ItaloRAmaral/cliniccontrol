@@ -33,12 +33,19 @@ export class AppointmentFactory {
   async makePrismaAppointment(
     appointment: Partial<CreateSingleAppointmentInputDto> = {},
   ): Promise<AppointmentEntity> {
-    const newPrismaAppointment = makeAppointment(appointment);
+    try {
+      const newPrismaAppointment = makeAppointment(appointment);
+      console.log('newPrismaAppointment', newPrismaAppointment)
 
-    await this.postgreSqlPrismaOrmService['appointment'].create(
-      PostgresqlPrismaAppointmentMapper.toPrismaCreate(newPrismaAppointment),
-    );
+    const x = await this.postgreSqlPrismaOrmService['appointment'].create({
+      data: PostgresqlPrismaAppointmentMapper.toPrismaCreate({...newPrismaAppointment})}
+    )
 
+    console.log('xxxxxxx', x)
     return newPrismaAppointment;
+    } catch (e) {
+      console.log( 'ERROR-----', e)
+    }
+
   }
 }

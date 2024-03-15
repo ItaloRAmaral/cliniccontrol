@@ -5,7 +5,7 @@ import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-init
 import { AppointmentEntity } from '../../../../../../core/domains/appointment/entities/appointment/entity';
 import { PostgreSqlPrismaOrmService } from '../../../../../database/infra/prisma/prisma.service';
 
-describe('[E2E] - Delete Appointment', () => {
+describe.only('[E2E] - Delete Appointment', () => {
   let prisma: PostgreSqlPrismaOrmService;
   let app: INestApplication;
   let access_token: string;
@@ -20,6 +20,7 @@ describe('[E2E] - Delete Appointment', () => {
     access_token = setup.access_token;
     invalid_access_token = setup.invalid_access_token;
     appointment = setup.appointment
+    console.log('APPPOINTOMENT', appointment)
   });
 
   async function deleteAppointmentWithoutAcessToken (appointmentId: string) {
