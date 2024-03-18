@@ -19,13 +19,16 @@ export class PostgresqlPrismaAppointmentMapper {
 
   static toPrismaCreate(
     raw: CreateSingleAppointmentInputDto,
-  ): Prisma.AppointmentUncheckedCreateInput {
+  ): Prisma.AppointmentCreateArgs {
     return {
-      // data: {
+      data: {
         ...raw,
         paymentMethod: raw.paymentMethod as unknown as PrismaPaymentMethod,
         date: new Date(raw.date),
-      // },
+        patientId: raw.patientId,
+        psychologistId: raw.psychologistId,
+        clinicId: raw.clinicId,
+      },
     };
   }
 
