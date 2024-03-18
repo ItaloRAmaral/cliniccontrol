@@ -51,8 +51,15 @@ describe('[E2E] - Create New Patient', () => {
     });
 
     expect(response.statusCode).toBe(201);
-    expect(response.body.message).toBe('Patient created successfully');
+    expect(response.body).toBeDefined();
+
     expect(patientOnDatabase).toBeTruthy();
+
+    expect(response.body).toEqual({
+      ...patientOnDatabase,
+      createdAt: patientOnDatabase?.createdAt.toISOString(),
+      updatedAt: patientOnDatabase?.updatedAt.toISOString()
+    });
   });
 
   it('[POST] - Should return an error when trying to create a patient that already exists', async () => {

@@ -45,9 +45,10 @@ describe('[E2E] - Create Appointment Registry', () => {
       .send(appointmentRegistry);
 
     expect(createdPatientAppointmentRegistry.statusCode).toBe(201);
-    expect(createdPatientAppointmentRegistry.body.message).toBe(
-      'Appointment registry created successfully',
-    );
+    expect(createdPatientAppointmentRegistry.body.registry).toBeDefined();
+    expect(createdPatientAppointmentRegistry.body.registry.observations).toEqual(expect.any(String));
+    expect(createdPatientAppointmentRegistry.body.patientId).toBe(appointmentRegistry.patientId);
+    expect(createdPatientAppointmentRegistry.body.psychologistId).toBe(appointmentRegistry.psychologistId);
   });
 
   it('[POST] - Should return an error when trying to create a registry with an invalid patient id', async () => {
