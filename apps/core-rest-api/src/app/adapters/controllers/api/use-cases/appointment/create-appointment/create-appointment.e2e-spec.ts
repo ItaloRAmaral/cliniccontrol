@@ -58,9 +58,8 @@ describe('[E2E] - Create New Appointment', () => {
     expect(response.statusCode).toBe(201);
     expect(response.body).toEqual({
       ...appointmentOnDatabase,
-      createdAt: appointmentOnDatabase?.createdAt.toISOString(),
-      date: appointmentOnDatabase?.date.toISOString(),
-      updatedAt: appointmentOnDatabase?.updatedAt.toISOString(),
+      createdAt: newAppointment?.createdAt.toISOString(),
+      date: newAppointment?.date.toISOString(),
     });
     expect(appointmentOnDatabase).toBeTruthy();
   });

@@ -48,6 +48,10 @@ export class PostgresqlPrismaOrmAppointmentRepository
   async createSingleAppointment(
     appointment: CreateSingleAppointmentInputDto,
   ): Promise<AppointmentEntity> {
+    const toPrismaEntity = PostgresqlPrismaAppointmentMapper.toPrismaCreate(
+      appointment
+    );
+
     const isAppointmentExists = await this.findSingleAppointmentByDate(
       new Date(appointment.date),
     );
@@ -56,12 +60,24 @@ export class PostgresqlPrismaOrmAppointmentRepository
       throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']);
     }
 
-    const toPrismaEntity = PostgresqlPrismaAppointmentMapper.toPrismaCreate({
-      ...appointment,
-    });
+    console.log('toPrismaEntity', toPrismaEntity)
 
     const newAppointment =
-      await this.postgresqlPrismaOrmService['appointment'].create({data: {...toPrismaEntity}});
+      await this.postgresqlPrismaOrmService['appointment'].create({
+        // data: {
+        //   patientId: toPrismaEntity.data.patientId ? toPrismaEntity.data.patientId : '',
+        //   psychologistId: toPrismaEntity.data.psychologistId ? toPrismaEntity.data.psychologistId: '',
+        //   id: toPrismaEntity.data.id,
+        //   clinicId: toPrismaEntity.data.clinicId ? toPrismaEntity.data.clinicId: '',
+        //   date: toPrismaEntity.data.date,
+        // }
+        data: {
+          patientId: toPrismaEntity.data?.patientId,
+          psychologistId: toPrismaEntity.data?.psychologistId,
+          clinicId: toPrismaEntity.data?.clinicId,
+          date: toPrismaEntity.data.date,
+        }
+      });
 
     return PostgresqlPrismaAppointmentMapper.toDomain(newAppointment);
   }

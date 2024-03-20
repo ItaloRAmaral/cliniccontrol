@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 
 import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
 
-import { PostgresqlPrismaAppointmentMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-appointment-mapper';
 import { AppointmentEntity } from '../../src/app/core/domains/appointment/entities/appointment/entity';
 import { CreateSingleAppointmentInputDto } from '../../src/app/core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
 import { PaymentMethod } from '../../src/app/core/shared/interfaces/payments';
@@ -37,11 +36,17 @@ export class AppointmentFactory {
       const newPrismaAppointment = makeAppointment(appointment);
       console.log('newPrismaAppointment', newPrismaAppointment)
 
-    const x = await this.postgreSqlPrismaOrmService['appointment'].create({
-      data: PostgresqlPrismaAppointmentMapper.toPrismaCreate({...newPrismaAppointment})}
+      await this.postgreSqlPrismaOrmService['appointment'].create({
+        data: {
+          patientId: newPrismaAppointment.patientId,
+          psychologistId: newPrismaAppointment.psychologistId,
+          id: newPrismaAppointment.id,
+          clinicId: newPrismaAppointment.clinicId,
+          date: newPrismaAppointment.date,
+        }
+      }
     )
 
-    console.log('xxxxxxx', x)
     return newPrismaAppointment;
     } catch (e) {
       console.log( 'ERROR-----', e)
