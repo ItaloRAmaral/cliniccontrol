@@ -62,7 +62,6 @@ describe('[E2E] - Delete Appointment', () => {
 
   it('[DELETE] - Should successfully delete an appointment', async () => {
     const response = await deleteAppointmentWithAcessToken(appointment.id, access_token)
-
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Appointment deleted successfully');
 

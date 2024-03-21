@@ -2,10 +2,11 @@ import { BadRequestException, Body, Controller, Param, Patch } from '@nestjs/com
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { patchMethodDocs } from './docs';
 
-import { UpdatePsychologistDto } from '../../../../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
+import { UpdatePsychologistInputDto } from '../../../../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { UpdatePsychologistControllerDto } from './dto';
+import { UpdatePsychologistControllerInputDto } from './input.dto';
 import { NestjsUpdatePsychologistService } from './nestjs-update-psychologist.service';
+import { UpdatePsychologistControllerOutputDto } from './output.dto';
 
 @ApiTags('Psychologist')
 @ApiBearerAuth()
@@ -19,8 +20,8 @@ export class UpdatePsychologistController {
   @ApiOperation(patchMethodDocs)
   async execute(
     @Param('psychologistId') psychologistId: string,
-    @Body() updatePsychologistDto: UpdatePsychologistControllerDto
-  ) {
+    @Body() updatePsychologistDto: UpdatePsychologistControllerInputDto,
+  ): Promise<UpdatePsychologistControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updatePsychologistDto).length === 0;
 
@@ -31,7 +32,7 @@ export class UpdatePsychologistController {
       const psychologist = {
         id: psychologistId.toString(),
         ...updatePsychologistDto,
-      } as UpdatePsychologistDto;
+      } as UpdatePsychologistInputDto;
 
       await this.updatePsychologistService.execute(psychologist);
 

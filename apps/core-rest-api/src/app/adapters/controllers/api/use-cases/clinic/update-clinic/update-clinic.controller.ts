@@ -1,10 +1,11 @@
 import { BadRequestException, Body, Controller, Param, Patch } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { UpdateClinicDto } from '../../../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
+import { UpdateClinicInputDto } from '../../../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { UpdateClinicControllerDto } from './dto';
+import { UpdateClinicControllerInputDto } from './input.dto';
 import { NestjsUpdateClinicService } from './nestjs-update-clinic.service';
+import { UpdateClinicControllerOutputDto } from './output.dto';
 
 @ApiTags('Clinic')
 @ApiBearerAuth()
@@ -17,8 +18,8 @@ export class UpdateClinicController {
   @Patch(':clinicId/update')
   async execute(
     @Param('clinicId') clinicId: string,
-    @Body() updateClinicDto: UpdateClinicControllerDto
-  ) {
+    @Body() updateClinicDto: UpdateClinicControllerInputDto,
+  ): Promise<UpdateClinicControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updateClinicDto).length === 0;
 
@@ -29,11 +30,11 @@ export class UpdateClinicController {
       const clinic = {
         id: clinicId.toString(),
         ...updateClinicDto,
-      } as UpdateClinicDto;
+      } as UpdateClinicInputDto;
 
-      await this.updateClinicService.execute(clinic);
+      const updatedClinic = await this.updateClinicService.execute(clinic);
 
-      return { message: 'Clinic updated successfully' };
+      return { message: 'Clinic updated successfully', updatedClinic };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

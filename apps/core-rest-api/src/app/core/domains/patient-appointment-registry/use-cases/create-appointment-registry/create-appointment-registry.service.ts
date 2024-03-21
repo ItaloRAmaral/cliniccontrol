@@ -13,7 +13,7 @@ import { PsychologistDatabaseRepository } from '../../../psychologist/repositori
 import { PatientAppointmentRegistryDatabaseRepository } from '../../repositories/database-repository';
 
 import { PatientAppointmentRegistryEntity } from '../../entities/registry/entity';
-import { CreatePatientAppointmentRegistryDto } from './create-appointment-registry-dto';
+import { CreatePatientAppointmentRegistryInputDto } from './create-appointment-registry-dto';
 
 export class CreatePatientAppointmentRegistryService {
   private dataEncrypter: DataEncrypterService = new DataEncrypterService();
@@ -21,26 +21,26 @@ export class CreatePatientAppointmentRegistryService {
   constructor(
     private psychologistDatabaseRepository: PsychologistDatabaseRepository,
     private patientDatabaseRepository: PatientDatabaseRepository,
-    private patientAppointmentRegistryDatabaseRepository: PatientAppointmentRegistryDatabaseRepository
+    private patientAppointmentRegistryDatabaseRepository: PatientAppointmentRegistryDatabaseRepository,
   ) {}
 
   async execute(
-    createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryDto
+    createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryInputDto,
   ): Promise<PatientAppointmentRegistryEntity> {
     // Validate
     const createPatientAppointmentRegistryDtoInstance = plainToInstance(
-      CreatePatientAppointmentRegistryDto,
-      createPatientAppointmentRegistryDto
+      CreatePatientAppointmentRegistryInputDto,
+      createPatientAppointmentRegistryDto,
     );
     await applicationValidateOrReject(createPatientAppointmentRegistryDtoInstance);
 
     const isPatientExists = await this.patientDatabaseRepository.findPatientById(
-      createPatientAppointmentRegistryDto.patientId
+      createPatientAppointmentRegistryDto.patientId,
     );
 
     const isPsychologistExists =
       await this.psychologistDatabaseRepository.findPsychologistById(
-        createPatientAppointmentRegistryDto.psychologistId
+        createPatientAppointmentRegistryDto.psychologistId,
       );
 
     if (!isPatientExists) {
@@ -52,7 +52,7 @@ export class CreatePatientAppointmentRegistryService {
     }
 
     const encryptedRegistry = this.dataEncrypter.encrypt(
-      createPatientAppointmentRegistryDto.registry['observations']
+      createPatientAppointmentRegistryDto.registry['observations'],
     );
 
     // Create
@@ -63,7 +63,7 @@ export class CreatePatientAppointmentRegistryService {
           registry: {
             observations: encryptedRegistry,
           },
-        }
+        },
       );
 
     return patientAppointmentRegistry;

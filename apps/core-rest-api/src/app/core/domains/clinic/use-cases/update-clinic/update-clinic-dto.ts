@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class UpdateClinicDto {
+export class UpdateClinicInputDto {
   @IsString()
   id!: string;
 

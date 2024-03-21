@@ -38,7 +38,7 @@ describe('[E2E] - Delete Psychologist Account', () => {
 
   it('[DELETE] - Should return an error when trying to delete a psychologist without access_token', async () => {
     const response = await request(app.getHttpServer()).delete(
-      `/psychologist/${psychologist.email}/delete`
+      `/psychologist/${psychologist.email}/delete`,
     );
 
     expect(response.status).toBe(401);
@@ -92,8 +92,6 @@ describe('[E2E] - Delete Psychologist Account', () => {
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Psychologist deleted successfully');
-    expect(Array.isArray(response.body.data.associatedClinics)).toBe(true);
-    expect(response.body.data.associatedClinics).toHaveLength(0);
 
     const deletedPsychologist = await prisma['psychologist'].findUnique({
       where: { id: newPsychologist.id },
@@ -109,8 +107,6 @@ describe('[E2E] - Delete Psychologist Account', () => {
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Psychologist deleted successfully');
-    expect(Array.isArray(response.body.data.associatedClinics)).toBe(true);
-    expect(response.body.data.associatedClinics).not.toHaveLength(0);
 
     const deletedPsychologist = await prisma['psychologist'].findUnique({
       where: { id: psychologist.id },

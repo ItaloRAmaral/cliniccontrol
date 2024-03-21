@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreatePatientAppointmentRegistryDto } from '../../../../../../core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { CreatePatientAppointmentRegistryOutputDto } from './dto';
+import { CreatePatientAppointmentRegistryControllerInputDto } from './input.dto';
 import { NestjsCreatePatientAppointmentRegistryService } from './nestjs-create-patient-appointment-registry.service';
+import { CreatePatientAppointmentRegistryControllerOutputDto } from './output.dto';
 
 @ApiTags('Create Patient Appointment Registry')
 @Controller({
@@ -16,14 +16,15 @@ export class CreatePatientAppointmentRegistryController {
 
   @Post('create')
   async execute(
-    @Body() createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryDto,
-  ): Promise<CreatePatientAppointmentRegistryOutputDto> {
+    @Body()
+    createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryControllerInputDto,
+  ): Promise<CreatePatientAppointmentRegistryControllerOutputDto> {
     try {
-      await this.createPatientAppointmentRegistryService.execute(
+      const patientAppointmentRegistry = await this.createPatientAppointmentRegistryService.execute(
         createPatientAppointmentRegistryDto,
       );
 
-      return { message: 'Appointment registry created successfully' };
+      return patientAppointmentRegistry
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

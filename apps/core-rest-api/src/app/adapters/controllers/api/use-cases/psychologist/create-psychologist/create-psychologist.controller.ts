@@ -2,12 +2,13 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
 
-import { CreatePsychologistDto } from '../../../../../../core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import { applicationValidateOrReject } from '../../../../../../shared/validators/validate-or-reject';
 import { Public } from '../../../../../auth/public';
 import { ApiKeyGuard } from '../../../guards/api-key.guard';
+import { CreatePsychologistControllerInputDto } from './input.dto';
 import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.service';
+import { CreatePsychologistControllerOutputDto } from './output.dto';
 
 /**
  * ExecutionContext
@@ -25,17 +26,19 @@ export class CreatePsychologistController {
   @UseGuards(ApiKeyGuard)
   @Public()
   async execute(
-    @Body() createPsychologistDto: CreatePsychologistDto
-  ): Promise<null | undefined | void> {
+    @Body() createPsychologistDto: CreatePsychologistControllerInputDto,
+  ): Promise<CreatePsychologistControllerOutputDto> {
     try {
       const createPsychologistDtoInstance = plainToInstance(
-        CreatePsychologistDto,
-        createPsychologistDto
+        CreatePsychologistControllerInputDto,
+        createPsychologistDto,
       );
 
       await applicationValidateOrReject(createPsychologistDtoInstance);
 
-      await this.createPsychologistService.execute(createPsychologistDto);
+      const psychologist = await this.createPsychologistService.execute(createPsychologistDto);
+
+      return psychologist
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

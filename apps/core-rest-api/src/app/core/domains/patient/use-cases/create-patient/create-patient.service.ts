@@ -6,14 +6,17 @@ import { applicationValidateOrReject } from '../../../../../shared/validators/va
 import { PatientEntity } from '../../entities/patient/entity';
 import { ICreatePatientServiceProps } from '../../interfaces/patient';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
-import { CreatePatientDto } from './create-patient-dto';
+import { CreatePatientInputDto } from './create-patient-dto';
 
 export class CreatePatientService {
   constructor(private patientDatabaseRepository: PatientDatabaseRepository) {}
 
   async execute(createPatientDto: ICreatePatientServiceProps): Promise<PatientEntity> {
     // Validate
-    const createPatientDtoInstance = plainToInstance(CreatePatientDto, createPatientDto);
+    const createPatientDtoInstance = plainToInstance(
+      CreatePatientInputDto,
+      createPatientDto,
+    );
 
     await applicationValidateOrReject(createPatientDtoInstance);
 

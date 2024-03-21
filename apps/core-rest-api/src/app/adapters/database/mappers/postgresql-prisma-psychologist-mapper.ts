@@ -5,8 +5,8 @@ import {
   Role as PrismaRole,
 } from '@prisma/client';
 import { PsychologistEntity } from '../../../core/domains/psychologist/entities/psychologist/entity';
-import { CreatePsychologistDto } from '../../../core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
-import { UpdatePsychologistDto } from '../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
+import { CreatePsychologistInputDto } from '../../../core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { UpdatePsychologistInputDto } from '../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
 import { Plan, Role } from '../../../core/shared/interfaces/payments';
 
 export class PostgresqlPrismaPsychologistMapper {
@@ -22,7 +22,7 @@ export class PostgresqlPrismaPsychologistMapper {
     return raw.map((psychologist) => this.toDomain(psychologist));
   }
 
-  static toPrismaCreate(raw: CreatePsychologistDto): Prisma.PsychologistCreateArgs {
+  static toPrismaCreate(raw: CreatePsychologistInputDto): Prisma.PsychologistCreateArgs {
     raw.role as unknown as PrismaRole;
 
     return {
@@ -34,7 +34,7 @@ export class PostgresqlPrismaPsychologistMapper {
     };
   }
 
-  static toPrismaUpdate(raw: UpdatePsychologistDto): Prisma.PsychologistUpdateArgs {
+  static toPrismaUpdate(raw: UpdatePsychologistInputDto): Prisma.PsychologistUpdateArgs {
     return {
       data: {
         ...raw,

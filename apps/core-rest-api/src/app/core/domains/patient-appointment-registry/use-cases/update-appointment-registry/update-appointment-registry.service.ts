@@ -4,7 +4,7 @@ import { PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES } from '../../../../../shar
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { DataEncrypterService } from '../../../../shared/cryptography/use-cases/data-encrypter.service';
 import { PatientAppointmentRegistryDatabaseRepository } from '../../repositories/database-repository';
-import { UpdatePatientAppointmentRegistryDto } from './update-appointment-registry-dto';
+import { UpdatePatientAppointmentRegistryInputDto } from './update-appointment-registry-dto';
 
 export class UpdatePatientAppointmentRegistryService {
   private dataEncrypter: DataEncrypterService = new DataEncrypterService();
@@ -14,11 +14,11 @@ export class UpdatePatientAppointmentRegistryService {
   ) {}
 
   async execute(
-    updatePatientAppointmentRegistryDto: UpdatePatientAppointmentRegistryDto,
+    updatePatientAppointmentRegistryDto: UpdatePatientAppointmentRegistryInputDto,
   ): Promise<void> {
     // Validate
     const DeletePatientAppointmentRegistryDtoInstance = plainToInstance(
-      UpdatePatientAppointmentRegistryDto,
+      UpdatePatientAppointmentRegistryInputDto,
       updatePatientAppointmentRegistryDto,
     );
     await applicationValidateOrReject(DeletePatientAppointmentRegistryDtoInstance);
@@ -35,15 +35,16 @@ export class UpdatePatientAppointmentRegistryService {
     }
 
     const encryptedRegistry = this.dataEncrypter.encrypt(
-      updatePatientAppointmentRegistryDto.registry['observations']
+      updatePatientAppointmentRegistryDto.registry['observations'],
     );
 
     await this.patientAppointmentRegistryDatabaseRepository.updatePatientAppointmentRegistry(
-      {...updatePatientAppointmentRegistryDto,
+      {
+        ...updatePatientAppointmentRegistryDto,
         registry: {
           observations: encryptedRegistry,
         },
-      }
+      },
     );
   }
 }

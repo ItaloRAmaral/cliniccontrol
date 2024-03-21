@@ -1,6 +1,6 @@
-import { IsDate, IsString } from "class-validator";
+import { IsDate, IsString } from 'class-validator';
 
-export class UpdatedAppointmentDateDto {
+export class UpdatedAppointmentDateInputDto {
   @IsString()
   id!: string;
 

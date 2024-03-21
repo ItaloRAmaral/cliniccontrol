@@ -2,9 +2,9 @@ import { ConflictException } from '@nestjs/common';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { ClinicDatabaseRepository } from '../../clinic/repositories/database-repository';
 import { PsychologistEntity } from '../entities/psychologist/entity';
-import { CreatePsychologistDto } from '../use-cases/create-psychologist/create-psychologist-dto';
-import { DeletedPsychologistInfo } from '../use-cases/delete-psychologist/dto';
-import { UpdatePsychologistDto } from '../use-cases/update-psychologist/update-psychologist-dto';
+import { CreatePsychologistInputDto } from '../use-cases/create-psychologist/create-psychologist-dto';
+import { DeletedPsychologistOutputDto } from '../use-cases/delete-psychologist/dto';
+import { UpdatePsychologistInputDto } from '../use-cases/update-psychologist/update-psychologist-dto';
 import { PsychologistDatabaseRepository } from './database-repository';
 
 export class InMemoryPsychologistDatabaseRepository
@@ -14,12 +14,12 @@ export class InMemoryPsychologistDatabaseRepository
 
   constructor(private clinicRepository: ClinicDatabaseRepository) {}
 
-  async createPsychologist(psychologist: CreatePsychologistDto) {
+  async createPsychologist(psychologist: CreatePsychologistInputDto) {
     const isPsychologistExists = await this.findPsychologistByEmail(psychologist.email);
 
     if (isPsychologistExists) {
       throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_ALREADY_EXISTS']
+        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_ALREADY_EXISTS'],
       );
     }
 
@@ -44,7 +44,7 @@ export class InMemoryPsychologistDatabaseRepository
     return this.psychologists;
   }
 
-  async updatePsychologist(newPsychologist: UpdatePsychologistDto): Promise<void> {
+  async updatePsychologist(newPsychologist: UpdatePsychologistInputDto): Promise<void> {
     const oldPsychologist = await this.findPsychologistById(newPsychologist.id);
 
     if (!oldPsychologist) {
@@ -63,7 +63,7 @@ export class InMemoryPsychologistDatabaseRepository
     this.psychologists[psychologistIndex] = updatedPsychologist;
   }
 
-  async deletePsychologist(email: string): Promise<DeletedPsychologistInfo> {
+  async deletePsychologist(email: string): Promise<DeletedPsychologistOutputDto> {
     const isPsychologistExists = await this.findPsychologistByEmail(email);
 
     if (!isPsychologistExists) {
@@ -72,11 +72,11 @@ export class InMemoryPsychologistDatabaseRepository
 
     const associatedClinics =
       await this.clinicRepository.deleteAllClinicsByPsychologistId(
-        isPsychologistExists.id
+        isPsychologistExists.id,
       );
 
     this.psychologists = this.psychologists.filter(
-      (psychologists) => psychologists.email !== email
+      (psychologists) => psychologists.email !== email,
     );
 
     return {

@@ -5,12 +5,12 @@ import { APPOINTMENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-m
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
-import { UpdateAppointmentInfoDto } from './update-appointment-info-dto';
+import { CreateSingleAppointmentInputDto } from '../create-single-appointment/create-single-appointment-dto';
+import { UpdateAppointmentInfoInputDto } from './update-appointment-info-dto';
 import { UpdateAppointmentInfoService } from './update-appointment-info.service';
 
 describe('[appointment] Update Appointment Info Service', () => {
-  const fakeAppointment: CreateSingleAppointmentDto = {
+  const fakeAppointment: CreateSingleAppointmentInputDto = {
     psychologistId: randomUUID(),
     patientId: randomUUID(),
     date: faker.date.recent({ days: 10 }),
@@ -34,7 +34,7 @@ describe('[appointment] Update Appointment Info Service', () => {
     const createAppointment =
       await databaseRepository.createSingleAppointment(fakeAppointment);
 
-    const newAppointmentInfo: UpdateAppointmentInfoDto = {
+    const newAppointmentInfo: UpdateAppointmentInfoInputDto = {
       id: createAppointment.id,
       paid: true,
       paymentMethod: PaymentMethod.PIX,
@@ -57,7 +57,7 @@ describe('[appointment] Update Appointment Info Service', () => {
   });
 
   it('should throw error if appointment does not exist', async () => {
-    const newAppointmentInfo: UpdateAppointmentInfoDto = {
+    const newAppointmentInfo: UpdateAppointmentInfoInputDto = {
       id: randomUUID(),
       paid: true,
       paymentMethod: PaymentMethod.PIX,

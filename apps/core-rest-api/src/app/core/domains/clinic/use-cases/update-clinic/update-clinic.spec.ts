@@ -4,12 +4,12 @@ import { randomUUID } from 'crypto';
 import { CLINIC_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { InMemoryClinicDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { ClinicDatabaseRepository } from '../../repositories/database-repository';
-import { CreateClinicDto } from '../create-clinic/create-clinic-dto';
-import { UpdateClinicDto } from './update-clinic-dto';
+import { CreateClinicInputDto } from '../create-clinic/create-clinic-dto';
+import { UpdateClinicInputDto } from './update-clinic-dto';
 import { UpdateClinicService } from './update-clinic.service';
 
 describe('[clinic] Update Clinic Service', () => {
-  const fakeClinic: CreateClinicDto = {
+  const fakeClinic: CreateClinicInputDto = {
     name: faker.person.fullName(),
     city: faker.location.city(),
     state: faker.location.state(),
@@ -27,7 +27,7 @@ describe('[clinic] Update Clinic Service', () => {
   it('should update a clinic', async () => {
     const createClinic = await databaseRepository.createClinic(fakeClinic);
 
-    const newClinicInfos: UpdateClinicDto = {
+    const newClinicInfos: UpdateClinicInputDto = {
       id: createClinic.id,
       city: faker.location.city(),
     };

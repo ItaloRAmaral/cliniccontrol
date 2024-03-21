@@ -4,14 +4,14 @@ import { Injectable } from '@nestjs/common';
 import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
 import { PostgresqlPrismaPsychologistMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-psychologist-mapper';
 import { PsychologistEntity } from '../../src/app/core/domains/psychologist/entities/psychologist/entity';
-import { CreatePsychologistDto } from '../../src/app/core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { CreatePsychologistInputDto } from '../../src/app/core/domains/psychologist/use-cases/create-psychologist/create-psychologist-dto';
 import { Plan, Role } from '../../src/app/core/shared/interfaces/payments';
 
 /*
   Creating a factory for the Psychologist entity, which will be used to create tests for the domain's use cases
 */
 export function makePsychologist(
-  override: Partial<CreatePsychologistDto> = {}
+  override: Partial<CreatePsychologistInputDto> = {},
 ): PsychologistEntity {
   const newPsychologist = new PsychologistEntity({
     name: 'Novo Usuário Teste',
@@ -33,12 +33,12 @@ export class PsychologistFactory {
   constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
   async makePrismaPsychologist(
-    psychologist: Partial<CreatePsychologistDto> = {}
+    psychologist: Partial<CreatePsychologistInputDto> = {},
   ): Promise<PsychologistEntity> {
     const newPrismaPsychologist = makePsychologist(psychologist);
 
     await this.postgreSqlPrismaOrmService['psychologist'].create(
-      PostgresqlPrismaPsychologistMapper.toPrismaCreate(newPrismaPsychologist)
+      PostgresqlPrismaPsychologistMapper.toPrismaCreate(newPrismaPsychologist),
     );
 
     return newPrismaPsychologist;

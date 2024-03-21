@@ -3,10 +3,10 @@ import { Injectable } from '@nestjs/common';
 
 import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
 import { PatientAppointmentRegistryEntity } from '../../src/app/core/domains/patient-appointment-registry/entities/registry/entity';
-import { CreatePatientAppointmentRegistryDto } from '../../src/app/core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
+import { CreatePatientAppointmentRegistryInputDto } from '../../src/app/core/domains/patient-appointment-registry/use-cases/create-appointment-registry/create-appointment-registry-dto';
 
 export function makePatientAppointmentRegistry(
-  override: Partial<CreatePatientAppointmentRegistryDto> = {},
+  override: Partial<CreatePatientAppointmentRegistryInputDto> = {},
 ): PatientAppointmentRegistryEntity {
   const newAppointment = new PatientAppointmentRegistryEntity({
     psychologistId: faker.string.uuid(),
@@ -25,7 +25,7 @@ export class PatientAppointmentRegistryFactory {
   constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
   async makePrismaPatientAppointmentRegistry(
-    patientAppointmentRegistry: Partial<CreatePatientAppointmentRegistryDto> = {},
+    patientAppointmentRegistry: Partial<CreatePatientAppointmentRegistryInputDto> = {},
   ): Promise<PatientAppointmentRegistryEntity> {
     const newPrismaPatientAppointmentRegistry = makePatientAppointmentRegistry(
       patientAppointmentRegistry,

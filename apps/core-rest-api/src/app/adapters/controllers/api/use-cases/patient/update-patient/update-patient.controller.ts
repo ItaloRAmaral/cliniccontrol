@@ -8,6 +8,7 @@ import {
   UpdatePatientControllerReqParamsInputDto,
 } from './input-dto';
 import { NestjsUpdatePatientService } from './nestjs-update-patient.service';
+import { UpdatePatientControllerOutputDto } from './output.dto';
 
 @ApiTags('Patient')
 @ApiBearerAuth()
@@ -22,7 +23,7 @@ export class UpdatePatientController {
   async execute(
     @Param() { id }: UpdatePatientControllerReqParamsInputDto,
     @Body() updatePsychologistDto: UpdatePatientControllerReqBodyInputDto,
-  ) {
+  ): Promise<UpdatePatientControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updatePsychologistDto).length === 0;
 
@@ -30,9 +31,12 @@ export class UpdatePatientController {
         throw new BadRequestException('Must provide at least one field to update');
       }
 
-      await this.updatePatientService.execute({ id, ...updatePsychologistDto });
+      const updatedPatient = await this.updatePatientService.execute({
+        id,
+        ...updatePsychologistDto,
+      });
 
-      return { message: 'Patient updated successfully' };
+      return { message: 'Patient updated successfully', updatedPatient };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

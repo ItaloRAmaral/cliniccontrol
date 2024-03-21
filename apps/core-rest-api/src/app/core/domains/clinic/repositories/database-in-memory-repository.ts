@@ -1,19 +1,19 @@
 import { ConflictException } from '@nestjs/common';
 import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { ClinicEntity } from '../entities/clinic/entity';
-import { CreateClinicDto } from '../use-cases/create-clinic/create-clinic-dto';
-import { DeletedClinicInfo } from '../use-cases/delete-clinic/dto';
-import { UpdateClinicDto } from '../use-cases/update-clinic/update-clinic-dto';
+import { CreateClinicInputDto } from '../use-cases/create-clinic/create-clinic-dto';
+import { DeletedClinicOutputDto } from '../use-cases/delete-clinic/dto';
+import { UpdateClinicInputDto } from '../use-cases/update-clinic/update-clinic-dto';
 import { ClinicDatabaseRepository } from './database-repository';
 
 export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepository {
   private clinics: ClinicEntity[] = [];
   private deletedClinics: ClinicEntity[] = [];
 
-  async createClinic(clinic: CreateClinicDto): Promise<ClinicEntity> {
+  async createClinic(clinic: CreateClinicInputDto): Promise<ClinicEntity> {
     const isClinicExists = await this.findClinicByNameAndPsychologistId(
       clinic.name,
-      clinic.psychologistId
+      clinic.psychologistId,
     );
 
     if (isClinicExists) {
@@ -33,17 +33,17 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
 
   async findClinicByNameAndPsychologistId(
     name: string,
-    psychologistId: string
+    psychologistId: string,
   ): Promise<ClinicEntity | null> {
     return (
       this.clinics.find(
-        (clinic) => clinic.name === name && clinic.psychologistId === psychologistId
+        (clinic) => clinic.name === name && clinic.psychologistId === psychologistId,
       ) ?? null
     );
   }
 
   async findClinicByPsychologistId(
-    psychologistId: string
+    psychologistId: string,
   ): Promise<ClinicEntity[] | null> {
     return (
       this.clinics.filter((clinic) => clinic.psychologistId === psychologistId) ?? null
@@ -54,7 +54,7 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     return this.clinics.find((clinic) => clinic.id === id) ?? null;
   }
 
-  async updateClinic(newClinicInfo: UpdateClinicDto): Promise<void> {
+  async updateClinic(newClinicInfo: UpdateClinicInputDto): Promise<ClinicEntity> {
     const oldClinicInfo = await this.findClinicById(newClinicInfo.id);
 
     if (!oldClinicInfo) {
@@ -71,12 +71,12 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     });
 
     this.clinics[clinicIndex] = updatedClinic;
+
+    return updatedClinic;
   }
 
-  async deleteClinic(id: string): Promise<DeletedClinicInfo> {
-    const isClinicExists = await this.findClinicById(
-      id
-    );
+  async deleteClinic(id: string): Promise<DeletedClinicOutputDto> {
+    const isClinicExists = await this.findClinicById(id);
 
     if (!isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
@@ -84,12 +84,12 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
 
     this.clinics = this.clinics.filter((clinic) => clinic.id !== id);
     return {
-      deletedClinic: isClinicExists
-    }
+      deletedClinic: isClinicExists,
+    };
   }
 
   async deleteAllClinicsByPsychologistId(
-    psychologistId: string
+    psychologistId: string,
   ): Promise<ClinicEntity[]> {
     const isClinicExists = await this.findClinicByPsychologistId(psychologistId);
 
@@ -98,11 +98,11 @@ export class InMemoryClinicDatabaseRepository implements ClinicDatabaseRepositor
     }
 
     const deletedClinics = this.clinics.filter(
-      (clinic) => clinic.psychologistId === psychologistId
+      (clinic) => clinic.psychologistId === psychologistId,
     );
 
     this.clinics = this.clinics.filter(
-      (clinic) => clinic.psychologistId !== psychologistId
+      (clinic) => clinic.psychologistId !== psychologistId,
     );
 
     return deletedClinics;

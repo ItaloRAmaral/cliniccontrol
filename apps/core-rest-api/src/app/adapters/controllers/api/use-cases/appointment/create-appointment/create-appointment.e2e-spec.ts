@@ -44,19 +44,26 @@ describe('[E2E] - Create New Appointment', () => {
       online: false,
       paymentMethod: PaymentMethod.CREDIT_CARD
     });
+
     const response = await request(app.getHttpServer())
       .post('/appointment/create')
       .set('Authorization', `Bearer ${access_token}`)
       .send(newAppointment);
 
-    const appointmentOnDatabase = await prisma.appointment.findFirst({
+    const appointmentOnDatabase = await prisma.appointment.findUnique({
       where: {
-        patientId: newAppointment.patientId,
+        patientId: response.body.patientId,
+        id: response.body.id
       },
     });
 
     expect(response.statusCode).toBe(201);
-    expect(response.body.message).toBe('Appointment created successfully');
+    expect(response.body).toEqual({
+      ...appointmentOnDatabase,
+      createdAt: appointmentOnDatabase?.createdAt.toISOString(),
+      date: appointmentOnDatabase?.date.toISOString(),
+      updatedAt: appointmentOnDatabase?.updatedAt.toISOString(),
+    });
     expect(appointmentOnDatabase).toBeTruthy();
   });
 })

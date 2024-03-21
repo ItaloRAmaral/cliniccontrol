@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class RouteParamsDto {
+export class DeletePatientControllerInputDto {
   @IsString()
   patientId!: string;
 }

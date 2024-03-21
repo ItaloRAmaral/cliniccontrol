@@ -5,8 +5,8 @@ import {
 } from '@prisma/client';
 
 import { PatientEntity } from '../../../core/domains/patient/entities/patient/entity';
-import { CreatePatientDto } from '../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
-import { UpdatePatientDto } from '../../../core/domains/patient/use-cases/update-patient/update-patient-dto';
+import { CreatePatientInputDto } from '../../../core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { UpdatePatientInputDto } from '../../../core/domains/patient/use-cases/update-patient/update-patient-dto';
 import { PaymentMethod } from '../../../core/shared/interfaces/payments';
 
 export class PostgresqlPrismaPatientMapper {
@@ -17,7 +17,7 @@ export class PostgresqlPrismaPatientMapper {
     });
   }
 
-  static toPrismaCreate(raw: CreatePatientDto): Prisma.PatientCreateArgs {
+  static toPrismaCreate(raw: CreatePatientInputDto): Prisma.PatientCreateArgs {
     return {
       data: {
         ...raw,
@@ -26,7 +26,7 @@ export class PostgresqlPrismaPatientMapper {
     };
   }
 
-  static toPrismaUpdate(raw: UpdatePatientDto): Prisma.PatientUpdateArgs {
+  static toPrismaUpdate(raw: UpdatePatientInputDto): Prisma.PatientUpdateArgs {
     return {
       data: {
         ...raw,

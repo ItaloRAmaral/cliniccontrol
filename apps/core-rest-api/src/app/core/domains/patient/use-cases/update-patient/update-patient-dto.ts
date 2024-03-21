@@ -1,7 +1,7 @@
 import { IsEnum, IsMobilePhone, IsOptional, IsString } from 'class-validator';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 
-export class UpdatePatientDto {
+export class UpdatePatientInputDto {
   @IsString()
   id!: string;
 

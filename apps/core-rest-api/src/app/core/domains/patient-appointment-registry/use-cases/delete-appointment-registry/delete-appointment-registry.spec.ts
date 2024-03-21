@@ -18,13 +18,13 @@ import { DeletePatientAppointmentRegistryService } from './delete-appointment-re
 import { ConflictException } from '@nestjs/common';
 import { PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { PatientEntity } from '../../../patient/entities/patient/entity';
-import { CreatePatientDto } from '../../../patient/use-cases/create-patient/create-patient-dto';
+import { CreatePatientInputDto } from '../../../patient/use-cases/create-patient/create-patient-dto';
 import { PsychologistEntity } from '../../../psychologist/entities/psychologist/entity';
-import { CreatePsychologistDto } from '../../../psychologist/use-cases/create-psychologist/create-psychologist-dto';
-import { CreatePatientAppointmentRegistryDto } from '../create-appointment-registry/create-appointment-registry-dto';
+import { CreatePsychologistInputDto } from '../../../psychologist/use-cases/create-psychologist/create-psychologist-dto';
+import { CreatePatientAppointmentRegistryInputDto } from '../create-appointment-registry/create-appointment-registry-dto';
 
 describe('[registry] - Create Patient Appointment Registry Service', () => {
-  const fakePatient: CreatePatientDto = {
+  const fakePatient: CreatePatientInputDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
@@ -34,7 +34,7 @@ describe('[registry] - Create Patient Appointment Registry Service', () => {
     clinicId: randomUUID(),
   };
 
-  const fakePsychologist: CreatePsychologistDto = {
+  const fakePsychologist: CreatePsychologistInputDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     password: faker.internet.password({ length: 8 }),
@@ -42,7 +42,7 @@ describe('[registry] - Create Patient Appointment Registry Service', () => {
     plan: Plan.PREMIUM,
   };
 
-  let newPatientAppointmentRegistry: CreatePatientAppointmentRegistryDto;
+  let newPatientAppointmentRegistry: CreatePatientAppointmentRegistryInputDto;
 
   let psychologist: PsychologistEntity;
   let patient: PatientEntity;
@@ -67,7 +67,8 @@ describe('[registry] - Create Patient Appointment Registry Service', () => {
       patientAppointmentRegistryDatabaseRepository,
     );
 
-    psychologist = await psychologistDatabaseRepository.createPsychologist(fakePsychologist);
+    psychologist =
+      await psychologistDatabaseRepository.createPsychologist(fakePsychologist);
     patient = await patientDatabaseRepository.createPatient(fakePatient);
 
     const registry = {
@@ -82,22 +83,30 @@ describe('[registry] - Create Patient Appointment Registry Service', () => {
   });
 
   it('should delete a new patient appointment registry', async () => {
-    const patientAppointmentRegistry = await patientAppointmentRegistryDatabaseRepository.createPatientAppointmentRegistry({
-     ...newPatientAppointmentRegistry
-    })
+    const patientAppointmentRegistry =
+      await patientAppointmentRegistryDatabaseRepository.createPatientAppointmentRegistry(
+        {
+          ...newPatientAppointmentRegistry,
+        },
+      );
 
-    await service.execute({id: patientAppointmentRegistry.id})
+    await service.execute({ id: patientAppointmentRegistry.id });
 
-    const getRegistry = await patientAppointmentRegistryDatabaseRepository.findPatientAppointmentRegistryById(patientAppointmentRegistry.id)
-    expect(getRegistry).toBeNull()
+    const getRegistry =
+      await patientAppointmentRegistryDatabaseRepository.findPatientAppointmentRegistryById(
+        patientAppointmentRegistry.id,
+      );
+    expect(getRegistry).toBeNull();
   });
 
   it('should throw conflict exception if regristry does not exists', async () => {
     const patientAppointmentRegistry = {
-      id: 'id-not-existent'
-    }
+      id: 'id-not-existent',
+    };
     await expect(service.execute(patientAppointmentRegistry)).rejects.toThrow(
-      new ConflictException(PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES['REGISTRY_NOT_FOUND']),
+      new ConflictException(
+        PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES['REGISTRY_NOT_FOUND'],
+      ),
     );
   });
 });

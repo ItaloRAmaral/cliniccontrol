@@ -9,6 +9,7 @@ export class AppointmentEntity extends AppointmentDto {
     Object.assign(this, props);
     this.id = props.id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
+    this.updatedAt = props.updatedAt ?? null;
     this.done = props.done ?? false;
     this.missed = props.missed ?? null;
     this.cancellationDate = props.cancellationDate ?? null;

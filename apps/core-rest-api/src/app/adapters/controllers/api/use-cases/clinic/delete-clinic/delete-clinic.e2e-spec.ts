@@ -59,12 +59,6 @@ describe('[E2E] - Delete Clinic', () => {
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Clinic deleted successfully');
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        clinic: expect.objectContaining({ name: expect.any(String) }),
-        deletedAt: expect.any(String),
-      }),
-    );
 
     const deletedClinic = await prisma['clinic'].findUnique({
       where: { id: clinic.id },

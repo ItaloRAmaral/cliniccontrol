@@ -5,7 +5,7 @@ import { applicationValidateOrReject } from '../../../../../shared/validators/va
 import { BcryptHasherService } from '../../../../shared/cryptography/use-cases/bcrypt-hasher.service';
 import { PsychologistEntity } from '../../entities/psychologist/entity';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
-import { CreatePsychologistDto } from './create-psychologist-dto';
+import { CreatePsychologistInputDto } from './create-psychologist-dto';
 
 export class CreatePsychologistService {
   private hasherService: BcryptHasherService = new BcryptHasherService();
@@ -13,23 +13,23 @@ export class CreatePsychologistService {
   constructor(private psychologistDatabaseRepository: PsychologistDatabaseRepository) {}
 
   async execute(
-    createPsychologistDto: CreatePsychologistDto
+    createPsychologistDto: CreatePsychologistInputDto,
   ): Promise<PsychologistEntity> {
     // Validate
     const createPsychologistDtoInstance = plainToInstance(
-      CreatePsychologistDto,
-      createPsychologistDto
+      CreatePsychologistInputDto,
+      createPsychologistDto,
     );
     await applicationValidateOrReject(createPsychologistDtoInstance);
 
     const isPsychologistExists =
       await this.psychologistDatabaseRepository.findPsychologistByEmail(
-        createPsychologistDto.email
+        createPsychologistDto.email,
       );
 
     if (isPsychologistExists) {
       throw new ConflictException(
-        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_ALREADY_EXISTS']
+        PSYCHOLOGIST_ERROR_MESSAGES['PSYCHOLOGIST_ALREADY_EXISTS'],
       );
     }
 
