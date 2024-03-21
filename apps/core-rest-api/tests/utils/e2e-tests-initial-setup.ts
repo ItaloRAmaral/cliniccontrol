@@ -78,7 +78,6 @@ export async function setupE2ETest() {
     clinicId: clinic.id,
   });
 
-  console.log('patient', patient)
   // Creating an appointment to use in tests
   const appointment = await appointmentFactory.makePrismaAppointment({
     psychologistId: psychologist.id,

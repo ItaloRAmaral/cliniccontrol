@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 
 import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
 
+import { PostgresqlPrismaAppointmentMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-appointment-mapper';
 import { AppointmentEntity } from '../../src/app/core/domains/appointment/entities/appointment/entity';
 import { CreateSingleAppointmentInputDto } from '../../src/app/core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
 import { PaymentMethod } from '../../src/app/core/shared/interfaces/payments';
@@ -32,25 +33,10 @@ export class AppointmentFactory {
   async makePrismaAppointment(
     appointment: Partial<CreateSingleAppointmentInputDto> = {},
   ): Promise<AppointmentEntity> {
-    try {
-      const newPrismaAppointment = makeAppointment(appointment);
-      console.log('newPrismaAppointment', newPrismaAppointment)
-
-      await this.postgreSqlPrismaOrmService['appointment'].create({
-        data: {
-          patientId: newPrismaAppointment.patientId,
-          psychologistId: newPrismaAppointment.psychologistId,
-          id: newPrismaAppointment.id,
-          clinicId: newPrismaAppointment.clinicId,
-          date: newPrismaAppointment.date,
-        }
-      }
+    const newPrismaAppointment = makeAppointment(appointment);
+    const createdAppointment = await this.postgreSqlPrismaOrmService['appointment'].create(
+      PostgresqlPrismaAppointmentMapper.toPrismaCreate(newPrismaAppointment)
     )
-
-    return newPrismaAppointment;
-    } catch (e) {
-      console.log( 'ERROR-----', e)
-    }
-
+    return PostgresqlPrismaAppointmentMapper.toDomain(createdAppointment);
   }
 }

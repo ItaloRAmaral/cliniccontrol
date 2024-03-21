@@ -22,7 +22,9 @@ export class PostgresqlPrismaAppointmentMapper {
   ): Prisma.AppointmentCreateArgs {
     return {
       data: {
-        ...raw,
+        online: raw.online,
+        confirmed: raw.confirmed,
+        cancelled: raw.cancelled,
         paymentMethod: raw.paymentMethod as unknown as PrismaPaymentMethod,
         date: new Date(raw.date),
         patientId: raw.patientId,

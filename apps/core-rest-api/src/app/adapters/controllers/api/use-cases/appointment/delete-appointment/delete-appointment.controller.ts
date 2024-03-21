@@ -17,7 +17,6 @@ export class DeleteAppointmentController {
   async execute(@Param() {appointmentId}: DeleteAppointmentInputDto): Promise<DeleteAppointmentOutputDto>{
     try {
       await this.deleteAppointmentService.execute(appointmentId);
-
       return {
         message: 'Appointment deleted successfully',
       }
