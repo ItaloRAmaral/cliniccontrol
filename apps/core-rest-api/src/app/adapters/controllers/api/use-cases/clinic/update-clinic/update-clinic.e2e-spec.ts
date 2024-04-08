@@ -5,7 +5,7 @@ import { INestApplication } from '@nestjs/common';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { ClinicEntity } from '../../../../../../core/domains/clinic/entities/clinic/entity';
 
-describe('[E2E] - Update Clinic', () => {
+describe('[E2E] - Create Appointment', () => {
   let app: INestApplication;
   let clinic: ClinicEntity;
   let access_token: string;
@@ -21,7 +21,7 @@ describe('[E2E] - Update Clinic', () => {
     invalid_access_token = setup.invalid_access_token;
   });
 
-  it('[PATCH] - Should successfully update a clinic', async () => {
+  it('[PATCH] - Should successfully create appointment', async () => {
     const updateInfos = {
       name: 'New Clinic Name',
     };
@@ -41,7 +41,7 @@ describe('[E2E] - Update Clinic', () => {
     });
   });
 
-  it('[PATCH] - Should return an error when trying to update a clinic without access_token', async () => {
+  it('[PATCH] - Should return an error when trying to create appointment without access_token', async () => {
     const updateInfos = {
       name: 'New Clinic Name',
     };
@@ -54,7 +54,7 @@ describe('[E2E] - Update Clinic', () => {
     expect(response.body.message).toBe('Invalid JWT token');
   });
 
-  it('[PATCH] - Should return an error when trying to update a clinic with invalid access_token', async () => {
+  it('[PATCH] - Should return an error when trying to create appointment with invalid access_token', async () => {
     const updateInfos = {
       name: 'New Clinic Name',
     };
@@ -68,7 +68,7 @@ describe('[E2E] - Update Clinic', () => {
     expect(response.body.message).toBe('Invalid JWT token');
   });
 
-  it('[PATCH] - Should return an error when trying to update a clinic with invalid id', async () => {
+  it('[PATCH] - Should return an error when trying to create appointment with invalid id', async () => {
     const updateInfos = {
       name: 'New Clinic Name',
     };
@@ -82,7 +82,7 @@ describe('[E2E] - Update Clinic', () => {
     expect(response.body.message).toBe('clinic not found');
   });
 
-  it('[PATCH] - Should return an error when trying to update a clinic with empty request body', async () => {
+  it('[PATCH] - Should return an error when trying to create appointment with empty request body', async () => {
     const updateInfos = {};
 
     const response = await request(app.getHttpServer())
@@ -94,7 +94,7 @@ describe('[E2E] - Update Clinic', () => {
     expect(response.body.message).toBe('Must provide at least one field to update');
   });
 
-  it('[PATCH] - Should return an error when trying to update a clinic with an invalid body type params', async () => {
+  it('[PATCH] - Should return an error when trying to create appointment with an invalid body type params', async () => {
     const updateInfos = {
       name: 123,
     };

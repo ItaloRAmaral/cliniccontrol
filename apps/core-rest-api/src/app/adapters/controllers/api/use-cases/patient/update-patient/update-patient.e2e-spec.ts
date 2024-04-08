@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 import { setupE2ETest } from '../../../../../../../../tests/utils/e2e-tests-initial-setup';
 import { PatientEntity } from '../../../../../../core/domains/patient/entities/patient/entity';
 
-describe('[E2E] - Update Psychologist Account', () => {
+describe('[E2E] - Update Patient', () => {
   let app: INestApplication;
 
   let patient: PatientEntity;
