@@ -1,7 +1,7 @@
 import { Controller, Delete, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { DeleteClinicControllerInputDto } from './input.dto';
+import { DeleteClinicControllerParamsInputDto } from './input.dto';
 import { NestjsDeleteClinicService } from './nestjs-delete-clinic.service';
 import { DeleteClinicControllerOutputDto } from './output.dto';
 
@@ -12,12 +12,12 @@ import { DeleteClinicControllerOutputDto } from './output.dto';
 export class DeleteClinicController {
   constructor(private deleteClinicService: NestjsDeleteClinicService) {}
 
-  @Delete(':clinicId/delete')
+  @Delete(':id/delete')
   async execute(
-    @Param() { clinicId }: DeleteClinicControllerInputDto,
+    @Param() { id }: DeleteClinicControllerParamsInputDto,
   ): Promise<DeleteClinicControllerOutputDto> {
     try {
-      await this.deleteClinicService.execute(clinicId);
+      await this.deleteClinicService.execute(id);
 
       return {
         message: 'Clinic deleted successfully',

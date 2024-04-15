@@ -54,13 +54,13 @@ export class InMemoryPatientDatabaseRepository implements PatientDatabaseReposit
     return updatedPatient;
   }
 
-  async deletePatient(patientId: string): Promise<void> {
-    const isPatientExists = await this.findPatientById(patientId);
+  async deletePatient(id: string): Promise<void> {
+    const isPatientExists = await this.findPatientById(id);
 
     if (!isPatientExists) {
       throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
     }
 
-    this.patients = this.patients.filter((patient) => patient.id !== patientId);
+    this.patients = this.patients.filter((patient) => patient.id !== id);
   }
 }

@@ -1,10 +1,12 @@
-import { BadRequestException, Body, Controller, Param, Patch } from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { BadRequestException, Body, Controller, Param, Patch } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { UpdateAppointmentControllerBodyInputDto, UpdateAppointmentControllerParamsInputDto } from "./input.dto";
-import { NestjsUpdateAppointmentService } from "./nestjs-update-appointment.service";
-import { UpdateAppointmentControllerOutputDto } from "./output.dto";
-
+import {
+  UpdateAppointmentControllerBodyInputDto,
+  UpdateAppointmentControllerParamsInputDto,
+} from './input.dto';
+import { NestjsUpdateAppointmentService } from './nestjs-update-appointment.service';
+import { UpdateAppointmentControllerOutputDto } from './output.dto';
 
 @ApiTags('Appointment')
 @ApiBearerAuth()
@@ -17,8 +19,8 @@ export class UpdateAppointmentController {
   @Patch(':id/update')
   async execute(
     @Param() { id }: UpdateAppointmentControllerParamsInputDto,
-    @Body() updateAppointmentDto: UpdateAppointmentControllerBodyInputDto)
-    : Promise<UpdateAppointmentControllerOutputDto>{
+    @Body() updateAppointmentDto: UpdateAppointmentControllerBodyInputDto,
+  ): Promise<UpdateAppointmentControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updateAppointmentDto).length === 0;
 
@@ -26,7 +28,7 @@ export class UpdateAppointmentController {
         throw new BadRequestException('Must provide at least one field to update');
       }
 
-      await this.updateAppointmentService.execute({...updateAppointmentDto, id});
+      await this.updateAppointmentService.execute({ ...updateAppointmentDto, id });
 
       return { message: 'Appointment updated successfully' };
     } catch (error) {

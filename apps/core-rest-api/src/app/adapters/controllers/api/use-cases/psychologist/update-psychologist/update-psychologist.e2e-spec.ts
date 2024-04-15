@@ -70,12 +70,14 @@ describe('[E2E] - Update Psychologist Account', () => {
   });
 
   it('[PATCH] - Should return an error when trying to update a psychologist with invalid id', async () => {
+    const psychologistFakeId = 'ca6196cd-3c1e-4cfb-a268-d7e7eb7196c1';
+
     const updateInfos = {
       name: 'New Name',
     };
 
     const response = await request(app.getHttpServer())
-      .patch(`/psychologist/invalid_id/update`)
+      .patch(`/psychologist/${psychologistFakeId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send(updateInfos);
 

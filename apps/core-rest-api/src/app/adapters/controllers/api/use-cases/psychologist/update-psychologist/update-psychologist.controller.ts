@@ -4,7 +4,10 @@ import { patchMethodDocs } from './docs';
 
 import { UpdatePsychologistInputDto } from '../../../../../../core/domains/psychologist/use-cases/update-psychologist/update-psychologist-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { UpdatePsychologistControllerInputDto } from './input.dto';
+import {
+  DeletePatientAppointmentRegistryParamsInputDto,
+  UpdatePsychologistControllerInputDto,
+} from './input.dto';
 import { NestjsUpdatePsychologistService } from './nestjs-update-psychologist.service';
 import { UpdatePsychologistControllerOutputDto } from './output.dto';
 
@@ -19,7 +22,7 @@ export class UpdatePsychologistController {
   @Patch(':id/update')
   @ApiOperation(patchMethodDocs)
   async execute(
-    @Param('id') id: string,
+    @Param() { id }: DeletePatientAppointmentRegistryParamsInputDto,
     @Body() updatePsychologistDto: UpdatePsychologistControllerInputDto,
   ): Promise<UpdatePsychologistControllerOutputDto> {
     try {

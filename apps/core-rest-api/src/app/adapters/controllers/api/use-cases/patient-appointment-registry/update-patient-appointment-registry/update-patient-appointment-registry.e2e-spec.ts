@@ -27,8 +27,8 @@ describe('[E2E] -  Update Appointment Registry', () => {
       .patch(`/appointment-registry/${patientAppointmentRegistry.id}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send({
-        observations: 'update observation'
-      })
+        observations: 'update observation',
+      });
 
     expect(response.status).toEqual(200);
     expect(response.body).toEqual({
@@ -37,12 +37,14 @@ describe('[E2E] -  Update Appointment Registry', () => {
   });
 
   it('should return 404 if the appointment registry does not exist', async () => {
+    const appointmentRegistryFakeId = 'ca6196cd-3c1e-4cfb-a268-d7e7eb7196c1';
+
     const response = await request(app.getHttpServer())
-      .patch(`/appointment-registry/fake-id/update`)
+      .patch(`/appointment-registry/${appointmentRegistryFakeId}/update`)
       .set('Authorization', `Bearer ${access_token}`)
       .send({
-        observations: 'update observation'
-      })
+        observations: 'update observation',
+      });
 
     expect(response.status).toEqual(404);
     expect(response.body.message).toEqual('registry not found');

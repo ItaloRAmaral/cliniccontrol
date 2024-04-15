@@ -18,18 +18,18 @@ import { DeletePsychologistControllerOutputDto } from './output.dto';
 export class DeletePsychologistController {
   constructor(private deletePsychologistService: NestjsDeletePsychologistService) {}
 
-  @Delete(':psychologistEmail/delete')
+  @Delete(':email/delete')
   @ApiOperation(patchMethodDocs)
   async execute(
-    @Param() { psychologistEmail }: DeletePsychologistControllerInputDto,
+    @Param() { email }: DeletePsychologistControllerInputDto,
     @CurrentUser() currentUser: TokenPayload,
   ): Promise<DeletePsychologistControllerOutputDto> {
     try {
-      if (psychologistEmail !== currentUser.email) {
+      if (email !== currentUser.email) {
         throw new ForbiddenException('You can only delete your own account');
       }
 
-      await this.deletePsychologistService.execute(psychologistEmail);
+      await this.deletePsychologistService.execute(email);
 
       return {
         message: 'Psychologist deleted successfully',

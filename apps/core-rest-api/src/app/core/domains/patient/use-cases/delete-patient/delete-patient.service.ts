@@ -12,7 +12,7 @@ export class DeletePatientService {
   constructor(private patientDatabaseRepository: PatientDatabaseRepository) {}
 
   async execute(deletePatientDto: DeletePatientInputDto): Promise<void> {
-    const { patientId, psychologistId } = deletePatientDto;
+    const { id, psychologistId } = deletePatientDto;
 
     const createPatientDtoInstance = plainToInstance(
       DeletePatientInputDto,
@@ -22,8 +22,7 @@ export class DeletePatientService {
     await applicationValidateOrReject(createPatientDtoInstance);
 
     // Validate if patient exists in db
-    const isPatientExists =
-      await this.patientDatabaseRepository.findPatientById(patientId);
+    const isPatientExists = await this.patientDatabaseRepository.findPatientById(id);
 
     if (!isPatientExists) {
       throw new NotFoundException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
@@ -34,6 +33,6 @@ export class DeletePatientService {
     }
 
     // Delete patient
-    await this.patientDatabaseRepository.deletePatient(patientId);
+    await this.patientDatabaseRepository.deletePatient(id);
   }
 }

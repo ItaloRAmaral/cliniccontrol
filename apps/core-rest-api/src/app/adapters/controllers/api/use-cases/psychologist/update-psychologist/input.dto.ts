@@ -1,4 +1,4 @@
-import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString, IsUUID, Min } from 'class-validator';
 import { Plan } from '../../../../../../core/shared/interfaces/payments';
 
 export class UpdatePsychologistControllerInputDto {
@@ -31,4 +31,9 @@ export class UpdatePsychologistControllerInputDto {
   @IsNumber()
   @Min(0)
   totalMonthEarnings?: number;
+}
+
+export class DeletePatientAppointmentRegistryParamsInputDto {
+  @IsUUID()
+  id!: string;
 }

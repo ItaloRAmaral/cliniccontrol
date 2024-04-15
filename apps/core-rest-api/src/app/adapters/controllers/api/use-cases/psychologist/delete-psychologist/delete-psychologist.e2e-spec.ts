@@ -71,7 +71,7 @@ describe('[E2E] - Delete Psychologist Account', () => {
       .set('Authorization', `Bearer ${access_token}`);
 
     expect(response.status).toBe(400);
-    expect(response.body.message[0]).toBe('psychologistEmail must be an email');
+    expect(response.body.message[0]).toBe('email must be an email');
   });
 
   it('[DELETE] - Should successfully delete a psychologist account with no associated clinics', async () => {

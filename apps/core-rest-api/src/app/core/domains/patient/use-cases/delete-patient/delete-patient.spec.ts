@@ -37,7 +37,7 @@ describe('[patient] Delete Patient Service', () => {
     const patient = await databaseRepository.createPatient(fakePatient);
 
     deletePatientDto = {
-      patientId: patient.id,
+      id: patient.id,
       psychologistId: patient.psychologistId,
     };
   });
@@ -60,7 +60,7 @@ describe('[patient] Delete Patient Service', () => {
     const patient = await databaseRepository.createPatient(fakePatient);
 
     deletePatientDto = {
-      patientId: patient.id,
+      id: patient.id,
       psychologistId: randomUUID(),
     };
 

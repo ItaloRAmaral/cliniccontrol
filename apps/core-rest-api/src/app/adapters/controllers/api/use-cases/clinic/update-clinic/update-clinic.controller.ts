@@ -3,7 +3,10 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { UpdateClinicInputDto } from '../../../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { UpdateClinicControllerInputDto } from './input.dto';
+import {
+  UpdateClinicControllerInputDto,
+  UpdateClinicControllerParamsInputDto,
+} from './input.dto';
 import { NestjsUpdateClinicService } from './nestjs-update-clinic.service';
 import { UpdateClinicControllerOutputDto } from './output.dto';
 
@@ -15,9 +18,9 @@ import { UpdateClinicControllerOutputDto } from './output.dto';
 export class UpdateClinicController {
   constructor(private updateClinicService: NestjsUpdateClinicService) {}
 
-  @Patch(':clinicId/update')
+  @Patch(':id/update')
   async execute(
-    @Param('clinicId') clinicId: string,
+    @Param() { id }: UpdateClinicControllerParamsInputDto,
     @Body() updateClinicDto: UpdateClinicControllerInputDto,
   ): Promise<UpdateClinicControllerOutputDto> {
     try {
@@ -28,7 +31,7 @@ export class UpdateClinicController {
       }
 
       const clinic = {
-        id: clinicId.toString(),
+        id: id.toString(),
         ...updateClinicDto,
       } as UpdateClinicInputDto;
 

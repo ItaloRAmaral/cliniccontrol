@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class DeleteClinicControllerInputDto {
+export class DeleteClinicControllerParamsInputDto {
   @IsString()
-  clinicId!: string;
+  id!: string;
 }

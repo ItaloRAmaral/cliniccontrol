@@ -6,7 +6,7 @@ import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAp
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
 import { CurrentUser } from '../../../decorators/current-user.decorator';
-import { DeletePatientControllerInputDto } from './input.dto';
+import { DeletePatientControllerParamsInputDto } from './input.dto';
 import { NestjsDeletePatientService } from './nestjs-delete-patient.service';
 import { DeletePatientControllerOutputDto } from './output.dto';
 
@@ -18,15 +18,15 @@ import { DeletePatientControllerOutputDto } from './output.dto';
 export class DeletePatientController {
   constructor(private deletePatientService: NestjsDeletePatientService) {}
 
-  @Delete(':patientId/delete')
+  @Delete(':id/delete')
   @ApiOperation(deleteMethodDocs)
   async execute(
-    @Param() { patientId }: DeletePatientControllerInputDto,
+    @Param() { id }: DeletePatientControllerParamsInputDto,
     @CurrentUser() currentUser: TokenPayload,
   ): Promise<DeletePatientControllerOutputDto> {
     try {
       const deletePatientDto = {
-        patientId,
+        id,
         psychologistId: currentUser.id,
       };
 

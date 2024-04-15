@@ -1,7 +1,7 @@
 import { Controller, Delete, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { DeletePatientAppointmentRegistryControllerInputDto } from './input.dto';
+import { DeletePatientAppointmentRegistryParamsInputDto } from './input.dto';
 import { NestjsDeletePatientAppointmentRegistryService } from './nestjs-delete-patient-appointment-registry.service';
 import { DeletePatientAppointmentRegistryControllerOutputDto } from './output.dto';
 
@@ -17,7 +17,7 @@ export class DeletePatientAppointmentRegistryController {
   @Delete(':id/delete')
   async execute(
     @Param()
-    { id }: DeletePatientAppointmentRegistryControllerInputDto,
+    { id }: DeletePatientAppointmentRegistryParamsInputDto,
   ): Promise<DeletePatientAppointmentRegistryControllerOutputDto> {
     try {
       await this.deletePatientAppointmentRegistryService.execute({ id });
