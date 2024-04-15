@@ -1,7 +1,42 @@
-import { IsObject, IsString } from 'class-validator';
-import { PsychologistEntity } from '../../../../../../core/domains/psychologist/entities/psychologist/entity';
+import { IsDate, IsEnum, IsNumber, IsObject, IsString, Min } from 'class-validator';
+import { Plan, Role } from '../../../../../../core/shared/interfaces/payments';
 
-class UpdatePsychologistInfoOutputDto extends PsychologistEntity {}
+class UpdatePsychologistInfoOutputDto {
+  @IsString()
+  id!: string;
+
+  @IsString()
+  name!: string;
+
+  @IsString()
+  email!: string;
+
+  @IsString()
+  password!: string;
+
+  @IsEnum(Role)
+  role!: Role;
+
+  @IsNumber()
+  price?: number | null;
+
+  @IsEnum(Plan)
+  plan!: Plan;
+
+  @IsNumber()
+  @Min(0)
+  totalYearEarnings?: number | null;
+
+  @IsNumber()
+  @Min(0)
+  totalMonthEarnings?: number | null;
+
+  @IsDate()
+  createdAt!: Date;
+
+  @IsDate()
+  updatedAt?: Date | null;
+}
 
 export class UpdatePsychologistControllerOutputDto {
   @IsString()
