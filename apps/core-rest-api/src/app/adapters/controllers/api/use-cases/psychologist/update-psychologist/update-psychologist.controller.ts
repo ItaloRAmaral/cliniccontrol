@@ -16,10 +16,10 @@ import { UpdatePsychologistControllerOutputDto } from './output.dto';
 export class UpdatePsychologistController {
   constructor(private updatePsychologistService: NestjsUpdatePsychologistService) {}
 
-  @Patch(':psychologistId/update')
+  @Patch(':id/update')
   @ApiOperation(patchMethodDocs)
   async execute(
-    @Param('psychologistId') psychologistId: string,
+    @Param('id') id: string,
     @Body() updatePsychologistDto: UpdatePsychologistControllerInputDto,
   ): Promise<UpdatePsychologistControllerOutputDto> {
     try {
@@ -30,7 +30,7 @@ export class UpdatePsychologistController {
       }
 
       const psychologist = {
-        id: psychologistId.toString(),
+        id: id.toString(),
         ...updatePsychologistDto,
         price: updatePsychologistDto.price ?? null,
       } as UpdatePsychologistInputDto;
