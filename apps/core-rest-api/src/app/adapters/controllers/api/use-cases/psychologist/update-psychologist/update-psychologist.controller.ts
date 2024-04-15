@@ -32,11 +32,13 @@ export class UpdatePsychologistController {
       const psychologist = {
         id: psychologistId.toString(),
         ...updatePsychologistDto,
+        price: updatePsychologistDto.price ?? null,
       } as UpdatePsychologistInputDto;
 
-      await this.updatePsychologistService.execute(psychologist);
+      const updatedPsychologist =
+        await this.updatePsychologistService.execute(psychologist);
 
-      return { message: 'Psychologist updated successfully' };
+      return { message: 'Psychologist updated successfully', updatedPsychologist };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

@@ -16,7 +16,7 @@ export class UpdatePsychologistControllerInputDto {
 
   @IsOptional()
   @IsNumber()
-  price?: number;
+  price?: number | null;
 
   @IsOptional()
   @IsEnum(Plan)

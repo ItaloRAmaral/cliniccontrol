@@ -10,6 +10,8 @@ export abstract class PsychologistDatabaseRepository {
   abstract findPsychologistByEmail(email: string): Promise<PsychologistEntity | null>;
   abstract findPsychologistById(id: string): Promise<PsychologistEntity | null>;
   abstract getPsychologists(): Promise<PsychologistEntity[]>;
-  abstract updatePsychologist(newPsychologist: UpdatePsychologistInputDto): Promise<void>;
+  abstract updatePsychologist(
+    newPsychologist: UpdatePsychologistInputDto,
+  ): Promise<PsychologistEntity>;
   abstract deletePsychologist(email: string): Promise<DeletedPsychologistOutputDto>;
 }

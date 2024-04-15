@@ -44,7 +44,9 @@ export class InMemoryPsychologistDatabaseRepository
     return this.psychologists;
   }
 
-  async updatePsychologist(newPsychologist: UpdatePsychologistInputDto): Promise<void> {
+  async updatePsychologist(
+    newPsychologist: UpdatePsychologistInputDto,
+  ): Promise<PsychologistEntity> {
     const oldPsychologist = await this.findPsychologistById(newPsychologist.id);
 
     if (!oldPsychologist) {
@@ -60,7 +62,7 @@ export class InMemoryPsychologistDatabaseRepository
       updatedAt: new Date(),
     });
 
-    this.psychologists[psychologistIndex] = updatedPsychologist;
+    return (this.psychologists[psychologistIndex] = updatedPsychologist);
   }
 
   async deletePsychologist(email: string): Promise<DeletedPsychologistOutputDto> {

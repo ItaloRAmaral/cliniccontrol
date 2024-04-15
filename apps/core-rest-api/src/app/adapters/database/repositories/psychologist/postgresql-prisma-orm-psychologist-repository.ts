@@ -72,7 +72,9 @@ export class PostgresqlPrismaOrmPsychologistRepository
     return PostgresqlPrismaPsychologistMapper.toDomainMany(psychologists);
   }
 
-  async updatePsychologist(newPsychologist: UpdatePsychologistInputDto): Promise<void> {
+  async updatePsychologist(
+    newPsychologist: UpdatePsychologistInputDto,
+  ): Promise<PsychologistEntity> {
     const oldPsychologist = await this.findPsychologistById(newPsychologist.id);
 
     if (!oldPsychologist) {
@@ -82,7 +84,10 @@ export class PostgresqlPrismaOrmPsychologistRepository
     const toPrismaEntity =
       PostgresqlPrismaPsychologistMapper.toPrismaUpdate(newPsychologist);
 
-    await this.postgreSqlPrismaOrmService['psychologist'].update(toPrismaEntity);
+    const updatedPsychologist =
+      await this.postgreSqlPrismaOrmService['psychologist'].update(toPrismaEntity);
+
+    return PostgresqlPrismaPsychologistMapper.toDomain(updatedPsychologist);
   }
 
   async deletePsychologist(email: string) {
