@@ -4,7 +4,7 @@ import { postMethodDocs } from './docs';
 
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
-import { CreatePatientControllerInputDto } from './input.dto';
+import { CreatePatientControllerBodyInputDto } from './input.dto';
 import { NestjsCreatePatientService } from './nestjs-create-patient.service';
 import { CreatePatientControllerOutputDto } from './output.dto';
 
@@ -19,12 +19,12 @@ export class CreatePatientController {
   @Post('create')
   @ApiOperation(postMethodDocs)
   async execute(
-    @Body() createPatientDto: CreatePatientControllerInputDto,
+    @Body() createPatientDto: CreatePatientControllerBodyInputDto,
   ): Promise<CreatePatientControllerOutputDto> {
     try {
       const patient = await this.createPatientService.execute(createPatientDto);
 
-      return patient
+      return patient;
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

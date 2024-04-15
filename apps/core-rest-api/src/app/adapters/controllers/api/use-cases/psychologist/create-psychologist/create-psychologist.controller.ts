@@ -6,7 +6,7 @@ import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAp
 import { applicationValidateOrReject } from '../../../../../../shared/validators/validate-or-reject';
 import { Public } from '../../../../../auth/public';
 import { ApiKeyGuard } from '../../../guards/api-key.guard';
-import { CreatePsychologistControllerInputDto } from './input.dto';
+import { CreatePsychologistControllerBodyInputDto } from './input.dto';
 import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.service';
 import { CreatePsychologistControllerOutputDto } from './output.dto';
 
@@ -26,19 +26,20 @@ export class CreatePsychologistController {
   @UseGuards(ApiKeyGuard)
   @Public()
   async execute(
-    @Body() createPsychologistDto: CreatePsychologistControllerInputDto,
+    @Body() createPsychologistDto: CreatePsychologistControllerBodyInputDto,
   ): Promise<CreatePsychologistControllerOutputDto> {
     try {
       const createPsychologistDtoInstance = plainToInstance(
-        CreatePsychologistControllerInputDto,
+        CreatePsychologistControllerBodyInputDto,
         createPsychologistDto,
       );
 
       await applicationValidateOrReject(createPsychologistDtoInstance);
 
-      const psychologist = await this.createPsychologistService.execute(createPsychologistDto);
+      const psychologist =
+        await this.createPsychologistService.execute(createPsychologistDto);
 
-      return psychologist
+      return psychologist;
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

@@ -6,7 +6,7 @@ import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAp
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
 import { CurrentUser } from '../../../decorators/current-user.decorator';
-import { DeletePsychologistControllerInputDto } from './input.dto';
+import { DeletePsychologistParamsInputDto } from './input.dto';
 import { NestjsDeletePsychologistService } from './nestjs-delete-psychologist.service';
 import { DeletePsychologistControllerOutputDto } from './output.dto';
 
@@ -21,7 +21,7 @@ export class DeletePsychologistController {
   @Delete(':email/delete')
   @ApiOperation(patchMethodDocs)
   async execute(
-    @Param() { email }: DeletePsychologistControllerInputDto,
+    @Param() { email }: DeletePsychologistParamsInputDto,
     @CurrentUser() currentUser: TokenPayload,
   ): Promise<DeletePsychologistControllerOutputDto> {
     try {

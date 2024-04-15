@@ -6,7 +6,7 @@ import { UpdatePsychologistInputDto } from '../../../../../../core/domains/psych
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import {
   DeletePatientAppointmentRegistryParamsInputDto,
-  UpdatePsychologistControllerInputDto,
+  UpdatePsychologistControllerBodyInputDto,
 } from './input.dto';
 import { NestjsUpdatePsychologistService } from './nestjs-update-psychologist.service';
 import { UpdatePsychologistControllerOutputDto } from './output.dto';
@@ -23,7 +23,7 @@ export class UpdatePsychologistController {
   @ApiOperation(patchMethodDocs)
   async execute(
     @Param() { id }: DeletePatientAppointmentRegistryParamsInputDto,
-    @Body() updatePsychologistDto: UpdatePsychologistControllerInputDto,
+    @Body() updatePsychologistDto: UpdatePsychologistControllerBodyInputDto,
   ): Promise<UpdatePsychologistControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updatePsychologistDto).length === 0;

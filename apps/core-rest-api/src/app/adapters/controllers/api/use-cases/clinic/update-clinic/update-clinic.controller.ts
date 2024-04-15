@@ -4,7 +4,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UpdateClinicInputDto } from '../../../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import {
-  UpdateClinicControllerInputDto,
+  UpdateClinicControllerBodyInputDto,
   UpdateClinicControllerParamsInputDto,
 } from './input.dto';
 import { NestjsUpdateClinicService } from './nestjs-update-clinic.service';
@@ -21,7 +21,7 @@ export class UpdateClinicController {
   @Patch(':id/update')
   async execute(
     @Param() { id }: UpdateClinicControllerParamsInputDto,
-    @Body() updateClinicDto: UpdateClinicControllerInputDto,
+    @Body() updateClinicDto: UpdateClinicControllerBodyInputDto,
   ): Promise<UpdateClinicControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updateClinicDto).length === 0;

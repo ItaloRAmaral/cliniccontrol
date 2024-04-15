@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { CreatePatientAppointmentRegistryControllerInputDto } from './input.dto';
+import { CreatePatientAppointmentRegistryControllerBodyInputDto } from './input.dto';
 import { NestjsCreatePatientAppointmentRegistryService } from './nestjs-create-patient-appointment-registry.service';
 import { CreatePatientAppointmentRegistryControllerOutputDto } from './output.dto';
 
@@ -17,14 +17,15 @@ export class CreatePatientAppointmentRegistryController {
   @Post('create')
   async execute(
     @Body()
-    createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryControllerInputDto,
+    createPatientAppointmentRegistryDto: CreatePatientAppointmentRegistryControllerBodyInputDto,
   ): Promise<CreatePatientAppointmentRegistryControllerOutputDto> {
     try {
-      const patientAppointmentRegistry = await this.createPatientAppointmentRegistryService.execute(
-        createPatientAppointmentRegistryDto,
-      );
+      const patientAppointmentRegistry =
+        await this.createPatientAppointmentRegistryService.execute(
+          createPatientAppointmentRegistryDto,
+        );
 
-      return patientAppointmentRegistry
+      return patientAppointmentRegistry;
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

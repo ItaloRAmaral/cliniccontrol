@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { CreateSingleAppointmentControllerInputDto } from './input.dto';
+import { CreateSingleAppointmentControllerBodyInputDto } from './input.dto';
 import { NestjsCreateAppointmentService } from './nestjs-create-appointment.service';
 import { CreateAppointmentControllerOutputDto } from './output.dto';
 
@@ -16,7 +16,7 @@ export class CreateAppointmentController {
   @Post('create')
   // @ApiOperation(postMethodDocs)
   async execute(
-    @Body() createAppointmentDto: CreateSingleAppointmentControllerInputDto,
+    @Body() createAppointmentDto: CreateSingleAppointmentControllerBodyInputDto,
   ): Promise<CreateAppointmentControllerOutputDto> {
     try {
       const appointment = await this.createAppointmentService.execute({
@@ -24,7 +24,7 @@ export class CreateAppointmentController {
         date: new Date(createAppointmentDto.date),
       });
 
-      return appointment
+      return appointment;
     } catch (error) {
       throw new GlobalAppHttpException(error);
     }

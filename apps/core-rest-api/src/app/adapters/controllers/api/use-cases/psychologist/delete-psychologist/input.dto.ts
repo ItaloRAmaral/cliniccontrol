@@ -1,6 +1,6 @@
 import { IsEmail } from 'class-validator';
 
-export class DeletePsychologistControllerInputDto {
+export class DeletePsychologistParamsInputDto {
   @IsEmail()
   email!: string;
 }

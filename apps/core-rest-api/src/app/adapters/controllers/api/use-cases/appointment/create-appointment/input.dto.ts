@@ -1,7 +1,7 @@
 import { IsBoolean, IsDate, IsEnum, IsOptional, IsString } from 'class-validator';
 import { PaymentMethod } from '../../../../../../core/shared/interfaces/payments';
 
-export class CreateSingleAppointmentControllerInputDto {
+export class CreateSingleAppointmentControllerBodyInputDto {
   @IsString()
   psychologistId!: string;
 

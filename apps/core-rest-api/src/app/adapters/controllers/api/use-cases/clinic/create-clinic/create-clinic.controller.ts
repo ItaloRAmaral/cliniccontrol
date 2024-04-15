@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
-import { CreateClinicControllerInputDto } from './input.dto';
+import { CreateClinicControllerBodyInputDto } from './input.dto';
 import { NestjsCreateClinicService } from './nestjs-create-clinic.service';
 import { CreateClinicControllerOutputDto } from './output.dto';
 
@@ -14,11 +14,11 @@ export class CreateClinicController {
 
   @Post('create')
   async execute(
-    @Body() createClinicDto: CreateClinicControllerInputDto,
+    @Body() createClinicDto: CreateClinicControllerBodyInputDto,
   ): Promise<CreateClinicControllerOutputDto> {
     try {
       const clinic = await this.createClinicService.execute(createClinicDto);
-      return clinic
+      return clinic;
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

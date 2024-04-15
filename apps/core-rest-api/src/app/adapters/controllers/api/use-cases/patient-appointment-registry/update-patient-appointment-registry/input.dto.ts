@@ -1,9 +1,4 @@
-import { IsString, IsUUID } from 'class-validator';
-
-export class UpdatePatientAppointmentRegistryControllerInputDto {
-  @IsString()
-  id!: string;
-}
+import { IsUUID } from 'class-validator';
 
 export class UpdatePatientAppointmentRegistryParamsInputDto {
   @IsUUID()

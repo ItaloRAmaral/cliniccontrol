@@ -5,7 +5,7 @@ export class UpdateClinicControllerParamsInputDto {
   id!: string;
 }
 
-export class UpdateClinicControllerInputDto {
+export class UpdateClinicControllerBodyInputDto {
   @IsOptional()
   @IsString()
   name?: string;

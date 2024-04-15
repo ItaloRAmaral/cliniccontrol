@@ -1,7 +1,7 @@
 import { IsEnum, IsNumber, IsOptional, IsString, IsUUID, Min } from 'class-validator';
 import { Plan } from '../../../../../../core/shared/interfaces/payments';
 
-export class UpdatePsychologistControllerInputDto {
+export class UpdatePsychologistControllerBodyInputDto {
   @IsOptional()
   @IsString()
   name?: string;

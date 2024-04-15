@@ -1,7 +1,7 @@
 import { IsEnum, IsString } from 'class-validator';
 import { Plan, Role } from '../../../../../../core/shared/interfaces/payments';
 
-export class CreatePsychologistControllerInputDto {
+export class CreatePsychologistControllerBodyInputDto {
   @IsString()
   name!: string;
 
