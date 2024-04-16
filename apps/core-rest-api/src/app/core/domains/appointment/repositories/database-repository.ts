@@ -23,6 +23,6 @@ export abstract class AppointmentDatabaseRepository {
   ): Promise<void>;
   abstract updateAppointment(
     newAppointmentInfo: UpdateAppointmentDto
-  ): Promise<void>;
+  ): Promise<AppointmentEntity>;
   abstract deleteSingleAppointment(appointmentId: string): Promise<void>;
 }

@@ -97,7 +97,7 @@ export class InMemoryAppointmentDatabaseRepository
 
   async updateAppointment(
     newAppointmentInfo: UpdateAppointmentDto,
-  ): Promise<void> {
+  ): Promise<AppointmentEntity> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(
       newAppointmentInfo.id,
     );
@@ -116,6 +116,8 @@ export class InMemoryAppointmentDatabaseRepository
     });
 
     this.appointments[appointmentIndex] = updatedAppointment;
+
+    return updatedAppointment
   }
 
   async deleteSingleAppointment(appointmentId: string): Promise<void> {

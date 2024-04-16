@@ -14,6 +14,7 @@ export class AppointmentEntity extends AppointmentDto {
     this.missed = props.missed ?? null;
     this.cancellationDate = props.cancellationDate ?? null;
     this.paid = props.paid ?? false;
+    this.confirmationDate = props.confirmationDate ?? null;
   }
 
   public get getId(): string {

@@ -28,9 +28,9 @@ export class UpdateAppointmentController {
         throw new BadRequestException('Must provide at least one field to update');
       }
 
-      await this.updateAppointmentService.execute({ ...updateAppointmentDto, id });
+      const updatedApointment = await this.updateAppointmentService.execute({ ...updateAppointmentDto, id });
 
-      return { message: 'Appointment updated successfully' };
+      return { message: 'Appointment updated successfully', updatedApointment };
     } catch (error) {
       throw new GlobalAppHttpException(error);
     }

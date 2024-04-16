@@ -112,7 +112,7 @@ export class PostgresqlPrismaOrmAppointmentRepository
     await this.postgresqlPrismaOrmService['appointment'].update(toPrismaEntity);
   }
 
-  async updateAppointment(newAppointmentInfo: UpdateAppointmentInfoInputDto): Promise<void> {
+  async updateAppointment(newAppointmentInfo: UpdateAppointmentInfoInputDto): Promise<AppointmentEntity> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(newAppointmentInfo.id);
 
     if (!oldAppointmentInfo) {
@@ -123,7 +123,10 @@ export class PostgresqlPrismaOrmAppointmentRepository
       ...newAppointmentInfo,
     });
 
-    await this.postgresqlPrismaOrmService['appointment'].update(toPrismaEntity);
+    const updatedPrismaAppointmentEntity = await this.postgresqlPrismaOrmService['appointment'].update(toPrismaEntity);
+
+    return PostgresqlPrismaAppointmentMapper.toDomain(updatedPrismaAppointmentEntity);
+
   }
 
   async deleteSingleAppointment(appointmentId: string): Promise<void> {
