@@ -1,5 +1,5 @@
 import { ConflictException } from '@nestjs/common';
-import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
+import { PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PatientAppointmentRegistryEntity } from '../entities/registry/entity';
 import {
   ICreatePatientAppointmentRegistry,
@@ -77,7 +77,7 @@ export class InMemoryPatientAppointmentRegistryDatabaseRepository
 
     if (!patientAppointmentRegistry) {
       throw new ConflictException(
-        PATIENT_ERROR_MESSAGES['PATIENT_APPOINTMENT_REGISTRY_NOT_FOUND']
+        PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES['REGISTRY_NOT_FOUND'],
       );
     }
 
