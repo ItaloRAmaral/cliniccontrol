@@ -5,7 +5,7 @@ import { Encrypter } from '../../../../../../core/shared/cryptography/repository
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
 import { Public } from '../../../../../auth/public';
-import { AuthenticatePsychologistControllerInputDto } from './input.dto';
+import { ControllerBodyInputDto } from './input.dto';
 import { NestjsAuthenticatePsychologistService } from './nestjs-authenticate-psychologist.service';
 import { AuthenticatePsychologistControllerOutputDto } from './output.dto';
 
@@ -22,7 +22,7 @@ export class AuthenticatePsychologistController {
   @Post('login')
   @Public()
   async execute(
-    @Body() psychologistLoginDto: AuthenticatePsychologistControllerInputDto,
+    @Body() psychologistLoginDto: ControllerBodyInputDto,
   ): Promise<AuthenticatePsychologistControllerOutputDto> {
     try {
       const { id, name, email } =

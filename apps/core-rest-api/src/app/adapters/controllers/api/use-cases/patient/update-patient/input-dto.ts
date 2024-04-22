@@ -1,7 +1,7 @@
 import { IsEnum, IsMobilePhone, IsOptional, IsString, IsUUID } from 'class-validator';
 import { PaymentMethod } from '../../../../../../core/shared/interfaces/payments';
 
-export class UpdatePatientControllerReqBodyInputDto {
+export class UpdatePatientControllerBodyInputDto {
   @IsOptional()
   @IsString()
   name?: string;
@@ -27,7 +27,7 @@ export class UpdatePatientControllerReqBodyInputDto {
   clinicId?: string;
 }
 
-export class UpdatePatientControllerReqParamsInputDto {
+export class UpdatePatientControllerParamsInputDto {
   @IsUUID()
   id!: string;
 }

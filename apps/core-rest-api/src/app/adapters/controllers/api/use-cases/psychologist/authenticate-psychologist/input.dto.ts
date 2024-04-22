@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class AuthenticatePsychologistControllerInputDto {
+export class ControllerBodyInputDto {
   @IsString()
   email!: string;
 

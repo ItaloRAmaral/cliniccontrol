@@ -4,8 +4,8 @@ import { patchMethodDocs } from './docs';
 
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import {
-  UpdatePatientControllerReqBodyInputDto,
-  UpdatePatientControllerReqParamsInputDto,
+  UpdatePatientControllerBodyInputDto,
+  UpdatePatientControllerParamsInputDto,
 } from './input-dto';
 import { NestjsUpdatePatientService } from './nestjs-update-patient.service';
 import { UpdatePatientControllerOutputDto } from './output.dto';
@@ -21,8 +21,8 @@ export class UpdatePatientController {
   @Patch(':id/update')
   @ApiOperation(patchMethodDocs)
   async execute(
-    @Param() { id }: UpdatePatientControllerReqParamsInputDto,
-    @Body() updatePsychologistDto: UpdatePatientControllerReqBodyInputDto,
+    @Param() { id }: UpdatePatientControllerParamsInputDto,
+    @Body() updatePsychologistDto: UpdatePatientControllerBodyInputDto,
   ): Promise<UpdatePatientControllerOutputDto> {
     try {
       const isReqBodyEmpty = Object.keys(updatePsychologistDto).length === 0;
