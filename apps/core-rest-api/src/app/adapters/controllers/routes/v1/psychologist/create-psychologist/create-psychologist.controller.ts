@@ -5,7 +5,7 @@ import { plainToInstance } from 'class-transformer';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 import { applicationValidateOrReject } from '../../../../../../shared/validators/validate-or-reject';
 import { Public } from '../../../../../auth/public';
-import { ApiKeyGuard } from '../../../guards/api-key.guard';
+import { ApiKeyGuard } from '../../../../guards/api-key.guard';
 import { CreatePsychologistControllerBodyInputDto } from './input.dto';
 import { NestjsCreatePsychologistService } from './nestjs-create-psychologist.service';
 import { CreatePsychologistControllerOutputDto } from './output.dto';

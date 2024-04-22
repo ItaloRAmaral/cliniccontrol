@@ -7,7 +7,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { version } from '../package.json';
-import { ApiModule } from './app/adapters/controllers/api/api.module';
+import { ApiModule } from './app/adapters/controllers/api.module';
 import { EnvService } from './app/adapters/env/env.service';
 import { mainDescriptionMarkdown } from './main.docs';
 
@@ -36,7 +36,7 @@ async function bootstrap() {
       transformOptions: {
         enableImplicitConversion: true, // With this option set to true, we no longer need to specify types with the @Type decorator;
       },
-    })
+    }),
   );
 
   // Enable version

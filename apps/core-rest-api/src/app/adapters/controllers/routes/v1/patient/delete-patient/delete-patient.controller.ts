@@ -5,7 +5,7 @@ import { deleteMethodDocs } from './docs';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
-import { CurrentUser } from '../../../decorators/current-user.decorator';
+import { CurrentUser } from '../../../../decorators/current-user.decorator';
 import { DeletePatientControllerParamsInputDto } from './input.dto';
 import { NestjsDeletePatientService } from './nestjs-delete-patient.service';
 import { DeletePatientControllerOutputDto } from './output.dto';

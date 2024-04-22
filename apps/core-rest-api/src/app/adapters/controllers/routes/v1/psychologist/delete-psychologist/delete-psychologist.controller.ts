@@ -5,7 +5,7 @@ import { patchMethodDocs } from './docs';
 import { GlobalAppHttpException } from '../../../../../../shared/errors/globalAppHttpException';
 
 import { TokenPayload } from '../../../../../auth/jwt.strategy';
-import { CurrentUser } from '../../../decorators/current-user.decorator';
+import { CurrentUser } from '../../../../decorators/current-user.decorator';
 import { DeletePsychologistParamsInputDto } from './input.dto';
 import { NestjsDeletePsychologistService } from './nestjs-delete-psychologist.service';
 import { DeletePsychologistControllerOutputDto } from './output.dto';

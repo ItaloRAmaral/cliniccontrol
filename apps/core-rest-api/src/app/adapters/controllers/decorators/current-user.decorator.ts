@@ -9,7 +9,7 @@
 */
 
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
-import { TokenPayload } from '../../../auth/jwt.strategy';
+import { TokenPayload } from '../../auth/jwt.strategy';
 
 export const CurrentUser = createParamDecorator((_: never, context: ExecutionContext) => {
   const request = context.switchToHttp().getRequest(); // usamos o switchToHttp para ter acesso ao request da requisição, e getRequest() para pegar o request (o request é um objeto que tem várias informações da requisição)
