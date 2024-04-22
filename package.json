@@ -29,9 +29,9 @@
     "prisma:core:schema:migrate": "prisma migrate dev --schema=./apps/core-rest-api/src/app/adapters/database/infra/prisma/postgresql.schema.prisma",
     "prisma:core:schema:generate": "prisma generate --schema=./apps/core-rest-api/src/app/adapters/database/infra/prisma/postgresql.schema.prisma",
     "prisma:core:schema:studio": "prisma studio --schema=./apps/core-rest-api/src/app/adapters/database/infra/prisma/postgresql.schema.prisma",
-    "core-setup": "bash ./scripts/setup/core-rest-api/run-setup.sh",
-    "core-prisma-setup": "bash ./scripts/setup/core-rest-api/run-prisma-setup.sh",
-    "core-docker-compose": "bash ./scripts/setup/core-rest-api/docker-compose-control.sh"
+    "setup": "bash ./scripts/setup/core-rest-api/run-setup.sh",
+    "prisma:setup": "bash ./scripts/setup/core-rest-api/run-prisma-setup.sh",
+    "docker:compose": "bash ./scripts/setup/core-rest-api/docker-compose-control.sh"
   },
   "private": true,
   "dependencies": {
