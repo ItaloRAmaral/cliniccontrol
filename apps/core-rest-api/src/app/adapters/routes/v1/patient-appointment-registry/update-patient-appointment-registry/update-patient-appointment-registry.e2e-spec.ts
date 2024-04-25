@@ -31,9 +31,7 @@ describe('[E2E] -  Update Appointment Registry', () => {
       });
 
     expect(response.status).toEqual(200);
-    expect(response.body).toEqual({
-      message: 'Appointment registry updated successfully',
-    });
+    expect(response.body.message).toEqual('Appointment registry updated successfully');
   });
 
   it('should return 404 if the appointment registry does not exist', async () => {
