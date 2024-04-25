@@ -23,9 +23,9 @@ export class UpdatePatientAppointmentRegistryController {
     registry: Registry,
   ): Promise<UpdatePatientAppointmentRegistryControllerOutputDto> {
     try {
-      await this.updatePatientAppointmentRegistryService.execute({ id, registry });
+      const updatedPatientAppointmentRegistry = await this.updatePatientAppointmentRegistryService.execute({ id, registry });
 
-      return { message: 'Appointment registry updated successfully' };
+      return { message: 'Appointment registry updated successfully', updatedPatientAppointmentRegistry };
     } catch (error: unknown) {
       throw new GlobalAppHttpException(error);
     }

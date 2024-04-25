@@ -3,6 +3,7 @@ import { plainToInstance } from 'class-transformer';
 import { PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { DataEncrypterService } from '../../../../shared/cryptography/use-cases/data-encrypter.service';
+import { PatientAppointmentRegistryEntity } from '../../entities/registry/entity';
 import { PatientAppointmentRegistryDatabaseRepository } from '../../repositories/database-repository';
 import { UpdatePatientAppointmentRegistryInputDto } from './update-appointment-registry-dto';
 
@@ -15,7 +16,7 @@ export class UpdatePatientAppointmentRegistryService {
 
   async execute(
     updatePatientAppointmentRegistryDto: UpdatePatientAppointmentRegistryInputDto,
-  ): Promise<void> {
+  ): Promise<PatientAppointmentRegistryEntity> {
     // Validate
     const DeletePatientAppointmentRegistryDtoInstance = plainToInstance(
       UpdatePatientAppointmentRegistryInputDto,
@@ -38,7 +39,7 @@ export class UpdatePatientAppointmentRegistryService {
       updatePatientAppointmentRegistryDto.registry['observations'],
     );
 
-    await this.patientAppointmentRegistryDatabaseRepository.updatePatientAppointmentRegistry(
+    return await this.patientAppointmentRegistryDatabaseRepository.updatePatientAppointmentRegistry(
       {
         ...updatePatientAppointmentRegistryDto,
         registry: {
