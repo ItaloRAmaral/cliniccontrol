@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-beta.6](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.4.0-beta.5...@cliniccontrol/core-rest-api@1.4.0-beta.6) (2024-03-14)
+
+### Features
+
+- **CC-132:** add endpoint to update appointment ([1908da4](https://github.com/ItaloRAmaral/cliniccontrol/commit/1908da48170f854c7351ca1d7a33bc4d25ef0b83))
+- **CC-132:** create generic use case to update appointment ([3953454](https://github.com/ItaloRAmaral/cliniccontrol/commit/3953454f909ccf31e3c1d9a5431875b56ac14987))
+
 ## [1.4.0-beta.5](https://github.com/ItaloRAmaral/cliniccontrol/compare/@cliniccontrol/core-rest-api@1.4.0-beta.4...@cliniccontrol/core-rest-api@1.4.0-beta.5) (2024-03-10)
 
 ### Features
