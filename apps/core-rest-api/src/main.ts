@@ -7,7 +7,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { version } from '../package.json';
-import { ApiModule } from './app/adapters/controllers/api.module';
+import { ApiModule } from './app/adapters/api.module';
 import { EnvService } from './app/adapters/env/env.service';
 import { mainDescriptionMarkdown } from './main.docs';
 

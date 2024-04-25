@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { BcryptHasherService } from '../../src/app/core/shared/cryptography/use-cases/bcrypt-hasher.service';
 
-import { ApiModule } from '../../src/app/adapters/controllers/api.module';
+import { ApiModule } from '../../src/app/adapters/api.module';
 import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infra/prisma/prisma.service';
 import { DatabaseRepositoriesModule } from '../../src/app/adapters/database/repositories/repositories.module';
 
