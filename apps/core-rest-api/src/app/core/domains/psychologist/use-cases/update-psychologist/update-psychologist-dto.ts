@@ -1,7 +1,7 @@
 import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 import { Plan, Role } from '../../../../shared/interfaces/payments';
 
-export class UpdatePsychologistDto {
+export class UpdatePsychologistInputDto {
   @IsString()
   id!: string;
 

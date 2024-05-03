@@ -4,18 +4,21 @@ import { plainToInstance } from 'class-transformer';
 import { PSYCHOLOGIST_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { BcryptHasherService } from '../../../../shared/cryptography/use-cases/bcrypt-hasher.service';
+import { PsychologistEntity } from '../../entities/psychologist/entity';
 import { PsychologistDatabaseRepository } from '../../repositories/database-repository';
-import { UpdatePsychologistDto } from './update-psychologist-dto';
+import { UpdatePsychologistInputDto } from './update-psychologist-dto';
 
 export class UpdatePsychologistService {
   private hasherService: BcryptHasherService = new BcryptHasherService();
 
   constructor(private psychologistDatabaseRepository: PsychologistDatabaseRepository) {}
 
-  async execute(updatePsychologist: UpdatePsychologistDto): Promise<void> {
+  async execute(
+    updatePsychologist: UpdatePsychologistInputDto,
+  ): Promise<PsychologistEntity> {
     // Validate
     const updatePsychologistDtoInstance = plainToInstance(
-      UpdatePsychologistDto,
+      UpdatePsychologistInputDto,
       updatePsychologist,
     );
     await applicationValidateOrReject(updatePsychologistDtoInstance);
@@ -66,6 +69,8 @@ export class UpdatePsychologistService {
     }
 
     // Update
-    await this.psychologistDatabaseRepository.updatePsychologist(updatePsychologist);
+    return await this.psychologistDatabaseRepository.updatePsychologist(
+      updatePsychologist,
+    );
   }
 }

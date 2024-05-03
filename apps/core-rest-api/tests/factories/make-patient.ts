@@ -5,10 +5,12 @@ import { PostgreSqlPrismaOrmService } from '../../src/app/adapters/database/infr
 import { PostgresqlPrismaPatientMapper } from '../../src/app/adapters/database/mappers/postgresql-prisma-patient-mapper';
 
 import { PatientEntity } from '../../src/app/core/domains/patient/entities/patient/entity';
-import { CreatePatientDto } from '../../src/app/core/domains/patient/use-cases/create-patient/create-patient-dto';
+import { CreatePatientInputDto } from '../../src/app/core/domains/patient/use-cases/create-patient/create-patient-dto';
 import { PaymentMethod } from '../../src/app/core/shared/interfaces/payments';
 
-export function makePatient(override: Partial<CreatePatientDto> = {}): PatientEntity {
+export function makePatient(
+  override: Partial<CreatePatientInputDto> = {},
+): PatientEntity {
   const newPatient = new PatientEntity({
     name: faker.person.fullName(),
     email: faker.internet.email(),
@@ -28,7 +30,7 @@ export class PatientFactory {
   constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
 
   async makePrismaPatient(
-    patient: Partial<CreatePatientDto> = {},
+    patient: Partial<CreatePatientInputDto> = {},
   ): Promise<PatientEntity> {
     const newPrismaPatient = makePatient(patient);
 

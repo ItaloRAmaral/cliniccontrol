@@ -5,8 +5,8 @@ import {
 } from '@prisma/client';
 
 import { AppointmentEntity } from '../../../core/domains/appointment/entities/appointment/entity';
-import { CreateSingleAppointmentDto } from '../../../core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
-import { UpdateAppointmentInfoDto } from '../../../core/domains/appointment/use-cases/update-appointment-info/update-appointment-info-dto';
+import { CreateSingleAppointmentInputDto } from '../../../core/domains/appointment/use-cases/create-single-appointment/create-single-appointment-dto';
+import { UpdateAppointmentInfoInputDto } from '../../../core/domains/appointment/use-cases/update-appointment-info/update-appointment-info-dto';
 import { PaymentMethod } from '../../../core/shared/interfaces/payments';
 
 export class PostgresqlPrismaAppointmentMapper {
@@ -17,17 +17,26 @@ export class PostgresqlPrismaAppointmentMapper {
     });
   }
 
-  static toPrismaCreate(raw: CreateSingleAppointmentDto): Prisma.AppointmentCreateArgs {
+  static toPrismaCreate(
+    raw: CreateSingleAppointmentInputDto,
+  ): Prisma.AppointmentCreateArgs {
     return {
       data: {
-        ...raw,
+        online: raw.online,
+        confirmed: raw.confirmed,
+        cancelled: raw.cancelled,
         paymentMethod: raw.paymentMethod as unknown as PrismaPaymentMethod,
         date: new Date(raw.date),
+        patientId: raw.patientId,
+        psychologistId: raw.psychologistId,
+        clinicId: raw.clinicId,
       },
     };
   }
 
-  static toPrismaUpdate(raw: UpdateAppointmentInfoDto): Prisma.AppointmentUpdateArgs {
+  static toPrismaUpdate(
+    raw: UpdateAppointmentInfoInputDto,
+  ): Prisma.AppointmentUpdateArgs {
     return {
       data: {
         ...raw,

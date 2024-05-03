@@ -43,8 +43,8 @@ jobs:
         run: |
           echo "DATABASE_URL=postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?schema=${{ secrets.POSTGRES_SCHEMA }}" >> $GITHUB_ENV
 
-      - name: Run core-setup script
-        run: pnpm run core-setup --action=migrate,generate
+      - name: Run setup script
+        run: pnpm run setup --action=migrate,generate
 
       - name: Run E2E Tests
         run: pnpm run test:e2e

@@ -2,15 +2,19 @@ import { NotFoundException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { PATIENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
+import { PatientEntity } from '../../entities/patient/entity';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
-import { UpdatePatientDto } from './update-patient-dto';
+import { UpdatePatientInputDto } from './update-patient-dto';
 
 export class UpdatePatientService {
   constructor(private patientDatabaseRepository: PatientDatabaseRepository) {}
 
-  async execute(newPatientInfo: UpdatePatientDto): Promise<void> {
+  async execute(newPatientInfo: UpdatePatientInputDto): Promise<PatientEntity> {
     // Validate props types
-    const updatePatientDtoInstance = plainToInstance(UpdatePatientDto, newPatientInfo);
+    const updatePatientDtoInstance = plainToInstance(
+      UpdatePatientInputDto,
+      newPatientInfo,
+    );
 
     await applicationValidateOrReject(updatePatientDtoInstance);
 
@@ -24,7 +28,7 @@ export class UpdatePatientService {
       throw new NotFoundException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
     }
 
-    // Create
-    await this.patientDatabaseRepository.updatePatient(newPatientInfo);
+    // Update
+    return await this.patientDatabaseRepository.updatePatient(newPatientInfo);
   }
 }

@@ -1,9 +1,9 @@
 import { ConflictException } from '@nestjs/common';
 import { APPOINTMENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { AppointmentEntity } from '../entities/appointment/entity';
-import { CreateSingleAppointmentDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
-import { UpdatedAppointmentDateDto } from '../use-cases/update-appointment-date/update-appointment-date-dto';
-import { UpdateAppointmentInfoDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
+import { CreateSingleAppointmentInputDto } from '../use-cases/create-single-appointment/create-single-appointment-dto';
+import { UpdatedAppointmentDateInputDto } from '../use-cases/update-appointment-date/update-appointment-date-dto';
+import { UpdateAppointmentInfoInputDto } from '../use-cases/update-appointment-info/update-appointment-info-dto';
 import { UpdateAppointmentDto } from '../use-cases/update-single-appointment/update-appointment-dto';
 import { AppointmentDatabaseRepository } from './database-repository';
 
@@ -13,7 +13,7 @@ export class InMemoryAppointmentDatabaseRepository
   private appointments: AppointmentEntity[] = [];
 
   async createSingleAppointment(
-    appointment: CreateSingleAppointmentDto,
+    appointment: CreateSingleAppointmentInputDto,
   ): Promise<AppointmentEntity> {
     const isAppointmentExist = await this.findSingleAppointmentByDate(appointment.date);
 
@@ -50,7 +50,7 @@ export class InMemoryAppointmentDatabaseRepository
   }
 
   async updateAppointmentInfo(
-    newAppointmentInfo: UpdateAppointmentInfoDto,
+    newAppointmentInfo: UpdateAppointmentInfoInputDto,
   ): Promise<void> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(
       newAppointmentInfo.id,
@@ -73,7 +73,7 @@ export class InMemoryAppointmentDatabaseRepository
   }
 
   async updateAppointmentDate(
-    newAppointmentInfo: UpdatedAppointmentDateDto,
+    newAppointmentInfo: UpdatedAppointmentDateInputDto,
   ): Promise<void> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(
       newAppointmentInfo.id,
@@ -97,7 +97,7 @@ export class InMemoryAppointmentDatabaseRepository
 
   async updateAppointment(
     newAppointmentInfo: UpdateAppointmentDto,
-  ): Promise<void> {
+  ): Promise<AppointmentEntity> {
     const oldAppointmentInfo = await this.findSingleAppointmentById(
       newAppointmentInfo.id,
     );
@@ -116,6 +116,8 @@ export class InMemoryAppointmentDatabaseRepository
     });
 
     this.appointments[appointmentIndex] = updatedAppointment;
+
+    return updatedAppointment
   }
 
   async deleteSingleAppointment(appointmentId: string): Promise<void> {

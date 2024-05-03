@@ -1,8 +1,8 @@
 import { IsString } from 'class-validator';
 
-export class DeletePatientDto {
+export class DeletePatientInputDto {
   @IsString()
-  patientId!: string;
+  id!: string;
 
   @IsString()
   psychologistId!: string;

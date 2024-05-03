@@ -3,8 +3,9 @@ import { plainToInstance } from 'class-transformer';
 import { PATIENT_APPOINTMENT_REGISTRY_ERROR_MESSAGES } from '../../../../../shared/errors/error-messages';
 import { applicationValidateOrReject } from '../../../../../shared/validators/validate-or-reject';
 import { DataEncrypterService } from '../../../../shared/cryptography/use-cases/data-encrypter.service';
+import { PatientAppointmentRegistryEntity } from '../../entities/registry/entity';
 import { PatientAppointmentRegistryDatabaseRepository } from '../../repositories/database-repository';
-import { UpdatePatientAppointmentRegistryDto } from './update-appointment-registry-dto';
+import { UpdatePatientAppointmentRegistryInputDto } from './update-appointment-registry-dto';
 
 export class UpdatePatientAppointmentRegistryService {
   private dataEncrypter: DataEncrypterService = new DataEncrypterService();
@@ -14,11 +15,11 @@ export class UpdatePatientAppointmentRegistryService {
   ) {}
 
   async execute(
-    updatePatientAppointmentRegistryDto: UpdatePatientAppointmentRegistryDto,
-  ): Promise<void> {
+    updatePatientAppointmentRegistryDto: UpdatePatientAppointmentRegistryInputDto,
+  ): Promise<PatientAppointmentRegistryEntity> {
     // Validate
     const DeletePatientAppointmentRegistryDtoInstance = plainToInstance(
-      UpdatePatientAppointmentRegistryDto,
+      UpdatePatientAppointmentRegistryInputDto,
       updatePatientAppointmentRegistryDto,
     );
     await applicationValidateOrReject(DeletePatientAppointmentRegistryDtoInstance);
@@ -35,15 +36,16 @@ export class UpdatePatientAppointmentRegistryService {
     }
 
     const encryptedRegistry = this.dataEncrypter.encrypt(
-      updatePatientAppointmentRegistryDto.registry['observations']
+      updatePatientAppointmentRegistryDto.registry['observations'],
     );
 
-    await this.patientAppointmentRegistryDatabaseRepository.updatePatientAppointmentRegistry(
-      {...updatePatientAppointmentRegistryDto,
+    return await this.patientAppointmentRegistryDatabaseRepository.updatePatientAppointmentRegistry(
+      {
+        ...updatePatientAppointmentRegistryDto,
         registry: {
           observations: encryptedRegistry,
         },
-      }
+      },
     );
   }
 }

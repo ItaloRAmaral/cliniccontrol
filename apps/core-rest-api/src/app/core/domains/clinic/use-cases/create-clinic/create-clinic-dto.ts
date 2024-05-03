@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class CreateClinicDto {
+export class CreateClinicInputDto {
   @IsString()
   name!: string;
 

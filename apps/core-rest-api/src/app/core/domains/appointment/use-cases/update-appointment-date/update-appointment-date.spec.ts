@@ -5,12 +5,12 @@ import { APPOINTMENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-m
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
-import { UpdatedAppointmentDateDto } from './update-appointment-date-dto';
+import { CreateSingleAppointmentInputDto } from '../create-single-appointment/create-single-appointment-dto';
+import { UpdatedAppointmentDateInputDto } from './update-appointment-date-dto';
 import { UpdateAppointmentDateService } from './update-appointment-date.service';
 
 describe('[appointment] Update Appointment Info Service', () => {
-  const fakeAppointment: CreateSingleAppointmentDto = {
+  const fakeAppointment: CreateSingleAppointmentInputDto = {
     psychologistId: randomUUID(),
     patientId: randomUUID(),
     date: faker.date.recent({ days: 10 }),
@@ -31,18 +31,17 @@ describe('[appointment] Update Appointment Info Service', () => {
   });
 
   it('should update an appointment', async () => {
-    const createAppointment = await databaseRepository.createSingleAppointment(
-      fakeAppointment
-    );
+    const createAppointment =
+      await databaseRepository.createSingleAppointment(fakeAppointment);
 
-    const newAppointmentInfo: UpdatedAppointmentDateDto = {
+    const newAppointmentInfo: UpdatedAppointmentDateInputDto = {
       date: new Date(),
       id: createAppointment.id,
     };
 
     await service.execute(newAppointmentInfo);
     const findAppointment = await databaseRepository.findSingleAppointmentById(
-      newAppointmentInfo.id
+      newAppointmentInfo.id,
     );
 
     expect(findAppointment).toEqual({
@@ -56,13 +55,13 @@ describe('[appointment] Update Appointment Info Service', () => {
   });
 
   it('should throw error if appointment does not exist', async () => {
-    const newAppointmentDate: UpdatedAppointmentDateDto = {
+    const newAppointmentDate: UpdatedAppointmentDateInputDto = {
       id: randomUUID(),
       date: new Date(),
     };
 
     await expect(service.execute(newAppointmentDate)).rejects.toThrow(
-      new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND'])
+      new ConflictException(APPOINTMENT_ERROR_MESSAGES['APPOINTMENT_NOT_FOUND']),
     );
   });
 });

@@ -1,14 +1,14 @@
 import { ConflictException } from '@nestjs/common';
 import { PATIENT_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PatientEntity } from '../entities/patient/entity';
-import { CreatePatientDto } from '../use-cases/create-patient/create-patient-dto';
-import { UpdatePatientDto } from '../use-cases/update-patient/update-patient-dto';
+import { CreatePatientInputDto } from '../use-cases/create-patient/create-patient-dto';
+import { UpdatePatientInputDto } from '../use-cases/update-patient/update-patient-dto';
 import { PatientDatabaseRepository } from './database-repository';
 
 export class InMemoryPatientDatabaseRepository implements PatientDatabaseRepository {
   private patients: PatientEntity[] = [];
 
-  async createPatient(patient: CreatePatientDto): Promise<PatientEntity> {
+  async createPatient(patient: CreatePatientInputDto): Promise<PatientEntity> {
     const isPatientExists = await this.findPatientByEmail(patient.email);
 
     if (isPatientExists) {
@@ -33,7 +33,7 @@ export class InMemoryPatientDatabaseRepository implements PatientDatabaseReposit
     return this.patients;
   }
 
-  async updatePatient(newPatientInfo: UpdatePatientDto): Promise<void> {
+  async updatePatient(newPatientInfo: UpdatePatientInputDto): Promise<PatientEntity> {
     const oldPatientInfo = await this.findPatientById(newPatientInfo.id);
 
     if (!oldPatientInfo) {
@@ -50,15 +50,17 @@ export class InMemoryPatientDatabaseRepository implements PatientDatabaseReposit
     });
 
     this.patients[patientIndex] = updatedPatient;
+
+    return updatedPatient;
   }
 
-  async deletePatient(patientId: string): Promise<void> {
-    const isPatientExists = await this.findPatientById(patientId);
+  async deletePatient(id: string): Promise<void> {
+    const isPatientExists = await this.findPatientById(id);
 
     if (!isPatientExists) {
       throw new ConflictException(PATIENT_ERROR_MESSAGES['PATIENT_NOT_FOUND']);
     }
 
-    this.patients = this.patients.filter((patient) => patient.id !== patientId);
+    this.patients = this.patients.filter((patient) => patient.id !== id);
   }
 }

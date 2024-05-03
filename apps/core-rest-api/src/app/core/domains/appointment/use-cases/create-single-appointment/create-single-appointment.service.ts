@@ -6,25 +6,25 @@ import { applicationValidateOrReject } from '../../../../../shared/validators/va
 import { AppointmentEntity } from '../../entities/appointment/entity';
 import { ICreateAppointmentServiceProps } from '../../interfaces/appointment';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { CreateSingleAppointmentDto } from './create-single-appointment-dto';
+import { CreateSingleAppointmentInputDto } from './create-single-appointment-dto';
 
 export class CreateSingleAppointmentService {
   constructor(private appointmentDatabaseRepository: AppointmentDatabaseRepository) {}
 
   async execute(
-    createSingleAppointmentDto: ICreateAppointmentServiceProps
+    createSingleAppointmentDto: ICreateAppointmentServiceProps,
   ): Promise<AppointmentEntity> {
     // Validate
     const createSingleAppointmentDtoInstance = plainToInstance(
-      CreateSingleAppointmentDto,
-      createSingleAppointmentDto
-      );
+      CreateSingleAppointmentInputDto,
+      createSingleAppointmentDto,
+    );
 
     await applicationValidateOrReject(createSingleAppointmentDtoInstance);
 
     const isAppointmentExist =
       await this.appointmentDatabaseRepository.findSingleAppointmentByDate(
-        createSingleAppointmentDto.date
+        createSingleAppointmentDto.date,
       );
     if (isAppointmentExist) {
       throw new ConflictException(APPOINTMENT_ERROR_MESSAGES['CONFLICTING_DATE_TIME']);
@@ -33,7 +33,7 @@ export class CreateSingleAppointmentService {
     // Create
     const createSingleAppointment =
       await this.appointmentDatabaseRepository.createSingleAppointment(
-        createSingleAppointmentDto
+        createSingleAppointmentDto,
       );
     return createSingleAppointment;
   }

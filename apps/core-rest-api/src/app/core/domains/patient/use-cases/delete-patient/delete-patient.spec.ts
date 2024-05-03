@@ -10,7 +10,7 @@ import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { PatientEntity } from '../../entities/patient/entity';
 import { InMemoryPatientDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
-import { DeletePatientDto } from './delete-patient-dto';
+import { DeletePatientInputDto } from './delete-patient-dto';
 import { DeletePatientService } from './delete-patient.service';
 
 describe('[patient] Delete Patient Service', () => {
@@ -28,7 +28,7 @@ describe('[patient] Delete Patient Service', () => {
   let databaseRepository: PatientDatabaseRepository;
 
   let patient: PatientEntity;
-  let deletePatientDto: DeletePatientDto;
+  let deletePatientDto: DeletePatientInputDto;
 
   beforeAll(async () => {
     databaseRepository = new InMemoryPatientDatabaseRepository();
@@ -37,7 +37,7 @@ describe('[patient] Delete Patient Service', () => {
     const patient = await databaseRepository.createPatient(fakePatient);
 
     deletePatientDto = {
-      patientId: patient.id,
+      id: patient.id,
       psychologistId: patient.psychologistId,
     };
   });
@@ -60,7 +60,7 @@ describe('[patient] Delete Patient Service', () => {
     const patient = await databaseRepository.createPatient(fakePatient);
 
     deletePatientDto = {
-      patientId: patient.id,
+      id: patient.id,
       psychologistId: randomUUID(),
     };
 

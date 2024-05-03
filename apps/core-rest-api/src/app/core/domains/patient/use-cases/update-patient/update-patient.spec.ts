@@ -5,12 +5,12 @@ import { PATIENT_ERROR_MESSAGES } from '../../../../../shared/errors/error-messa
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryPatientDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { PatientDatabaseRepository } from '../../repositories/database-repository';
-import { CreatePatientDto } from '../create-patient/create-patient-dto';
-import { UpdatePatientDto } from './update-patient-dto';
+import { CreatePatientInputDto } from '../create-patient/create-patient-dto';
+import { UpdatePatientInputDto } from './update-patient-dto';
 import { UpdatePatientService } from './update-patient.service';
 
 describe('[patient] Update Patient Service', () => {
-  const fakePatient: CreatePatientDto = {
+  const fakePatient: CreatePatientInputDto = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     cpf: faker.number.int({ min: 0, max: 10000000000 }).toString(),
@@ -31,7 +31,7 @@ describe('[patient] Update Patient Service', () => {
   it('should update a patient', async () => {
     const createPatient = await databaseRepository.createPatient(fakePatient);
 
-    const newPatientInfos: UpdatePatientDto = {
+    const newPatientInfos: UpdatePatientInputDto = {
       id: createPatient.id,
       email: faker.internet.email(),
       paymentMethod: PaymentMethod.PIX,

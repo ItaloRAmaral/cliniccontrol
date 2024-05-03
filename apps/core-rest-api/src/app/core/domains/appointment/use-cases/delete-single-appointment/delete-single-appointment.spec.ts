@@ -4,11 +4,11 @@ import { randomUUID } from 'crypto';
 import { PaymentMethod } from '../../../../shared/interfaces/payments';
 import { InMemoryAppointmentDatabaseRepository } from '../../repositories/database-in-memory-repository';
 import { AppointmentDatabaseRepository } from '../../repositories/database-repository';
-import { CreateSingleAppointmentDto } from '../create-single-appointment/create-single-appointment-dto';
+import { CreateSingleAppointmentInputDto } from '../create-single-appointment/create-single-appointment-dto';
 import { DeleteSingleAppointmentService } from './delete-single-appointment.service';
 
 describe('[appointment] Delete Single Appointment Service', () => {
-  const fakeAppointment: CreateSingleAppointmentDto = {
+  const fakeAppointment: CreateSingleAppointmentInputDto = {
     psychologistId: randomUUID(),
     patientId: randomUUID(),
     date: faker.date.recent({ days: 10 }),

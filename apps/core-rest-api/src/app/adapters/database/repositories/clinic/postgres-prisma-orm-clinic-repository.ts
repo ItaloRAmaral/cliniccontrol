@@ -1,9 +1,9 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { ClinicEntity } from '../../../../core/domains/clinic/entities/clinic/entity';
 import { ClinicDatabaseRepository } from '../../../../core/domains/clinic/repositories/database-repository';
-import { CreateClinicDto } from '../../../../core/domains/clinic/use-cases/create-clinic/create-clinic-dto';
-import { DeletedClinicInfo } from '../../../../core/domains/clinic/use-cases/delete-clinic/dto';
-import { UpdateClinicDto } from '../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
+import { CreateClinicInputDto } from '../../../../core/domains/clinic/use-cases/create-clinic/create-clinic-dto';
+import { DeletedClinicOutputDto } from '../../../../core/domains/clinic/use-cases/delete-clinic/dto';
+import { UpdateClinicInputDto } from '../../../../core/domains/clinic/use-cases/update-clinic/update-clinic-dto';
 import { CLINIC_ERROR_MESSAGES } from '../../../../shared/errors/error-messages';
 import { PostgreSqlPrismaOrmService } from '../../../database/infra/prisma/prisma.service';
 import { PostgresqlPrismaClinicMapper } from '../../mappers/postgresql-prisma-clinic-mapper';
@@ -11,10 +11,10 @@ import { PostgresqlPrismaClinicMapper } from '../../mappers/postgresql-prisma-cl
 @Injectable()
 export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseRepository {
   constructor(private postgreSqlPrismaOrmService: PostgreSqlPrismaOrmService) {}
-  async createClinic(clinic: CreateClinicDto): Promise<ClinicEntity> {
+  async createClinic(clinic: CreateClinicInputDto): Promise<ClinicEntity> {
     const isClinicExists = await this.findClinicByNameAndPsychologistId(
       clinic.name,
-      clinic.psychologistId
+      clinic.psychologistId,
     );
 
     if (isClinicExists) {
@@ -25,16 +25,15 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
       ...clinic,
     });
 
-    const newClinic = await this.postgreSqlPrismaOrmService['clinic'].create(
-      toPrismaEntity
-    );
+    const newClinic =
+      await this.postgreSqlPrismaOrmService['clinic'].create(toPrismaEntity);
 
     return PostgresqlPrismaClinicMapper.toDomain(newClinic);
   }
 
   async findClinicByNameAndPsychologistId(
     name: string,
-    psychologistId: string
+    psychologistId: string,
   ): Promise<ClinicEntity | null> {
     const clinic = await this.postgreSqlPrismaOrmService['clinic'].findFirst({
       where: {
@@ -65,9 +64,9 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
   }
 
   async findClinicByPsychologistId(
-    psychologistId: string
+    psychologistId: string,
   ): Promise<ClinicEntity[] | null> {
-    console.log(psychologistId)
+    console.log(psychologistId);
     throw new Error('Method not implemented.');
   }
 
@@ -77,7 +76,7 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
     return PostgresqlPrismaClinicMapper.toDomainMany(clinics);
   }
 
-  async updateClinic(newClinic: UpdateClinicDto): Promise<void> {
+  async updateClinic(newClinic: UpdateClinicInputDto): Promise<ClinicEntity> {
     const oldClinic = await this.findClinicById(newClinic.id);
 
     if (!oldClinic) {
@@ -86,13 +85,14 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
 
     const toPrismaEntity = PostgresqlPrismaClinicMapper.toPrismaUpdate(newClinic);
 
-    await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
+    const updatedPrismaClinicEntity =
+      await this.postgreSqlPrismaOrmService['clinic'].update(toPrismaEntity);
+
+    return PostgresqlPrismaClinicMapper.toDomain(updatedPrismaClinicEntity);
   }
 
-  async deleteClinic(id: string): Promise<DeletedClinicInfo> {
-    const isClinicExists = await this.findClinicById(
-      id
-    );
+  async deleteClinic(id: string): Promise<DeletedClinicOutputDto> {
+    const isClinicExists = await this.findClinicById(id);
 
     if (!isClinicExists) {
       throw new ConflictException(CLINIC_ERROR_MESSAGES['CLINIC_NOT_FOUND']);
@@ -107,15 +107,15 @@ export class PostgresqlPrismaOrmClinicRepository implements ClinicDatabaseReposi
 
     const responseObject = {
       deletedClinic: PostgresqlPrismaClinicMapper.toDomain(deletedClinic),
-    }
+    };
 
-    return responseObject
+    return responseObject;
   }
 
   async deleteAllClinicsByPsychologistId(
-    psychologistId: string
+    psychologistId: string,
   ): Promise<ClinicEntity[]> {
-    console.log(psychologistId)
+    console.log(psychologistId);
     throw new Error('Method not implemented.');
   }
 }
