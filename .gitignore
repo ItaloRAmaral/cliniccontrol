@@ -46,3 +46,7 @@ Thumbs.db
 data
 
 .nx/cache
+.nx/workspace-data
+.nx
+.dist
+.next
