@@ -1,0 +1,28 @@
+{
+  "name": "clinic-control-web-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/clinic-control-web-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["clinic-control-web"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/clinic-control-web-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "clinic-control-web:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "clinic-control-web:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "clinic-control-web:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

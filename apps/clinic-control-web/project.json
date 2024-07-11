@@ -1,0 +1,58 @@
+{
+  "name": "clinic-control-web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/clinic-control-web",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/clinic-control-web"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/clinic-control-web"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "clinic-control-web:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "clinic-control-web:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "clinic-control-web:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "clinic-control-web:build:production"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "clinic-control-web:build",
+        "staticFilePath": "dist/apps/clinic-control-web/out",
+        "spa": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

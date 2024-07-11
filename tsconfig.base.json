@@ -17,15 +17,11 @@
     "useUnknownInCatchVariables": true,
     "esModuleInterop": true,
     "paths": {
-      "@clinicControl/core-rest-api/core/*": [
-        "./apps/core-rest-api/src/app/core/*"
-      ],
       "@clinicControl/core-rest-api/adapters/*": [
         "./apps/core-rest-api/src/app/adapters/*"
       ],
-      "@clinicControl/core-rest-api/tests/*": [
-        "./apps/core-rest-api/tests/*"
-      ],
+      "@clinicControl/core-rest-api/core/*": ["./apps/core-rest-api/src/app/core/*"],
+      "@clinicControl/core-rest-api/tests/*": ["./apps/core-rest-api/tests/*"]
     }
   },
   "exclude": ["node_modules", "tmp"],
